@@ -1,0 +1,60 @@
+{
+  "target_configuration": {
+    "application_info": {
+      "name": "[APPLICATION_NAME]",
+      "bundle_id": "[BUNDLE_ID]",
+      "version": "[VERSION]",
+      "platform": "[iOS/Android]",
+      "download_source": "[App Store/Google Play/APK]"
+    },
+    "authorization": {
+      "type": "[bug_bounty/written_permission/own_app]",
+      "program_name": "[PROGRAM_NAME]",
+      "scope_url": "[PROGRAM_SCOPE_URL]",
+      "authorization_date": "[DATE_AUTHORIZED]",
+      "expiration_date": "[EXPIRATION_DATE]",
+      "special_conditions": "[ANY_SPECIAL_CONDITIONS]"
+    },
+    "testing_environment": {
+      "device_model": "[DEVICE_MODEL]",
+      "os_version": "[OS_VERSION]",
+      "jailbreak_root": "[YES/NO]",
+      "testing_network": "[ISOLATED/CONTROLLED]",
+      "proxy_configuration": "[PROXY_DETAILS]"
+    },
+    "testing_scope": {
+      "in_scope": [
+        "Mobile application security testing",
+        "API security assessment",
+        "Data storage analysis",
+        "Network communication security"
+      ],
+      "out_of_scope": [
+        "Social engineering",
+        "Physical device attacks",
+        "Third-party service testing",
+        "Denial of service attacks"
+      ]
+    },
+    "tools_configuration": {
+      "static_analysis": [
+        "MobSF",
+        "QARK",
+        "Semgrep"
+      ],
+      "dynamic_analysis": [
+        "Frida",
+        "objection",
+        "Burp Suite"
+      ],
+      "network_analysis": [
+        "Wireshark",
+        "mitmproxy"
+      ],
+      "device_analysis": [
+        "libimobiledevice",
+        "adb"
+      ]
+    }
+  }
+}

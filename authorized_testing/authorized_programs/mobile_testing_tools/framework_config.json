@@ -1,0 +1,107 @@
+{
+  "framework_info": {
+    "name": "Authorized Mobile Security Testing Framework",
+    "version": "3.0",
+    "programs_supported": [
+      "Huntr AI/ML",
+      "Apple Security Research",
+      "Google VRP"
+    ],
+    "created": "2025-09-25T13:13:03.452695"
+  },
+  "testing_methodology": {
+    "huntr_ai_mobile_testing": {
+      "description": "Mobile AI/ML security testing for Huntr bounties",
+      "targets": [
+        "TensorFlow Lite mobile implementations",
+        "PyTorch Mobile security vulnerabilities",
+        "Core ML model security (iOS)",
+        "ML Kit security issues (Android)",
+        "ONNX Runtime mobile vulnerabilities"
+      ],
+      "tools": [
+        "TensorFlow Model Analysis Tool",
+        "PyTorch Mobile Debugger",
+        "Core ML Tools (iOS)",
+        "ML Kit Model Analyzer (Android)",
+        "ONNX Runtime Profiler"
+      ],
+      "evidence_requirements": [
+        "Model file format vulnerability demonstration",
+        "Mobile ML inference exploitation proof-of-concept",
+        "Impact on mobile application security",
+        "Reproduction steps with specific model files"
+      ]
+    },
+    "apple_ios_security_testing": {
+      "description": "iOS security research for Apple Security Bounty",
+      "authorized_areas": [
+        "iOS system vulnerabilities",
+        "iOS application security",
+        "Secure Enclave research",
+        "biometric security research",
+        "iOS privilege escalation"
+      ],
+      "tools": [
+        "Xcode security tools",
+        "iOS device security analysis",
+        "Static analysis tools for iOS",
+        "Dynamic analysis with authorized methods"
+      ],
+      "srd_specific_testing": [
+        "Advanced iOS kernel research",
+        "Memory corruption vulnerability research",
+        "iOS sandbox security research",
+        "iOS boot chain security analysis"
+      ],
+      "evidence_requirements": [
+        "Detailed technical analysis",
+        "Reliable proof-of-concept",
+        "Impact assessment on iOS security",
+        "Professional vulnerability report"
+      ]
+    },
+    "google_android_testing": {
+      "description": "Android security research for Google VRP",
+      "authorized_areas": [
+        "Android OS security research",
+        "Google Play security analysis",
+        "Google mobile app security testing",
+        "Android framework vulnerabilities",
+        "Google services mobile security"
+      ],
+      "tools": [
+        "Android Studio security tools",
+        "Android Debug Bridge (ADB)",
+        "Android security testing framework",
+        "Google Play security analysis tools"
+      ],
+      "evidence_requirements": [
+        "Technical vulnerability analysis",
+        "Working proof-of-concept",
+        "Android-specific security impact",
+        "Comprehensive reproduction guide"
+      ]
+    }
+  },
+  "compliance_requirements": {
+    "authorization_documentation": [
+      "Program terms acceptance documentation",
+      "Testing scope verification",
+      "Authorized target confirmation",
+      "Testing timeline documentation"
+    ],
+    "testing_ethics": [
+      "No unauthorized data access",
+      "No harm to other users",
+      "Responsible disclosure practices",
+      "Professional research standards"
+    ],
+    "evidence_standards": [
+      "Professional screenshot capture",
+      "Detailed technical documentation",
+      "Reproducible testing methodology",
+      "Clear impact demonstration"
+    ]
+  }
+}

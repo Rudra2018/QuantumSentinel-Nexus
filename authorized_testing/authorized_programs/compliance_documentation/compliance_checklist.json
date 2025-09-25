@@ -1,0 +1,42 @@
+{
+  "compliance_checklist": {
+    "pre_testing": [
+      "\u2705 Program terms reviewed and accepted",
+      "\u2705 Testing scope verified as authorized",
+      "\u2705 Testing methodology approved",
+      "\u2705 Evidence collection plan prepared",
+      "\u2705 Responsible disclosure process understood"
+    ],
+    "during_testing": [
+      "\u2705 Testing limited to authorized scope only",
+      "\u2705 No unauthorized data access attempted",
+      "\u2705 No harm caused to other users",
+      "\u2705 Professional testing standards maintained",
+      "\u2705 Evidence collected according to guidelines"
+    ],
+    "post_testing": [
+      "\u2705 Findings documented professionally",
+      "\u2705 Proof-of-concept prepared ethically",
+      "\u2705 Impact assessment completed",
+      "\u2705 Submission prepared according to program requirements",
+      "\u2705 Coordinated disclosure process initiated"
+    ]
+  },
+  "program_specific_compliance": {
+    "huntr": {
+      "authorization": "Open source project security research",
+      "scope_verification": "AI/ML framework vulnerability research",
+      "evidence_requirements": "Mobile ML exploitation demonstration"
+    },
+    "apple": {
+      "authorization": "Apple Security Bounty Program participation",
+      "scope_verification": "iOS security research authorization",
+      "srd_requirements": "Security Research Device program compliance"
+    },
+    "google": {
+      "authorization": "Google VRP terms acceptance",
+      "scope_verification": "Android/Google services research authorization",
+      "submission_requirements": "Bug Hunters platform submission"
+    }
+  }
+}

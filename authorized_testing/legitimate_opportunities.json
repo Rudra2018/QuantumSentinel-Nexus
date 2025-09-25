@@ -1,0 +1,237 @@
+{
+  "bug_bounty_platforms": {
+    "hackerone": {
+      "name": "HackerOne",
+      "url": "https://hackerone.com/directory/programs",
+      "mobile_programs": [
+        {
+          "program": "Apple",
+          "scope": [
+            "iOS apps",
+            "macOS apps",
+            "Apple services"
+          ],
+          "bounty_range": "$100 - $1,000,000+",
+          "mobile_testing": "iOS security research authorized",
+          "notes": "Comprehensive Apple product security research"
+        },
+        {
+          "program": "Google/Alphabet",
+          "scope": [
+            "Android apps",
+            "Google Play",
+            "Chrome",
+            "YouTube"
+          ],
+          "bounty_range": "$100 - $31,337+",
+          "mobile_testing": "Android and mobile web authorized",
+          "notes": "Multiple Google products including mobile"
+        },
+        {
+          "program": "Microsoft",
+          "scope": [
+            "Office mobile apps",
+            "Xbox",
+            "Azure mobile"
+          ],
+          "bounty_range": "$500 - $15,000+",
+          "mobile_testing": "Microsoft mobile applications",
+          "notes": "Office 365 mobile and other Microsoft mobile apps"
+        },
+        {
+          "program": "Uber",
+          "scope": [
+            "Uber mobile apps",
+            "Uber Eats",
+            "API endpoints"
+          ],
+          "bounty_range": "$500 - $10,000+",
+          "mobile_testing": "iOS and Android Uber applications",
+          "notes": "Ride-sharing and delivery mobile apps"
+        },
+        {
+          "program": "Shopify",
+          "scope": [
+            "Mobile apps",
+            "Partner apps",
+            "API"
+          ],
+          "bounty_range": "$200 - $25,000+",
+          "mobile_testing": "Shopify mobile commerce apps",
+          "notes": "E-commerce platform mobile applications"
+        }
+      ]
+    },
+    "bugcrowd": {
+      "name": "Bugcrowd",
+      "url": "https://bugcrowd.com/programs",
+      "mobile_programs": [
+        {
+          "program": "Tesla",
+          "scope": [
+            "Mobile apps",
+            "Vehicle systems",
+            "Web applications"
+          ],
+          "bounty_range": "$100 - $15,000+",
+          "mobile_testing": "Tesla mobile application security",
+          "notes": "Electric vehicle and energy mobile apps"
+        },
+        {
+          "program": "Western Union",
+          "scope": [
+            "Mobile banking apps",
+            "Money transfer",
+            "API"
+          ],
+          "bounty_range": "$100 - $8,000+",
+          "mobile_testing": "Financial mobile applications",
+          "notes": "Money transfer and financial services mobile"
+        },
+        {
+          "program": "Atlassian",
+          "scope": [
+            "Mobile apps",
+            "Cloud services",
+            "API"
+          ],
+          "bounty_range": "$300 - $5,000+",
+          "mobile_testing": "Jira, Confluence mobile apps",
+          "notes": "Productivity and collaboration mobile tools"
+        }
+      ]
+    },
+    "intigriti": {
+      "name": "Intigriti",
+      "url": "https://app.intigriti.com/programs",
+      "mobile_programs": [
+        {
+          "program": "European Banking Programs",
+          "scope": [
+            "Mobile banking",
+            "Payment apps",
+            "API"
+          ],
+          "bounty_range": "\u20ac500 - \u20ac10,000+",
+          "mobile_testing": "European financial mobile apps",
+          "notes": "Various European bank mobile applications"
+        }
+      ]
+    }
+  },
+  "legitimate_testing_opportunities": {
+    "your_own_applications": {
+      "description": "Test applications you develop or own",
+      "authorization": "Automatic (you own the application)",
+      "testing_scope": "Complete mobile security testing",
+      "documentation": "Internal security assessment",
+      "tools": [
+        "All security testing tools",
+        "Full penetration testing"
+      ],
+      "screenshot_policy": "Full documentation allowed"
+    },
+    "open_source_projects": {
+      "description": "Contribute security research to open source mobile apps",
+      "authorization": "Follow project contribution guidelines",
+      "testing_scope": "Security vulnerability research",
+      "documentation": "GitHub issues, security advisories",
+      "examples": [
+        "Signal Android/iOS (security research welcome)",
+        "WordPress Mobile (has security program)",
+        "Firefox Mobile (Mozilla security program)",
+        "Telegram (security contest programs)"
+      ]
+    },
+    "academic_research": {
+      "description": "University-approved mobile security research",
+      "authorization": "Institutional Review Board (IRB) approval",
+      "testing_scope": "Research-focused security analysis",
+      "documentation": "Academic papers, conference presentations",
+      "requirements": [
+        "University affiliation",
+        "Research ethics approval",
+        "Coordinated disclosure process",
+        "Academic publication intent"
+      ]
+    },
+    "security_conferences": {
+      "description": "Conference-sponsored mobile security challenges",
+      "authorization": "Conference rules and guidelines",
+      "examples": [
+        "DEF CON Mobile Hacking Village",
+        "Black Hat Mobile Security Sessions",
+        "OWASP Mobile Security Events",
+        "BSides Mobile Security Workshops"
+      ],
+      "benefits": [
+        "Legal protection under conference rules",
+        "Networking with security professionals",
+        "Public recognition for findings",
+        "Learning from other researchers"
+      ]
+    }
+  },
+  "mobile_testing_methodology": {
+    "authorized_testing_steps": [
+      "1. Verify written authorization or program terms",
+      "2. Set up isolated testing environment",
+      "3. Configure mobile testing tools (Frida, Burp Suite)",
+      "4. Follow OWASP Mobile Security Testing Guide",
+      "5. Document findings with screenshots and PoC",
+      "6. Report through authorized channels",
+      "7. Follow coordinated disclosure timeline"
+    ],
+    "evidence_collection": [
+      "Screenshots of vulnerability demonstrations",
+      "Video recordings of exploitation process",
+      "Network traffic captures (Burp Suite/ZAP)",
+      "Tool output logs (Frida, MobSF, etc.)",
+      "Step-by-step reproduction documentation",
+      "Impact assessment and business risk analysis"
+    ],
+    "professional_reporting": [
+      "Clear vulnerability title and description",
+      "CVSS v3.1 scoring with justification",
+      "Detailed reproduction steps",
+      "Proof-of-concept with ethical boundaries",
+      "Business impact assessment",
+      "Remediation recommendations",
+      "Timeline for coordinated disclosure"
+    ]
+  },
+  "recommended_starting_points": [
+    {
+      "target": "Your Own Mobile App Development",
+      "difficulty": "Beginner",
+      "authorization": "Self-authorized",
+      "learning_value": "Complete mobile security lifecycle",
+      "tools_needed": "All mobile security testing tools",
+      "outcome": "Internal security improvement"
+    },
+    {
+      "target": "Public Bug Bounty Programs",
+      "difficulty": "Intermediate",
+      "authorization": "Program terms of service",
+      "learning_value": "Professional security research",
+      "tools_needed": "Professional testing toolkit",
+      "outcome": "Financial rewards + reputation"
+    },
+    {
+      "target": "Open Source Security Research",
+      "difficulty": "Intermediate",
+      "authorization": "Project contribution guidelines",
+      "learning_value": "Community security contribution",
+      "tools_needed": "Research-grade security tools",
+      "outcome": "Community recognition + CVE assignments"
+    },
+    {
+      "target": "Academic Mobile Security Research",
+      "difficulty": "Advanced",
+      "authorization": "University IRB approval",
+      "learning_value": "Cutting-edge security research",
+      "tools_needed": "Research laboratory setup",
+      "outcome": "Academic publications + conferences"
+    }
+  ]
+}
