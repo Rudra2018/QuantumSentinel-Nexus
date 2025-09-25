@@ -1,5 +1,6 @@
 """
-AegisLearner-AI Setup Configuration
+QuantumSentinel-Nexus Setup Configuration
+The Ultimate AI Cybersecurity Command Platform
 """
 
 from setuptools import setup, find_packages
@@ -10,14 +11,14 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 setup(
-    name="aegislearner-ai",
-    version="1.0.0",
-    author="AegisLearner-AI Team",
-    author_email="team@aegislearner-ai.com",
-    description="🛡️ Intelligent Security Testing Platform with AI-driven Learning",
+    name="quantumsentinel-nexus",
+    version="2.0.0-QUANTUM",
+    author="QuantumSentinel-Nexus Team",
+    author_email="team@quantumsentinel-nexus.com",
+    description="⚡ The Ultimate AI Cybersecurity Command Platform with Quantum-Inspired Intelligence",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/YourUsername/AegisLearner-AI",
+    url="https://github.com/Rudra2018/QuantumSentinel-Nexus",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     classifiers=[

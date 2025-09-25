@@ -1,6 +1,6 @@
 """
-AegisLearner-AI: Intelligent Security Orchestrator
-Advanced AI-driven security testing platform with comprehensive learning framework
+QuantumSentinel-Nexus: Quantum Command Center
+Ultimate AI-powered cybersecurity orchestrator with autonomous agent coordination
 """
 import asyncio
 import logging
@@ -16,13 +16,15 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from shared.learning.adaptive_learning_system import AdaptiveLearningSystem, LearningEvent
 from shared.learning.learning_integration import LearningIntegration, learning_integration
+from agents.vulnerability_analysis.pentestgpt_integration import create_pentestgpt_agent
+from agents.mobile_security.mobile_security_analyzer import create_mobile_security_analyzer
 
-class IntelligentSecurityOrchestrator:
+class QuantumSecurityOrchestrator:
     """
-    AegisLearner-AI: Intelligent Security Orchestrator
+    QuantumSentinel-Nexus: Quantum Command Center
 
-    Advanced security orchestrator with comprehensive learning framework that
-    continuously adapts and improves security testing strategies.
+    Ultimate AI-powered cybersecurity orchestrator that coordinates autonomous
+    security agents with quantum-inspired intelligence algorithms.
     """
 
     def __init__(self, config_path: str = None):
@@ -36,6 +38,12 @@ class IntelligentSecurityOrchestrator:
 
         # Initialize configuration
         self.config = self._load_configuration(config_path)
+
+        # Initialize PentestGPT agent
+        self.pentestgpt_agent = create_pentestgpt_agent(self.config.get('pentestgpt', {}))
+
+        # Initialize Mobile Security Analyzer
+        self.mobile_security_analyzer = create_mobile_security_analyzer(self.config.get('mobile_security', {}))
 
         # Setup intelligent logging
         self._setup_intelligent_logging()
@@ -220,6 +228,27 @@ class IntelligentSecurityOrchestrator:
             )
             recon_result['intelligence']['technology'] = tech_stack
 
+            # Enhance with PentestGPT AI-guided reconnaissance
+            target = target_config.get('target', 'unknown')
+            pentestgpt_recon = await self.pentestgpt_agent.execute_ai_guided_pentest(
+                target=target,
+                test_types=['reconnaissance'],
+                parameters={
+                    'reconnaissance': {
+                        'scope': 'full',
+                        'passive_only': False
+                    }
+                }
+            )
+
+            # Merge PentestGPT reconnaissance findings
+            if 'phases' in pentestgpt_recon and 'reconnaissance' in pentestgpt_recon['phases']:
+                pentestgpt_findings = pentestgpt_recon['phases']['reconnaissance'].get('findings', [])
+                for finding in pentestgpt_findings:
+                    finding['source'] = 'PentestGPT'
+                recon_result['findings'].extend(pentestgpt_findings)
+
+            recon_result['pentestgpt_reconnaissance'] = pentestgpt_recon
             recon_result['success'] = True
             recon_result['completed_at'] = datetime.now().isoformat()
 
@@ -301,11 +330,33 @@ class IntelligentSecurityOrchestrator:
             # Use reconnaissance intelligence for targeted analysis
             target_technologies = recon_results.get('intelligence', {}).get('technology', {})
 
-            # AI-enhanced vulnerability detection
+            # AI-enhanced vulnerability detection with PentestGPT
             vulnerabilities = await self._detect_vulnerabilities_intelligently(
                 target_config, target_technologies
             )
+
+            # Enhance with PentestGPT AI-guided analysis
+            target = target_config.get('target', 'unknown')
+            pentestgpt_results = await self.pentestgpt_agent.execute_ai_guided_pentest(
+                target=target,
+                test_types=['vulnerability_scan'],
+                parameters={
+                    'vulnerability_scan': {
+                        'scan_type': 'web_application',
+                        'tech_stack': list(target_technologies.keys())
+                    }
+                }
+            )
+
+            # Merge PentestGPT findings with existing vulnerabilities
+            if 'phases' in pentestgpt_results and 'vulnerability_scan' in pentestgpt_results['phases']:
+                pentestgpt_vulns = pentestgpt_results['phases']['vulnerability_scan'].get('findings', [])
+                for vuln in pentestgpt_vulns:
+                    vuln['source'] = 'PentestGPT'
+                vulnerabilities.extend(pentestgpt_vulns)
+
             vuln_result['vulnerabilities'] = vulnerabilities
+            vuln_result['pentestgpt_analysis'] = pentestgpt_results
 
             # Risk assessment with learning
             risk_assessment = await self._assess_risks_intelligently(vulnerabilities)
@@ -724,4 +775,4 @@ class IntelligentSecurityOrchestrator:
         return optimization_result
 
 # Global intelligent orchestrator instance
-intelligent_orchestrator = IntelligentSecurityOrchestrator()
+quantum_orchestrator = QuantumSecurityOrchestrator()
