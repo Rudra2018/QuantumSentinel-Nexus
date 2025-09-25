@@ -118,9 +118,44 @@ prompt-toolkit>=3.0.41
 # Docker and containerization support
 docker>=6.1.3
 
-# Legacy mobile security support (reduced)
+# Mobile Security Framework - Full Integration
+# Comprehensive Mobile Security Testing Suite
+frida-tools>=12.2.1
+objection>=1.11.0
 androguard>=3.4.0a1
+
+# 3rd-EAI AI Validation Engine Dependencies
+tensorflow>=2.13.0
+torch>=2.0.1
+transformers>=4.35.0
+sklearn>=0.0.post10
+xgboost>=2.0.0
+
+# Advanced ML libraries for AI validation
+lightgbm>=4.1.0
+catboost>=1.2.2
+
+# Video PoC Recording System
+opencv-python>=4.8.1.78
+moviepy>=1.0.3
+imageio>=2.31.5
+
+# iOS Testing Environment
+plistlib3>=0.1.0
+
+# Android Testing Environment
+python-adb>=3.2.0
+
+# Advanced Exploitation Framework
 frida>=16.1.4
+frida-tools>=12.2.1
+
+# Additional mobile security tools
+pymobiledevice3>=2.15.0
+
+# Enhanced PDF generation for mobile reports
+weasyprint>=60.1
+reportlab>=4.0.7
 
 # Additional security tools integration
 python-whois>=0.8.0
