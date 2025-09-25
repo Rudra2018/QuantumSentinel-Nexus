@@ -1,10 +1,9 @@
-# QuantumSentinel-Nexus Comprehensive Security Framework
-# Professional Docker Image for Recon, OSINT, and Bug Bounty Testing
+# QuantumSentinel-Nexus v4.0 - Ultimate Autonomous AI Security Testing System
 FROM ubuntu:22.04
 
-LABEL maintainer="QuantumSentinel-Nexus Team"
-LABEL description="Comprehensive Security Assessment Framework with Recon, OSINT, and Bug Bounty Tools"
-LABEL version="3.0"
+LABEL maintainer="QuantumSentinel AI Research Team"
+LABEL description="QuantumSentinel-Nexus v4.0 - Ultimate Autonomous AI Security Testing System with Zero-Day Discovery"
+LABEL version="4.0"
 
 # Prevent interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -43,7 +42,6 @@ RUN apt-get update && apt-get install -y \
     wireshark-common \
     tshark \
     # Security reconnaissance tools
-    dig \
     whois \
     dnsutils \
     # Node.js for Frida
@@ -187,17 +185,17 @@ RUN cat > /app/entrypoint.sh << 'EOF'
 #!/bin/bash
 set -e
 
-echo "🛡️ QuantumSentinel-Nexus Comprehensive Security Framework v3.0"
-echo "================================================================"
+echo "🛡️ QuantumSentinel-Nexus Ultimate AI Security Testing System v4.0"
+echo "=================================================================="
 echo "Docker Container Started Successfully!"
 echo ""
 echo "Available Modules:"
-echo "  • quantumsentinel_orchestrator.py - Master orchestration framework"
-echo "  • modules/recon_module.py - Advanced reconnaissance"
-echo "  • modules/osint_module.py - Open source intelligence"
-echo "  • modules/bugbounty_module.py - Vulnerability assessment"
-echo "  • modules/workflow_pipeline.py - Automated workflow management"
-echo "  • modules/report_engine.py - Professional PDF report generation"
+echo "  • autonomous_quantum_sentinel.py - Main autonomous AI system"
+echo "  • ai_core/quantum_sentinel_ml.py - Advanced ML/AI framework"
+echo "  • ai_core/unified_intelligence_layer.py - Cross-modal intelligence"
+echo "  • ai_agents/ - Specialized AI security agents (SAST/DAST/Binary)"
+echo "  • research_module/ - Zero-day discovery and research engine"
+echo "  • mobile_security_framework/ - Mobile security assessment"
 echo ""
 echo "Installed Security Tools:"
 echo "  Recon: subfinder, amass, httpx, nuclei, katana, naabu"
@@ -205,9 +203,9 @@ echo "  OSINT: theharvester, shodan-cli, censys"
 echo "  BugBounty: sqlmap, xsstrike, dirsearch, ffuf, keyhacks, arjun"
 echo ""
 echo "Usage Examples:"
-echo "  python3 quantumsentinel_orchestrator.py --target example.com"
-echo "  python3 -m modules.recon_module --domain example.com"
-echo "  python3 -m modules.osint_module --target example.com"
+echo "  python3 autonomous_quantum_sentinel.py --target example.com"
+echo "  python3 test_system.py - Run comprehensive system tests"
+echo "  python3 -m ai_agents.orchestrator_agent --target example.com"
 echo ""
 echo "Volume Mounts:"
 echo "  • /app/targets - Target configuration files"
@@ -248,9 +246,9 @@ RUN cat > /app/config/docker.yaml << 'EOF'
 # QuantumSentinel-Nexus Docker Configuration
 framework:
   name: "QuantumSentinel-Nexus"
-  version: "3.0"
+  version: "4.0"
   mode: "docker"
-  description: "Comprehensive Security Assessment Platform"
+  description: "Ultimate Autonomous AI Security Testing System"
 
 # Module Configuration
 modules:

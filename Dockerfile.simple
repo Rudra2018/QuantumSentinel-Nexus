@@ -1,0 +1,29 @@
+# Simple QuantumSentinel-Nexus v4.0 Docker Image for Testing
+FROM python:3.10-slim
+
+LABEL maintainer="QuantumSentinel AI Research Team"
+LABEL description="QuantumSentinel-Nexus v4.0 - Simplified Testing Image"
+LABEL version="4.0-simple"
+
+# Create app directory
+WORKDIR /app
+
+# Install minimal system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install Python dependencies
+COPY requirements-docker.txt /app/
+RUN pip install --no-cache-dir -r requirements-docker.txt
+
+# Copy application files
+COPY . /app/
+
+# Create directories
+RUN mkdir -p /app/assessments/{evidence,reports,screenshots,temp}
+
+# Run system test by default
+CMD ["python3", "test_system.py"]
