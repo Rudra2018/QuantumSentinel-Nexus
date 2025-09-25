@@ -19,6 +19,7 @@ from shared.learning.learning_integration import LearningIntegration, learning_i
 from agents.vulnerability_analysis.pentestgpt_integration import create_pentestgpt_agent
 from agents.mobile_security.mobile_security_analyzer import create_mobile_security_analyzer
 from validation.zero_false_positive_framework import create_zero_fp_framework, create_zfp_reporter
+from reporting.unified_report_system import create_unified_report_system, UnifiedScanResult
 
 class QuantumSecurityOrchestrator:
     """
@@ -49,6 +50,9 @@ class QuantumSecurityOrchestrator:
         # Initialize Zero False Positive Framework
         self.zfp_framework = create_zero_fp_framework(self.config.get('zero_fp_validation', {}))
         self.zfp_reporter = create_zfp_reporter()
+
+        # Initialize Unified Report System
+        self.unified_reporter = create_unified_report_system(self.config.get('output_dir', 'reports'))
 
         # Setup intelligent logging
         self._setup_intelligent_logging()
@@ -108,23 +112,97 @@ class QuantumSecurityOrchestrator:
         )
 
     @learning_integration.learning_enabled('orchestrator')
-    async def execute_intelligent_assessment(self, target_config: Dict[str, Any],
-                                           assessment_type: str = 'comprehensive') -> Dict[str, Any]:
-        """Execute an intelligent security assessment with learning integration"""
-        assessment_id = f"assessment_{datetime.now().timestamp()}"
+    async def execute_comprehensive_assessment_with_unified_reporting(self, target_config: Dict[str, Any],
+                                                                    assessment_type: str = 'comprehensive') -> Dict[str, Any]:
+        """Execute comprehensive assessment with unified reporting and validation"""
+        target = target_config.get('target', 'unknown')
+        start_time = datetime.now()
 
-        self.logger.info(f"🎯 Starting {assessment_type} assessment {assessment_id}")
-        self.logger.info(f"Target: {target_config.get('target', 'unknown')}")
+        # Start unified scan session
+        scan_id = await self.unified_reporter.start_scan_session(target, target_config)
 
-        # Get learning-based recommendations
-        recommendations = await self.learning_integration.get_agent_recommendations(
-            'orchestrator', target_config
-        )
+        self.logger.info(f"🚀 Starting comprehensive assessment with unified reporting")
+        self.logger.info(f"🎯 Scan ID: {scan_id}")
+        self.logger.info(f"🎯 Target: {target}")
 
-        # Predict overall success probability
-        success_prediction = await self.learning_integration.predict_agent_success(
-            'orchestrator', 'comprehensive_assessment', target_config
-        )
+        try:
+            # Phase 1: Comprehensive Reconnaissance
+            self.logger.info("🔍 Phase 1: Comprehensive Reconnaissance")
+            recon_results = await self._execute_intelligent_reconnaissance(target_config, scan_id)
+
+            # Phase 2: Multi-Tool Vulnerability Analysis
+            self.logger.info("🔬 Phase 2: Multi-Tool Vulnerability Analysis")
+            vuln_results = await self._execute_comprehensive_vulnerability_analysis(
+                target_config, recon_results, scan_id
+            )
+
+            # Phase 3: Comprehensive Revalidation
+            self.logger.info("🎯 Phase 3: Comprehensive Revalidation with ZFP Framework")
+            all_findings = self._collect_all_findings(recon_results, vuln_results)
+            toolset_results = self._collect_toolset_results(recon_results, vuln_results)
+
+            validation_results = await self.unified_reporter.revalidate_all_findings(
+                all_findings, self.zfp_framework, toolset_results
+            )
+
+            # Phase 4: Generate Single Comprehensive Report
+            end_time = datetime.now()
+            scan_result = UnifiedScanResult(
+                scan_id=scan_id,
+                target=target,
+                start_time=start_time,
+                end_time=end_time,
+                total_findings=len(all_findings),
+                validated_findings=len(validation_results['validated_findings']),
+                rejected_findings=len(validation_results['rejected_findings']),
+                high_confidence_findings=validation_results['validation_summary']['high_confidence'],
+                findings_by_severity=self._calculate_severity_distribution(validation_results['validated_findings']),
+                validation_summary=validation_results['validation_summary'],
+                toolset_results=toolset_results,
+                executive_summary=self._generate_executive_summary(validation_results),
+                technical_details=validation_results['validated_findings'],
+                remediation_plan=self._generate_remediation_plan(validation_results),
+                compliance_status=self._assess_compliance_status(validation_results)
+            )
+
+            # Generate single comprehensive PDF report
+            self.logger.info("📋 Generating single comprehensive PDF report")
+            report_path = await self.unified_reporter.generate_comprehensive_report(
+                scan_result, validation_results
+            )
+
+            # Finalize session and cleanup
+            session_summary = await self.unified_reporter.finalize_scan_session(scan_id)
+
+            # Final result
+            final_result = {
+                'scan_id': scan_id,
+                'target': target,
+                'start_time': start_time.isoformat(),
+                'end_time': end_time.isoformat(),
+                'duration': str(end_time - start_time),
+                'total_findings': scan_result.total_findings,
+                'validated_findings': scan_result.validated_findings,
+                'rejected_findings': scan_result.rejected_findings,
+                'high_confidence_findings': scan_result.high_confidence_findings,
+                'report_path': report_path,
+                'log_file': session_summary.get('log_file'),
+                'validation_summary': validation_results['validation_summary'],
+                'success': True,
+                'phases_completed': ['reconnaissance', 'vulnerability_analysis', 'revalidation', 'reporting'],
+                'zfp_framework_stats': self.zfp_framework.get_framework_statistics()
+            }
+
+            self.logger.info(f"✅ Assessment completed successfully")
+            self.logger.info(f"📋 Report: {report_path}")
+            self.logger.info(f"📊 Results: {scan_result.validated_findings}/{scan_result.total_findings} validated")
+
+            return final_result
+
+        except Exception as e:
+            self.logger.error(f"❌ Assessment failed: {str(e)}")
+            await self.unified_reporter.finalize_scan_session(scan_id)
+            raise
 
         self.logger.info(f"📊 Success prediction: {success_prediction:.2f}")
         self.logger.info(f"💡 Recommendations: {len(recommendations)} applied")
@@ -859,6 +937,166 @@ class QuantumSecurityOrchestrator:
     async def get_zero_fp_statistics(self) -> Dict[str, Any]:
         """Get Zero False Positive framework statistics"""
         return self.zfp_framework.get_framework_statistics()
+
+    def _collect_all_findings(self, recon_results: Dict[str, Any], vuln_results: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """Collect all findings from different phases"""
+        all_findings = []
+
+        # Collect reconnaissance findings
+        recon_findings = recon_results.get('findings', [])
+        for finding in recon_findings:
+            finding['phase'] = 'reconnaissance'
+            all_findings.append(finding)
+
+        # Collect vulnerability findings
+        vuln_findings = vuln_results.get('vulnerabilities', [])
+        for finding in vuln_findings:
+            finding['phase'] = 'vulnerability_analysis'
+            all_findings.append(finding)
+
+        # Collect validated findings from ZFP
+        zfp_findings = vuln_results.get('validated_findings', [])
+        for validated_finding in zfp_findings:
+            original_finding = validated_finding.get('original_finding', {})
+            original_finding['phase'] = 'zero_fp_validation'
+            original_finding['zfp_validated'] = True
+            all_findings.append(original_finding)
+
+        return all_findings
+
+    def _collect_toolset_results(self, recon_results: Dict[str, Any], vuln_results: Dict[str, Any]) -> Dict[str, Any]:
+        """Collect results from all toolsets"""
+        return {
+            'reconnaissance': recon_results,
+            'vulnerability_analysis': vuln_results,
+            'projectdiscovery': recon_results.get('pentestgpt_reconnaissance', {}),
+            'pentestgpt': vuln_results.get('pentestgpt_analysis', {}),
+            'nuclei': recon_results.get('nuclei_results', {}),
+            'mobile_security': vuln_results.get('mobile_security_results', {})
+        }
+
+    def _calculate_severity_distribution(self, validated_findings: List[Dict[str, Any]]) -> Dict[str, int]:
+        """Calculate severity distribution of validated findings"""
+        severity_count = {'critical': 0, 'high': 0, 'medium': 0, 'low': 0, 'info': 0}
+
+        for finding_data in validated_findings:
+            original_finding = finding_data.get('original_finding', {})
+            severity = original_finding.get('severity', 'medium').lower()
+            if severity in severity_count:
+                severity_count[severity] += 1
+            else:
+                severity_count['medium'] += 1
+
+        return severity_count
+
+    def _generate_executive_summary(self, validation_results: Dict[str, Any]) -> Dict[str, Any]:
+        """Generate executive summary"""
+        validated_count = len(validation_results['validated_findings'])
+        rejected_count = len(validation_results['rejected_findings'])
+        total_count = validation_results['total_findings']
+
+        return {
+            'total_findings_discovered': total_count,
+            'validated_vulnerabilities': validated_count,
+            'false_positives_eliminated': rejected_count,
+            'validation_accuracy': f"{(validated_count / total_count * 100):.1f}%" if total_count > 0 else "0%",
+            'high_confidence_findings': validation_results['validation_summary']['high_confidence'],
+            'critical_issues_count': len([
+                f for f in validation_results['validated_findings']
+                if f.get('original_finding', {}).get('severity', '').lower() in ['critical', 'high']
+            ]),
+            'immediate_action_required': validation_results['validation_summary']['high_confidence'] > 0
+        }
+
+    def _generate_remediation_plan(self, validation_results: Dict[str, Any]) -> Dict[str, Any]:
+        """Generate remediation plan"""
+        validated_findings = validation_results['validated_findings']
+
+        priority_levels = {'immediate': [], 'high': [], 'medium': [], 'low': []}
+
+        for finding_data in validated_findings:
+            original_finding = finding_data.get('original_finding', {})
+            severity = original_finding.get('severity', 'medium').lower()
+            confidence = finding_data.get('combined_confidence', 0.5)
+
+            if severity == 'critical' or (severity == 'high' and confidence >= 0.9):
+                priority_levels['immediate'].append(original_finding)
+            elif severity == 'high' or (severity == 'medium' and confidence >= 0.8):
+                priority_levels['high'].append(original_finding)
+            elif severity == 'medium':
+                priority_levels['medium'].append(original_finding)
+            else:
+                priority_levels['low'].append(original_finding)
+
+        return {
+            'immediate_action': len(priority_levels['immediate']),
+            'high_priority': len(priority_levels['high']),
+            'medium_priority': len(priority_levels['medium']),
+            'low_priority': len(priority_levels['low']),
+            'priority_breakdown': priority_levels,
+            'estimated_remediation_time': self._estimate_total_remediation_time(priority_levels)
+        }
+
+    def _estimate_total_remediation_time(self, priority_levels: Dict[str, List]) -> str:
+        """Estimate total remediation time"""
+        time_estimates = {
+            'immediate': len(priority_levels['immediate']) * 4,  # 4 hours each
+            'high': len(priority_levels['high']) * 2,  # 2 hours each
+            'medium': len(priority_levels['medium']) * 1,  # 1 hour each
+            'low': len(priority_levels['low']) * 0.5  # 30 minutes each
+        }
+
+        total_hours = sum(time_estimates.values())
+
+        if total_hours < 8:
+            return f"{total_hours:.1f} hours"
+        elif total_hours < 40:
+            return f"{total_hours/8:.1f} days"
+        else:
+            return f"{total_hours/40:.1f} weeks"
+
+    def _assess_compliance_status(self, validation_results: Dict[str, Any]) -> Dict[str, Any]:
+        """Assess compliance status"""
+        validated_findings = validation_results['validated_findings']
+
+        # Count findings by compliance category
+        owasp_violations = 0
+        pci_violations = 0
+        gdpr_violations = 0
+
+        for finding_data in validated_findings:
+            original_finding = finding_data.get('original_finding', {})
+            vuln_type = original_finding.get('type', '').lower()
+
+            # OWASP Top 10 mapping
+            owasp_types = ['sql_injection', 'xss', 'broken_auth', 'sensitive_data', 'xxe', 'broken_access', 'misconfig', 'xss', 'deserialization', 'logging']
+            if any(owasp_type in vuln_type for owasp_type in owasp_types):
+                owasp_violations += 1
+
+            # PCI DSS implications
+            if vuln_type in ['sql_injection', 'xss', 'weak_crypto']:
+                pci_violations += 1
+
+            # GDPR implications
+            if vuln_type in ['sql_injection', 'path_traversal', 'broken_auth']:
+                gdpr_violations += 1
+
+        return {
+            'owasp_compliance': 'non_compliant' if owasp_violations > 0 else 'compliant',
+            'owasp_violations': owasp_violations,
+            'pci_compliance': 'at_risk' if pci_violations > 0 else 'compliant',
+            'pci_violations': pci_violations,
+            'gdpr_compliance': 'at_risk' if gdpr_violations > 0 else 'compliant',
+            'gdpr_violations': gdpr_violations,
+            'overall_compliance_risk': 'high' if (owasp_violations + pci_violations + gdpr_violations) > 5 else 'medium' if (owasp_violations + pci_violations + gdpr_violations) > 0 else 'low'
+        }
+
+    async def _execute_comprehensive_vulnerability_analysis(self, target_config: Dict[str, Any],
+                                                          recon_results: Dict[str, Any],
+                                                          assessment_id: str) -> Dict[str, Any]:
+        """Execute comprehensive vulnerability analysis with all tools"""
+        # This is the existing vulnerability analysis method with enhanced integration
+        return await self._execute_intelligent_vulnerability_analysis(target_config, recon_results, assessment_id)
 
 # Global intelligent orchestrator instance
 quantum_orchestrator = QuantumSecurityOrchestrator()

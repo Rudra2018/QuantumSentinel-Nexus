@@ -81,7 +81,8 @@ class QuantumSentinelNexus:
             Complete assessment results with learning insights
         """
 
-        self.logger.info(f"🎯 Starting {assessment_type} assessment for {target}")
+        self.logger.info(f"🚀 Starting {assessment_type} assessment with unified reporting")
+        self.logger.info(f"🎯 Target: {target}")
 
         # Validate target
         if not target or target.strip() == '':
@@ -93,7 +94,9 @@ class QuantumSentinelNexus:
             'assessment_type': assessment_type,
             'timestamp': datetime.now().isoformat(),
             'learning_enabled': True,
-            'output_format': output_format
+            'output_format': 'pdf',  # Always use PDF for unified reporting
+            'zero_fp_validation': True,
+            'comprehensive_revalidation': True
         }
 
         # Load additional config if provided
@@ -107,9 +110,9 @@ class QuantumSentinelNexus:
                 self.logger.warning(f"Failed to load config file {config_file}: {e}")
 
         try:
-            # Execute intelligent assessment
-            self.logger.info("🧠 Executing AI-enhanced security assessment")
-            assessment_results = await self.orchestrator.execute_intelligent_assessment(
+            # Execute comprehensive assessment with unified reporting
+            self.logger.info("🧠 Executing comprehensive AI-enhanced security assessment with unified reporting")
+            assessment_results = await self.orchestrator.execute_comprehensive_assessment_with_unified_reporting(
                 target_config, assessment_type
             )
 
