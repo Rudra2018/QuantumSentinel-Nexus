@@ -1,0 +1,124 @@
+name: Security Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 6 * * 1'  # Weekly on Monday at 6 AM
+
+jobs:
+  code-security:
+    runs-on: ubuntu-latest
+    name: Code Security Analysis
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install bandit safety semgrep
+
+    - name: Run Bandit security scan
+      run: |
+        bandit -r . -f json -o bandit-report.json || true
+
+    - name: Run Safety check
+      run: |
+        safety check --json --output safety-report.json || true
+
+    - name: Run Semgrep security scan
+      run: |
+        semgrep --config=auto --json --output=semgrep-report.json . || true
+
+    - name: Upload security reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-reports
+        path: |
+          bandit-report.json
+          safety-report.json
+          semgrep-report.json
+
+  docker-security:
+    runs-on: ubuntu-latest
+    name: Docker Security Analysis
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build Docker image
+      run: docker build -t quantumsentinel/nexus:security-test .
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: quantumsentinel/nexus:security-test
+        format: 'json'
+        output: 'trivy-report.json'
+
+    - name: Run Docker Bench Security
+      run: |
+        docker run --rm --net host --pid host --userns host --cap-add audit_control \
+          -e DOCKER_CONTENT_TRUST=$DOCKER_CONTENT_TRUST \
+          -v /etc:/etc:ro \
+          -v /usr/bin/containerd:/usr/bin/containerd:ro \
+          -v /usr/bin/runc:/usr/bin/runc:ro \
+          -v /usr/lib/systemd:/usr/lib/systemd:ro \
+          -v /var/lib:/var/lib:ro \
+          -v /var/run/docker.sock:/var/run/docker.sock:ro \
+          --label docker_bench_security \
+          docker/docker-bench-security > docker-bench-report.txt || true
+
+    - name: Upload Docker security reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: docker-security-reports
+        path: |
+          trivy-report.json
+          docker-bench-report.txt
+
+  framework-tests:
+    runs-on: ubuntu-latest
+    name: Framework Functionality Tests
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build and run framework tests
+      run: |
+        docker build -t quantumsentinel/nexus:test .
+
+        # Test basic framework functionality
+        docker run --rm -v $(pwd):/workspace quantumsentinel/nexus:test bash -c "
+          cd /workspace &&
+          python3 -c 'import sys; sys.path.append(\"/app\"); import comprehensive_mobile_security_suite; print(\"✅ Framework imports working\")' &&
+          python3 -c 'import sys; sys.path.append(\"/app\"); import bulletproof_validation_suite; print(\"✅ Validation suite imports working\")' &&
+          python3 -c 'import sys; sys.path.append(\"/app\"); import create_final_integrated_report; print(\"✅ Report generator imports working\")'
+        "
+
+    - name: Test Frida installation
+      run: |
+        docker run --rm quantumsentinel/nexus:test bash -c "
+          frida --version &&
+          python3 -c 'import frida; print(f\"Frida Python: {frida.__version__}\")' &&
+          echo '✅ Frida installation verified'
+        "
+
+    - name: Test mobile analysis tools
+      run: |
+        docker run --rm quantumsentinel/nexus:test bash -c "
+          jadx --version &&
+          which apktool &&
+          echo '✅ Mobile analysis tools verified'
+        "

@@ -1,0 +1,188 @@
+# QuantumSentinel-Nexus Orchestrator Configuration
+# Comprehensive settings for recon, OSINT, and bug bounty testing
+
+framework:
+  name: "QuantumSentinel-Nexus"
+  version: "3.0"
+  mode: "comprehensive"
+  description: "Professional Security Assessment Platform"
+
+# Module Configuration
+modules:
+  recon:
+    enabled: true
+    tools:
+      - "subfinder"
+      - "amass"
+      - "httpx"
+      - "nuclei"
+      - "katana"
+      - "naabu"
+    settings:
+      parallel_execution: true
+      max_threads: 50
+      rate_limit: 100
+      timeout: 30
+      subdomain_validation: true
+      port_scan_top_ports: 1000
+    nuclei:
+      templates: ["cves", "vulnerabilities", "misconfigurations"]
+      custom_templates: true
+      severity_filter: ["critical", "high", "medium"]
+
+  osint:
+    enabled: true
+    tools:
+      - "theharvester"
+      - "shodan"
+      - "recon-ng"
+      - "spiderfoot"
+      - "maltego"
+    features:
+      github_dorks: true
+      breach_check: true
+      social_media: false  # Privacy conscious
+      employee_enum: false  # Privacy conscious
+    apis:
+      shodan_key: "${SHODAN_API_KEY}"
+      censys_key: "${CENSYS_API_KEY}"
+      virustotal_key: "${VIRUSTOTAL_API_KEY}"
+    github_dorking:
+      enabled: true
+      search_terms: ["api_key", "password", "secret", "token", "credential"]
+      file_types: [".env", ".config", ".yaml", ".json"]
+
+  bugbounty:
+    enabled: true
+    tools:
+      - "burpsuite"
+      - "sqlmap"
+      - "dirsearch"
+      - "keyhacks"
+      - "xsstrike"
+      - "ffuf"
+      - "arjun"
+      - "gau"
+      - "trufflehog"
+    settings:
+      validation_level: "high"
+      false_positive_reduction: true
+      ai_validation: true
+      manual_validation_required: true
+    vulnerability_types:
+      - "sql_injection"
+      - "xss"
+      - "ssrf"
+      - "open_redirect"
+      - "directory_traversal"
+      - "api_key_exposure"
+      - "cors_misconfiguration"
+      - "subdomain_takeover"
+    sqlmap:
+      risk_level: 2
+      level: 3
+      timeout: 30
+      threads: 10
+    dirsearch:
+      wordlists: ["common.txt", "big.txt", "raft-large-directories.txt"]
+      extensions: ["php", "asp", "aspx", "jsp", "html", "js", "txt", "pdf"]
+      threads: 30
+
+# Output Configuration
+output:
+  base_dir: "assessments"
+  formats:
+    - "pdf"
+    - "html"
+    - "json"
+    - "xml"
+  evidence_collection: true
+  screenshots: true
+  pcap_capture: true
+  log_retention_days: 30
+
+# Report Configuration
+reporting:
+  template_style: "professional"
+  include_methodology: true
+  include_executive_summary: true
+  include_remediation: true
+  include_evidence: true
+  branding:
+    logo: "assets/quantumsentinel-logo.png"
+    company: "QuantumSentinel-Nexus"
+    website: "https://github.com/quantumsentinel/nexus"
+
+# Ethical and Legal Compliance
+ethical:
+  scope_validation: true
+  rate_limiting: true
+  authorized_only: true
+  responsible_disclosure: true
+  privacy_conscious: true
+  max_requests_per_minute: 60
+  respect_robots_txt: true
+  avoid_destructive_tests: true
+
+# Performance Configuration
+performance:
+  max_concurrent_tasks: 10
+  memory_limit_gb: 8
+  disk_space_limit_gb: 50
+  timeout_minutes: 120
+  auto_cleanup: true
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_rotation: true
+  max_file_size_mb: 100
+  backup_count: 5
+
+# Security Configuration
+security:
+  api_key_encryption: true
+  secure_temp_files: true
+  evidence_integrity: true
+  audit_logging: true
+
+# Bug Bounty Program Specific Settings
+programs:
+  default:
+    submission_format: "standard"
+    severity_mapping: "cvss"
+    evidence_requirements: ["screenshot", "proof_of_concept"]
+
+  hackerone:
+    submission_format: "hackerone"
+    severity_mapping: "hackerone"
+    additional_fields: ["asset_type", "weakness"]
+
+  intigriti:
+    submission_format: "intigriti"
+    severity_mapping: "intigriti"
+    additional_fields: ["endpoint", "payload"]
+
+# Tool-Specific Advanced Configuration
+tool_configs:
+  subfinder:
+    resolvers: "config/resolvers.txt"
+    all_sources: true
+    timeout: 30
+
+  amass:
+    config: "config/amass.ini"
+    passive: true
+    active: false  # More ethical for initial recon
+
+  httpx:
+    follow_redirects: true
+    status_code: true
+    title: true
+    tech_detect: true
+
+  nuclei:
+    update_templates: true
+    markdown_export: true
+    sarif_export: true
