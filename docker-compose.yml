@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: quantumsentinel/nexus:3.0
+    image: quantumsentinel/nexus:4.0
     container_name: quantumsentinel-nexus
 
     # Environment variables
@@ -69,7 +69,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: quantumsentinel/nexus:3.0
+    image: quantumsentinel/nexus:4.0
     container_name: quantumsentinel-web
 
     environment:

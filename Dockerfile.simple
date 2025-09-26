@@ -1,29 +1,91 @@
-# Simple QuantumSentinel-Nexus v4.0 Docker Image for Testing
+# QuantumSentinel-Nexus v4.0 - Simplified Docker Image
 FROM python:3.10-slim
 
-LABEL maintainer="QuantumSentinel AI Research Team"
-LABEL description="QuantumSentinel-Nexus v4.0 - Simplified Testing Image"
-LABEL version="4.0-simple"
+LABEL maintainer="QuantumSentinel Development Team"
+LABEL description="QuantumSentinel-Nexus v4.0 - AI-Powered Security Testing Framework (Simplified)"
+LABEL version="4.0"
 
-# Create app directory
+# Prevent interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+
+# Create app directory and user
+RUN useradd -m -u 1000 security && \
+    mkdir -p /app && \
+    chown -R security:security /app
+
 WORKDIR /app
 
-# Install minimal system dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    git \
     curl \
+    wget \
+    git \
+    unzip \
+    nmap \
+    whois \
+    dnsutils \
+    net-tools \
+    openssl \
+    ca-certificates \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install Python dependencies
-COPY requirements-docker.txt /app/
-RUN pip install --no-cache-dir -r requirements-docker.txt
+# Install Python dependencies
+COPY requirements-minimal.txt /app/
+RUN pip3 install --no-cache-dir -r requirements-minimal.txt
+
+# Install additional Python packages
+RUN pip3 install --no-cache-dir \
+    matplotlib \
+    seaborn \
+    pandas \
+    jinja2 \
+    python-whois \
+    dnspython \
+    python-nmap
 
 # Copy application files
-COPY . /app/
+COPY --chown=security:security . /app/
 
-# Create directories
-RUN mkdir -p /app/assessments/{evidence,reports,screenshots,temp}
+# Create necessary directories
+RUN mkdir -p /app/assessments/{evidence,reports,screenshots,temp} && \
+    mkdir -p /app/config && \
+    chown -R security:security /app/assessments /app/config
 
-# Run system test by default
-CMD ["python3", "test_system.py"]
+# Create entrypoint script
+RUN cat > /app/entrypoint.sh << 'EOF'
+#!/bin/bash
+echo "🛡️ QuantumSentinel-Nexus AI Security Testing Framework v4.0"
+echo "=============================================================="
+echo "Available Commands:"
+echo "  python3 autonomous_quantum_sentinel.py - Main framework"
+echo "  python3 test_system.py - Run system tests"
+echo ""
+if [ "$#" -eq 0 ]; then
+    exec /bin/bash
+else
+    exec "$@"
+fi
+EOF
+
+RUN chmod +x /app/entrypoint.sh && \
+    chown security:security /app/entrypoint.sh
+
+# Switch to security user
+USER security
+
+# Set working directory and volumes
+WORKDIR /app
+VOLUME ["/app/assessments", "/app/config"]
+
+# Expose port
+EXPOSE 8080
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python3 -c "import sys; sys.exit(0)" || exit 1
+
+# Set entrypoint
+ENTRYPOINT ["/app/entrypoint.sh"]
+CMD []

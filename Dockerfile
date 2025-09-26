@@ -1,8 +1,8 @@
-# QuantumSentinel-Nexus v4.0 - Ultimate Autonomous AI Security Testing System
+# QuantumSentinel-Nexus v4.0 - AI-Powered Security Testing Framework
 FROM ubuntu:22.04
 
-LABEL maintainer="QuantumSentinel AI Research Team"
-LABEL description="QuantumSentinel-Nexus v4.0 - Ultimate Autonomous AI Security Testing System with Zero-Day Discovery"
+LABEL maintainer="QuantumSentinel Development Team"
+LABEL description="QuantumSentinel-Nexus v4.0 - Comprehensive AI-Powered Security Testing Framework"
 LABEL version="4.0"
 
 # Prevent interactive prompts during package installation
@@ -99,32 +99,9 @@ RUN pip3 install --no-cache-dir \
     censys \
     virustotal-api
 
-# Install Go-based security tools
-RUN export GOPATH=/opt/go && \
-    export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin && \
-    mkdir -p $GOPATH && \
-    # Install Subfinder
-    go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest && \
-    # Install Httpx
-    go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest && \
-    # Install Nuclei
-    go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest && \
-    # Install Katana
-    go install -v github.com/projectdiscovery/katana/cmd/katana@latest && \
-    # Install Naabu
-    go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest && \
-    # Install FFUF
-    go install github.com/ffuf/ffuf@latest && \
-    # Install Amass
-    go install -v github.com/owasp-amass/amass/v4/...@master && \
-    # Copy binaries to system PATH
-    cp $GOPATH/bin/* /usr/local/bin/ && \
-    # Clean up
-    rm -rf $GOPATH/pkg $GOPATH/src
-
-# Set Go environment
-ENV GOPATH=/opt/go
-ENV PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
+# Skip Go-based tools for now due to version compatibility issues
+# Focus on Python-based security framework
+RUN echo "Skipping Go tools due to compatibility issues"
 
 # Install additional security tools
 RUN cd /opt && \
@@ -185,22 +162,22 @@ RUN cat > /app/entrypoint.sh << 'EOF'
 #!/bin/bash
 set -e
 
-echo "🛡️ QuantumSentinel-Nexus Ultimate AI Security Testing System v4.0"
-echo "=================================================================="
+echo "🛡️ QuantumSentinel-Nexus AI Security Testing Framework v4.0"
+echo "=============================================================="
 echo "Docker Container Started Successfully!"
 echo ""
 echo "Available Modules:"
-echo "  • autonomous_quantum_sentinel.py - Main autonomous AI system"
-echo "  • ai_core/quantum_sentinel_ml.py - Advanced ML/AI framework"
-echo "  • ai_core/unified_intelligence_layer.py - Cross-modal intelligence"
-echo "  • ai_agents/ - Specialized AI security agents (SAST/DAST/Binary)"
-echo "  • research_module/ - Zero-day discovery and research engine"
-echo "  • mobile_security_framework/ - Mobile security assessment"
+echo "  • autonomous_quantum_sentinel.py - Main AI security framework"
+echo "  • ai_core/quantum_sentinel_ml.py - Machine learning framework"
+echo "  • ai_core/unified_intelligence_layer.py - Intelligence coordination"
+echo "  • ai_agents/ - Specialized security testing agents"
+echo "  • security_engines/ - Comprehensive security assessment engines"
+echo "  • mobile_security/ - Mobile application security testing"
 echo ""
 echo "Installed Security Tools:"
-echo "  Recon: subfinder, amass, httpx, nuclei, katana, naabu"
+echo "  Python Framework: QuantumSentinel-Nexus AI Security System"
 echo "  OSINT: theharvester, shodan-cli, censys"
-echo "  BugBounty: sqlmap, xsstrike, dirsearch, ffuf, keyhacks, arjun"
+echo "  Security: sqlmap, xsstrike, dirsearch, keyhacks, arjun"
 echo ""
 echo "Usage Examples:"
 echo "  python3 autonomous_quantum_sentinel.py --target example.com"
@@ -248,7 +225,7 @@ framework:
   name: "QuantumSentinel-Nexus"
   version: "4.0"
   mode: "docker"
-  description: "Ultimate Autonomous AI Security Testing System"
+  description: "Comprehensive AI-Powered Security Testing Framework"
 
 # Module Configuration
 modules:
