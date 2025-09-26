@@ -27,8 +27,31 @@ try:
     import bandit
     from bandit.core import config as bandit_config
     from bandit.core import manager as bandit_manager
+    TORCH_AVAILABLE = True
 except ImportError as e:
     print(f"⚠️  SAST agent dependencies missing: {e}")
+    TORCH_AVAILABLE = False
+    # Create dummy torch module for graceful degradation
+    class torch:
+        Tensor = Any  # Add Tensor as type alias
+        @staticmethod
+        def no_grad():
+            return DummyContext()
+        @staticmethod
+        def tensor(*args, **kwargs):
+            return None
+        @staticmethod
+        def randn(*args, **kwargs):
+            return None
+        @staticmethod
+        def empty(*args, **kwargs):
+            return None
+
+    class DummyContext:
+        def __enter__(self):
+            return self
+        def __exit__(self, *args):
+            pass
 
 @dataclass
 class CodePattern:
@@ -47,8 +70,8 @@ class CodeGraph:
     """Code graph representation"""
     nodes: List[Dict[str, Any]]
     edges: List[Tuple[int, int]]
-    node_features: torch.Tensor
-    edge_features: torch.Tensor
+    node_features: Any  # torch.Tensor when available
+    edge_features: Any  # torch.Tensor when available
 
 class CodeBERTAnalyzer:
     """CodeBERT-based semantic code analysis"""
@@ -110,7 +133,7 @@ class CodeBERTAnalyzer:
             "language": language
         }
 
-    async def _extract_semantic_features(self, embeddings: torch.Tensor, code: str, language: str) -> Dict[str, Any]:
+    async def _extract_semantic_features(self, embeddings: Any, code: str, language: str) -> Dict[str, Any]:
         """Extract semantic features from CodeBERT embeddings"""
         # Convert embeddings to numpy for analysis
         embed_np = embeddings.numpy()
@@ -245,7 +268,7 @@ class GraphSAGEAnalyzer:
             "confidence": 0.72
         }
 
-    async def _detect_vulnerability_patterns(self, embeddings: torch.Tensor, code_graph: CodeGraph) -> List[Dict[str, Any]]:
+    async def _detect_vulnerability_patterns(self, embeddings: Any, code_graph: CodeGraph) -> List[Dict[str, Any]]:
         """Detect vulnerability patterns in node embeddings"""
         patterns = []
 
@@ -273,7 +296,7 @@ class GraphSAGEAnalyzer:
 
         return patterns
 
-    async def _identify_suspicious_subgraphs(self, embeddings: torch.Tensor) -> int:
+    async def _identify_suspicious_subgraphs(self, embeddings: Any) -> int:
         """Identify number of suspicious subgraphs"""
         # Simulate subgraph analysis
         return max(0, len(embeddings) // 25)

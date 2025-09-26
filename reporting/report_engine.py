@@ -21,16 +21,45 @@ import hashlib
 
 try:
     from weasyprint import HTML, CSS
+    WEASYPRINT_AVAILABLE = True
+except ImportError:
+    logging.warning("weasyprint not available - PDF generation will be limited")
+    WEASYPRINT_AVAILABLE = False
+
+try:
     from jinja2 import Template, Environment, FileSystemLoader
+    JINJA2_AVAILABLE = True
+except ImportError:
+    logging.warning("jinja2 not available - template generation will be limited")
+    JINJA2_AVAILABLE = False
+    # Create dummy classes for fallback
+    class Environment:
+        def __init__(self, *args, **kwargs):
+            pass
+        def get_template(self, name):
+            return None
+    class FileSystemLoader:
+        def __init__(self, *args, **kwargs):
+            pass
+
+try:
     import matplotlib.pyplot as plt
     import seaborn as sns
     import pandas as pd
+    PLOTTING_AVAILABLE = True
+except ImportError:
+    logging.warning("matplotlib/seaborn not available - chart generation will be limited")
+    PLOTTING_AVAILABLE = False
+
+try:
     from reportlab.lib import colors
     from reportlab.lib.pagesizes import letter, A4
     from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
     from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-except ImportError as e:
-    logging.warning(f"Report dependencies missing: {e}")
+    REPORTLAB_AVAILABLE = True
+except ImportError:
+    logging.warning("reportlab not available - PDF generation will be limited")
+    REPORTLAB_AVAILABLE = False
 
 
 class ReportEngine:
