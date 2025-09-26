@@ -1,0 +1,57 @@
+# QuantumSentinel-Nexus Minimal Docker Requirements
+# Core dependencies for containerized deployment
+
+# Core Python framework
+aiofiles>=23.2.1
+aiohttp>=3.9.1
+requests>=2.31.0
+urllib3>=2.1.0
+
+# Configuration and data processing
+pyyaml>=6.0.1
+python-dotenv>=1.0.0
+
+# Web scraping and parsing
+beautifulsoup4>=4.12.2
+lxml>=4.9.3
+
+# Network and security libraries
+dnspython>=2.4.2
+cryptography>=41.0.7
+
+# Data analysis
+pandas>=2.1.4
+numpy>=1.24.4
+
+# Report generation
+jinja2>=3.1.2
+reportlab>=4.0.7
+
+# HTTP and web testing
+httpx>=0.25.2
+
+# Security testing libraries
+python-nmap>=0.7.1
+paramiko>=3.4.0
+
+# Logging and monitoring
+loguru>=0.7.2
+rich>=13.7.0
+colorama>=0.4.6
+
+# Utility libraries
+click>=8.1.7
+tqdm>=4.66.1
+tabulate>=0.9.0
+
+# File handling
+py7zr>=0.20.0
+
+# Git and version control
+gitpython>=3.1.40
+
+# Performance and optimization
+psutil>=5.9.6
+
+# CLI and interface
+prompt-toolkit>=3.0.41

@@ -1,0 +1,3888 @@
+{
+  "aa_configuration": {
+    "split_payment_configuration": {
+      "enable_split_payment": false,
+      "split_payment_method_blocked_list": [
+        "card",
+        "saved_card",
+        "gopay_pay_later"
+      ]
+    },
+    "out_for_delivery_estimate": {
+      "instant": {
+        "value": 45,
+        "unit": {
+          "default": "mins",
+          "id": "menit"
+        }
+      }
+    },
+    "driver_assigned_delivery_estimate": {
+      "instant": {
+        "value": 45,
+        "unit": {
+          "default": "mins",
+          "id": "menit"
+        }
+      }
+    },
+    "delivery_delayed_estimate": {
+      "instant_delivery_delayed": {
+        "out_for_delivery_delayed": 5,
+        "driver_assigned_delayed": 5,
+        "order_confirmed_delayed": 5
+      },
+      "economic_delivery_delayed": {
+        "out_for_delivery_delayed": 5,
+        "driver_assigned_delayed": 5,
+        "order_confirmed_delayed": 5
+      }
+    },
+    "refund_to_wallet_configuration": {
+      "enable_refund_to_wallet": true
+    },
+    "help_configuration": {
+      "trigger_journey": "pharmacy_delivery"
+    },
+    "apotik_home_component_config": [
+      {
+        "component_type": "upload_prescription",
+        "display_order": 2,
+        "template": "template1",
+        "data_source_identifier": ""
+      }
+    ],
+    "feature_flags": {
+      "buy_again_enabled": true
+    },
+    "cart_recovery_duration": 3600,
+    "desired_delivery_time_for_app_review": 1800,
+    "feedback_configuration": {
+      "scales": [
+        {
+          "id": "1",
+          "key": "thumbs_up",
+          "value": "1",
+          "scale": "1",
+          "attributes": null
+        },
+        {
+          "id": "2",
+          "key": "thumbs_down",
+          "value": "0",
+          "scale": "1",
+          "attributes": [
+            {
+              "id": "incomplete_medicine",
+              "key": "incomplete_medicine",
+              "display_name": {
+                "id": "Obat tidak lengkap",
+                "default": "Incomplete medicine"
+              },
+              "display_order": 1,
+              "value": "0",
+              "scale": "1"
+            },
+            {
+              "id": "wrong_medicine",
+              "key": "wrong_medicine",
+              "display_name": {
+                "id": "Obat salah",
+                "default": "Wrong medicine"
+              },
+              "display_order": 2,
+              "value": "0",
+              "scale": "1"
+            },
+            {
+              "id": "order_not_received",
+              "key": "order_not_received",
+              "display_name": {
+                "id": "Pesanan tidak diterima",
+                "default": "Order not received"
+              },
+              "display_order": 3,
+              "value": "0",
+              "scale": "1"
+            },
+            {
+              "id": "delivery_issues",
+              "key": "delivery_issues",
+              "display_name": {
+                "id": "Masalah pengiriman",
+                "default": "Delivery issues"
+              },
+              "display_order": 4,
+              "value": "0",
+              "scale": "1"
+            },
+            {
+              "id": "others",
+              "key": "others",
+              "display_name": {
+                "id": "Lainnya",
+                "default": "Others"
+              },
+              "display_order": 5,
+              "value": "0",
+              "scale": "1"
+            }
+          ]
+        }
+      ]
+    },
+    "liveconnect_configuration": {
+      "enabled": true,
+      "checkout_polling_time_with_live_connect": 10,
+      "checkout_polling_time_without_live_connect": 5,
+      "order_polling_time_with_live_connect": 60,
+      "order_polling_time_without_live_connect": 30,
+      "polling_time_unit": "SECONDS"
+    },
+    "max_item_increment": 99,
+    "abandoned_cart_expiration": 604800,
+    "cart_expiry_duration": 86400,
+    "maximum_user_coupons": 3,
+    "cart_recovery_message": {
+      "id": "Produk yang dipilih masih ada di keranjang belanjaan. Segera lanjutkan ke pembayaran sebelum stock habis.",
+      "en": "We noticed that you left a few items in your cart. They're not reserved so they could sell out."
+    },
+    "red_medicine_verification_required": false,
+    "max_prescription_file_size": 10240000,
+    "show_search_ftue": false,
+    "search_hints": [
+      {
+        "id": "Pharmaton atau Vitamin",
+        "en": "Pharmaton or Vitamin"
+      },
+      {
+        "id": "Bisolvon atau Batuk dan Flu",
+        "en": "Bisolvon or Cough and Flu"
+      }
+    ],
+    "minimum_order_amount": 10000,
+    "min_prescription_file_size": 5120,
+    "order_status_map": {
+      "placed": [
+        "confirmed"
+      ],
+      "completed": [
+        "cancelled",
+        "delivered",
+        "completed"
+      ],
+      "picked": [
+        "shipped"
+      ]
+    },
+    "prescription_required": false,
+    "cancellation_reasons": [
+      {
+        "key": "already_bought_medicine",
+        "display_name": {
+          "default": "Already bought medicine",
+          "id": "Sudah membeli di tempat lain"
+        },
+        "display_order": 1
+      },
+      {
+        "key": "driver_requested_cancellation",
+        "display_name": {
+          "default": "Driver requested to cancel",
+          "id": "Driver meminta pembatalan"
+        },
+        "display_order": 2
+      },
+      {
+        "key": "wrong_items",
+        "display_name": {
+          "default": "Ordered the wrong item(s)",
+          "id": "Salah memasukkan produk"
+        },
+        "display_order": 3
+      },
+      {
+        "key": "order_delay",
+        "display_name": {
+          "default": "Waited for too long",
+          "id": "Menunggu terlalu lama"
+        },
+        "display_order": 4
+      },
+      {
+        "key": "pharmacy_too_far",
+        "display_name": {
+          "default": "Pharmacy is too far",
+          "id": "Apotik terlalu jauh"
+        },
+        "display_order": 5
+      },
+      {
+        "key": "pharmacy_requested_cancellation",
+        "display_name": {
+          "default": "Pharmacy requested to cancel",
+          "id": "Apotek meminta pembatalan"
+        },
+        "display_order": 6
+      },
+      {
+        "key": "wrong_address",
+        "display_name": {
+          "default": "I input the wrong address",
+          "id": "Saya masukan alamat yang salah"
+        },
+        "display_order": 7
+      }
+    ],
+    "payment_options_enabled": true,
+    "cancellation_messages": {
+      "wrong_address": {
+        "en": "Wrong Address",
+        "id": "Salah alamat"
+      },
+      "recipient_not_found": {
+        "en": "Recipient not found",
+        "id": "Penerima tidak ditemukan"
+      },
+      "order_cancelled": {
+        "en": "Order cancelled by delivery partner",
+        "id": "Pesanan dibatalkan oleh mitra pengiriman"
+      },
+      "order_returned": {
+        "en": "Order has been returned",
+        "id": "Pesanan telah dikembalikan"
+      }
+    },
+    "promo_enabled": true,
+    "auto_abandon_expiration_time": 720,
+    "sponsored_keywords": {
+      "title": {
+        "id": "Sponsor",
+        "default": "Sponsored"
+      },
+      "keywords": [
+        {
+          "display_order": 1,
+          "key": "Covid-19",
+          "search_text": "Covid-19"
+        },
+        {
+          "display_order": 2,
+          "key": "Dulcolax",
+          "search_text": "Dulcolax"
+        },
+        {
+          "display_order": 3,
+          "key": "Bisolvon Extra",
+          "search_text": "Bisolvon Extra"
+        },
+        {
+          "display_order": 4,
+          "key": "Lactogen",
+          "search_text": "Lactogen"
+        },
+        {
+          "display_order": 5,
+          "key": "Dancow",
+          "search_text": "Dancow"
+        }
+      ]
+    },
+    "maximum_order_amount": 13000000,
+    "payment_configuration": {
+      "categories": [
+        {
+          "type": "wallet",
+          "instruments": [
+            {
+              "type": "wallet",
+              "provider": "halodoc"
+            }
+          ]
+        },
+        {
+          "type": "gopay",
+          "instruments": [
+            {
+              "type": "gopay",
+              "provider": "midtrans"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "instruments": [
+            {
+              "type": "card",
+              "provider": "midtrans"
+            }
+          ]
+        }
+      ]
+    },
+    "banners_config": {
+      "banner_per_page_count": 5,
+      "is_enabled": true,
+      "max_banner_count": 5
+    },
+    "display_order_eta": true,
+    "delivery_estimate": {
+      "instant": {
+        "min": 33,
+        "max": 45,
+        "unit": "minutes"
+      },
+      "delayed_instant": {
+        "min": 1,
+        "max": 4,
+        "unit": "days"
+      }
+    },
+    "product_discovery_module_configuration": {
+      "is_enabled": true,
+      "modules": [
+        {
+          "title": {
+            "default": "halofit",
+            "id": "halofit"
+          },
+          "caption": {
+            "default": "Top multivitamin packages for your health",
+            "id": "Paket multivitamin terbaik untuk kesehatanmu"
+          },
+          "category_id": "da3f4aae-e538-4c77-8f2a-016ddb764e15",
+          "category_name": "Halofit",
+          "display_order": 1,
+          "display_count": 8,
+          "template_type": "template1"
+        }
+      ]
+    },
+    "product_subscription_config": {
+      "primary_termsAndConditions": "https://web.stage.halodoc.com/syarat-dan-ketentuan-langganan-obat",
+      "payment_TermsAndConditions": "https://web.stage.halodoc.com/syarat-dan-ketentuan-pembayaran-langganan-obat",
+      "subscription_faq": "https://www.halodoc.com/faq/category/subscription"
+    },
+    "subscription_cancellation_reasons": [
+      {
+        "key": "no_required_anymore",
+        "display_order": 1,
+        "display_name": {
+          "default": "Don’t need the item anymore",
+          "id": "Tidak membutuhkan barangnya lagi"
+        }
+      },
+      {
+        "key": "waited_too_long",
+        "display_order": 2,
+        "display_name": {
+          "default": "Delivery took longer than expected",
+          "id": "Pengiriman terlalu lama"
+        }
+      },
+      {
+        "key": "already_bought_medicine",
+        "display_order": 3,
+        "display_name": {
+          "default": "Already bought the item somewhere else",
+          "id": "Sudah membeli barang yang sama di tempat lain"
+        }
+      },
+      {
+        "key": "others",
+        "display_order": 4,
+        "display_name": {
+          "default": "Others",
+          "id": "Lainnya"
+        }
+      }
+    ],
+    "enable_free_sample": true,
+    "regular_shipment_providers": [
+      {
+        "key": "shipper",
+        "trackingURL": "https://shipper.id/tracking",
+        "isTrackingIDRequired": false
+      },
+      {
+        "key": "anteraja",
+        "trackingURL": "https://anteraja.id/tracking/",
+        "isTrackingIDRequired": true
+      },
+      {
+        "key": "medex",
+        "trackingURL": "https://medex-tracking.halodoc.com/?shipment-id=",
+        "isTrackingIDRequired": true
+      }
+    ],
+    "micro_insurance_data": {
+      "micro_insurance_display_email_view": true,
+      "micro_insurance_cart_checkbox_selected": true,
+      "micro_insurance_claim_url": "https://stg1.cermati.com/pusatklaim/halodoc-pl/goods",
+      "micro_insurance_faq_url": "https://www.halodoc.com/faq/category/asuransi-liabilitas-produk",
+      "title": {
+        "id": "Asuransi Liabilitas Produk",
+        "default": "Product Liability Insurance"
+      },
+      "micro_insurance_plan_title": {
+        "id": "Proteksi Efek Samping",
+        "default": "Side Effects Protection Plan"
+      },
+      "claim_subtitle": {
+        "id": "Klaim Ganti Rugi Biaya Medis Hingga",
+        "default": "Claim Medical Compensation up to"
+      },
+      "claim_benefit_title": {
+        "id": "500% dari Harga Produk",
+        "default": "500% of the Product Price"
+      },
+      "micro_insurance_claim_contact": [
+        {
+          "display_order": 1,
+          "title": {
+            "id": "Hotline",
+            "default": "Hotline"
+          },
+          "contact_details": "1500298",
+          "type": "hotline"
+        },
+        {
+          "display_order": 2,
+          "title": {
+            "id": "Whatsapp",
+            "default": "Whatsapp"
+          },
+          "contact_details": "08111500299",
+          "type": "whatsapp"
+        },
+        {
+          "display_order": 3,
+          "title": {
+            "id": "Email",
+            "default": "Email"
+          },
+          "contact_details": "digital@aswata.co.id",
+          "type": "email"
+        }
+      ],
+      "subtitle_keywords": [
+        {
+          "display_order": 1,
+          "benefit_type": "prescription",
+          "title": {
+            "id": "Klaim hingga 100% dari harga produk jika terjadi efek samping atau cedera fisik",
+            "default": "Claim up to 100% of the product price if side effects or physical injuries occur"
+          }
+        },
+        {
+          "display_order": 2,
+          "benefit_type": "prescription",
+          "title": {
+            "id": "Dapatkan ganti rugi biaya medis hingga 500% dari harga produk jika pengobatan diperlukan",
+            "default": "Get medical compensation up to 500% of the product price if treatment is needed"
+          }
+        },
+        {
+          "display_order": 3,
+          "benefit_type": "profile",
+          "title": {
+            "id": "Berlaku untuk anggota keluarga yang terdaftar dalam Kartu Keluarga yang sama dengan pengguna Halodoc",
+            "default": "Eligible for family members registered on the same Kartu Keluarga as the Halodoc user"
+          }
+        }
+      ],
+      "micro_insurance_coverage": [
+        {
+          "display_order": 1,
+          "benefit_type": "coverage",
+          "title": {
+            "id": "Cakupan Proteksi",
+            "default": "What’s Covered"
+          },
+          "subtitle": [
+            {
+              "display_order": 1,
+              "title": {
+                "id": "Efek samping atau cedera fisik akibat produk yang dialami oleh kamu maupun anggota keluarga hingga maks. Rp5.000.000",
+                "default": "Side effects or injuries incurred by you or family members due to product usage, up to a maximum of Rp5.000.000"
+              }
+            },
+            {
+              "display_order": 2,
+              "title": {
+                "id": "Ganti rugi biaya medis hingga maks. Rp25.000.000",
+                "default": "Medical compensation, up to a maximum of Rp25.000.000"
+              }
+            },
+            {
+              "display_order": 3,
+              "title": {
+                "id": "Berlaku untuk produk yang memiliki izin edar legal atau memiliki sertifikasi BPOM atau SNI",
+                "default": "Eligible for legally distributed products or product certified by BPOM or SNI"
+              }
+            },
+            {
+              "display_order": 4,
+              "title": {
+                "id": "Masa berlaku polis **3 bulan** dan aktif dalam 1 x 24 jam sejak produk diterima",
+                "default": "Valid for **3 months** and activated within 1 x 24 hours of delivery"
+              },
+              "bold_text": {
+                "id": "3 bulan",
+                "default": "3 months"
+              }
+            }
+          ]
+        },
+        {
+          "display_order": 2,
+          "benefit_type": "coverageDont",
+          "title": {
+            "id": "Tidak Mencakup",
+            "default": "What’s Not Covered"
+          },
+          "subtitle": [
+            {
+              "display_order": 1,
+              "title": {
+                "id": "Gejala akibat riwayat penyakit sebelumnya",
+                "default": "Any symptoms linked to previous illnesses"
+              }
+            },
+            {
+              "display_order": 2,
+              "title": {
+                "id": "Dugaan penggunaan alkohol atau narkoba",
+                "default": "If drug or alcohol usage is suspected"
+              }
+            },
+            {
+              "display_order": 3,
+              "title": {
+                "id": "Penyakit kejiwaan, menular seksual, dan pengecualian lainnya pada dokumen polis",
+                "default": "Mental health issues, sexually transmitted infections, and other exclusions on your policy document"
+              }
+            }
+          ]
+        }
+      ],
+      "micro_insurance_claim": [
+        {
+          "display_order": 1,
+          "benefit_type": "claim",
+          "subtitle": [
+            {
+              "display_order": 1,
+              "title": {
+                "id": "Konfirmasi kondisimu dengan dokter di faskes atau melalui Halodoc.",
+                "default": "Consult a doctor at a healthcare facility or on Halodoc to confirm your condition."
+              }
+            },
+            {
+              "display_order": 2,
+              "title": {
+                "id": "Ajukan klaim melalui tombol berikut dalam waktu 30 hari sejak tanggal kerugian. Sertakan dokumen pendukung seperti Surat Keterangan Dokter, kuitansi, resep, dan dokumen pendukung lainnya.",
+                "default": "Submit your claim within 30 days from the date of the incident by clicking the button below. Include supporting documents such as your doctor letter, invoice(s), prescription(s) and any other proof of care."
+              }
+            },
+            {
+              "display_order": 3,
+              "title": {
+                "id": "Klaim akan dianalisis maks. 5 hari kerja oleh Aswata. Jika disetujui, dana akan dikirimkan ke rekening bank yang tercantum pada formulir klaim.",
+                "default": "Your claim will be analyzed within 5 business days by Aswata. If approved, compensation will be transferred to the bank account listed on your claim form."
+              }
+            }
+          ]
+        }
+      ],
+      "micro_insurance_terms_and_conditions": [
+        {
+          "display_order": 1,
+          "benefit_type": "terms",
+          "title": {
+            "id": "Definisi",
+            "default": "Definitions"
+          },
+          "subtitle": [
+            {
+              "display_order": 1,
+              "title": {
+                "id": "Asuransi Liabilitas Produk adalah produk asuransi yang disediakan oleh PT. Fokus Solusi Proteksi (Cermati Protect) dan PT Asuransi Wahana Tata (Aswata) dengan PT Media Dokter Investama (Halodoc) sebagai perantara penjualan produk, yang menawarkan manfaat yang tidak dijual secara terpisah dan hanya dapat dibeli secara bersamaan dengan pembelian produk Liabilitas Produk di Halodoc.",
+                "default": "Product Liability Insurance is an insurance product provided by PT Fokus Solusi Proteksi (Cermati Protect) and PT Asuransi Wahana Tata with PT Media Dokter Investama (Halodoc) as its sales intermediaries, which offered benefits that are not sold separately and must be purchased simultaneously with the product under Liability Product on Halodoc."
+              }
+            },
+            {
+              "display_order": 2,
+              "title": {
+                "id": "User atau Pengguna adalah Pelanggan Halodoc yang terdaftar pada platform Halodoc dan tercantum dalam dokumen polis/Ikhtisar Pertanggungan atas sesuatu yang dipertanggungkan berdasarkan Asuransi Liabilitas Produk sehingga memiliki hak untuk mendapatkan perlindungan asuransi dari kemungkinan resiko yang dapat terjadi.",
+                "default": "User means Halodoc user registered on the Halodoc platform, listed in the policy documents/Surat Rangkuman Perlindungan for the insured product under the Product Liability Insurance who is entitled to receive insurance protection against possible risk that may occur."
+              }
+            },
+            {
+              "display_order": 3,
+              "title": {
+                "id": "Data Pribadi adalah data tentang orang perseorangan yang teridentifikasi atau dapat diidentifikasi secara tersendiri atau dikombinasi dengan informasi lainnya, baik secara langsung maupun tidak langsung melalui sistem elektronik atau nonelektronik. Data Pribadi termasuk namun tidak terbatas pada nama, alamat, atau informasi lainnya.",
+                "default": "Personal Data means information about an individual that can be identified independently or when combined with other information, directly or indirectly through an electronic or non-electronic system. Personal Data includes, but is not limited to, name, address, or other information."
+              }
+            }
+          ]
+        },
+        {
+          "display_order": 2,
+          "benefit_type": "terms",
+          "title": {
+            "id": "Syarat & Ketentuan",
+            "default": "Terms & Conditions"
+          },
+          "subtitle": [
+            {
+              "display_order": 1,
+              "title": {
+                "id": "Asuransi Liabilitas Produk hanya dapat dibeli melalui aplikasi Halodoc (iOS & Android).",
+                "default": "Product Liability Insurance can only be purchased on the Halodoc applications (iOS & Android)."
+              }
+            },
+            {
+              "display_order": 2,
+              "title": {
+                "id": "Halodoc tidak melakukan pengelolaan terhadap premi dan hanya berperan sebagai perantara antara Pengguna dengan Cermati Protect dan Aswata melalui aplikasi Halodoc.",
+                "default": "Halodoc does not manage any insurance premiums and only acts as an intermediary between the user and Cermati Protect and Aswata through the Halodoc applications."
+              }
+            },
+            {
+              "display_order": 3,
+              "title": {
+                "id": "Halodoc tidak memiliki kewajiban dan/atau tanggung jawab apa pun terkait dengan pembelian produk asuransi oleh Pengguna.",
+                "default": "Halodoc has no obligation and/or responsibility related to the User’s product insurance purchase."
+              }
+            },
+            {
+              "display_order": 4,
+              "title": {
+                "id": "Halodoc berhak tanpa pemberitahuan sebelumnya melakukan tindakan-tindakan yang diperlukan apabila ditemukan tindakan kecurangan dari Pengguna.",
+                "default": "Halodoc is entitled to take necessary action without prior notice if there are indications of fraud by the User."
+              }
+            },
+            {
+              "display_order": 5,
+              "title": {
+                "id": "Dengan mempunyai Asuransi Liabilitas Produk, Pengguna akan mendapatkan beberapa manfaat yang dapat dilihat pada **Manfaat Asuransi**.",
+                "default": "By purchasing Product Liability Insurance, the User will receive some benefit which could be read on **Insurance Benefit.**"
+              },
+              "bold_text": {
+                "id": "3 bulan",
+                "default": "Insurance Benefit."
+              }
+            },
+            {
+              "display_order": 6,
+              "title": {
+                "id": "Dokumen Polis yang berupa Ikhtisar Pertanggungan akan muncul pada layar aplikasi setelah produk diterima dan dapat langsung diunduh. Dokumen ini juga akan dikirimkan melalui email jika Pengguna mendaftarkan email pada aplikasi Halodoc.",
+                "default": "The Policy Documents, which consist of Surat Rangkuman Perlindungan, will appear on the Halodoc app after the product is received and can be downloaded immediately. If Users register their email with the Halodoc app, the document will also be sent."
+              }
+            },
+            {
+              "display_order": 7,
+              "title": {
+                "id": "Klaim dapat diajukan dalam waktu 5 hari kalender setelah tanggal kejadian disertai dokumen atau bukti lainnya untuk mempermudah verifikasi klaim. Segala biaya yang timbul untuk mendapatkan dokumen atau bukti tersebut merupakan tanggung jawab Pengguna.",
+                "default": "Claims can be submitted within 5 calendar days after the incident, including supporting documents or other evidence to facilitate the verification process. The User is responsible for all costs incurred in obtaining these documents or evidence."
+              }
+            },
+            {
+              "display_order": 8,
+              "title": {
+                "id": "Dengan membeli Asuransi Liabilitas Produk, Pengguna setuju dengan syarat dan ketentuan yang telah ditetapkan oleh Aswata, termasuk namun tidak terbatas pada keputusan Aswata, yang dapat dilihat pada **Ketentuan Polis**.",
+                "default": "By purchasing Product Liability Insurance the User agrees to Aswata's terms and conditions, which can be found in the **Policy Wording,** including but not limited to Aswata’s decision."
+              }
+            },
+            {
+              "display_order": 9,
+              "title": {
+                "id": "Pelaporan klaim dapat dilakukan dengan mengunjungi **Cermati Claim Portal** (www.cermati.com/pusatklaim/halodoc/product-liability). Apabila butuh bantuan lebih lanjut, silakan hubungi Aswata melalui **hotline Tanya Aswata 1500298, WhatsApp Vania ke 08111500299,** atau **email ke 'digital@aswata.co.id'.**",
+                "default": "Claims can be submitted via the **Cermati Claim Portal** (www.cermati.com/pusatklaim/halodoc/product-liability). If further support is required, please contact Aswata through the **hotline Tanya Aswata 1500298, WhatsApp Vania on 08111500299,** or send an **email to digital@aswata.co.id.**"
+              },
+              "bold_text": {
+                "id": "3 bulan",
+                "default": "Cermati Claim Portal"
+              }
+            },
+            {
+              "display_order": 10,
+              "title": {
+                "id": "Pihak yang berhak melaporkan klaim dan menerima pembayaran klaim adalah Pengguna yang namanya tercantum dalam Ikhtisar Pertanggungan.",
+                "default": "The individual authorized to submit a claim and receive payment is the User whose name is stated in the Surat Rangkuman Perlindungan."
+              }
+            },
+            {
+              "display_order": 11,
+              "title": {
+                "id": "Apabila pada saat verifikasi klaim dibuktikan adanya unsur penipuan/kecurangan oleh Cermati Protect dan Aswata, maka Penyedia Jasa Asuransi berhak untuk  menolak klaim yang diajukan.",
+                "default": "If Cermati Protect and Aswata identify and confirm fraud or discrepancies during the claim review, the Insurance Service Provider has the right to reject the claim."
+              }
+            },
+            {
+              "display_order": 12,
+              "title": {
+                "id": "Pengguna disarankan untuk membaca dengan seksama semua penjelasan tentang jaminan dan pengecualian yang terkandung dalam Ketentuan Polis Aswata.",
+                "default": "It is recommended that the User carefully read the explanation regarding insurance coverage and exclusions in the Aswata Policy."
+              }
+            },
+            {
+              "display_order": 13,
+              "title": {
+                "id": "Dengan membeli Asuransi Liabilitas Produk, Pengguna setuju bahwa Data Pribadi akan dibagikan kepada PT. Fokus Solusi Proteksi (Cermati Protect) dan PT Asuransi Wahana Tata (Aswata). Setiap pemrosesan Data Pribadi akan tunduk pada ketentuan yang telah diatur dalam Pemberitahuan Privasi Halodoc (https://www.halodoc.com/kebijakan-privasi) serta Kebijakan Privasi Cermati Protect dan Aswata, yang masing-masing bertindak secara terpisah terhadap Data Pribadi sesuai dengan peraturan perundang-undangan yang berlaku di Indonesia.",
+                "default": "By purchasing Product Liability Insurance, the User agrees that Personal Data will be shared with PT. Fokus Solusi Proteksi (Cermati Protect) dan PT Asuransi Wahana Tata (Aswata). The processing of Personal Data will be subject to the provisions within the Halodoc Privacy Notice (https://www.halodoc.com/kebijakan-privasi), as well as the Privacy Policies of Cermati Protect and Aswata, each of which will act separately under the applicable laws and regulations in Indonesia."
+              }
+            },
+            {
+              "display_order": 14,
+              "title": {
+                "id": "Pengguna selanjutnya juga menyetujui untuk membebaskan Halodoc dari segala tuntutan kewajiban, ganti rugi dan kompensasi dalam bentuk apapun terkait pelaksanaan layanan Asuransi Liabilitas Produk termasuk proses pertanggungan, klaim, dan hal lainnya yang dilakukan oleh Aswata & Cermati Protect.",
+                "default": "The User also agrees to release Halodoc from any liability, compensation, or any form of compensation related to Product Liability Insurance, including the coverage process, claims, and other actions done by Aswata & Cemati Protect."
+              }
+            }
+          ]
+        },
+        {
+          "display_order": 3,
+          "benefit_type": "terms",
+          "title": {
+            "id": "Manfaat Asuransi",
+            "default": "Insurance Benefit"
+          },
+          "regular_subtitle": {
+            "id": "Asuransi Liabilitas Produk siap memberikan perlindungan terhadap kerugian yang terjadi akibat penggunaan produk yang dibeli, sesuai dengan cakupan berikut:",
+            "default": "Product Liability Insurance protects against any side effects or injuries caused by the product purchased on Halodoc based on the following coverage:"
+          },
+          "subtitle": [
+            {
+              "display_order": 1,
+              "title": {
+                "id": "**Efek samping atau cedera fisik** \\nMemberikan kompensasi 100% dari harga barang atau maks. Rp5.000.000, jika gejala atau cedera fisik dapat dibuktikan melalui konsultasi langsung dengan dokter di rumah sakit,  klinik, atau melalui layanan telemedisin, atau konsultasi online di aplikasi Halodoc",
+                "default": "**Side effects or physical injury** \\nProviding 100% compensation of the product price or a maximum of Rp5.000.000, if side effects or physical injury are proven through consultation with a doctor at a hospital, clinic, telemedicine service, or online consultation on the Halodoc applications"
+              },
+              "bold_text": {
+                "id": "3 bulan",
+                "default": "Side effects or physical injury"
+              }
+            },
+            {
+              "display_order": 2,
+              "title": {
+                "id": "**Pengobatan akibat efek samping atau cedera fisik** \\nMemberikan penggantian biaya medis hingga 500% dari harga barang atau maks. Rp25.000.000, jika gejala atau cedera fisik dapat dibuktikan melalui konsultasi langsung dengan dokter di rumah sakit,  klinik, atau melalui layanan telemedisin, atau konsultasi online di aplikasi Halodoc",
+                "default": "**Medical costs caused by side effects or physical injury** \\nProviding medical costs compensation up to 500% of the product price or a maximum of Rp25.000.000, if side effects or physical injury are proven through consultation with a doctor at a hospital, clinic, telemedicine service, or online consultation on the Halodoc applications"
+              },
+              "bold_text": {
+                "id": "3 bulan",
+                "default": "Medical costs caused by side effects or physical injury"
+              }
+            }
+          ]
+        },
+        {
+          "display_order": 4,
+          "benefit_type": "terms",
+          "title": {
+            "id": "Cara Membeli Asuransi",
+            "default": "How to Buy Insurance"
+          },
+          "subtitle": [
+            {
+              "display_order": 1,
+              "title": {
+                "id": "Pelanggan Halodoc dapat membeli Asuransi Liabilitas Produk dengan mencentang kolom Proteksi Efek Samping pada halaman ‘Keranjang’ saat melakukan pembayaran.",
+                "default": "Halodoc Users can purchase Product Liability Insurance by ticking the Side Effects Protection Plan box on the ‘Cart’ page during checkout."
+              }
+            },
+            {
+              "display_order": 2,
+              "title": {
+                "id": "Cermati Protect akan mengirimkan Dokumen Polis kepada Pengguna melalui email dan aplikasi Halodoc paling lambat 1x24 jam sejak barang diterima.",
+                "default": "Cermati Protect will send Policy Documents to the User through email and the Halodoc app no later than 1x24 hours after receiving the products."
+              }
+            }
+          ]
+        },
+        {
+          "display_order": 5,
+          "benefit_type": "terms",
+          "title": {
+            "id": "Pertanggungan",
+            "default": "Coverage"
+          },
+          "subtitle": [
+            {
+              "display_order": 1,
+              "title": {
+                "id": "Masa berlaku layanan Asuransi Liabilitas Produk yang disediakan Cermati Protect dan Aswata adalah **3 bulan** sejak status barang diterima.",
+                "default": "The validity period for Product Liability Insurance provided by Cermati Protect & Aswata is 3 months after receiving the products."
+              }
+            },
+            {
+              "display_order": 2,
+              "title": {
+                "id": "Asuransi ini memberikan jaminan kepada Pengguna atas sakit atau cedera badan yang terjadi akibat barang yang diasuransikan.",
+                "default": "Insurance will provide protection guarantees to the User for illness or injury resulting from the insured product."
+              }
+            },
+            {
+              "display_order": 3,
+              "title": {
+                "id": "Jenis dan nilai pertanggungan, jaminan, limit, serta premi akan disesuaikan dengan harga dan kuantitas barang yang tertera saat pembayaran.",
+                "default": "The price and quantity of products, as stated on the payment screen, will determine the compensation types, coverage value, guarantees, limits, and premiums."
+              }
+            },
+            {
+              "display_order": 4,
+              "title": {
+                "id": "**Asuransi tidak dapat dipindahtangankan ke pihak lain.** Apabila terdapat anggota keluarga yang sakit atau cedera badan setelah menggunakan produk, maka klaim dapat diajukan oleh Pengguna dengan menyertakan Kartu Keluarga dan dokumen pendukung lainnya sebagai bukti (anggota keluarga tersebut harus termasuk dalam satu Kartu Keluarga dengan Pengguna yang tercantum dalam Dokumen Polis).",
+                "default": "**The insurance cannot be transferred to another person.** If family members experience illness or physical injury caused by the product, the user can submit a claim by attaching a Kartu Keluarga and other supporting documents as evidence (the family members affected must be registered under the same Kartu Keluarga as the User stated in the Policy Documents)."
+              },
+              "bold_text": {
+                "id": "3 bulan",
+                "default": "The insurance cannot be transferred to another person."
+              }
+            },
+            {
+              "display_order": 5,
+              "title": {
+                "id": "Nilai penggantian akan dihitung sesuai ketentuan berikut: \\nKompensasi barang yang menyebabkan sakit atau cedera badan secara fisik sebesar 100% dari harga satuan produk **dikalikan dengan kuantitas barang yang dibeli** atau maks. Rp5.000.000. Penggantian biaya medis sebesar 500% dari harga satuan produk **per kejadian dan per orang** atau maks. Rp25.000.000 tergantung biaya yang lebih kecil.",
+                "default": "Compensation value will be counted based on the provision below: \\nProduct compensation that causes illness or physical injury is 100% of the product price **multiplied by the product quantity** or a max. of Rp5.000.000. Medical costs compensation is 500% of the product price **per incident per person** or a max. of Rp25.000.000 depending on the lower cost."
+              },
+              "bold_text": {
+                "id": "3 bulan",
+                "default": "multiplied by the product quantity"
+              }
+            },
+            {
+              "display_order": 6,
+              "title": {
+                "id": "Kondisi objek yang dapat dijaminkan: \\n1. Berlaku untuk barang bersertifikasi BPOM dan SNI atau memiliki izin edar Indonesia yang legal (khusus produk impor). \\n2. Klaim hanya berlaku untuk produk yang terdaftar dalam Asuransi Liabilitas Produk. \\n3. Tiap produk akan memiliki Ikhtisar Pertanggungan secara terpisah. Satu Ikhtisar Pertanggungan berlaku untuk satu produk. \\n4. Penanggung hanya akan membayar biaya medis yang belum ditanggung oleh BPJS ataupun asuransi lainnya.",
+                "default": "Conditions under which the product is insured: \\n1. Eligible for products certified by BPOM and SNI or having a legal Indonesian distribution permit (especially for imported products). \\n2. The claim applies to a product registered under Product Liability Insurance. \\n3. Each product will have a separate Surat Rangkuman Perlindungan. One Surat Rangkuman Perlindungan applies to one product. \\n4. The insurance provider will only pay medical costs not covered by BPJS or other insurance."
+              }
+            },
+            {
+              "display_order": 7,
+              "title": {
+                "id": "Batas wilayah jaminan hanya dalam wilayah Negara Republik Indonesia",
+                "default": "The coverage area is limited only to the territory of the Republic of Indonesia."
+              }
+            }
+          ]
+        },
+        {
+          "display_order": 6,
+          "benefit_type": "terms",
+          "title": {
+            "id": "Pengecualian",
+            "default": "Exclusions"
+          },
+          "regular_subtitle": {
+            "id": "Asuransi tidak bertanggung jawab atas kerugian, sakit, atau cedera badan yang ditimbulkan oleh:",
+            "default": "The insurance provider is not responsible for any loss, illness, or physical injury caused by the following conditions:"
+          },
+          "notes_placeholder": {
+            "id": "Jaminan Asuransi ini tunduk pada PENGECUALIAN UMUM YANG BERLAKU yang dapat ditemukan di dalam Ketentuan Polis PT Asuransi Wahana Tata. Pengguna sangat disarankan untuk membaca dengan seksama.",
+            "default": "This insurance complies with these GENERAL EXCLUSIONS which can be found in PT Asuransi Wahana Tata Policy Terms and Conditions. Users are recommended to carefully read this policy."
+          },
+          "subtitle": [
+            {
+              "display_order": 1,
+              "title": {
+                "id": "Kondisi yang sudah ada sebelumnya",
+                "default": "Symptoms linked to previous illness"
+              }
+            },
+            {
+              "display_order": 2,
+              "title": {
+                "id": "Kondisi bawaan atau keturunan",
+                "default": "Hereditary conditions"
+              }
+            },
+            {
+              "display_order": 3,
+              "title": {
+                "id": "Kondisi kejiwaan",
+                "default": "Mental health issues"
+              }
+            },
+            {
+              "display_order": 4,
+              "title": {
+                "id": "Efek kecanduan alkohol atau narkoba",
+                "default": "Suspected alcohol or drug use"
+              }
+            },
+            {
+              "display_order": 5,
+              "title": {
+                "id": "Efek akibat HIV/AIDS atau penyakit menular seksual",
+                "default": "Suspected HIV/AIDS or sexually transmitted infections"
+              }
+            },
+            {
+              "display_order": 6,
+              "title": {
+                "id": "Penyakit yang timbul bukan karena penggunaan produk",
+                "default": "Any symptoms occurred not due to the product use"
+              }
+            },
+            {
+              "display_order": 7,
+              "title": {
+                "id": "Pengecualian lainnya sesuai Ketentuan Polis Penanggung",
+                "default": "Other exclusions stated in the Policy Terms and Conditions"
+              }
+            }
+          ]
+        }
+      ]
+    }
+},
+  "login_configuration": {
+    "auth_option": [
+      "whatsapp",
+      "sms"
+    ]
+  },
+  "analytics_configuration": {
+    "utm_session_duration": 7,
+    "utm_timeout_timeunit": "DAYS"
+  },
+  "cc_information": {
+    "phone_number": "+622150959900",
+    "email_body": "Hello,\n\nName: #PATIENTNAME#\nRegistered mobile number: #MOBILENUMBER#\nOrder ID:\nProblem:",
+    "email_subject": "Issue faced on Halodoc",
+    "email": "help@halodoc.com"
+  },
+  "consultation_configuration": {
+    "split_payment_configuration": {
+      "enable_split_payment": true,
+      "split_payment_method_blocked_list": [
+        "card",
+        "saved_card",
+        "gopay_pay_later"
+      ]
+    },
+    "help_configuration": {
+      "trigger_journey": "consultation"
+    },
+    "feedback_configuration": {
+      "scales": [
+        {
+          "id": "1",
+          "key": "thumbs_up",
+          "value": "1",
+          "scale": "1",
+          "attributes": null
+        },
+        {
+          "id": "2",
+          "key": "thumbs_down",
+          "value": "0",
+          "scale": "1",
+          "attributes": [
+            {
+              "id": "unfriendly_doc",
+              "key": "unfriendly_doc",
+              "display_name": {
+                "id": "Dokter tidak ramah",
+                "default": "Doctor is unfriendly"
+              },
+              "display_order": 1,
+              "value": "0",
+              "scale": "1"
+            },
+            {
+              "id": "unsatisfactory_answer",
+              "key": "unsatisfactory_answer",
+              "display_name": {
+                "id": "Jawaban kurang memuaskan",
+                "default": "Not satisfied with answer"
+              },
+              "display_order": 2,
+              "value": "0",
+              "scale": "1"
+            },
+            {
+              "id": "slow_response",
+              "key": "slow_response",
+              "display_name": {
+                "id": "Respon lama",
+                "default": "Slow response"
+              },
+              "display_order": 3,
+              "value": "0",
+              "scale": "1"
+            },
+            {
+              "id": "unstable_connection",
+              "key": "unstable_connection",
+              "display_name": {
+                "id": "Koneksi tidak stabil",
+                "default": "Unstable connection"
+              },
+              "display_order": 4,
+              "value": "0",
+              "scale": "1"
+            }
+          ]
+        }
+      ]
+    },
+    "liveconnect_configuration": {
+      "enabled": true,
+      "polling_time_with_live_connect": 10,
+      "polling_time_without_live_connect": 5,
+      "polling_time_unit": "SECONDS"
+    },
+    "chat_config": {
+      "request_timeout": 180,
+      "request_timeout_timeunit": "SECONDS",
+      "consultation_waittime": 120,
+      "consultation_waittime_timeunit": "SECONDS"
+    },
+    "tc_scheduled_consultation_config": {
+      "consultation_timeout": 10,
+      "consultation_timeout_timeunit": "MINUTES"
+    },
+    "maximum_user_coupons": 3,
+    "moh_configuration": {
+      "moh_active": true,
+      "moh_message": "Approved partner of"
+    },
+    "consultation_request_values": [
+      {
+        "display_name": {
+          "default": "Hey <Name>, We are notifying the doctor about your request",
+          "id": "Halo <name>, Kami sudah memberitahu dokter tentang permintaan"
+        },
+        "start_interval": 180,
+        "end_interval": 160
+      },
+      {
+        "display_name": {
+          "default": " We will notify you when the doctor accepts your request",
+          "id": "Kami akan memberitahukan ketika dokter menjawab permintaan kamu"
+        },
+        "start_interval": 159,
+        "end_interval": 120
+      },
+      {
+        "display_name": {
+          "default": "We are waiting for the doctor to accept your request",
+          "id": "Kami menunggu dokter untuk menjawab permintaan kamu"
+        },
+        "start_interval": 119,
+        "end_interval": 80
+      },
+      {
+        "display_name": {
+          "default": "Thanks for your patience, we are waiting for the doctor to accept your request",
+          "id": "Terima kasih untuk kesabarannya, menunggu dokter menjawab permintaan kamu"
+        },
+        "start_interval": 79,
+        "end_interval": 0
+      }
+    ],
+    "consultation_web": "https://www.halodoc.com/tanya-dokter",
+    "consultation_timeout_timeunit": "MINUTES",
+    "call_config": {
+      "request_timeout_timeunit": "SECONDS",
+      "reconnect_timeout_timeunit": "SECONDS",
+      "reconnect_timeout": 30,
+      "request_timeout": 45
+    },
+    "cancellation_reasons": [
+      {
+        "key": "browsing_app",
+        "display_order": 0,
+        "display_name": {
+          "default": "Just browsing the app",
+          "id": "Hanya melihat-lihat aplikasi"
+        }
+      },
+      {
+        "key": "waited_too_long",
+        "display_order": 1,
+        "display_name": {
+          "default": "Waited too long",
+          "id": "Terlalu lama menunggu"
+        }
+      },
+      {
+        "key": "wrong_doctor_selected",
+        "display_order": 2,
+        "display_name": {
+          "default": "Wrong doctor selected",
+          "id": "Salah memilih dokter"
+        }
+      },
+      {
+        "key": "other",
+        "display_order": 3,
+        "display_name": {
+          "default": "Other",
+          "id": "Lainnya"
+        }
+      }
+    ],
+    "consultation_timeout": 60,
+    "tc_configuration": {
+      "doctor_category_title": {
+        "default": "Recommended Doctors",
+        "id": "Rekomendasi dokter"
+      },
+      "doctor_category_subtitle": {
+        "default": "Chat with our best available doctors",
+        "id": "Dokter siaga terbaik untukmu"
+      },
+      "no_of_category_doctors": 2,
+      "doctor_category": "d614fa3e-8b4b-48e9-97b0-9885f56622fc",
+      "doctor_sharing_text": {
+        "default": "Hey! I found #fullName# on Halodoc. Install the app now to talk: #deeplink#",
+        "id": "Hi! Saya baru saja mendapatkan informasi kesehatan terbaik dari dokter Halodoc! Klik link untuk chat dengan dokter Halodoc sekarang: #deeplink#"
+      },
+      "no_of_recent_doctors": 3
+    },
+    "payment_configuration": {
+      "categories": [
+        {
+          "type": "wallet",
+          "instruments": [
+            {
+              "type": "wallet",
+              "provider": "halodoc"
+            }
+          ]
+        },
+        {
+          "type": "gopay",
+          "instruments": [
+            {
+              "type": "gopay",
+              "provider": "midtrans"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "instruments": [
+            {
+              "type": "card",
+              "provider": "midtrans"
+            }
+          ]
+        }
+      ]
+    },
+    "mentalhealth_subcategory": {
+      "mentalhealth_categoryID": "65cc3d18-0174-4c61-aa2a-b4645ce29206",
+      "allowedCategory": [
+        {
+          "category_name": "Clinical Psychologist",
+          "category_id": "65cc3d18-0174-4c61-aa2a-b4645ce29206",
+          "filter": [
+            {
+              "display_name": {
+                "default": "Expertise",
+                "id": "Keahlian"
+              },
+              "enabled": true,
+              "filter_type": "category_ids",
+              "options": [
+                {
+                  "display": {
+                    "default": "Stress",
+                    "id": "Stres"
+                  },
+                  "value": "59c4622e-13a7-4244-8531-a28f050af92a"
+                },
+                {
+                  "display": {
+                    "default": "Anxiety",
+                    "id": "Gangguan Kecemasan"
+                  },
+                  "value": "85223b85-16ad-4803-b9e9-2279435ae0f7"
+                },
+                {
+                  "display": {
+                    "default": "Depression",
+                    "id": "Depresi"
+                  },
+                  "value": "91c7470a-59d5-4a34-809b-bf390604e97c"
+                },
+                {
+                  "display": {
+                    "default": "Family & Relationships",
+                    "id": "Keluarga & Hubungan"
+                  },
+                  "value": "0ea2e8d8-fa84-4013-baaf-6cefbafea0b3"
+                },
+                {
+                  "display": {
+                    "default": "Trauma",
+                    "id": "Trauma"
+                  },
+                  "value": "04792875-02a7-4b91-9570-a72809fbe73e"
+                },
+                {
+                  "display": {
+                    "default": "Mood Problems",
+                    "id": "Gangguan Mood"
+                  },
+                  "value": "21225f35-7793-4725-b6dc-85962dc4f769"
+                },
+                {
+                  "display": {
+                    "default": "Work & Career",
+                    "id": "Pekerjaan & Karir"
+                  },
+                  "value": "07eca06a-9795-4e4e-973f-a3bd62309560"
+                },
+                {
+                  "display": {
+                    "default": "Addiction",
+                    "id": "Kecanduan"
+                  },
+                  "value": "e380e2f3-b037-4410-b916-7fdca03b5076"
+                },
+                {
+                  "display": {
+                    "default": "Self Improvement",
+                    "id": "Pengembangan Diri"
+                  },
+                  "value": "ba3778ca-dc69-47db-a016-e029f7591305"
+                },
+                {
+                  "display": {
+                    "default": "Parenting & Children",
+                    "id": "Parenting & Anak"
+                  },
+                  "value": "da6893bf-07c7-4a70-9702-90f8564d79ef"
+                },
+                {
+                  "display": {
+                    "default": "Personality Issues",
+                    "id": "Gangguan Kepribadian"
+                  },
+                  "value": "7cea2f70-a8dd-4216-a842-2aef2724d2ac"
+                },
+                {
+                  "display": {
+                    "default": "Sexual Identity",
+                    "id": "Identitas Seksual"
+                  },
+                  "value": "b8e0dbe3-1594-4d56-81fb-8bb3bfdc6bac"
+                }
+              ],
+              "selection_type": "single"
+            }
+          ]
+        },
+        {
+          "category_name": "Psychiatrist",
+          "category_id": "76995b0a-276f-4341-93d5-9bd7544df798",
+          "filter": [
+            {
+              "display_name": {
+                "default": "Expertise",
+                "id": "Keahlian"
+              },
+              "enabled": true,
+              "filter_type": "category_ids",
+              "options": [
+                {
+                  "display": {
+                    "default": "Stress",
+                    "id": "Stres"
+                  },
+                  "value": "59c4622e-13a7-4244-8531-a28f050af92a"
+                },
+                {
+                  "display": {
+                    "default": "Anxiety",
+                    "id": "Gangguan Kecemasan"
+                  },
+                  "value": "85223b85-16ad-4803-b9e9-2279435ae0f7"
+                },
+                {
+                  "display": {
+                    "default": "Depression",
+                    "id": "Depresi"
+                  },
+                  "value": "91c7470a-59d5-4a34-809b-bf390604e97c"
+                },
+                {
+                  "display": {
+                    "default": "Family & Relationships",
+                    "id": "Keluarga & Hubungan"
+                  },
+                  "value": "0ea2e8d8-fa84-4013-baaf-6cefbafea0b3"
+                },
+                {
+                  "display": {
+                    "default": "Trauma",
+                    "id": "Trauma"
+                  },
+                  "value": "04792875-02a7-4b91-9570-a72809fbe73e"
+                },
+                {
+                  "display": {
+                    "default": "Mood Problems",
+                    "id": "Gangguan Mood"
+                  },
+                  "value": "21225f35-7793-4725-b6dc-85962dc4f769"
+                },
+                {
+                  "display": {
+                    "default": "Work & Career",
+                    "id": "Pekerjaan & Karir"
+                  },
+                  "value": "07eca06a-9795-4e4e-973f-a3bd62309560"
+                },
+                {
+                  "display": {
+                    "default": "Addiction",
+                    "id": "Kecanduan"
+                  },
+                  "value": "e380e2f3-b037-4410-b916-7fdca03b5076"
+                },
+                {
+                  "display": {
+                    "default": "Self Improvement",
+                    "id": "Pengembangan Diri"
+                  },
+                  "value": "ba3778ca-dc69-47db-a016-e029f7591305"
+                },
+                {
+                  "display": {
+                    "default": "Parenting & Children",
+                    "id": "Parenting & Anak"
+                  },
+                  "value": "da6893bf-07c7-4a70-9702-90f8564d79ef"
+                },
+                {
+                  "display": {
+                    "default": "Personality Issues",
+                    "id": "Gangguan Kepribadian"
+                  },
+                  "value": "7cea2f70-a8dd-4216-a842-2aef2724d2ac"
+                },
+                {
+                  "display": {
+                    "default": "Sexual Identity",
+                    "id": "Identitas Seksual"
+                  },
+                  "value": "b8e0dbe3-1594-4d56-81fb-8bb3bfdc6bac"
+                }
+              ],
+              "selection_type": "single"
+            }
+          ]
+        },
+        {
+          "category_name": "Mental Health",
+          "category_id": "65cc3d18-0174-4c61-aa2a-b4645ce29206",
+          "filter": [
+            {
+              "display_name": {
+                "default": "Expertise",
+                "id": "Keahlian"
+              },
+              "enabled": true,
+              "filter_type": "category_ids",
+              "options": [
+                {
+                  "display": {
+                    "default": "Stress",
+                    "id": "Stres"
+                  },
+                  "value": "59c4622e-13a7-4244-8531-a28f050af92a"
+                },
+                {
+                  "display": {
+                    "default": "Anxiety",
+                    "id": "Gangguan Kecemasan"
+                  },
+                  "value": "85223b85-16ad-4803-b9e9-2279435ae0f7"
+                },
+                {
+                  "display": {
+                    "default": "Depression",
+                    "id": "Depresi"
+                  },
+                  "value": "91c7470a-59d5-4a34-809b-bf390604e97c"
+                },
+                {
+                  "display": {
+                    "default": "Family & Relationships",
+                    "id": "Keluarga & Hubungan"
+                  },
+                  "value": "0ea2e8d8-fa84-4013-baaf-6cefbafea0b3"
+                },
+                {
+                  "display": {
+                    "default": "Trauma",
+                    "id": "Trauma"
+                  },
+                  "value": "04792875-02a7-4b91-9570-a72809fbe73e"
+                },
+                {
+                  "display": {
+                    "default": "Mood Problems",
+                    "id": "Gangguan Mood"
+                  },
+                  "value": "21225f35-7793-4725-b6dc-85962dc4f769"
+                },
+                {
+                  "display": {
+                    "default": "Work & Career",
+                    "id": "Pekerjaan & Karir"
+                  },
+                  "value": "07eca06a-9795-4e4e-973f-a3bd62309560"
+                },
+                {
+                  "display": {
+                    "default": "Addiction",
+                    "id": "Kecanduan"
+                  },
+                  "value": "e380e2f3-b037-4410-b916-7fdca03b5076"
+                },
+                {
+                  "display": {
+                    "default": "Self Improvement",
+                    "id": "Pengembangan Diri"
+                  },
+                  "value": "ba3778ca-dc69-47db-a016-e029f7591305"
+                },
+                {
+                  "display": {
+                    "default": "Parenting & Children",
+                    "id": "Parenting & Anak"
+                  },
+                  "value": "da6893bf-07c7-4a70-9702-90f8564d79ef"
+                },
+                {
+                  "display": {
+                    "default": "Personality Issues",
+                    "id": "Gangguan Kepribadian"
+                  },
+                  "value": "7cea2f70-a8dd-4216-a842-2aef2724d2ac"
+                },
+                {
+                  "display": {
+                    "default": "Sexual Identity",
+                    "id": "Identitas Seksual"
+                  },
+                  "value": "b8e0dbe3-1594-4d56-81fb-8bb3bfdc6bac"
+                }
+              ],
+              "selection_type": "single"
+            }
+          ]
+        }
+      ]
+    },
+    "discovery_configurations": {
+      "filters": [
+        {
+          "display_name": {
+            "default": "Appointment Type",
+            "id": "Appointment Type"
+          },
+          "enabled": true,
+          "filter_type": "appointment",
+          "options": [
+            {
+              "display": {
+                "default": "Instant Chat",
+                "id": "Instant Chat"
+              },
+              "value": "walkin"
+            },
+            {
+              "display": {
+                "default": "Scheduled",
+                "id": "Scheduled"
+              },
+              "value": "scheduled"
+            }
+          ],
+          "selection_type": "single"
+        },
+        {
+          "display": {
+            "default_name": "Capability",
+            "id": "Capability"
+          },
+          "enabled": true,
+          "filter_type": "capabilities",
+          "selection_type": "multi_select",
+          "options": [
+            {
+              "display": {
+                "default": "Audio",
+                "id": "Audio"
+              },
+              "value": "audio"
+            },
+            {
+              "display": {
+                "default": "Video",
+                "id": "Video"
+              },
+              "value": "video"
+            },
+            {
+              "display": {
+                "default": "Chat",
+                "id": "Chat"
+              },
+              "value": "chat"
+            },
+            {
+              "display": {
+                "default": "Physical",
+                "id": "Physical"
+              },
+              "value": "physical"
+            }
+          ]
+        },
+        {
+          "display_name": {
+            "default": "Consultation Price",
+            "id": "Consultation Price"
+          },
+          "enabled": true,
+          "filter_type": "price",
+          "type": "multi_select",
+          "options": [
+            {
+              "display": {
+                "default": "Less than Rp50.000",
+                "id": "Less than Rp50.000"
+              },
+              "value": "0-50000"
+            },
+            {
+              "display": {
+                "default": "50K-100K",
+                "id": "50K-100K"
+              },
+              "value": "50001-100000"
+            },
+            {
+              "display": {
+                "default": "100K+",
+                "id": "100K+"
+              },
+              "value": "100001-50000000"
+            }
+          ]
+        },
+        {
+          "display_name": {
+            "default": "Doctor's Gender",
+            "id": "Doctor's Gender"
+          },
+          "enabled": true,
+          "filter_type": "gender",
+          "selection_type": "single",
+          "options": [
+            {
+              "display": {
+                "default": "Male",
+                "id": "Male"
+              },
+              "value": "male"
+            },
+            {
+              "display": {
+                "default": "Female",
+                "id": "Female"
+              },
+              "value": "female"
+            }
+          ]
+        },
+        {
+          "display": {
+            "default": "Doctor's Experience",
+            "id": "Doctor's Experience"
+          },
+          "enabled": true,
+          "filter_type": "experience",
+          "selection_type": "single",
+          "options": [
+            {
+              "display": {
+                "default": "Less than 5 years",
+                "id": "Less than 5 years"
+              },
+              "value": "0-5"
+            },
+            {
+              "display": {
+                "default": "5-10 yrs",
+                "id": "5-10 yrs"
+              },
+              "value": "5-10"
+            },
+            {
+              "display": {
+                "default": "10+ yrs",
+                "id": "10+ yrs"
+              },
+              "value": "10-200"
+            }
+          ]
+        }
+      ]
+    },
+    "doctor_status": {
+      "statuses": [
+        {
+          "key": "online",
+          "display_order": 1,
+          "display_name": {
+            "id": "Online",
+            "default": "Online"
+          }
+        },
+        {
+          "key": "away",
+          "display_order": 2,
+          "display_name": {
+            "id": "Jauh Dari Ponsel",
+            "default": "away"
+          }
+        },
+        {
+          "key": "busy",
+          "display_order": 3,
+          "display_name": {
+            "id": "Sibuk",
+            "default": "busy"
+          }
+        },
+        {
+          "key": "cant_talk",
+          "display_order": 4,
+          "display_name": {
+            "id": "Hanya Bisa Chat",
+            "default": "Can’t Talk, Chat Only"
+          }
+        },
+        {
+          "key": "urgent_only",
+          "display_order": 5,
+          "display_name": {
+            "id": "Mendesak Saja",
+            "default": "Urgent Only"
+          }
+        },
+        {
+          "key": "delayed_response",
+          "display_order": 6,
+          "display_name": {
+            "id": "Respon Lambat",
+            "default": "Delayed Response"
+          }
+        }
+      ]
+    },
+    "audio_video_support_config": {
+      "supported_file_upload_types": "audio/*, video/*, application/pdf",
+      "supported_consultation_types": [
+        "online",
+        "bidan"
+      ],
+      "max_file_upload_size_in_mb": 50,
+      "supported_audio_list": "mp3, wav, m4a, aac",
+      "supported_video_list": "avi, mp4, mkv, mov, wmv"
+    },
+    "grouping_consultations_config": {
+      "grouping_consultations_feature_flag": true,
+      "supported_consultation_types": [
+        "online"
+      ],
+      "excluded_specialities": [
+        "d4b424c2-c250-4ac9-8e9b-077fdeb58322"
+      ]
+    },
+    "airbender_config": {
+      "pre_typing_delay": 3000,
+      "maximum_typing_duration": 10000,
+      "manual_typing_indicator_handling": false
+    },
+    "maximum_manual_coupons": [
+      {
+        "source": "teleconsultation",
+        "value": 1
+      },
+      {
+        "source": "digital_clinic",
+        "value": 3
+      }
+    ]
+
+  },
+  "article_configuration": {
+    "num_categories_per_page": 9
+  },
+  "feature_flags": {
+    "paper_prescription_enabled": true,
+    "covid_19_banner_enabled": true,
+    "live_connect_enabled": false,
+    "lab_services_enabled": true,
+    "subscription_enabled": true,
+    "in_app_content_enabled": true,
+    "pres_reminder_enabled": true,
+    "official_stores_enabled": true,
+    "transporter_log_enabled": true,
+    "user_service_enabled": true,
+    "unified_history_enabled": true,
+    "braze_analytics_enabled": true,
+    "deferred_login_enabled": true,
+    "ftue_home_screen": null,
+    "amplitude_analytics_enabled": false,
+    "clevertap_analytics_enabled": true,
+    "transporter_config": {
+      "enable_debug_log": true,
+      "enable_info_log": true,
+      "enable_warn_log": true,
+      "enable_error_log": true
+    }
+  },
+  "directories_configuration": {
+    "split_payment_configuration": {
+      "enable_split_payment": false,
+      "split_payment_method_blocked_list": [
+        "card",
+        "saved_card",
+        "gopay_pay_later"
+      ]
+    },
+    "refund_to_wallet_configuration": {
+      "enable_refund_to_wallet": true
+    },
+    "discovery_configurations": {
+      "filters": [
+        {
+          "display_name": {
+            "default": "Gender",
+            "id": "Jenis Kelamin"
+          },
+          "enabled": true,
+          "filter_type": "gender",
+          "selection_type": "single",
+          "options": [
+            {
+              "display": {
+                "default": "Male",
+                "id": "Pria"
+              },
+              "value": "male"
+            },
+            {
+              "display": {
+                "default": "Female",
+                "id": "Wanita"
+              },
+              "value": "female"
+            }
+          ]
+        },
+        {
+          "display_name": {
+            "default": "Experience",
+            "id": "Pengalaman"
+          },
+          "enabled": true,
+          "filter_type": "experience",
+          "selection_type": "multi_select",
+          "options": [
+            {
+              "display": {
+                "default": "Less than 5 years",
+                "id": "Kurang dari 5 tahun"
+              },
+              "value": "0-5"
+            },
+            {
+              "display": {
+                "default": "5 - 10 years",
+                "id": "5-10 tahun"
+              },
+              "value": "5-10"
+            },
+            {
+              "display": {
+                "default": "10-20 years",
+                "id": "10-20 tahun"
+              },
+              "value": "10-20"
+            },
+            {
+              "display": {
+                "default": "More than 20 years",
+                "id": "Lebih dari 20 tahun"
+              },
+              "value": "20-100"
+            }
+          ]
+        },
+        {
+          "display_name": {
+            "default": "Price",
+            "id": "Harga konsultasi"
+          },
+          "enabled": true,
+          "filter_type": "price",
+          "selection_type": "multi_select",
+          "options": [
+            {
+              "display": {
+                "default": "Less than Rp150.000",
+                "id": "Kurang dari Rp150.000"
+              },
+              "value": "0-150000"
+            },
+            {
+              "display": {
+                "default": "Rp150.000 - Rp250.000",
+                "id": "Rp150.000 - Rp250.000"
+              },
+              "value": "150001-250000"
+            },
+            {
+              "display": {
+                "default": "Rp250.000 - Rp450.000",
+                "id": "Rp250.000 - Rp450.000"
+              },
+              "value": "250001-450000"
+            },
+            {
+              "display": {
+                "default": "More than Rp450.000",
+                "id": "Lebih dari Rp450.000"
+              },
+              "value": "450001-50000000"
+            }
+          ]
+        },
+        {
+          "display_name": {
+            "default": "Sort from",
+            "id": "Urutkan Berdasarkan"
+          },
+          "enabled": true,
+          "filter_type": "sort_field",
+          "selection_type": "single",
+          "options": [
+            {
+              "display": {
+                "default": "Nearest",
+                "id": "Terdekat"
+              },
+              "value": "distance"
+            },
+            {
+              "display": {
+                "default": "Best rating",
+                "id": "Rating Terbaik"
+              },
+              "value": "rating"
+            }
+          ]
+        }
+      ]
+    },
+    "help_configuration": {
+      "trigger_journey": "welcome"
+    },
+    "hospital_sharing_text": {
+      "id": "Hi! Buat janji di #hospitalname# lewat Halodoc. Tanpa antri, langsung konsultasi. Klik: #deeplink#",
+      "default": "Hey! You can book appointment with #hospitalname# by Halodoc. No need to queue and just go to consultation room. Just click: #deeplink#"
+    },
+    "feedback_configuration": {
+      "provider_location": {
+        "scales": [
+          {
+            "id": "one_star",
+            "value": "1",
+            "scale": "5",
+            "attributes": {
+              "display_name": {
+                "id": "Apa yang bisa ditingkatkan?",
+                "default": "What can be improved?"
+              },
+              "values": [
+                {
+                  "key": "reregister_manually",
+                  "display_name": {
+                    "id": "Harus mendaftar ulang manual",
+                    "default": "Have to re-register manually"
+                  },
+                  "display_order": 1
+                },
+                {
+                  "key": "waiting_too_long",
+                  "display_name": {
+                    "id": "Waktu tunggu terlalu lama",
+                    "default": "Waiting too long"
+                  },
+                  "display_order": 2
+                },
+                {
+                  "key": "unresponsive_staff",
+                  "display_name": {
+                    "id": "Staf tidak cepat tanggap",
+                    "default": "Unresponsive staffs"
+                  },
+                  "display_order": 3
+                },
+                {
+                  "key": "overcrowded",
+                  "display_name": {
+                    "id": "Terlalu ramai",
+                    "default": "Overcrowded"
+                  },
+                  "display_order": 4
+                },
+                {
+                  "key": "bad_health_protocol",
+                  "display_name": {
+                    "id": "Tanpa protokol kesehatan",
+                    "default": "Bad health protocol"
+                  },
+                  "display_order": 5
+                }
+              ]
+            }
+          },
+          {
+            "id": "two_star",
+            "value": "2",
+            "scale": "5",
+            "attributes": {
+              "display_name": {
+                "id": "Apa yang bisa ditingkatkan?",
+                "default": "What can be improved?"
+              },
+              "values": [
+                {
+                  "key": "reregister_manually",
+                  "display_name": {
+                    "id": "Harus mendaftar ulang manual",
+                    "default": "Have to re-register manually"
+                  },
+                  "display_order": 1
+                },
+                {
+                  "key": "waiting_too_long",
+                  "display_name": {
+                    "id": "Waktu tunggu terlalu lama",
+                    "default": "Waiting too long"
+                  },
+                  "display_order": 2
+                },
+                {
+                  "key": "unresponsive_staff",
+                  "display_name": {
+                    "id": "Staf tidak cepat tanggap",
+                    "default": "Unresponsive staffs"
+                  },
+                  "display_order": 3
+                },
+                {
+                  "key": "overcrowded",
+                  "display_name": {
+                    "id": "Terlalu ramai",
+                    "default": "Overcrowded"
+                  },
+                  "display_order": 4
+                },
+                {
+                  "key": "bad_health_protocol",
+                  "display_name": {
+                    "id": "Tanpa protokol kesehatan",
+                    "default": "Bad health protocol"
+                  },
+                  "display_order": 5
+                }
+              ]
+            }
+          },
+          {
+            "id": "three_star",
+            "value": "3",
+            "scale": "5",
+            "attributes": {
+              "display_name": {
+                "id": "Apa yang bisa ditingkatkan?",
+                "default": "What can be improved?"
+              },
+              "values": [
+                {
+                  "key": "reregister_manually",
+                  "display_name": {
+                    "id": "Harus mendaftar ulang manual",
+                    "default": "Have to re-register manually"
+                  },
+                  "display_order": 1
+                },
+                {
+                  "key": "waiting_too_long",
+                  "display_name": {
+                    "id": "Waktu tunggu terlalu lama",
+                    "default": "Waiting too long"
+                  },
+                  "display_order": 2
+                },
+                {
+                  "key": "unresponsive_staff",
+                  "display_name": {
+                    "id": "Staf tidak cepat tanggap",
+                    "default": "Unresponsive staffs"
+                  },
+                  "display_order": 3
+                },
+                {
+                  "key": "overcrowded",
+                  "display_name": {
+                    "id": "Terlalu ramai",
+                    "default": "Overcrowded"
+                  },
+                  "display_order": 4
+                },
+                {
+                  "key": "bad_health_protocol",
+                  "display_name": {
+                    "id": "Tanpa protokol kesehatan",
+                    "default": "Bad health protocol"
+                  },
+                  "display_order": 5
+                }
+              ]
+            }
+          },
+          {
+            "id": "four_star",
+            "value": "4",
+            "scale": "5",
+            "attributes": {
+              "display_name": {
+                "id": "Apa yang menyenangkan?",
+                "default": "What went well?"
+              },
+              "values": [
+                {
+                  "key": "no_manual_registration",
+                  "display_name": {
+                    "id": "Tidak perlu daftar manual",
+                    "default": "No manual registration"
+                  },
+                  "display_order": 1
+                },
+                {
+                  "key": "quick_waiting_time",
+                  "display_name": {
+                    "id": "Tidak menunggu lama",
+                    "default": "Quick waiting time"
+                  },
+                  "display_order": 2
+                },
+                {
+                  "key": "responsive_staffs",
+                  "display_name": {
+                    "id": "Staf cepat tanggap",
+                    "default": "Responsive staffs"
+                  },
+                  "display_order": 3
+                },
+                {
+                  "key": "cozy_clean_area",
+                  "display_name": {
+                    "id": "Area nyaman & bersih",
+                    "default": "Cozy & clean area"
+                  },
+                  "display_order": 4
+                },
+                {
+                  "key": "good_health_protocol",
+                  "display_name": {
+                    "id": "Protokol kesehatan bagus",
+                    "default": "Good health protocol"
+                  },
+                  "display_order": 5
+                }
+              ]
+            }
+          },
+          {
+            "id": "five_star",
+            "value": "5",
+            "scale": "5",
+            "attributes": {
+              "display_name": {
+                "id": "Apa yang menyenangkan?",
+                "default": "What went well?"
+              },
+              "values": [
+                {
+                  "key": "no_manual_registration",
+                  "display_name": {
+                    "id": "Tidak perlu daftar manual",
+                    "default": "No manual registration"
+                  },
+                  "display_order": 1
+                },
+                {
+                  "key": "quick_waiting_time",
+                  "display_name": {
+                    "id": "Tidak menunggu lama",
+                    "default": "Quick waiting time"
+                  },
+                  "display_order": 2
+                },
+                {
+                  "key": "responsive_staffs",
+                  "display_name": {
+                    "id": "Staf cepat tanggap",
+                    "default": "Responsive staffs"
+                  },
+                  "display_order": 3
+                },
+                {
+                  "key": "cozy_clean_area",
+                  "display_name": {
+                    "id": "Area nyaman & bersih",
+                    "default": "Cozy & clean area"
+                  },
+                  "display_order": 4
+                },
+                {
+                  "key": "good_health_protocol",
+                  "display_name": {
+                    "id": "Protokol kesehatan bagus",
+                    "default": "Good health protocol"
+                  },
+                  "display_order": 5
+                }
+              ]
+            }
+          }
+        ],
+        "attributes": {
+          "display_name": {
+            "id": "Berapa lama kamu menunggu pemeriksaan?",
+            "default": "How long did you wait for the treatment?"
+          },
+          "values": [
+            {
+              "key": "less_than_15_mins",
+              "display_name": {
+                "id": "Kurang dari 15 menit",
+                "default": "Less than 15 mins"
+              },
+              "display_order": 1
+            },
+            {
+              "key": "15_to_60_mins",
+              "display_name": {
+                "id": "15-60 menit",
+                "default": "15-60 mins"
+              },
+              "display_order": 2
+            },
+            {
+              "key": "more_than_60_mins",
+              "display_name": {
+                "id": "Lebih dari 60 menit",
+                "default": "More than 60 mins"
+              },
+              "display_order": 3
+            }
+          ]
+        },
+        "comments": {
+          "display_name": {
+            "id": "Berbagi pengalaman dengan pasien lain",
+            "default": "Let other patients know your experience"
+          },
+          "placeholder": {
+            "id": "Bantu pasien lain memilih rumah sakit yang tepat!",
+            "default": "Help other patients to choose the right hospital!"
+          }
+        }
+      },
+      "personnel": {
+        "title": {
+          "id": "Rekomendasikan dokter ini?",
+          "default": "Recommend this doctor?"
+        },
+        "scales": [
+          {
+            "id": "not_recommend",
+            "value": "0",
+            "scale": "1",
+            "attributes": {
+              "display_name": {
+                "id": "Apa yang bisa ditingkatkan?",
+                "default": "What can be improved?"
+              },
+              "values": [
+                {
+                  "key": "unfriendly",
+                  "display_name": {
+                    "id": "Dokter tidak ramah",
+                    "default": "Unfriendly"
+                  },
+                  "display_order": 1
+                },
+                {
+                  "key": "bad_explanation",
+                  "display_name": {
+                    "id": "Dokter tidak komunikatif",
+                    "default": "Bad explanation"
+                  },
+                  "display_order": 2
+                },
+                {
+                  "key": "value_for_money",
+                  "display_name": {
+                    "id": "Kualitas sepadan dg harga",
+                    "default": "Value for money"
+                  },
+                  "display_order": 3
+                }
+              ]
+            }
+          },
+          {
+            "id": "recommend",
+            "value": "1",
+            "scale": "1",
+            "attributes": {
+              "display_name": {
+                "id": "Apa yang menyenangkan?",
+                "default": "What went well?"
+              },
+              "values": [
+                {
+                  "key": "friendliness",
+                  "display_name": {
+                    "id": "Ramah",
+                    "default": "Friendliness"
+                  },
+                  "display_order": 1
+                },
+                {
+                  "key": "good_explanation",
+                  "display_name": {
+                    "id": "Menjelaskan dengan baik",
+                    "default": "Good explanation"
+                  },
+                  "display_order": 2
+                },
+                {
+                  "key": "value_for_money",
+                  "display_name": {
+                    "id": "Kualitas sepadan dg harga",
+                    "default": "Value for money"
+                  },
+                  "display_order": 3
+                }
+              ]
+            }
+          }
+        ],
+        "comments": {
+          "display_name": {
+            "id": "Yuk ceritakan pendapatmu tentang %@",
+            "default": "Let other patients know your opinion about %@"
+          },
+          "placeholder": {
+            "id": "Bantu pasien lain memilih dokter yang tepat",
+            "default": "Help other patients to choose the right doctor"
+          }
+        }
+      },
+      "procedure": {
+        "title": {
+          "id": "Rekomendasikan tindakan medis ini?",
+          "default": "Recommend this procedure?"
+        },
+        "scales": [
+          {
+            "id": "not_recommend",
+            "value": "0",
+            "scale": "1",
+            "attributes": {
+              "display_name": {
+                "id": "Apa yang bisa ditingkatkan?",
+                "default": "What can be improved?"
+              },
+              "values": [
+                {
+                  "key": "bad_treatment_satisfaction",
+                  "display_name": {
+                    "id": "Pelayanan tidak memuaskan",
+                    "default": "Bad treatment satisfaction"
+                  },
+                  "display_order": 1
+                },
+                {
+                  "key": "value_for_money",
+                  "display_name": {
+                    "id": "Kualitas tidak sepadan dg harga",
+                    "default": "Value for money"
+                  },
+                  "display_order": 2
+                },
+                {
+                  "key": "unfriendly",
+                  "display_name": {
+                    "id": "Tidak ramah",
+                    "default": "Unfriendly"
+                  },
+                  "display_order": 3
+                },
+                {
+                  "key": "bad_explanation",
+                  "display_name": {
+                    "id": "Penjelasan kurang",
+                    "default": "Bad explanation"
+                  },
+                  "display_order": 4
+                }
+              ]
+            }
+          },
+          {
+            "id": "recommend",
+            "value": "1",
+            "scale": "1",
+            "attributes": {
+              "display_name": {
+                "id": "Apa yang menyenangkan?",
+                "default": "What went well?"
+              },
+              "values": [
+                {
+                  "key": "good_treatment_satisfaction",
+                  "display_name": {
+                    "id": "Pelayanan memuaskan",
+                    "default": "Good treatment satisfaction"
+                  },
+                  "display_order": 1
+                },
+                {
+                  "key": "value_for_money",
+                  "display_name": {
+                    "id": "Kualitas sepadan dg harga",
+                    "default": "Value for money"
+                  },
+                  "display_order": 2
+                },
+                {
+                  "key": "friendliness",
+                  "display_name": {
+                    "id": "Ramah",
+                    "default": "Friendliness"
+                  },
+                  "display_order": 3
+                },
+                {
+                  "key": "good_explanation",
+                  "display_name": {
+                    "id": "Menjelaskan dengan baik",
+                    "default": "Good explanation"
+                  },
+                  "display_order": 4
+                }
+              ]
+            }
+          }
+        ],
+        "comments": {
+          "display_name": {
+            "id": "Berbagi pengalaman dengan pasien lain",
+            "default": "Let other patients know your experience"
+          },
+          "placeholder": {
+            "id": "Bantu pasien lain memilih perawatan / tindakan yang tepat",
+            "default": "Help other patients to choose the right treatment / procedure"
+          }
+        }
+      }
+    },
+    "appointment_status_messages": [
+      {
+        "key": "booked",
+        "display_name": {
+          "id": "Menunggu konfirmasi…",
+          "default": "Waiting for confirmation…"
+        }
+      },
+      {
+        "key": "confirmed",
+        "display_name": {
+          "id": "Janji telah dikonfirmasi, mohon datang tepat waktu",
+          "default": "Your appointment has been confirmed, please come on time"
+        }
+      },
+      {
+        "key": "cancelled",
+        "display_name": {
+          "id": "Janji dibatalkan, alasan :",
+          "default": "Your appointment has been cancelled, reason :"
+        }
+      },
+      {
+        "key": "booked_payment",
+        "display_name": {
+          "id": "Pembayaran berhasil dan sedang menunggu konfirmasi..",
+          "default": "Payment is successfull and waiting for confirmation.."
+        }
+      },
+      {
+        "key": "confirmed_payment",
+        "display_name": {
+          "id": "Janji telah dikonfirmasi, mohon datang tepat waktu",
+          "default": "Your appointment has been confirmed, please come on time"
+        }
+      },
+      {
+        "key": "cancelled_payment_refund_initiated",
+        "display_name": {
+          "id": "Janji dibatalkan karena %@. Pengembalian dana sedang diproses",
+          "default": "Appointment cancelled because %@. Refund is on process."
+        }
+      },
+      {
+        "key": "cancelled_payment_refund_success",
+        "display_name": {
+          "id": "Janji dibatalkan karena %@. Pengembalian dana berhasil",
+          "default": "Appointment cancelled because %@. Refund is successful."
+        }
+      },
+      {
+        "key": "cancelled_payment_refund_processing",
+        "display_name": {
+          "id": "Perjanjian dibatalkan karena %@. Pengembalian dana sedang diproses.",
+          "default": "Appointment cancelled because %@. Refund is processing."
+        }
+      },
+      {
+        "key": "cancelled_payment_refund_failed",
+        "display_name": {
+          "id": "Perjanjian dibatalkan karena %@. Pengembalian dana gagal.",
+          "default": "Appointment cancelled because %@. Refund is failed."
+        }
+      },
+      {
+        "key": "cancelled_payment_refund_cancelled",
+        "display_name": {
+          "id": "Perjanjian dibatalkan karena %@. Pengembalian dana dibatalkan.",
+          "default": "Appointment cancelled because %@. Refund is cancelled."
+        }
+      },
+      {
+        "key": "cancelled_payment_refund_cancelled",
+        "display_name": {
+          "id": "Perjanjian dibatalkan karena %@. Pengembalian dana dibatalkan.",
+          "default": "Appointment cancelled because %@. Refund is cancelled."
+        }
+      }
+    ],
+    "covid_19_banner_configuration": {
+      "supported_speciality_slugs": [
+        "rapid-test-covid-19"
+      ],
+      "image_url": "https://stg-bintan-hospital-assets.s3-ap-southeast-1.amazonaws.com/covid-19-banner/banner_logo.png",
+      "header": {
+        "default": "Rapid & PCR Test for COVID-19",
+        "id": "Tes PCR & Rapid COVID-19"
+      },
+      "description": {
+        "default": "Fast, accurate and affordable tests available accross Indonesia",
+        "id": "Tes yang cepat, akurat, terjangkau dan tersedia di berbagai lokasi di Indonesia"
+      },
+      "banner_details": {
+        "header": {
+          "default": "We provide two types of tests for COVID-19. Choose one that suitable for your needs:",
+          "id": "Kami menyediakan dua pilihan tes untuk COVID-19. Pilih sesuai kebutuhanmu:"
+        },
+        "items": [
+          {
+            "image_url": "https://stg-bintan-hospital-assets.s3-ap-southeast-1.amazonaws.com/covid-19-banner/pcr-test.png",
+            "header": {
+              "default": "PCR Test",
+              "id": "PCR Test"
+            },
+            "description": {
+              "default": "To test whether you have virus RNA as diagnosis of COVID-19. Sample is taken by swab method from nose / throat. You may use this test to accurately detect COVID-19.",
+              "id": "Untuk memeriksa adanya RNA virus sebagai sarana diagnosis COVID-19. Menggunakan spesimen swab dari hidung/tenggorokan. Gunakan tes ini untuk mendeteksi COVID-19 secara akurat."
+            }
+          },
+          {
+            "image_url": "https://stg-bintan-hospital-assets.s3-ap-southeast-1.amazonaws.com/covid-19-banner/rapid-test.png",
+            "header": {
+              "default": "Rapid Test",
+              "id": "Rapid Test"
+            },
+            "description": {
+              "default": "To test whether you have antibody towards SARS CoV2 as screening method of COVID-19. Sample is taken by blood. You may use this test for travelling purposes.",
+              "id": "Untuk memeriksa adanya antibodi terhadap virus SARS CoV2 sebagai sarana skrining COVID-19. Menggunakan spesimen darah. Gunakan tes ini untuk keperluan syarat bepergian."
+            }
+          }
+        ]
+      },
+      "covid_19_filter_configuration": {
+        "items": [
+          {
+            "name": {
+              "default": "All",
+              "id": "All"
+            },
+            "speciality_slug": "rapid-test-covid-19"
+          },
+          {
+            "name": {
+              "default": "Rapid",
+              "id": "Rapid"
+            },
+            "speciality_slug": "rapid-test"
+          },
+          {
+            "name": {
+              "default": "PCR",
+              "id": "PCR"
+            },
+            "speciality_slug": "pcr-test"
+          }
+        ]
+      }
+    },
+    "user_applicable_coupon_limit": 3,
+    "landing_screen_details_info": {
+      "description": {
+        "id": "Buat janji konsultasi dokter di Rumah Sakit kini praktis dengan Halodoc. Tanpa perlu antre dan menunggu lama, loh!",
+        "default": "Cut the hassle and visit hospital without the need to queue. Book an appointment in ease by following these steps below:"
+      },
+      "items": [
+        {
+          "title": {
+            "id": "Pilih dokter atau layanan",
+            "default": "Find a doctor or service"
+          },
+          "description": {
+            "id": "Pesan dari berbagai dokter dan layanan medis tersertifikasi",
+            "default": "Book from various certified doctor specialties and medical services available"
+          },
+          "image_url": "https://stg-bintan-hospital-assets.s3-ap-southeast-1.amazonaws.com/landing+screen+details/high/find_doctor.png"
+        },
+        {
+          "title": {
+            "id": "Datang 15 menit sebelum jadwal",
+            "default": "Arrive 15 minutes in advance"
+          },
+          "description": {
+            "id": "Tidak lagi perlu antre, kamu hanya perlu datang sesuai jadwal",
+            "default": "No more queueing! Just need to make sure you don’t skip your turn."
+          },
+          "image_url": "https://stg-bintan-hospital-assets.s3-ap-southeast-1.amazonaws.com/landing+screen+details/high/come-hospital.png"
+        },
+        {
+          "title": {
+            "id": "Tunjukkan pesanan ke bagian admisi",
+            "default": "Show your booking to admission staff"
+          },
+          "description": {
+            "id": "Tidak perlu lagi mendaftar ulang, datamu sudah secara otomatis tercatat",
+            "default": "No need to re-register. You can then wait your turn in waiting area."
+          },
+          "image_url": "https://stg-bintan-hospital-assets.s3-ap-southeast-1.amazonaws.com/landing+screen+details/high/show-booking.png"
+        },
+        {
+          "title": {
+            "id": "Konsultasikan masalah kesehatanmu",
+            "default": "Consult and be better"
+          },
+          "description": {
+            "id": "Nikmati mudahnya buat janji RS bersama Halodoc",
+            "default": "Enjoy a hassle-free hospital appointment with Halodoc"
+          },
+          "image_url": "https://stg-bintan-hospital-assets.s3-ap-southeast-1.amazonaws.com/landing+screen+details/high/get-consult.png"
+        }
+      ]
+    },
+    "doctor_sharing_text": {
+      "id": "Hi! Buat janji dengan #doctorname# lewat Halodoc. Tanpa antri, langsung konsultasi. Klik: #deeplink#",
+      "default": "Hey! You can book appointment with #doctorname# by Halodoc. No need to queue and just go to consultation room. Just click: #deeplink#"
+    },
+    "appointment_cancellation_reasons": {
+      "booked_cancellation_reasons": [
+        {
+          "key": "hospital_registered",
+          "display_name": {
+            "id": "Sudah melakukan pendaftaran sendiri",
+            "default": "I have registered at hospital"
+          },
+          "display_order": 1
+        },
+        {
+          "key": "schedule_change",
+          "display_name": {
+            "id": "Ingin melakukan perubahan jadwal",
+            "default": "I want to change the schedule"
+          },
+          "display_order": 2
+        },
+        {
+          "key": "waited_too_long",
+          "display_name": {
+            "id": "Terlalu lama menunggu konfirmasi",
+            "default": "I waited too long for confirmation"
+          },
+          "display_order": 3
+        },
+        {
+          "key": "want_doctor_change",
+          "display_name": {
+            "id": "Ingin melakukan perubahan dokter",
+            "default": "I want to change the doctor"
+          },
+          "display_order": 4
+        },
+        {
+          "key": "want_hospital_clinic_change",
+          "display_name": {
+            "id": "Ingin melakukan perubahan Rumah Sakit / Klinik",
+            "default": "I want to change the hospital / clinic"
+          },
+          "display_order": 5
+        },
+        {
+          "key": "others",
+          "display_name": {
+            "id": "Lainnya",
+            "default": "Others"
+          },
+          "display_order": 6
+        }
+      ],
+      "confirmed_cancellation_reasons": [
+        {
+          "key": "change_schedule",
+          "display_name": {
+            "id": "Ingin mengajukan perubahan jadwal",
+            "default": "I want to change schedule"
+          },
+          "display_order": 1
+        },
+        {
+          "key": "directly_registered_at_hospital",
+          "display_name": {
+            "id": "Sudah melakukan pendaftaran sendiri",
+            "default": "I have registered directly at the Hospital"
+          },
+          "display_order": 2
+        },
+        {
+          "key": "patient_couldnot_come",
+          "display_name": {
+            "id": "Tidak bisa datang ke RS",
+            "default": "I can't make it to my appointment"
+          },
+          "display_order": 3
+        },
+        {
+          "key": "doctor_not_available",
+          "display_name": {
+            "id": "Tidak ingin menemui dokter pengganti",
+            "default": "My doctor is not available and I don't want to meet the substitute doctor"
+          },
+          "display_order": 4
+        },
+        {
+          "key": "others",
+          "display_name": {
+            "id": "Lainnya",
+            "default": "Others"
+          },
+          "display_order": 5
+        }
+      ]
+    },
+    "payment_configuration": {
+      "categories": [
+        {
+          "type": "wallet",
+          "instruments": [
+            {
+              "type": "wallet",
+              "provider": "halodoc"
+            }
+          ]
+        },
+        {
+          "type": "gopay",
+          "instruments": [
+            {
+              "type": "gopay",
+              "provider": "midtrans"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "instruments": [
+            {
+              "type": "card",
+              "provider": "midtrans"
+            }
+          ]
+        },
+        {
+          "type": "internet_banking",
+          "instruments": [
+            {
+              "type": "bca_klikpay",
+              "provider": "midtrans"
+            }
+          ]
+        }
+      ]
+    },
+    "nik_display_info": [
+      {
+        "header": {
+          "id": "Mengapa nomor identitas diperlukan?",
+          "default": "Why is an ID number required?"
+        },
+        "description": {
+          "id": "Sesuai dengan ketentuan terbaru dari Kementrian Kesehatan Indonesia, kami memerlukan nomor identitasmu untuk keabsahan hasil tes. Datamu aman bersama kami.",
+          "default": "As per the new regulation from Indonesia’s Ministry of Health, we need your ID number to validate the test result. Your data is safe with us."
+        }
+      },
+      {
+        "header": {
+          "id": "Identitas apa saja yang berlaku?",
+          "default": "What kind of ID number that I can input?"
+        },
+        "description": {
+          "id": "Identitas yang berlaku untuk keperluan ini adalah NIK (untuk WNI) atau nomor paspor (untuk WNA). Identitas selain jenis tersebut tidak berlaku untuk keperluan ini dan dapat berakibat pada pembatalan perjanjian.",
+          "default": "We only accept either NIK (for Indonesian citizens) or passport number (for foreigners). Please note that using another ID number other than these two might result in appointment cancellation."
+        }
+      },
+      {
+        "header": {
+          "id": "Di mana saya bisa menemukan NIK?",
+          "default": "Where can I find NIK?"
+        },
+        "description": {
+          "id": "Untuk pasien dewasa, NIK terdapat pada KTP/KK. Untuk pasien anak, NIK terdapat pada KK/KIA.",
+          "default": "For adult patient, you can find NIK on your KTP/KK. For children patient, you can find NIK on KK/KIA."
+        }
+      },
+      {
+        "header": {
+          "id": "Jika saya memesan untuk anak, dokumen apa yang harus saya unggah?",
+          "default": "If I book for my child, what should I upload?"
+        },
+        "description": {
+          "id": "Silakan mengunggah foto KK atau KIA.",
+          "default": "You can upload either KK or KIA image to verify your child’s identity."
+        }
+      }
+    ],
+    "nar_display_info": [
+      {
+        "header": {
+          "id": "Apa itu NAR?",
+          "default": "What is NAR?"
+        },
+        "description": {
+          "id": "NAR (New All Record) adalah sistem dari Kementrian Kesehatan yang digunakan untuk memvalidasi hasil tes dan menekan jumlah hasil tes palsu. Semua hasil tes harus diunggah ke NAR dan divalidasi menggunakan nomor ID pasien. Status NAR akan ditambahkan dalam maksimal 30 menit setelah hasil tes diterbitkan.",
+          "default": "NAR (New All Record) is a system from Ministry of Health to validate test results from health facilities and reduce fake results. All tests must be uploaded to NAR to be validated using your ID number. NAR status will be updated within maximum 30 minutes after the test result is issued."
+        }
+      }
+    ],
+    "hospital_configurations_appointment": {
+      "sort": [
+        {
+          "display_name": {
+            "default": "Sort",
+            "id": "Urutkan Berdasarkan"
+          },
+          "enabled": true,
+          "filter_type": "sort_field",
+          "selection_type": "single",
+          "options": [
+            {
+              "display": {
+                "default": "Nearest",
+                "id": "Terdekat"
+              },
+              "value": "distance"
+            },
+            {
+              "display": {
+                "default": "Best Rating",
+                "id": "Rating Terbaik"
+              },
+              "value": "rating"
+            }
+          ]
+        }
+      ],
+      "filters": [
+        {
+          "display_name": {
+            "default": "Specialization",
+            "id": "Spesialisasi Dokter"
+          },
+          "enabled": true,
+          "filter_type": "doctor_specialization",
+          "selection_type": "multi_select",
+          "options": []
+        },
+        {
+          "display_name": {
+            "default": "Insurance",
+            "id": "Asuransi"
+          },
+          "enabled": true,
+          "filter_type": "insurance_policies",
+          "selection_type": "multi_select",
+          "options": [
+            {
+              "display": {
+                "default": "Halodoc",
+                "id": "Halodoc"
+              },
+              "value": "halodoc"
+            },
+            {
+              "display": {
+                "default": "Allianz",
+                "id": "Allianz"
+              },
+              "value": "allianz"
+            },
+            {
+              "display": {
+                "default": "Prudential",
+                "id": "Prudential"
+              },
+              "value": "prudential"
+            }
+          ]
+        },
+        {
+          "display_name": {
+            "default": "Facility Type",
+            "id": "Tipe Faskes"
+          },
+          "enabled": true,
+          "filter_type": "facility_type",
+          "selection_type": "multi_select",
+          "options": [
+            {
+              "display": {
+                "default": "General Hospital",
+                "id": "Rumah Sakit Umum"
+              },
+              "value": "Rumah Sakit Umum"
+            },
+            {
+              "display": {
+                "default": "Children Hospital",
+                "id": "Rumah Sakit Umum Daerah"
+              },
+              "value": "Rumah Sakit Umum Daerah"
+            },
+            {
+              "display": {
+                "default": "Heart Hospital",
+                "id": "Rumah Sakit Ibu dan Anak"
+              },
+              "value": "Rumah Sakit Ibu dan Anak"
+            },
+            {
+              "display": {
+                "default": "Cancer Hospital",
+                "id": "Rumah Sakit Jantung"
+              },
+              "value": "Rumah Sakit Jantung"
+            },
+            {
+              "display": {
+                "default": "Vaccination Center",
+                "id": "Sentra Vaksinasi"
+              },
+              "value": "Sentra Vaksinasi"
+            },
+            {
+              "display": {
+                "default": "Mental Hospital",
+                "id": "Rumah Sakit Jiwa"
+              },
+              "value": "Rumah Sakit Jiwa"
+            },
+            {
+              "display": {
+                "default": "Clinic",
+                "id": "Klinik"
+              },
+              "value": "Klinik"
+            },
+            {
+              "display": {
+                "default": "Beauty Clinic",
+                "id": "Klinik Kecantikan"
+              },
+              "value": "Klinik Kecantikan"
+            },
+            {
+              "display": {
+                "default": "Private Clinic",
+                "id": "Praktek Pribadi"
+              },
+              "value": "Praktek Pribadi"
+            },
+            {
+              "display": {
+                "default": "Pharmacy",
+                "id": "Apotek"
+              },
+              "value": "Apotek"
+            },
+            {
+              "display": {
+                "default": "Lab",
+                "id": "Laboratorium"
+              },
+              "value": "Laboratorium"
+            }
+          ]
+        }
+      ]
+    },
+    "hospital_configurations_dmp": {
+      "sort": [
+        {
+          "display_name": {
+            "default": "Sort",
+            "id": "Urutkan Berdasarkan"
+          },
+          "enabled": true,
+          "filter_type": "sort_field",
+          "selection_type": "single",
+          "options": [
+            {
+              "display": {
+                "default": "Nearest",
+                "id": "Terdekat"
+              },
+              "value": "distance"
+            },
+            {
+              "display": {
+                "default": "Best Rating",
+                "id": "Rating Terbaik"
+              },
+              "value": "rating"
+            }
+          ]
+        }
+      ],
+      "filters": [
+        {
+          "display_name": {
+            "default": "Category",
+            "id": "Kategori Layanan"
+          },
+          "enabled": true,
+          "filter_type": "category",
+          "selection_type": "multi_select",
+          "options": []
+        },
+        {
+          "display_name": {
+            "default": "Facility Type",
+            "id": "Tipe Faskes"
+          },
+          "enabled": true,
+          "filter_type": "facility_type",
+          "selection_type": "multi_select",
+          "options": [
+            {
+              "display": {
+                "default": "General Hospital",
+                "id": "Rumah Sakit Umum"
+              },
+              "value": "Rumah Sakit Umum"
+            },
+            {
+              "display": {
+                "default": "Children Hospital",
+                "id": "Rumah Sakit Umum Daerah"
+              },
+              "value": "Rumah Sakit Umum Daerah"
+            },
+            {
+              "display": {
+                "default": "Heart Hospital",
+                "id": "Rumah Sakit Ibu dan Anak"
+              },
+              "value": "Rumah Sakit Ibu dan Anak"
+            },
+            {
+              "display": {
+                "default": "Cancer Hospital",
+                "id": "Rumah Sakit Jantung"
+              },
+              "value": "Rumah Sakit Jantung"
+            },
+            {
+              "display": {
+                "default": "Vaccination Center",
+                "id": "Sentra Vaksinasi"
+              },
+              "value": "Sentra Vaksinasi"
+            },
+            {
+              "display": {
+                "default": "Mental Hospital",
+                "id": "Rumah Sakit Jiwa"
+              },
+              "value": "Rumah Sakit Jiwa"
+            },
+            {
+              "display": {
+                "default": "Clinic",
+                "id": "Klinik"
+              },
+              "value": "Klinik"
+            },
+            {
+              "display": {
+                "default": "Beauty Clinic",
+                "id": "Klinik Kecantikan"
+              },
+              "value": "Klinik Kecantikan"
+            },
+            {
+              "display": {
+                "default": "Private Clinic",
+                "id": "Praktek Pribadi"
+              },
+              "value": "Praktek Pribadi"
+            },
+            {
+              "display": {
+                "default": "Pharmacy",
+                "id": "Apotek"
+              },
+              "value": "Apotek"
+            },
+            {
+              "display": {
+                "default": "Lab",
+                "id": "Laboratorium"
+              },
+              "value": "Laboratorium"
+            }
+          ]
+        }
+      ]
+    },
+    "procedure_configurations": {
+      "home_care_department_ids": [
+        "6b0e06e4-3f27-4be7-aa22-4f62d1b53409",
+        "43be4dd1-7d58-4ff3-9d11-3d1778583e94",
+        "55427b8d-47a0-4685-bb97-f2bedf6a66c6",
+        "81396a3d-f322-463b-bd18-bdf4496208ee",
+        "ff5ab48f-7107-4307-a503-8c2afdf1d9df"
+      ],
+      "sort": [
+        {
+          "display_name": {
+            "default": "Sort",
+            "id": "Sort"
+          },
+          "enabled": true,
+          "filter_type": "sort_field",
+          "selection_type": "single",
+          "options": [
+            {
+              "display": {
+                "default": "Nearest",
+                "id": "Nearest"
+              },
+              "value": "distance"
+            },
+            {
+              "display": {
+                "default": "Lowest price",
+                "id": "Lowest price"
+              },
+              "value": "price"
+            }
+          ]
+        }
+      ],
+      "filters": [
+        {
+          "display_name": {
+            "default": "Category",
+            "id": "Kategori"
+          },
+          "enabled": true,
+          "filter_type": "category",
+          "selection_type": "multi_select",
+          "options": []
+        },
+        {
+          "display_name": {
+            "default": "Results In",
+            "id": "Kecepatan Hasil"
+          },
+          "enabled": true,
+          "filter_type": "results_in",
+          "selection_type": "multi_select",
+          "options": [
+            {
+              "display": {
+                "default": "Instant -  Less than 12 hours",
+                "id": "Instant - Kurang dari 12 jam"
+              },
+              "value": "0-12"
+            },
+            {
+              "display": {
+                "default": "Express - 12-24 hours",
+                "id": "Express - 12-24 jam"
+              },
+              "value": "12-24"
+            },
+            {
+              "display": {
+                "default": "Next Day - 24-48 hours",
+                "id": "Next Day - 24-48 jam"
+              },
+              "value": "24-48"
+            },
+            {
+              "display": {
+                "default": "Regular - More than 48 hours",
+                "id": "Regular - Lebih dari 48 jam"
+              },
+              "value": "48-72"
+            }
+          ]
+        },
+        {
+          "display_name": {
+            "default": "Test Location",
+            "id": "Lokasi Pelaksanaan"
+          },
+          "enabled": true,
+          "filter_type": "test_location",
+          "selection_type": "multi_select",
+          "options": [
+            {
+              "display": {
+                "default": "On site",
+                "id": "Di faskes"
+              },
+              "value": "on_site"
+            },
+            {
+              "display": {
+                "default": "Drive Thru",
+                "id": "Drive Thru (dengan kendaraan)"
+              },
+              "value": "drive_thru"
+            },
+            {
+              "display": {
+                "default": "Home Care",
+                "id": "Home Care (petugas datang ke lokasimu)"
+              },
+              "value": "home_care"
+            }
+          ]
+        }
+      ],
+      "test_location_mapping": [
+        {
+          "display": {
+            "default": "On site",
+            "id": "Di faskes"
+          },
+          "key": "on_site"
+        },
+        {
+          "display": {
+            "default": "Drive Thru",
+            "id": "Drive Thru"
+          },
+          "key": "drive_thru"
+        },
+        {
+          "display": {
+            "default": "Home Care",
+            "id": "Home Care"
+          },
+          "key": "home_care"
+        }
+      ]
+    }
+  },
+  "google_service_api_key": "",
+  "in_app_update_configuration": {
+    "in_app_update": "",
+    "force_update_msg": {
+      "en": "",
+      "id": ""
+    },
+    "flex_update_msg": {
+      "en": "",
+      "id": ""
+    }
+  },
+  "lab_configuration": {
+    "order_status_map": {
+      "placed": [
+        "created",
+        "confirmed"
+      ],
+      "cancelled": [
+        "cancel_requested",
+        "cancelled"
+      ],
+      "completed": [
+        "completed",
+        "closed"
+      ]
+    },
+    "cancellation_reasons": [
+      {
+        "key": "test_need_sooner",
+        "display_name": {
+          "default": "Patient needs the procedure sooner.",
+          "id": "Pasien perlu mendapatkan tindakan lebih cepat."
+        },
+        "display_order": 1
+      },
+      {
+        "key": "patient_needs_to_admitted",
+        "display_name": {
+          "default": "Patient needs the procedure done at the hospital.",
+          "id": "Pasien perlu tindakannya dilakukan di RS."
+        },
+        "display_order": 2
+      },
+      {
+        "key": "lab_test_not_needed",
+        "display_name": {
+          "default": "Patient no longer needs the procedure.",
+          "id": "Pasien sudah tidak memerlukan tindakan."
+        },
+        "display_order": 3
+      },
+      {
+        "key": "booked_wrong_test",
+        "display_name": {
+          "default": "Patient booked the wrong procedure.",
+          "id": "Pasien memesan tindakan yang salah."
+        },
+        "display_order": 4
+      },
+      {
+        "key": "need_to_modify_test",
+        "display_name": {
+          "default": "Patient needs to modify the order.",
+          "id": "Pasien perlu mengubah pesanan."
+        },
+        "display_order": 5
+      },
+      {
+        "key": "already_tested",
+        "display_name": {
+          "default": "Patient has already received the procedure.",
+          "id": "Pasien sudah menerima tindakan."
+        },
+        "display_order": 6
+      },
+      {
+        "key": "sample_not_collected",
+        "display_name": {
+          "default": "Patient’s procedure couldn’t be completed.",
+          "id": "Tindakan pasien tidak dapat dilanjutkan."
+        },
+        "display_order": 7
+      },
+      {
+        "key": "other",
+        "display_name": {
+          "default": "Others",
+          "id": "Lainnya"
+        },
+        "display_order": 8
+      }
+    ],
+    "customized_content": {
+      "staff_arrival_info": {
+        "id": "Staf medis diperkirakan akan tiba di lokasimu dalam 45 - 60 menit.",
+        "default": "Our medical staff should arrive in 45 - 60 minutes."
+      }
+    },
+    "popular_search_keywords": {
+      "title": {
+        "id": "Pencarian Populer",
+        "default": "Popular Searches"
+      },
+      "keywords": [
+        {
+          "display_order": 1,
+          "key": "Medical Check Up",
+          "search_text": "Medical Check Up"
+        },
+        {
+          "display_order": 2,
+          "key": "Vaksin",
+          "search_text": "Vaksin"
+        },
+        {
+          "display_order": 3,
+          "key": "Vitamin C",
+          "search_text": "Vitamin C"
+        },
+        {
+          "display_order": 4,
+          "key": "Immune Booster",
+          "search_text": "Immune Booster"
+        },
+        {
+          "display_order": 5,
+          "key": "Alergi",
+          "search_text": "Alergi"
+        },
+        {
+          "display_order": 6,
+          "key": "HIV",
+          "search_text": "HIV"
+        },
+        {
+          "display_order": 7,
+          "key": "Tipes",
+          "search_text": "Tipes"
+        },
+        {
+          "display_order": 8,
+          "key": "Demam",
+          "search_text": "Demam"
+        },
+        {
+          "display_order": 9,
+          "key": "Diabetes",
+          "search_text": "Diabetes"
+        },
+        {
+          "display_order": 10,
+          "key": "Kolesterol",
+          "search_text": "Kolesterol"
+        }
+      ]
+    },
+    "split_payment_configuration": {
+      "split_payment_method_blocked_list": [
+        "card",
+        "saved_card",
+        "pay_later"
+      ],
+      "enable_split_payment": false
+    },
+    "help_configuration": {
+      "trigger_journey": "lab_appointment"
+    },
+    "deeplink_chat_now": "halodoc://contactdoctor/category?category_id=fa20fb6c-1248-4a86-9244-27ba27dd3ed1&category_name=COVID-19",
+    "non_lab_test_list": [
+      {
+        "key": "vaccine",
+        "display_name": {
+          "default": "Vaccine",
+          "id": "Vaksin"
+        }
+      },
+      {
+        "key": "vitamin_booster",
+        "display_name": {
+          "default": "Vitamin Booster",
+          "id": "Vitamin Booster"
+        }
+      }
+    ],
+    "chatnow_link": "halodoc://teleconsultation"
+  },
+  "live_connect_configuration": {
+    "connect_on_app_launch": true,
+    "auto_reconnect_enabled": false,
+    "keep_alive_time": 100,
+    "clean_session": false
+  },
+  "misool_configuration": {
+    "single_validation_enabled_providers": [
+      "31778973-642b-4430-94cc-b3e264a99c53",
+      "ba35379d-e928-408d-b673-654eba826bf8",
+      "3d06483-981d-4c7b-b036-6f9c30495ae1",
+      "c3d06483-981d-4c7b-b036-6f9c30495ae1"
+    ]
+  },
+  "paper_prescription": {
+    "prescription_limit": 3,
+    "prescription_sla_time_duration": 15,
+    "prescription_sla_time_unit": "MINUTES"
+  },
+  "payment_configuration": {
+    "topup_denominations": [
+      50000,
+      100000,
+      200000
+    ]
+  },
+  "subscription_configuration": {
+    "split_payment_configuration": {
+      "enable_split_payment": true,
+      "split_payment_method_blocked_list": [
+        "card",
+        "saved_card",
+        "gopay_pay_later"
+      ]
+    },
+    "payment_configuration": {
+      "categories": [
+        {
+          "type": "wallet",
+          "instruments": [
+            {
+              "type": "wallet",
+              "provider": "halodoc"
+            }
+          ]
+        },
+        {
+          "type": "gopay",
+          "instruments": [
+            {
+              "type": "gopay",
+              "provider": "midtrans"
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "instruments": [
+            {
+              "type": "card",
+              "provider": "midtrans"
+            }
+          ]
+        },
+        {
+          "type": "internet_banking",
+          "instruments": [
+            {
+              "type": "bca_klikpay",
+              "provider": "midtrans"
+            }
+          ]
+        }
+      ]
+    },
+    "hcp_allowed_banks": [
+      "BRI",
+      "BANK EKSPOR INDONESIA",
+      "BANK MANDIRI",
+      "BANK BNI",
+      "BANK DANAMON",
+      "BANK PERMATA"
+    ]
+  },
+  "wallet_configuration": {
+    "halocoins_configuration": {
+      "halocoins_terms": [
+        {
+          "display_name": {
+            "default": "Earn Halocoins when you consult or buy medicines. Your coins will be credited once your transaction is completed!",
+            "id": "Dapatkan Halocoins saat konsultasi atau membeli obat. Kamu bisa menerima koinmu setelah transaksimu selesai!"
+          }
+        },
+        {
+          "display_name": {
+            "default": "Save more by redeeming coins when you pay.",
+            "id": "Nikmati transaksi yang lebih hemat dengan menggunakan koin."
+          }
+        },
+        {
+          "display_name": {
+            "default": "1 Halocoin equals Rp1.",
+            "id": "1 Halocoins setara dengan Rp1."
+          }
+        },
+        {
+          "display_name": {
+            "default": "Halocoins can’t be cashed out or transferred.",
+            "id": "Halocoins tidak dapat diuangkan atau ditransfer."
+          }
+        }
+      ]
+    },
+    "refund_to_bank_configuration": {
+      "enable_refund_to_bank": true
+    },
+    "wallet_top_up_configuration": {
+      "enable_wallet_top_up": true
+    },
+    "topup_denominations": [
+      50000,
+      100000,
+      200000
+    ],
+    "minimum_amount": 10000,
+    "maximum_amount": 2000000,
+    "payment_configuration": {
+      "categories": [
+        {
+          "type": "card",
+          "instruments": [
+            {
+              "type": "card",
+              "provider": "midtrans"
+            }
+          ]
+        },
+        {
+          "type": "virtual_account",
+          "instruments": [
+            {
+              "type": "mandiri_va",
+              "modes": [
+                "mobile_banking",
+                "internet_banking",
+                "atm"
+              ],
+              "provider": "midtrans"
+            },
+            {
+              "type": "bca_va",
+              "modes": [
+                "m_bca",
+                "klik-bca",
+                "atm_bca"
+              ],
+              "provider": "midtrans"
+            }
+          ]
+        }
+      ],
+      "order_topup_types": [
+        {
+          "category": "card",
+          "instruments": [
+            "card"
+          ]
+        }
+      ]
+    }
+  },
+  "domain_whitelist": [
+    "halodoc.com",
+    "kitabisa.com",
+    "astra-mapp.prod.halodoc.com"
+  ],
+  "eprescription_configuration" : {
+    "erx_disclaimer_message" : {
+      "id" : "Resep digital ini hanya dapat ditebus melalui aplikasi Halodoc",
+      "default" : "This digital prescription is only applicable to be redeemed at Halodoc app"
+    }
+  },
+  "delete_account_configuration": {
+    "enable_delete_account": true,
+    "delete_account_reasons": [
+      {
+        "display_name": {
+          "default": "I want to change my phone number",
+          "id": "Saya ingin mengubah nomor telepon"
+        },
+        "id": 1
+      },
+      {
+        "display_name": {
+          "default": "I want to delete a profile",
+          "id": "Saya ingin menghapus profil"
+        },
+        "id": 2
+      },
+      {
+        "display_name": {
+          "default": "Others",
+          "id": "Lainnya"
+        },
+        "id": 100
+      }
+    ],
+    "delete_account_terms": [
+      {
+        "display_name": {
+          "default": "Permanently delete all your information on Halodoc, including order history, past consultation chats, test results and more without the ability to restore this information in the future",
+          "id": "Menghapus permanen semua informasimu di Halodoc, termasuk riwayat transaksi, chat-chat konsultasi sebelumnya, hasil tes lab dan lainnya tanpa bisa dipulihkan di masa mendatang"
+        }
+      },
+      {
+        "display_name": {
+          "default": "Cancel any ongoing subscriptions or appointments",
+          "id": "Membatalkan langganan yang sedang aktif atau janji medis"
+        }
+      },
+      {
+        "display_name": {
+          "default": "Permanently delete any linked insurances, saved credit cards or other payment information",
+          "id": "Menghapus permanen semua asuransi yang terhubung, kartu kredit yang tersimpan, atau informasi pembayaran lainnya"
+        }
+      },
+      {
+        "display_name": {
+          "default": "Permanently unsubscribe from all marketing and promotional messages",
+          "id": "Berhenti berlangganan semua pesan promosi dan pemasaran secara permanen"
+        }
+      }
+    ]
+  },
+  "profile_configuration": {
+    "delete_profile_configuration" : {
+      "enable_delete_profile": true,
+      "delete_profile_reasons": [
+        {
+          "display_name": {
+            "default": "It’s a duplicate profile",
+            "id": "Ini profil ganda"
+          },
+          "id": 1
+        },
+        {
+          "display_name": {
+            "default": "I don’t use this profile anymore",
+            "id": "Tidak menggunakan profil ini lagi"
+          },
+          "id": 2
+        }
+      ],
+      "delete_profile_terms": [
+        {
+          "display_name": {
+            "default": "Permanently delete all Halodoc transaction history. Including order history, past consultation chats, payment data, test results and more.",
+            "id": "Menghapus semua riwayat transaksi Halodoc, termasuk riwayat pesanan, chat konsultasi sebelumnya, data pembayaran, hasil tes, dan lainnya."
+          }
+        },
+        {
+          "display_name": {
+            "default": "Not be able to restore this profile.",
+            "id": "Tidak dapat mengembalikan profil ini."
+          }
+        },
+        {
+          "display_name": {
+            "default": "Unlink any existing insurance policies.",
+            "id": "Menghapus sambungan polis asuransi yang ada."
+          }
+        }
+      ],
+      "merge_profile_terms": [
+        {
+          "display_name": {
+            "default": "Not be able to undo this action.",
+            "id": "Menggabungkan semua riwayat transaksi Halodoc, termasuk riwayat pesanan, chat konsultasi sebelumnya, data pembayaran, hasil tes, dan lainnya.'"
+          }
+        },
+        {
+          "display_name": {
+            "default": "Combine all transaction history, including order history, past consultation chats, payment information, test results, and more.",
+            "id": "Menghapus sambungan polis asuransi pada profil ganda, jika ada."
+          }
+        },
+        {
+          "display_name": {
+            "default": "Unlink any existing insurance policies of the duplicate profile.",
+            "id": "Tidak dapat mengurungkan tindakan ini."
+          }
+        }
+      ]
+    }
+  },
+  "digital_clinic_configuration": {
+    "bonus_name": "Chat Gratis Haloskin",
+    "landing_page_configuration": [
+      {
+        "category": [
+          {
+            "name": "haloskin",
+            "app_id": "com.halodoc.digitalclinic.haloskin",
+            "sub_category": [
+              {
+                "name": "acne",
+                "id": {
+                  "default": "37702058-8c5f-4a23-a688-5fd15278b61b"
+                },
+                "cases": [
+                  {
+                    "name": "initial_consultation",
+                    "cta_title": "Mulai Perawatan Baru"
+                  },
+                  {
+                    "name": "unredeemed_erx",
+                    "cta_title": "Tebus Resep Haloskin"
+                  },
+                  {
+                    "name": "active_benefit",
+                    "cta_title": "Konsultasi Haloskin"
+                  }
+                ],
+                "carousel_banner": [
+                  {
+                    "id": "1",
+                    "background_image_url": "https://d1ojs48v3n42tp.cloudfront.net/digital_clinic/headline.png",
+                    "title": "Acne Treatment yang Terbukti Cocok pada 94% Pengguna* 🤍",
+                    "description": "*berdasarkan riset pada 103 pengguna Haloskin"
+                  },
+                  {
+                    "id": "2",
+                    "background_image_url": "https://d1ojs48v3n42tp.cloudfront.net/digital_clinic/bod_headline.png",
+                    "title": "Diformulasikan oleh Dokter Kulit Berpengalaman 12+ Tahun 🤍",
+                    "description": null
+                  },
+                  {
+                    "id": "3",
+                    "background_image_url": "https://d1ojs48v3n42tp.cloudfront.net/digital_clinic/scope_headline.png",
+                    "title": "Solusi untuk Kulitmu Menanti Di Sini 🤍",
+                    "description": null
+                  }
+                ],
+                "theme_color": "#e0004d",
+                "doctor_team_screen": {
+                  "content_url": "https://digital-clinic-mapp.prod.halodoc.com/doctor-team",
+                  "title": "Ahli Kulit Haloskin"
+                },
+                "faq_screen": {
+                  "content_url": "https://www.halodoc.com/faq/category/haloskin",
+                  "title": "FAQ"
+                },
+                "privacy_policy_screen": {
+                  "content_url": "https://tiny.cc/HeliosPrivacyNotice",
+                  "title": "Haloskin"
+                },
+                "terms_of_use_screen": {
+                  "content_url": "https://www.halodoc.com/syarat-dan-ketentuan-haloskin",
+                  "title": "Haloskin"
+                },
+                "app_source_url": "https://digital-clinic-mapp.prod.halodoc.com"
+              }
+            ]
+          },
+          {
+            "name": "halofit",
+            "app_id": "com.halodoc.digitalclinic.halofit",
+            "sub_category": [
+              {
+                "name": "weight_loss",
+                "id": {
+                  "rd": "fd70887f-0fd9-4da0-9c5d-6e7aed2fee0f",
+                  "default": "b1c13216-0dc8-4ecd-9bf1-1a64ae406e67"
+                },
+                "cases": [
+                  {
+                    "name": "initial_consultation",
+                    "cta_title": "Konsultasi Halofit"
+                  },
+                  {
+                    "name": "unredeemed_erx",
+                    "cta_title": "Tebus Resep Sekarang"
+                  },
+                  {
+                    "name": "active_benefit",
+                    "cta_title": "Lanjutkan Dietmu"
+                  }
+                ],
+                "carousel_banner": [
+                  {
+                    "id": "1",
+                    "background_image_url": "https://d1ojs48v3n42tp.cloudfront.net/digital_clinic/weightloss/weight_loss_program.png",
+                    "title": "Program Weight Loss yang Dirancang Secara Klinis untuk Hasil Cepat & Aman",
+                    "description": null
+                  },
+                  {
+                    "id": "2",
+                    "background_image_url": "https://d1ojs48v3n42tp.cloudfront.net/digital_clinic/weightloss/board_of_wellness.png",
+                    "title": "Dirancang oleh Spesialis Metabolik & Nutrisi Berpengalaman 30+ Tahun",
+                    "description": null
+                  },
+                  {
+                    "id": "3",
+                    "background_image_url": "https://d1ojs48v3n42tp.cloudfront.net/digital_clinic/weightloss/scope_image.png",
+                    "title": "Lawan Obesitas, Sindrom Metabolik & Diabetes dari Rumah",
+                    "description": null
+                  }
+                ],
+                "theme_color": "#2d6548",
+                "doctor_team_screen": {
+                  "content_url": "https://digital-clinic-mapp.prod.halodoc.com/doctor-team",
+                  "title": "Kenali Tim Halofit"
+                },
+                "faq_screen": {
+                  "content_url": "https://www.halodoc.com/faq/category/halofit",
+                  "title": "FAQ"
+                },
+                "privacy_policy_screen": {
+                  "content_url": "https://tiny.cc/HeliosPrivacyNotice",
+                  "title": "Halofit"
+                },
+                "terms_of_use_screen": {
+                  "content_url": "https://www.halodoc.com/syarat-dan-ketentuan-haloskin",
+                  "title": "Halofit"
+                },
+                "app_source_url": "https://digital-clinic-mapp.prod.halodoc.com"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "treatment_status_body": [
+      "requested",
+      "activated",
+      "created",
+      "on_hold",
+      "confirmed"
+    ],
+    "async_chat_enabled": false
+  },
+  "address_proximity_distance": 500,
+  "dfm_configuration": {
+    "call_feature_config": {
+      "trigger_points": {
+        "waiting_screen": true,
+        "chat_screen": true,
+        "audio_video_call_click": true
+      }
+    }
+  }
+}

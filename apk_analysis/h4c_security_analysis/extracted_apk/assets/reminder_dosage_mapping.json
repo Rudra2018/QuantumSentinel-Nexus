@@ -1,0 +1,262 @@
+[
+  {
+    "timorDosageValues": "Ampul",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Botol",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Cartridge",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Drops",
+    "remindersDosageUnit": "Drops"
+  },
+  {
+    "timorDosageValues": "Dry Sirup",
+    "remindersDosageUnit": "Measuring Spoon"
+  },
+  {
+    "timorDosageValues": "Dry Syrup",
+    "remindersDosageUnit": "Measuring Spoon"
+  },
+  {
+    "timorDosageValues": "Ear Drops",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Eye Drops",
+    "remindersDosageUnit": "Drops"
+  },
+  {
+    "timorDosageValues": "Gargle",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Kaleng",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Kaplet",
+    "remindersDosageUnit": "Caplet"
+  },
+  {
+    "timorDosageValues": "Kapsul",
+    "remindersDosageUnit": "Capsule"
+  },
+  {
+    "timorDosageValues": "Kapsul Lunak",
+    "remindersDosageUnit": "Capsule"
+  },
+  {
+    "timorDosageValues": "kapsul;",
+    "remindersDosageUnit": "Capsule"
+  },
+  {
+    "timorDosageValues": "Larutan",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Liqid",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Liquid",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Lliquid",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Lotion",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Minyak",
+    "remindersDosageUnit": "Drop"
+  },
+  {
+    "timorDosageValues": "Nasal Drops",
+    "remindersDosageUnit": "Drop"
+  },
+  {
+    "timorDosageValues": "Oil",
+    "remindersDosageUnit": "Drop"
+  },
+  {
+    "timorDosageValues": "Pil",
+    "remindersDosageUnit": "Capsule"
+  },
+  {
+    "timorDosageValues": "Sachet",
+    "remindersDosageUnit": "Sachet"
+  },
+  {
+    "timorDosageValues": "Sirup",
+    "remindersDosageUnit": "Measuring Spoon"
+  },
+  {
+    "timorDosageValues": "Suspensi",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Tab Lozenges",
+    "remindersDosageUnit": "Tablet"
+  },
+  {
+    "timorDosageValues": "Tablet",
+    "remindersDosageUnit": "Tablet"
+  },
+  {
+    "timorDosageValues": "Tablet Effervescent",
+    "remindersDosageUnit": "Tablet"
+  },
+  {
+    "timorDosageValues": "Tablet Kunyah",
+    "remindersDosageUnit": "Tablet"
+  },
+  {
+    "timorDosageValues": "Tablet Lozenges",
+    "remindersDosageUnit": "Tablet"
+  },
+  {
+    "timorDosageValues": "Tablet Vaginal",
+    "remindersDosageUnit": "Tablet"
+  },
+  {
+    "timorDosageValues": "Vial",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Ampul",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Botol",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Cartridge",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Drops",
+    "remindersDosageUnit": "Drops"
+  },
+  {
+    "timorDosageValues": "Dry Sirup",
+    "remindersDosageUnit": "Measuring Spoon"
+  },
+  {
+    "timorDosageValues": "Dry Syrup",
+    "remindersDosageUnit": "Measuring Spoon"
+  },
+  {
+    "timorDosageValues": "Ear Drops",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Eye Drops",
+    "remindersDosageUnit": "Drops"
+  },
+  {
+    "timorDosageValues": "Gargle",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Kaleng",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Kaplet",
+    "remindersDosageUnit": "Caplet"
+  },
+  {
+    "timorDosageValues": "Kapsul",
+    "remindersDosageUnit": "Capsule"
+  },
+  {
+    "timorDosageValues": "Kapsul Lunak",
+    "remindersDosageUnit": "Capsule"
+  },
+  {
+    "timorDosageValues": "kapsul;",
+    "remindersDosageUnit": "Capsule"
+  },
+  {
+    "timorDosageValues": "Larutan",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Liqid",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Liquid",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Lliquid",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Lotion",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Minyak",
+    "remindersDosageUnit": "Drop"
+  },
+  {
+    "timorDosageValues": "Nasal Drops",
+    "remindersDosageUnit": "Drop"
+  },
+  {
+    "timorDosageValues": "Pil",
+    "remindersDosageUnit": "Capsule"
+  },
+  {
+    "timorDosageValues": "Sachet",
+    "remindersDosageUnit": "Sachet"
+  },
+  {
+    "timorDosageValues": "Sirup",
+    "remindersDosageUnit": "Measuring Spoon"
+  },
+  {
+    "timorDosageValues": "Suspensi",
+    "remindersDosageUnit": "ML"
+  },
+  {
+    "timorDosageValues": "Tab Lozenges",
+    "remindersDosageUnit": "Tablet"
+  },
+  {
+    "timorDosageValues": "Tablet",
+    "remindersDosageUnit": "Tablet"
+  },
+  {
+    "timorDosageValues": "Tablet Effervescent",
+    "remindersDosageUnit": "Tablet"
+  },
+  {
+    "timorDosageValues": "Tablet Kunyah",
+    "remindersDosageUnit": "Tablet"
+  },
+  {
+    "timorDosageValues": "Tablet Lozenges",
+    "remindersDosageUnit": "Tablet"
+  },
+  {
+    "timorDosageValues": "Tablet Vaginal",
+    "remindersDosageUnit": "Tablet"
+  },
+  {
+    "timorDosageValues": "Vial",
+    "remindersDosageUnit": "ML"
+  }
+]

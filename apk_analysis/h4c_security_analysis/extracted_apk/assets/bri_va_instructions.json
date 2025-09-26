@@ -1,0 +1,64 @@
+{
+   "bank_name":"BRI",
+   "bank_logo":"ic_payment_logo_bank_bri",
+   "payment_instructions":[
+      {
+         "mode_name":"ATM BRI",
+         "mode_name_id":"ATM BRI",
+         "mode_key":"atm_bri",
+         "steps":[
+            {
+               "default":"Insert your BRI ATM card and PIN.",
+               "id":"Masukkan kartu ATM dan PIN BRI kamu."
+            },
+            {
+               "default":"Select Other Transaction > Payment > BRIVA.",
+               "id":"Pilih Transaksi Lainnya > Pembayaran > BRIVA."
+            },
+            {
+               "default":"Enter your Virtual Account number : #virtualAccountNumber#, then select Continue.",
+               "id":"Masukkan nomor Virtual Account : #virtualAccountNumber#. lalu pilih Lanjut."
+            },
+            {
+               "default":"Enter the amount to be paid. Make sure all the information is correct.",
+               "id":"Masukkan jumlah yang perlu dibayarkan. Pastikan semua informasi pembayaran benar."
+            },
+            {
+               "default":"Payment completed. Keep your receipt as proof of payment. Your payment will be updated automatically. This may take up to 5 minutes.",
+               "id":"Transaksi telah selesai. Simpan struk transaksi sebagai bukti pembayaran. Tagihan kamu akan diperbarui secara otomatis dalam 5 menit."
+            }
+         ]
+      },
+      {
+         "mode_name":"BRImo (BRI Mobile)",
+         "mode_name_id":"BRImo (BRI Mobile)",
+         "mode_key":"mobile_banking_bri",
+         "steps":[
+            {
+               "default":"Log in to the BRImo application.",
+               "id":"Masuk ke akun aplikasi BRImo."
+            },
+            {
+               "default":"Select BRIVA.",
+               "id":"Pilih BRIVA."
+            },
+            {
+               "default":"Enter your Virtual Account number : #virtualAccountNumber#.",
+               "id":"Masukkan nomor Virtual Account : #virtualAccountNumber#."
+            },
+            {
+               "default":"Enter the amount to be paid if needed.",
+               "id":"Masukkan nominal yang akan dibayarkan jika perlu."
+            },
+            {
+               "default":"Enter your PIN, then select Send.",
+               "id":"Masukkan PIN, lalu pilih Kirim."
+            },
+            {
+               "default":"Your transaction is completed. Keep your notification as proof of payment. Your payment will be updated automatically. This may take up to 5 minutes.",
+               "id":"Transaksi telah selesai. Simpan notifikasi yang muncul sebagai bukti pembayaran. Tagihan kamu akan diperbarui secara otomatis dalam 5 menit."
+            }
+         ]
+      }
+   ]
+}

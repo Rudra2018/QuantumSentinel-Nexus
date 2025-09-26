@@ -1,0 +1,103 @@
+{
+   "bank_name":"BCA",
+   "bank_logo":"ic_payment_logo_bank_bca",
+   "payment_instructions":[
+      {
+         "mode_name":"ATM BCA",
+         "mode_name_id":"ATM BCA",
+         "mode_key":"atm_bca",
+         "steps":[
+            {
+               "default":"Insert your BCA ATM card and PIN.",
+               "id":"Masukkan kartu ATM dan PIN BCA kamu."
+            },
+            {
+               "default":"Select Other Transactions > Transfer >To BCA Virtual Account.",
+               "id":"Pilih menu Transaksi Lainnya > Transfer > ke Rekening BCA Virtual Account."
+            },
+            {
+               "default":"Enter your Virtual Account number : #virtualAccountNumber#.",
+               "id":"Masukkan nomor Virtual Account : #virtualAccountNumber#."
+            },
+            {
+               "default":"On the confirmation page, verify all payment details such as name, company name, VA number and invoice amount.",
+               "id":"Di halaman konfirmasi, pastikan detail pembayaran sudah sesuai seperti nomor VA, nama, perusahaan dan total tagihan."
+            },
+            {
+               "default":"Enter the amount to be transferred which has to be equivalent to your invoice amount.",
+               "id":"Masukkan Jumlah Transfer sesuai dengan total tagihan kamu."
+            },
+            {
+               "default":"Follow the instructions to complete payment. ",
+               "id":"Ikuti instruksi untuk menyelesaikan pembayaran."
+            },
+            {
+               "default":"Payment completed. Keep your receipt as proof of payment. Your payment will be updated automatically. This may take up to 5 minutes. ",
+               "id":"Pembayaran selesai. Simpan struk transaksi sebagai bukti pembayaran. Tagihan kamu akan diperbarui secara otomatis dalam 5 menit."
+            }
+         ]
+      },
+      {
+         "mode_name":"m-BCA (BCA mobile)",
+         "mode_name_id":"m-BCA (BCA mobile)",
+         "mode_key":"m_bca",
+         "steps":[
+            {
+               "default":"Log in to the BCA Mobile application.",
+               "id":"Masuk ke akun aplikasi BCA Mobile."
+            },
+            {
+               "default":"Select m-BCA, then enter your m-BCA access code.",
+               "id":"Pilih m-BCA, kemudian masukkan kode akses m-BCA."
+            },
+            {
+               "default":"Select m-Transfer > BCA Virtual Account.",
+               "id":"Pilih m-Transfer > BCA Virtual Account."
+            },
+            {
+               "default":"Select from your saved accounts, or enter your Virtual Account number : #virtualAccountNumber#.",
+               "id":"Pilih dari Daftar Transfer, atau masukkan nomor Virtual Account : #virtualAccountNumber#."
+            },
+            {
+               "default":"Enter your m-BCA PIN to confirm.",
+               "id":"Masukkan PIN m-BCA untuk konfirmasi."
+            },
+            {
+               "default":"Payment completed. Keep your notification as proof of payment.",
+               "id":"Pembayaran selesai. Simpan notifikasi yang muncul sebagai bukti pembayaran."
+            }
+         ]
+      },
+      {
+         "mode_name":"Internet Banking BCA (Klik BCA)",
+         "mode_name_id":"Internet Banking BCA (Klik BCA)",
+         "mode_key":"klik-bca",
+         "steps":[
+            {
+               "default":"Log in to #link#.",
+               "id":"Masuk ke #link#."
+            },
+            {
+               "default":"Select Transfer >Transfer to BCA Virtual Account.",
+               "id":"Pilih Transfer >Transfer ke BCA Virtual Account."
+            },
+            {
+               "default":"Select from your transfer list, or enter your Virtual Account number : #virtualAccountNumber#.",
+               "id":" Pilih dari Daftar Transfer, atau masukkan nomor Virtual Account : #virtualAccountNumber#."
+            },
+            {
+               "default":"On the confirmation page, verify all payment details such as name, company name, VA number and invoice amount.",
+               "id":"Di halaman konfirmasi, pastikan detail pembayaran sudah sesuai seperti nomor VA, nama, perusahaan dan total tagihan."
+            },
+            {
+               "default":"Enter RESPON KEYBCA APPLI 1 shown in your BCA Token, then select Send.",
+               "id":"Masukkan RESPON KEYBCA APPLI 1 yang muncul pada Token BCA kamu, lalu klik Kirim."
+            },
+            {
+               "default":"Payment completed. Keep your notification as proof of payment.",
+               "id":"Pembayaran selesai. Simpan notifikasi yang muncul sebagai bukti pembayaran."
+            }
+         ]
+      }
+   ]
+}

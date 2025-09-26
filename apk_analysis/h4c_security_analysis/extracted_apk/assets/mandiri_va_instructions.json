@@ -1,0 +1,72 @@
+{
+  "bank_name": "Mandiri",
+  "bank_logo": "ic_payment_logo_bank_mandiri",
+  "payment_instructions": [
+    {
+      "mode_name": "ATM MANDIRI",
+      "mode_name_id":"ATM MANDIRI",
+      "mode_key": "atm",
+      "steps": [
+        {
+          "default": "Insert your Mandiri ATM card and PIN.",
+          "id": "Masukkan kartu ATM dan PIN Mandiri kamu."
+        },
+        {
+          "default": "Select Payment > Multi Payment.",
+          "id": "Pilih Pembayaran > Multi Payment."
+        },
+        {
+          "default": "Enter the company code, then select Correct.",
+          "id": "Masukkan kode perusahaan, lalu pilih Benar."
+        },
+        {
+          "default": "Enter your Virtual Account number: #virtualAccountNumber#, then select Correct.",
+          "id": "Masukkan nomor Virtual Account : #virtualAccountNumber#, lalu pilih Benar."
+        },
+        {
+          "default": "Enter the amount to transfer if needed, then select Correct.",
+          "id": "Jika diperlukan, masukkan nominal yang ingin di transfer, lalu pilih Benar."
+        },
+        {
+          "default": "Your payment confirmation will be displayed. If correct, select Yes to proceed.",
+          "id": "Konfirmasi pembayaran akan ditampilkan, jika sudah sesuai, pilih Ya."
+        },
+        {
+          "default": "Payment completed. Keep your receipt as proof of payment. Your payment will be updated automatically. This may take up to 5 minutes.",
+          "id": "Transaksi telah selesai. Simpan struk transaksi sebagai bukti pembayaran. Tagihan kamu akan diperbarui secara otomatis dalam 5 menit."
+        }
+      ]
+    },
+    {
+      "mode_name": "Livin' by Mandiri (Mandiri Mobile)",
+      "mode_name_id":"Livin' by Mandiri (Mandiri Mobile)",
+      "mode_key": "mobile_banking",
+      "steps": [
+        {
+          "default": "Log in to the Livin’ by Mandiri application.",
+          "id": "Masuk ke akun aplikasi Livin’ by Mandiri."
+        },
+        {
+          "default": "Select Payment.",
+          "id": "Pilih Pembayaran"
+        },
+        {
+          "default": "Select Xendit 88908 as a service provider, then enter your Virtual Account number : #virtualAccountNumber#, and select Continue.",
+          "id": "Pilih Xendit 88908 sebagai penyedia jasa, lalu masukkan nomor Virtual Account : #virtualAccountNumber#, lalu pilih Lanjut."
+        },
+        {
+          "default": "Confirm your transaction details, then select Confirm.",
+          "id": "Periksa kembali detail transaksimu, jika sudah sesuai pilih Konfirmasi."
+        },
+        {
+          "default": "Enter your m-Banking PIN.",
+          "id": "Masukkan PIN m-Banking kamu."
+        },
+        {
+          "default": "Your transaction is completed. Keep your notification as proof of payment. Your payment will be updated automatically. This may take up to 5 minutes.",
+          "id": "Transaksi telah selesai. Simpan notifikasi yang muncul sebagai bukti pembayaran. Tagihan kamu akan diperbarui secara otomatis dalam 5 menit."
+        }
+      ]
+    }
+  ]
+}

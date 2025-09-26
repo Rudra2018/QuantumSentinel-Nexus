@@ -78,8 +78,8 @@ ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH=$PATH:$JAVA_HOME/bin
 
 # Install Python dependencies
-COPY requirements.txt /app/
-RUN pip3 install --no-cache-dir -r requirements.txt
+COPY requirements-minimal.txt /app/
+RUN pip3 install --no-cache-dir -r requirements-minimal.txt
 
 # Install additional Python packages for comprehensive framework
 RUN pip3 install --no-cache-dir \
@@ -238,8 +238,8 @@ RUN chmod +x /app/entrypoint.sh && \
 # Switch to security user
 USER security
 
-# Copy orchestrator configuration
-COPY config/orchestrator.yaml /app/config/
+# Copy configuration files
+COPY config/ /app/config/
 
 # Create Docker-specific configuration
 RUN cat > /app/config/docker.yaml << 'EOF'

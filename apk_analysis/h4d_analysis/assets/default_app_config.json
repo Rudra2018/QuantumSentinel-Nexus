@@ -1,0 +1,1842 @@
+{
+  "help_url": "https://www.halodoc.com/faq?_single=true",
+  "support_phone_number": "+6285574677403",
+  "icd10_config": {
+    "enabledFlag": true,
+    "excludedSpecialities": [
+      "f051e457-a39f-47f7-bed8-34cd8e073b02"
+    ]
+  },
+  "moh_configuration": {
+    "moh_active": true,
+    "moh_message": "Approved partner of"
+  },
+  "login_configuration": {
+    "auth_option": [
+      "whatsapp",
+      "sms"
+    ]
+  },
+  "reject_reasons": [
+    {
+      "key": "key1",
+      "display_name": "display name 1",
+      "display_order": 1
+    }
+  ],
+  "pharmacy_config": {
+    "delivery_options": [
+      {
+        "display_order": 2,
+        "enabled": true,
+        "max_order_amount": 10000000,
+        "min_order_amount": 0,
+        "type": "pickup"
+      }
+    ]
+  },
+  "domain_whitelist": [
+    "halodoc.com",
+    "kitabisa.com",
+    "astra-mapp.prod.halodoc.com"
+  ],
+  "referral_config": {
+    "feature_flag": true,
+    "doctor_specialities": [
+      {
+        "default": "General Practitioner",
+        "id": "Dokter Umum"
+      },
+      {
+        "default": "Obstetrician and Gynaecologist",
+        "id": "Sp. Kebidanan dan Kandungan"
+      },
+      {
+        "default": "Dermatology and Venereologist",
+        "id": "Sp. Kulit dan Kelamin"
+      },
+      {
+        "default": "Paediatrician",
+        "id": "Sp. Anak"
+      },
+      {
+        "default": "Internist",
+        "id": "Sp. Penyakit Dalam"
+      },
+      {
+        "default": "Dentist",
+        "id": "Dokter Gigi"
+      },
+      {
+        "default": "Ophthalmologist",
+        "id": "Sp. Mata"
+      },
+      {
+        "default": "Ear Nose Throat Specialist",
+        "id": "Sp. Telinga Hidung Tenggorokan"
+      },
+      {
+        "default": "Andrologist",
+        "id": "Sp. Andrologi"
+      },
+      {
+        "default": "Nutritionist",
+        "id": "Sp. Gizi"
+      },
+      {
+        "default": "Psychiatrist",
+        "id": "Sp. Kedokteran Jiwa"
+      },
+      {
+        "default": "Cardiologist",
+        "id": "Sp. Jantung dan Pembuluh Darah"
+      },
+      {
+        "default": "Endocrinologist",
+        "id": "Spesialis Diabetes dan Endokrin"
+      },
+      {
+        "default": "Surgeon Mulut dan Maksilofasial",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Pediatric Dentist",
+        "id": "Spesialis Kedokteran Gigi Anak"
+      },
+      {
+        "default": "Gastroenterology-hepatologist",
+        "id": "Spesialis Penyakit Dalam - Gastroenterologi-Hepatologi"
+      },
+      {
+        "default": "Psychosomatic doctor",
+        "id": "Spesialis Penyakit Dalam  - Psikosomatik"
+      },
+      {
+        "default": "Rheumatologist",
+        "id": "Spesialis Penyakit Dalam- Reumatologi"
+      },
+      {
+        "default": "Oral Dentist",
+        "id": "Spesialis Penyakit Mulut"
+      },
+      {
+        "default": "Surgeon Vaskuler",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Geriatrician",
+        "id": "Spesialis Penyakit Dalam - Geriatri"
+      },
+      {
+        "default": "Prostodonsia (restorasi rongga mulut)",
+        "id": "Spesialis Prostodonsia"
+      },
+      {
+        "default": "Pediatric Spesialis Bedah",
+        "id": "Bedah Anak"
+      },
+      {
+        "default": "General Surgeon",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Eye Physician",
+        "id": "Spesialis Mata"
+      },
+      {
+        "default": "Oral & Maxilofaxial Spesialis Bedah",
+        "id": "Bedah Mulut dan Maksilofasial"
+      },
+      {
+        "default": "Clinical Microbiologist",
+        "id": "Spesialis Mikrobiologi Klinik"
+      },
+      {
+        "default": "Pulmonologist",
+        "id": "Spesialis Paru"
+      },
+      {
+        "default": "Surgeon Tulang",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Dermatology and Venerologist",
+        "id": "Spesialis Penyakit Kulit dan Kelamin"
+      },
+      {
+        "default": "Anesthesiology Doctorologi",
+        "id": "Spesialis Anestesi"
+      },
+      {
+        "default": "Thoracic Cardiovascular Surgeon",
+        "id": "Spesialis Bedah Toraks dan Kardiovaskular"
+      },
+      {
+        "default": "Ear",
+        "id": "Spesialis THT"
+      },
+      {
+        "default": "Periodontologist",
+        "id": "Spesialis Periodonsia"
+      },
+      {
+        "default": "Orthopedic Spesialist",
+        "id": "Spesialis Ortopedi"
+      },
+      {
+        "default": "Orthodontist",
+        "id": "Spesialis Ortodonsia"
+      },
+      {
+        "default": "Oncological surgeon",
+        "id": "Spesialis Bedah Onkologi"
+      },
+      {
+        "default": "Surgeon Syaraf",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Clinical Nutritionist",
+        "id": "Spesialis Gizi"
+      },
+      {
+        "default": "Ortodonsia (perawatan maloklusi)",
+        "id": "Spesialis Ortodonsia"
+      },
+      {
+        "default": "Surgeon Tumor",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Aesthetic Physician",
+        "id": "Dokter Estetika"
+      },
+      {
+        "default": "lactation counselor",
+        "id": "Konselor Laktasi"
+      },
+      {
+        "default": "Plastic Spesialis Bedah",
+        "id": "Bedah Plastik"
+      },
+      {
+        "default": "Radiation Oncologist",
+        "id": "Spesialis Onkologi Radiasi"
+      },
+      {
+        "default": "Digestive Spesialis Bedah",
+        "id": "Bedah Digestif"
+      },
+      {
+        "default": "Orthopaedic and Trauma Surgeon",
+        "id": "Spesialis Bedah Orthopaedi dan Traumatologi"
+      },
+      {
+        "default": "psychologist",
+        "id": "Psikolog"
+      },
+      {
+        "default": "Conservative Dentist",
+        "id": "Spesialis Konservasi"
+      },
+      {
+        "default": "Anesthesiology Doctor",
+        "id": "Spesialis Anestesi"
+      },
+      {
+        "default": "Neurologist",
+        "id": "Spesialis Neurologi"
+      },
+      {
+        "default": "Neurosurgeon",
+        "id": "Bedah Saraf"
+      },
+      {
+        "default": "Surgeon Digestif",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Aesthetician",
+        "id": "Dokter Estetika"
+      },
+      {
+        "default": "General Practitioner",
+        "id": "Dokter Umum"
+      },
+      {
+        "default": "Obstetrics and Gynocologist",
+        "id": "Spesialis Kebidanan Kandungan"
+      },
+      {
+        "default": "Internist",
+        "id": "Spesialis Penyakit Dalam"
+      },
+      {
+        "default": "Allergy-immunologist",
+        "id": "Alergi-Immunologi"
+      },
+      {
+        "default": "Nephrologist and hypertension specialist",
+        "id": "Spesialis Penyakit Dalam  - Ginjal-Hipertensi"
+      },
+      {
+        "default": "Surgeon Thorax Kardiovaskuler",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Anatomical Pathologist",
+        "id": "Spesialis Patologi Anatomi"
+      },
+      {
+        "default": "Surgeon Mulut",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Oral and Maxilofaxial Surgeon",
+        "id": "Bedah Mulut dan Maksilofasial"
+      },
+      {
+        "default": "General Spesialis Bedah",
+        "id": "Bedah"
+      },
+      {
+        "default": "Tropical medicine doctor",
+        "id": "Spesialis Penyakit Dalam - Penyakit Tropik Infeksi"
+      },
+      {
+        "default": "Clinical Nutritionist Klinik",
+        "id": "Spesialis Gizi"
+      },
+      {
+        "default": "saraf",
+        "id": "Spesialis Saraf"
+      },
+      {
+        "default": "Surgeon Orthopedi & Traumatologi",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Plastic surgeon",
+        "id": "Bedah Plastik"
+      },
+      {
+        "default": "Hypnotherapist",
+        "id": "Spesialis hipnotherapi"
+      },
+      {
+        "default": "Ear Nose and Throat Physician",
+        "id": "Spesialis THT"
+      },
+      {
+        "default": "Forensic Doctor",
+        "id": "Spesialis Kedokteran Forensik"
+      },
+      {
+        "default": "Physiatherapist",
+        "id": "Spesialis Fisioterapi"
+      },
+      {
+        "default": "Surgeon Onkologi",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Surgeon-Bedah Digesif",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Surgeon Saluran Kemih",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Radiologi",
+        "id": "Spesialis Radiologi"
+      },
+      {
+        "default": "Psychologist",
+        "id": "Spesialis Kedokteran Jiwa"
+      },
+      {
+        "default": "Dermatology and Venereologist",
+        "id": "Spesialis Kulit dan kelamin"
+      },
+      {
+        "default": "Hematologist",
+        "id": "Spesialis Hematologi dan Onkologi"
+      },
+      {
+        "default": "Gastrointestinal Surgeon",
+        "id": "Bedah Digestif"
+      },
+      {
+        "default": "Surgeon Toraks dan Kardiovaskular",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Surgeon",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Occupational Medicine",
+        "id": "Spesialis Kedokteran Okupasi"
+      },
+      {
+        "default": "Pediatrician",
+        "id": "Spesialis Anak"
+      },
+      {
+        "default": "NeuroSpesialis Bedah",
+        "id": "Bedah Saraf"
+      },
+      {
+        "default": "Thoracic Cardiovascular Spesialis Bedah",
+        "id": "Bedah Toraks Kardiovaskuler"
+      },
+      {
+        "default": "Urologi",
+        "id": "Spesialis Urologi"
+      },
+      {
+        "default": "Accupunture Doctor",
+        "id": "Spesialis Akupuntur"
+      },
+      {
+        "default": "Cardiologist",
+        "id": "Spesialis Jantung dan Pembuluh Darah"
+      },
+      {
+        "default": "Surgeon - Konsultan",
+        "id": "Dokter Spesialis Bedah"
+      },
+      {
+        "default": "Cardiovascular physician",
+        "id": "Spesialis Penyakit Dalam - Kardiovaskular"
+      },
+      {
+        "default": "Dentist",
+        "id": "Dokter Gigi"
+      },
+      {
+        "default": "Surgeon Orthopaedi",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Obstetrician",
+        "id": "Spesialis Kebidanan Kandungan"
+      },
+      {
+        "default": "Surgeon Ortopedi dan Traumatologi",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Telinga Hidung Tenggorok",
+        "id": "Spesialis Telinga Hidung Tenggorok"
+      },
+      {
+        "default": "hematologist and oncologist",
+        "id": "Konsultan Hematologi dan Onkologi"
+      },
+      {
+        "default": "Prostodontist",
+        "id": "Spesialis Prostodonsia"
+      },
+      {
+        "default": "Clinical Pathologist",
+        "id": "Spesialis Patologi Klinik"
+      },
+      {
+        "default": "Sports Medicine",
+        "id": "Spesialis Kesehatan Olahraga"
+      },
+      {
+        "default": "Surgeon Orthopaedi dan Traumatologi",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Rehabilitasi Medik",
+        "id": "Spesialis Fisik dan Rehabilitasi Medik"
+      },
+      {
+        "default": "Pediatric surgeon",
+        "id": "Bedah Anak"
+      },
+      {
+        "default": "General Practicioner",
+        "id": "Dokter Umum"
+      },
+      {
+        "default": "Endodontist",
+        "id": "Spesialis Konservasi"
+      },
+      {
+        "default": "opthamologist",
+        "id": "Spesialis Mata"
+      },
+      {
+        "default": "Nuclear Physician",
+        "id": "Spesialis Kedokteran Nuklir"
+      },
+      {
+        "default": "Urologist",
+        "id": "Spesialis Urologi"
+      },
+      {
+        "default": "Surgeon Orhopaedi dan Traumatologi",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Physiotherapist and Rehabilitation Doctor",
+        "id": "Spesialis Kedokteran Fisik dan Rehabilitasi"
+      },
+      {
+        "default": "Radiologist",
+        "id": "Spesialis Radiologi"
+      },
+      {
+        "default": "Andrologist",
+        "id": "Spesialis Andrologi"
+      },
+      {
+        "default": "Surgeon - Bedah Anak",
+        "id": "Spesialis Bedah"
+      },
+      {
+        "default": "Anesthesiology Doctorologi dan Terapi Intensif",
+        "id": "Spesialis Anestesi"
+      },
+      {
+        "default": "acupuncturists",
+        "id": "Spesialis Akupuntur"
+      },
+      {
+        "default": "sport specialist",
+        "id": "Spesialis Kesehatan Olahraga"
+      }
+    ]
+  },
+  "doctor_status": {
+    "statuses": [
+      {
+        "key": "available",
+        "display_order": 1,
+        "display_name": {
+          "id": "Available",
+          "default": "Available"
+        }
+      },
+      {
+        "key": "online",
+        "display_order": 2,
+        "display_name": {
+          "id": "Online",
+          "default": "Online"
+        }
+      },
+      {
+        "key": "away",
+        "display_order": 3,
+        "display_name": {
+          "id": "Jauh Dari Ponsel",
+          "default": "Away"
+        }
+      },
+      {
+        "key": "busy",
+        "display_order": 4,
+        "display_name": {
+          "id": "Sibuk",
+          "default": "Busy"
+        }
+      },
+      {
+        "key": "cant_talk",
+        "display_order": 5,
+        "display_name": {
+          "id": "Hanya Bisa Chat",
+          "default": "Can’t Talk, Chat Only"
+        }
+      },
+      {
+        "key": "urgent_only",
+        "display_order": 6,
+        "display_name": {
+          "id": "Mendesak Saja",
+          "default": "Urgent Only"
+        }
+      },
+      {
+        "key": "delayed_response",
+        "display_order": 7,
+        "display_name": {
+          "id": "Respon Lambat",
+          "default": "Delayed Response"
+        }
+      }
+    ],
+    "duration": {
+      "unit": [
+        {
+          "key": "HOURS",
+          "display_order": 1,
+          "display_name": {
+            "id": "Jam",
+            "default": "Hours"
+          }
+        },
+        {
+          "key": "DAYS",
+          "display_order": 2,
+          "display_name": {
+            "id": "Hari",
+            "default": "Day"
+          }
+        }
+      ],
+      "value": [
+        {
+          "key": -1,
+          "display_order": 1,
+          "display_name": {
+            "id": "Tidak Terbatas",
+            "default": "Indefinite"
+          }
+        },
+        {
+          "key": 1,
+          "display_order": 2,
+          "display_name": {
+            "id": "1",
+            "default": "1"
+          }
+        },
+        {
+          "key": 2,
+          "display_order": 3,
+          "display_name": {
+            "id": "2",
+            "default": "2"
+          }
+        },
+        {
+          "key": 3,
+          "display_order": 4,
+          "display_name": {
+            "id": "3",
+            "default": "3"
+          }
+        },
+        {
+          "key": 4,
+          "display_order": 5,
+          "display_name": {
+            "id": "4",
+            "default": "4"
+          }
+        },
+        {
+          "key": 5,
+          "display_order": 6,
+          "display_name": {
+            "id": "5",
+            "default": "5"
+          }
+        },
+        {
+          "key": 6,
+          "display_order": 7,
+          "display_name": {
+            "id": "6",
+            "default": "6"
+          }
+        }
+      ]
+    }
+  },
+  "non_lab_test_list": [
+    {
+      "key": "vaccine",
+      "display_name": {
+        "default": "Vaccine",
+        "id": "Vaksin"
+      }
+    },
+    {
+      "key": "vitamin_booster",
+      "display_name": {
+        "default": "Vitamin Booster",
+        "id": "Vitamin Booster"
+      }
+    }
+  ],
+  "follow_up_config": {
+    "feature_flag": true,
+    "period": [
+      {
+        "value": 1,
+        "unit": "Day"
+      },
+      {
+        "value": 3,
+        "unit": "Days"
+      },
+      {
+        "value": 1,
+        "unit": "Week"
+      },
+      {
+        "value": 4,
+        "unit": "Weeks"
+      }
+    ],
+    "custom_period": [
+      {
+        "max_value": 99,
+        "unit": "Day"
+      },
+      {
+        "max_value": 10,
+        "unit": "Week"
+      },
+      {
+        "max_value": 12,
+        "unit": "month"
+      },
+      {
+        "max_value": 2,
+        "unit": "year"
+      }
+    ]
+  },
+  "support_email": "help@halodoc.com",
+  "live_connect_configuration": {
+    "connect_on_app_launch": true,
+    "auto_reconnect_enabled": false,
+    "keep_alive_time": 60,
+    "clean_session": false
+  },
+  "consultation_config": {
+    "live_connect_notifications_enabled": true,
+    "updated_at_start": 1510252200000,
+    "new_consultation_polling_interval": 5000,
+    "notes_prescription_delay_duration": 5000,
+    "nsfw_image_inference": true,
+    "layer": {
+      "request_timeout": 180,
+      "request_timeout_timeunit": "SECONDS"
+    },
+    "agora": {
+      "request_timeout": 45,
+      "request_timeout_timeunit": "SECONDS",
+      "reconnect_timeout": 30,
+      "reconnect_timeout_timeunit": "SECONDS"
+    },
+    "audio_video_support_config": {
+      "supported_file_upload_types": "audio/*, video/*, application/pdf",
+      "supported_consultation_types": [
+        "online",
+        "bidan"
+      ],
+      "max_file_upload_size_in_mb": 50,
+      "supported_audio_list": "mp3, wav, m4a, aac",
+      "supported_video_list": "avi, mp4, mkv, mov, wmv"
+    },
+    "airbender_config": {
+      "airbender_feature_flag": true,
+      "aida_summary_timeout": 15
+    }
+  },
+  "terms_url": "https://www.halodoc.com/syaratdanketentuandokter?_single=true",
+  "feature_flags": {
+    "live_connect_enabled": false,
+    "transporter_log_enabled": true,
+    "amplitude_analytics_enabled": true,
+    "braze_analytics_enabled": true,
+    "clevertap_analytics_enabled": true,
+    "user_service_enabled": true,
+    "transporter_config": {
+      "enable_debug_log": true,
+      "enable_info_log": true,
+      "enable_warn_log": true,
+      "enable_error_log": true
+    }
+  },
+  "consultation_status_map": {
+    "new": [
+      "new_consultation"
+    ],
+    "active": [
+      "started",
+      "approved",
+      "completed"
+    ],
+    "closed": [
+      "cancelled",
+      "rejected",
+      "closed"
+    ]
+  },
+  "health_assessments": [
+    {
+      "key": "com.halodoc.assessment.depression",
+      "id": "91c7470a-59d5-4a34-809b-bf390604e97c",
+      "link": "http://depression-assessment.prod.halodoc.com/",
+      "thumbnail": "https://d33bcgoqn48wkk.cloudfront.net/MH_Assests/icDepression.png",
+      "title": {
+        "default": "Check for Depression",
+        "id": "Cek Depresi"
+      },
+      "subtitle": {
+        "default": "An adapted version of the PHQ-9 to check for & assess symptoms of depression.",
+        "id": "Hasil adaptasi tes PHQ-9 untuk mengecek & mengukur gejala depresi."
+      },
+      "display_order": 1
+    },
+    {
+      "key": "com.halodoc.assessment.anxiety",
+      "id": "85223b85-16ad-4803-b9e9-2279435ae0f7",
+      "link": "http://anxiety-assessment.prod.halodoc.com/",
+      "thumbnail": "https://d33bcgoqn48wkk.cloudfront.net/MH_Assests/icAnxity.png",
+      "title": {
+        "default": "Check for Anxiety",
+        "id": "Cek Gangguan Kecemasan"
+      },
+      "subtitle": {
+        "default": "An adapted version of the GAD-7 to check for & assess symptoms of anxiety.",
+        "id": "Hasil adaptasi tes GAD-7 untuk mengecek & mengukur gejala gangguan kecemasan."
+      },
+      "display_order": 2
+    }
+  ],
+  "prescription_templates": [
+    {
+      "id": "covid_19_1",
+      "type": "erx_template",
+      "display_order": 1,
+      "name": {
+        "id": "Covid Template 1",
+        "default": "Covid Template 1"
+      },
+      "medicines": [
+        {
+          "product_name": "Oseltamivir 75 mg 10 Kapsul",
+          "product_id": "d28be187-268a-44a6-a7dd-cd47f3094a70",
+          "quantity": 1,
+          "frequency_unit": "Daily",
+          "frequency_value": 2,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "capsule",
+          "comments": "Antiviral, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Azithromycin 500 mg Tablet",
+          "product_id": "29ab7ef8-2d58-44af-8b86-51af68d2d790",
+          "quantity": 5,
+          "frequency_unit": "Daily",
+          "frequency_value": 1,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Afternoon",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Antibiotic, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Surbex-Z 6 tablet",
+          "product_id": "ba3fc374-02b9-49a9-9829-98f34108acdf",
+          "quantity": 3,
+          "frequency_unit": "Daily",
+          "frequency_value": 2,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Vitamin, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Prove D3 1000 IU 10 tablet",
+          "product_id": "23244688-e029-4ab5-b625-ffa026047c29",
+          "quantity": 3,
+          "frequency_unit": "Daily",
+          "frequency_value": 3,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Afternoon,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Vitamin, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Acetylcystein 200 mg 10 caps",
+          "product_id": "1bcd74f0-abeb-4083-ba58-1509e32176a3",
+          "quantity": 2,
+          "frequency_unit": "Daily",
+          "frequency_value": 3,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Afternoon,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Capsule",
+          "comments": "Cough, Renal/Lung/Liver Protector, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Panadol 500 mg 10 Tablet",
+          "product_id": "f96d73f7-2b9f-4834-9c42-7390e1519dfe",
+          "quantity": 1,
+          "frequency_unit": "Daily",
+          "frequency_value": 3,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Afternoon,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Fever, Take if you have Fever",
+          "selling_unit": "strip"
+        }
+      ]
+    },
+    {
+      "id": "covid_19_2",
+      "type": "erx_template",
+      "display_order": 2,
+      "name": {
+        "id": "Covid Template 2",
+        "default": "Covid Template 2"
+      },
+      "medicines": [
+        {
+          "product_name": "Avigan 200 mg 10 Tablet",
+          "product_id": "c010e79d-e49d-4d29-b694-b7f6ce963249",
+          "quantity": 4,
+          "frequency_unit": "Daily",
+          "frequency_value": 2,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Evening",
+          "dosage_quantity_value": 8,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Antiviral, Take 2 x 8 tablet on the first day, Take 2 x 3 tablet on second to fifth day",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Azithromycin 500 mg Tablet",
+          "product_id": "29ab7ef8-2d58-44af-8b86-51af68d2d790",
+          "quantity": 5,
+          "frequency_unit": "Daily",
+          "frequency_value": 1,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Afternoon",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Antibiotic, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Surbex-Z 6 tablet",
+          "product_id": "ba3fc374-02b9-49a9-9829-98f34108acdf",
+          "quantity": 3,
+          "frequency_unit": "Daily",
+          "frequency_value": 2,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Vitamin, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Prove D3 1000 IU 10 tablet",
+          "product_id": "23244688-e029-4ab5-b625-ffa026047c29",
+          "quantity": 3,
+          "frequency_unit": "Daily",
+          "frequency_value": 3,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Afternoon,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Vitamin, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Acetylcystein 200 mg 10 caps",
+          "product_id": "1bcd74f0-abeb-4083-ba58-1509e32176a3",
+          "quantity": 2,
+          "frequency_unit": "Daily",
+          "frequency_value": 3,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Afternoon,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Capsule",
+          "comments": "Cough, Renal/Lung/Liver Protector, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Panadol 500 mg 10 Tablet",
+          "product_id": "f96d73f7-2b9f-4834-9c42-7390e1519dfe",
+          "quantity": 1,
+          "frequency_unit": "Daily",
+          "frequency_value": 3,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Afternoon,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Fever, Take if you have Fever",
+          "selling_unit": "strip"
+        }
+      ]
+    },
+    {
+      "id": "covid_19_3",
+      "type": "erx_template",
+      "display_order": 3,
+      "name": {
+        "id": "Covid Template 3",
+        "default": "Covid Template 3"
+      },
+      "medicines": [
+        {
+          "product_name": "Oseltamivir 75 mg 10 Kapsul",
+          "product_id": "d28be187-268a-44a6-a7dd-cd47f3094a70",
+          "quantity": 1,
+          "frequency_unit": "Daily",
+          "frequency_value": 2,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "capsule",
+          "comments": "Antiviral, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Levofloxacin 500 mg 10 Tablet",
+          "product_id": "a15bf884-31ff-4950-9dd4-a8b2ea2ae291",
+          "quantity": 1,
+          "frequency_unit": "Daily",
+          "frequency_value": 1,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Afternoon",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Antibiotic, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Surbex-Z 6 tablet",
+          "product_id": "ba3fc374-02b9-49a9-9829-98f34108acdf",
+          "quantity": 3,
+          "frequency_unit": "Daily",
+          "frequency_value": 2,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Vitamin, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Prove D3 1000 IU 10 tablet",
+          "product_id": "23244688-e029-4ab5-b625-ffa026047c29",
+          "quantity": 3,
+          "frequency_unit": "Daily",
+          "frequency_value": 3,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Afternoon,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Vitamin, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Acetylcystein 200 mg 10 caps",
+          "product_id": "1bcd74f0-abeb-4083-ba58-1509e32176a3",
+          "quantity": 2,
+          "frequency_unit": "Daily",
+          "frequency_value": 3,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Afternoon,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Capsule",
+          "comments": "Cough, Renal/Lung/Liver Protector, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Panadol 500 mg 10 Tablet",
+          "product_id": "f96d73f7-2b9f-4834-9c42-7390e1519dfe",
+          "quantity": 1,
+          "frequency_unit": "Daily",
+          "frequency_value": 3,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Afternoon,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Fever, Take if you have Fever",
+          "selling_unit": "strip"
+        }
+      ]
+    },
+    {
+      "id": "covid_19_4",
+      "type": "erx_template",
+      "display_order": 4,
+      "name": {
+        "id": "Covid Template 4",
+        "default": "Covid Template 4"
+      },
+      "medicines": [
+        {
+          "product_name": "Avigan 200 mg 10 Tablet",
+          "product_id": "c010e79d-e49d-4d29-b694-b7f6ce963249",
+          "quantity": 4,
+          "frequency_unit": "Daily",
+          "frequency_value": 2,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Evening",
+          "dosage_quantity_value": 8,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Antiviral, Take 2 x 8 tablet on the first day, Take 2 x 3 tablet on second to fifth day",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Levofloxacin 500 mg 10 Tablet",
+          "product_id": "a15bf884-31ff-4950-9dd4-a8b2ea2ae291",
+          "quantity": 1,
+          "frequency_unit": "Daily",
+          "frequency_value": 1,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Afternoon",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Antibiotic, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Surbex-Z 6 tablet",
+          "product_id": "ba3fc374-02b9-49a9-9829-98f34108acdf",
+          "quantity": 3,
+          "frequency_unit": "Daily",
+          "frequency_value": 2,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Vitamin, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Prove D3 1000 IU 10 tablet",
+          "product_id": "23244688-e029-4ab5-b625-ffa026047c29",
+          "quantity": 3,
+          "frequency_unit": "Daily",
+          "frequency_value": 3,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Afternoon,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Vitamin, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Acetylcystein 200 mg 10 caps",
+          "product_id": "1bcd74f0-abeb-4083-ba58-1509e32176a3",
+          "quantity": 2,
+          "frequency_unit": "Daily",
+          "frequency_value": 3,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Afternoon,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Capsule",
+          "comments": "Cough, Renal/Lung/Liver Protector, Finish Meds",
+          "selling_unit": "strip"
+        },
+        {
+          "product_name": "Panadol 500 mg 10 Tablet",
+          "product_id": "f96d73f7-2b9f-4834-9c42-7390e1519dfe",
+          "quantity": 1,
+          "frequency_unit": "Daily",
+          "frequency_value": 3,
+          "frequency_meal_labels": "After Meals",
+          "frequency_time_labels": "Morning,Afternoon,Evening",
+          "dosage_quantity_value": 1,
+          "dosage_quantity_unit": "Tablet",
+          "comments": "Fever, Take if you have Fever",
+          "selling_unit": "strip"
+        }
+      ]
+    }
+  ],
+  "privacy_url": "https://www.halodoc.com/kebijakan-privasi?_single=true",
+  "welcome_message_map": {
+    "corona": {
+      "medium_risk": {
+        "bahasa_indonesia": "(Ini adalah pesan otomatis) Hasil pemeriksaan mandiri Corona Bot: Level Resiko SEDANG (Orang Dalam Pemantauan)",
+        "english": "(This is an automatic message) Corona Bot self assessment result for this patient is MEDIUM Risk (ODP)"
+      },
+      "high_risk": {
+        "english": "(This is an automatic message) Corona Bot self assessment result for this patient is HIGH Risk (PDP).",
+        "bahasa_indonesia": "(Ini adalah pesan otomatis) Hasil pemeriksaan mandiri Corona Bot: Level Resiko TINGGI (Pasien Dalam Pengawasan)."
+      }
+    }
+  },
+  "prescription_configuration": {
+    "uom_list": [
+      {
+        "value": "strip",
+        "display_name": {
+          "default": "Strip",
+          "id": "Strip"
+        }
+      },
+      {
+        "value": "Lembar",
+        "display_name": {
+          "default": "Patch",
+          "id": "Lembar"
+        }
+      },
+      {
+        "value": "bottle",
+        "display_name": {
+          "default": "Bottle",
+          "id": "Botol"
+        }
+      },
+      {
+        "value": "tablet",
+        "display_name": {
+          "default": "Tablet",
+          "id": "Tablet"
+        }
+      },
+      {
+        "value": "vial",
+        "display_name": {
+          "default": "Vial",
+          "id": "Vial"
+        }
+      },
+      {
+        "value": "capsule",
+        "display_name": {
+          "default": "Capsule",
+          "id": "Kapsul"
+        }
+      },
+      {
+        "value": "ampul",
+        "display_name": {
+          "default": "ampul",
+          "id": "ampul"
+        }
+      },
+      {
+        "value": "kaplet",
+        "display_name": {
+          "default": "Caplet",
+          "id": "Kaplet"
+        }
+      },
+      {
+        "value": "sachet",
+        "display_name": {
+          "default": "Sachet",
+          "id": "Sachet"
+        }
+      },
+      {
+        "value": "box",
+        "display_name": {
+          "default": "Box",
+          "id": "Box"
+        }
+      },
+      {
+        "value": "Supositoria",
+        "display_name": {
+          "default": "Suppository",
+          "id": "Supositoria"
+        }
+      },
+      {
+        "value": "Tube",
+        "display_name": {
+          "default": "Tube",
+          "id": "Tube"
+        }
+      },
+      {
+        "value": "Ovula",
+        "display_name": {
+          "default": "Ovule",
+          "id": "Ovula"
+        }
+      },
+      {
+        "value": "Syringe",
+        "display_name": {
+          "default": "Syringe",
+          "id": "Syringe"
+        }
+      },
+      {
+        "value": "Flexpen",
+        "display_name": {
+          "default": "Flexpen",
+          "id": "Flexpen"
+        }
+      },
+      {
+        "value": "Pieces",
+        "display_name": {
+          "default": "Pieces",
+          "id": "Pieces"
+        }
+      },
+      {
+        "value": "Kaleng",
+        "display_name": {
+          "default": "Can",
+          "id": "Kaleng"
+        }
+      },
+      {
+        "value": "Blister",
+        "display_name": {
+          "default": "Blister",
+          "id": "Blister"
+        }
+      },
+      {
+        "value": "Turbuhaler",
+        "display_name": {
+          "default": "Turbuhaler",
+          "id": "Turbuhaler"
+        }
+      },
+      {
+        "value": "Respules",
+        "display_name": {
+          "default": "Respules",
+          "id": "Respules"
+        }
+      },
+      {
+        "value": "Bar",
+        "display_name": {
+          "default": "Bar",
+          "id": "Bar"
+        }
+      },
+      {
+        "value": "Pack",
+        "display_name": {
+          "default": "Pack",
+          "id": "Pack"
+        }
+      },
+      {
+        "value": "Pot",
+        "display_name": {
+          "default": "Pot",
+          "id": "Pot"
+        }
+      },
+      {
+        "value": "Kantung Infus",
+        "display_name": {
+          "default": "Infusion Bag",
+          "id": "Kantung Infus"
+        }
+      },
+      {
+        "value": "Plester",
+        "display_name": {
+          "default": "Plaster",
+          "id": "Plester"
+        }
+      },
+      {
+        "value": "Tablet Vaginal",
+        "display_name": {
+          "default": "Tablet Vaginal",
+          "id": "Tablet Vaginal"
+        }
+      },
+      {
+        "value": "Pen",
+        "display_name": {
+          "default": "Pen",
+          "id": "Pen"
+        }
+      },
+      {
+        "value": "Amplop",
+        "display_name": {
+          "default": "Envelope",
+          "id": "Amplop"
+        }
+      },
+      {
+        "value": "Can",
+        "display_name": {
+          "default": "Can",
+          "id": "Can"
+        }
+      }
+    ],
+    "min_dosage_value": 0,
+    "max_dosage_value": 30,
+    "max_quantity": 99,
+    "min_quantity_package": 1,
+    "max_quantity_package": 99,
+    "min_frequency_value": 0,
+    "max_frequency_value": 9,
+    "dosage_units": [
+      {
+        "value": "ampule",
+        "display_name": {
+          "default": "Ampule",
+          "id": "Ampul"
+        }
+      },
+      {
+        "value": "bottle",
+        "display_name": {
+          "default": "Bottle",
+          "id": "Botol"
+        }
+      },
+      {
+        "value": "cup",
+        "display_name": {
+          "default": "Cup (15 ml)",
+          "id": "Cup (15 ml)"
+        }
+      },
+      {
+        "value": "capsules",
+        "display_name": {
+          "default": "Capsules",
+          "id": "Kapsul"
+        }
+      },
+      {
+        "value": "sheets",
+        "display_name": {
+          "default": "Sheets",
+          "id": "Lembar"
+        }
+      },
+      {
+        "value": "micrograms",
+        "display_name": {
+          "default": "micrograms",
+          "id": "mcg"
+        }
+      },
+      {
+        "value": "milligrams",
+        "display_name": {
+          "default": "milligrams",
+          "id": "mg"
+        }
+      },
+      {
+        "value": "ml",
+        "display_name": {
+          "default": "ml",
+          "id": "ml"
+        },
+        "dosage_step_value": 0.1,
+        "min_dosage_value": 0.1
+      },
+      {
+        "value": "rub",
+        "display_name": {
+          "default": "Rub",
+          "id": "Oles"
+        }
+      },
+      {
+        "value": "ovula",
+        "display_name": {
+          "default": "Ovula",
+          "id": "Ovula"
+        }
+      },
+      {
+        "value": "patch",
+        "display_name": {
+          "default": "Patch",
+          "id": "Patch"
+        }
+      },
+      {
+        "value": "pill",
+        "display_name": {
+          "default": "Pill",
+          "id": "Pil"
+        }
+      },
+      {
+        "value": "sachet",
+        "display_name": {
+          "default": "Sachet",
+          "id": "Sachet"
+        }
+      },
+      {
+        "value": "spray",
+        "display_name": {
+          "default": "Spray",
+          "id": "Semprot"
+        }
+      },
+      {
+        "value": "table_spoon",
+        "display_name": {
+          "default": "Table spoon",
+          "id": "Sendok makan"
+        }
+      },
+      {
+        "value": "measuring_spoon_5ml",
+        "display_name": {
+          "default": "Measuring Spoon 5ml",
+          "id": "Sendok Takar 5ml"
+        }
+      },
+      {
+        "value": "measuring_spoon_10ml",
+        "display_name": {
+          "default": "Measuring Spoon 10ml",
+          "id": "Sendok Takar 10ml"
+        }
+      },
+      {
+        "value": "measuring_spoon_15ml",
+        "display_name": {
+          "default": "Measuring Spoon 15ml",
+          "id": "Sendok Takar 15ml"
+        }
+      },
+      {
+        "value": "suppository",
+        "display_name": {
+          "default": "Suppository",
+          "id": "Supositoria"
+        }
+      },
+      {
+        "value": "syringe",
+        "display_name": {
+          "default": "Syringe",
+          "id": "Syringe"
+        }
+      },
+      {
+        "value": "tablet",
+        "display_name": {
+          "default": "Tablet",
+          "id": "Tablet"
+        },
+        "min_dosage_value": 0.1,
+        "dosage_step_value": 0.1
+      },
+      {
+        "value": "drops",
+        "display_name": {
+          "default": "Drops",
+          "id": "Tetes"
+        },
+        "dosage_step_value": 0.1,
+        "min_dosage_value": 0.1
+      },
+      {
+        "value": "tube",
+        "display_name": {
+          "default": "Tube",
+          "id": "Tube"
+        }
+      },
+      {
+        "value": "unit",
+        "display_name": {
+          "default": "Unit",
+          "id": "Unit"
+        }
+      }
+    ],
+    "validity_configuration": {
+      "default_expiry_value": [
+        {
+          "value": 7,
+          "unit": "DAYS"
+        }
+      ],
+      "default_repeat_value": [
+        1
+      ],
+      "repeat_values": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "expiry_values": [
+        {
+          "value": 7,
+          "unit": "DAYS"
+        },
+        {
+          "value": 14,
+          "unit": "DAYS"
+        },
+        {
+          "value": 30,
+          "unit": "DAYS"
+        },
+        {
+          "value": 3,
+          "unit": "MONTHS"
+        },
+        {
+          "value": 6,
+          "unit": "MONTHS"
+        },
+        {
+          "value": 1,
+          "unit": "YEARS"
+        }
+      ]
+    },
+    "catalog_medicine_restriction": {
+      "only_catalog_medicine": true,
+      "message": {
+        "default": "This medicine isn't available on Halodoc and won't be listed on the patient's eRx.",
+        "id": "Obat ini tidak tersedia di Halodoc dan tidak akan tercantum di eRx pasien."
+      }
+    },
+    "min_quantity": 1,
+    "default_quantity": 1,
+    "default_frequency_value": 0,
+    "default_dosage_value": 0,
+    "dosage_step_value": 0.5,
+    "doctor_notes_generative_ai_config": {
+      "feature_flag": true,
+      "consultation_brief_character_limit": 200,
+      "advice_character_limit": 2048,
+      "symptom_character_limit": 2048,
+      "maximum_summarization_waiting_duration": 60,
+      "advice_textfield_height": 120,
+      "supported_consultation_types": [
+        "online"
+      ],
+      "assisted_by_aida_tag": {
+        "default": "ASSISTED BY AIDA",
+        "id": "DIBANTU OLEH AIDA"
+      }
+    },
+    "grouping_consultations_config": {
+      "grouping_consultations_feature_flag": false,
+      "supported_consultation_types": [
+        "online"
+      ]
+    },
+    "enable_migrated_notes_screen": false
+  },
+  "rest_recommendation_config": {
+    "enabledFlag": true
+  },
+  "medicine_review_rejection_reasons": [
+    {
+      "default": "Pasien tidak ada jawaban atau konsultasi terputus.",
+      "id": "Pasien tidak ada jawaban atau konsultasi terputus."
+    },
+    {
+      "default": "Obat yang diminta tidak sesuai diagnosis, indikasi, atau tujuan.",
+      "id": "Obat yang diminta tidak sesuai diagnosis, indikasi, atau tujuan."
+    },
+    {
+      "default": "Jawaban pasien tidak sesuai.",
+      "id": "Jawaban pasien tidak sesuai."
+    },
+    {
+      "default": "Data pasien tidak sesuai.",
+      "id": "Data pasien tidak sesuai."
+    },
+    {
+      "default": "Jumlah obat yang diminta tidak wajar.",
+      "id": "Jumlah obat yang diminta tidak wajar."
+    },
+    {
+      "default": "Obat digunakan untuk hewan atau keperluan non-medis tanpa informasi yang valid.",
+      "id": "Obat digunakan untuk hewan atau keperluan non-medis tanpa informasi yang valid."
+    },
+    {
+      "default": "Kondisi pasien memerlukan tinjauan medis lebih lanjut.",
+      "id": "Kondisi pasien memerlukan tinjauan medis lebih lanjut."
+    },
+    {
+      "default": "Pasien sedang hamil atau menunjukkan tanda kehamilan.",
+      "id": "Pasien sedang hamil atau menunjukkan tanda kehamilan."
+    },
+    {
+      "default": "Pasien menggunakan obat secara berulang atau terlalu sering.",
+      "id": "Pasien menggunakan obat secara berulang atau terlalu sering."
+    },
+    {
+      "default": "Obat diminta lebih dari 72 jam setelah aktivitas seksual.",
+      "id": "Obat diminta lebih dari 72 jam setelah aktivitas seksual."
+    },
+    {
+      "default": "Lainnya",
+      "id": "Lainnya"
+    }
+  ],
+  "min_android_support_config": {
+    "version": 24,
+    "title": {
+      "default": "Android Version Unsupported",
+      "id": "Versi Android Tidak Didukung"
+    },
+    "subtitle": {
+      "default": "Your Android version isn’t compatible with Halodoc’s latest performance and security features. \n \nTo keep enjoying Halodoc, update to Android 7.0 or later.",
+      "id": "Versi Android kamu tidak kompatibel dengan fitur keamanan dan kinerja terbaru dari Halodoc. \n \nAgar tetap bisa menikmati Halodoc, perbarui ke Android 7.0 atau nantinya."
+    }
+  },
+  "dfm_configuration": {
+    "call_feature_config": {
+      "trigger_points": {
+        "h4d_app_launch": true
+      }
+    }
+  },
+  "digital_clinic_configuration": {
+    "invite_specialities": {
+      "halofit": [
+        {
+          "value": "b1873071-ede4-49bd-88ec-189194f45406",
+          "display": {
+            "default": "Halofit - General Practitioner",
+            "id": "Halofit - Dokter Umum"
+          }
+        },
+        {
+          "value": "66de7764-b151-42f4-86cb-e5483ac12352",
+          "display": {
+            "default": "Halofit - Registered Dietitian",
+            "id": "Halofit - Registered Dietitian"
+          }
+        },
+        {
+          "value": "halofit_specialist",
+          "display": {
+            "default": "Halofit - Specialist",
+            "id": "Halofit - Spesialis"
+          }
+        }
+      ],
+      "haloskin": [
+        {
+          "value": "658e9cb3-9bc9-45bf-97da-26bb41921b01",
+          "display": {
+            "default": "Haloskin - General Practitioner",
+            "id": "Haloskin - Dokter Umum"
+          }
+        },
+        {
+          "value": "b8f40813-4090-490e-9275-f04f25ea807c",
+          "display": {
+            "default": "Haloskin - Specialist",
+            "id": "Haloskin - Spesialis"
+          }
+        }
+      ],
+      "others": [
+        {
+          "value": "nurse",
+          "display": {
+            "default": "Nurse",
+            "id": "Perawat"
+          }
+        }
+      ]
+    },
+    "consultation_filter_options": {
+      "filters": [
+        {
+          "display_name": {
+            "default": "Treatment Status",
+            "id": "Asuransi"
+          },
+          "enabled": true,
+          "filter_type": "consultations",
+          "selection_type": "multi_select",
+          "options": [
+            {
+              "display": {
+                "default": "Initial Consultation",
+                "id": "Konsultasi Perdana"
+              },
+              "value": "created"
+            },
+            {
+              "display": {
+                "default": "eRX Unredeemed",
+                "id": "Belum Tebus Resep"
+              },
+              "value": "created_with_erx"
+            },
+            {
+              "display": {
+                "default": "Awaiting Program Activation",
+                "id": "Menunggu Program Aktif"
+              },
+              "value": "confirmed, on_hold"
+            },
+            {
+              "display": {
+                "default": "Active Program",
+                "id": "Program Aktif"
+              },
+              "value": "activated"
+            },
+            {
+              "display": {
+                "default": "Program Completed",
+                "id": "Program Selesai"
+              },
+              "value": "expired"
+            }
+          ]
+        }
+      ]
+    },
+    "treatment_status": [
+      {
+        "display": {
+          "default": "Initial Consultation",
+          "id": "Konsultasi Perdana"
+        },
+        "value": "created"
+      },
+      {
+        "display": {
+          "default": "Active Program",
+          "id": "Program Aktif"
+        },
+        "value": "activated"
+      },
+      {
+        "display": {
+          "default": "Completed Program",
+          "id": "Selesai Program"
+        },
+        "value": "expired"
+      }
+    ],
+    "async_chat_enabled": false,
+    "show_all_recommendations_for_nurse": true
+  }
+}
