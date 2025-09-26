@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ report_title }}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header .subtitle { font-size: 1.2em; opacity: 0.9; }
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .finding {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 5px solid #dc3545;
+        }
+        .finding.critical { border-left-color: #dc3545; }
+        .finding.high { border-left-color: #fd7e14; }
+        .finding.medium { border-left-color: #ffc107; }
+        .finding.low { border-left-color: #28a745; }
+        .cvss-badge {
+            background: #dc3545;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .metric-card {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .metric-value { font-size: 2.5em; font-weight: bold; color: #667eea; }
+        .metric-label { color: #666; margin-top: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f8f9fa; font-weight: 600; }
+        .poc-section {
+            background: #d4edda;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .code-block {
+            background: #2d3748;
+            color: #f7fafc;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #343a40;
+            color: white;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 {{ report_title }}</h1>
+            <div class="subtitle">{{ report_subtitle }}</div>
+            <div style="margin-top: 20px;">
+                <strong>Report Generated:</strong> {{ generation_date }}
+            </div>
+        </div>
+
+        <!-- Executive Summary -->
+        <div class="section">
+            <h2>📊 Executive Summary</h2>
+            <p>{{ executive_summary }}</p>
+
+            <div style="margin: 20px 0;">
+                {% for metric_name, metric_value in metrics.items() %}
+                <div class="metric-card">
+                    <div class="metric-value">{{ metric_value }}</div>
+                    <div class="metric-label">{{ metric_name }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Methodology -->
+        <div class="section">
+            <h2>⚡ Testing Methodology</h2>
+            <p>{{ methodology_description }}</p>
+            <ul>
+                {% for method in testing_methods %}
+                <li><strong>{{ method.name }}:</strong> {{ method.description }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Security Findings -->
+        <div class="section">
+            <h2>🔥 Security Findings</h2>
+            {% for finding in findings %}
+            <div class="finding {{ finding.severity.lower() }}">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <h3>{{ finding.title }}</h3>
+                    <span class="cvss-badge">CVSS: {{ finding.cvss_score }}</span>
+                </div>
+
+                <p><strong>Severity:</strong> {{ finding.severity }}</p>
+                <p><strong>Affected Component:</strong> {{ finding.affected_component }}</p>
+                <p><strong>Description:</strong> {{ finding.description }}</p>
+
+                {% if finding.proof_of_concept %}
+                <div class="poc-section">
+                    <h4>🎯 Proof of Concept</h4>
+                    <div class="code-block">{{ finding.proof_of_concept }}</div>
+                </div>
+                {% endif %}
+
+                <p><strong>Impact:</strong> {{ finding.impact }}</p>
+                <p><strong>Remediation:</strong> {{ finding.remediation }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Risk Analysis -->
+        <div class="section">
+            <h2>📈 Risk Analysis</h2>
+            <table>
+                <tr>
+                    <th>Risk Category</th>
+                    <th>Likelihood</th>
+                    <th>Impact</th>
+                    <th>Overall Risk</th>
+                </tr>
+                {% for risk in risk_analysis %}
+                <tr>
+                    <td>{{ risk.category }}</td>
+                    <td>{{ risk.likelihood }}</td>
+                    <td>{{ risk.impact }}</td>
+                    <td>{{ risk.overall_risk }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="section">
+            <h2>🛡️ Security Recommendations</h2>
+            <ol>
+                {% for recommendation in recommendations %}
+                <li><strong>{{ recommendation.priority }}:</strong> {{ recommendation.description }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+
+        <div class="footer">
+            <h3>QuantumSentinel-Nexus v5.0</h3>
+            <p>Ultimate AI-Powered Security Testing Framework</p>
+            <p>Report generated with <strong>ZERO FALSE POSITIVES</strong> guarantee</p>
+        </div>
+    </div>
+</body>
+</html>

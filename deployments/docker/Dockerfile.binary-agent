@@ -1,0 +1,35 @@
+# QuantumSentinel-Nexus Binary Agent Docker Image
+FROM python:3.9-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies and binary analysis tools
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    git \
+    binutils \
+    file \
+    radare2 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Create necessary directories
+RUN mkdir -p tools data logs
+
+# Set environment variables
+ENV PYTHONPATH=/app
+ENV AGENT_TYPE=binary
+
+# Expose port
+EXPOSE 8083
+
+# Run the Binary agent
+CMD ["python3", "-m", "core.agents.binary_agent"]

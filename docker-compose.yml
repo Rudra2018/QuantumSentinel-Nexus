@@ -1,129 +1,265 @@
 version: '3.8'
 
 services:
-  quantumsentinel-nexus:
+  # Redis - Knowledge Graph Database
+  redis:
+    image: redis:7.0-alpine
+    container_name: quantumsentinel-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --save 60 1 --loglevel warning
+    networks:
+      - quantumsentinel-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+  # TimescaleDB - Time-series Data Storage
+  timescaledb:
+    image: timescale/timescaledb:latest-pg15
+    container_name: quantumsentinel-timescaledb
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: quantumsentinel
+      POSTGRES_USER: quantumsentinel
+      POSTGRES_PASSWORD: secure-password-change-me
+    volumes:
+      - timescaledb_data:/var/lib/postgresql/data
+    networks:
+      - quantumsentinel-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U quantumsentinel"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # Main Orchestrator
+  orchestrator:
     build:
       context: .
-      dockerfile: Dockerfile
-    image: quantumsentinel/nexus:4.0
-    container_name: quantumsentinel-nexus
-
-    # Environment variables
-    environment:
-      - PYTHONPATH=/app
-      - DEBIAN_FRONTEND=noninteractive
-      - TZ=UTC
-
-    # Volume mappings
-    volumes:
-      # Mount directory for target configuration files
-      - ./targets:/app/targets:ro
-      # Mount directory for generated reports and evidence
-      - ./security_testing:/app/assessments:rw
-      # Mount directory for custom configurations
-      - ./config:/app/config:ro
-      # Mount wordlists and templates
-      - ./wordlists:/app/wordlists:ro
-
-    # Port mappings (if web interface is enabled)
-    ports:
-      - "8080:8080"   # HTTP web interface
-      - "8443:8443"   # HTTPS web interface
-
-    # Resource limits
-    deploy:
-      resources:
-        limits:
-          cpus: '4.0'
-          memory: 8G
-        reservations:
-          cpus: '2.0'
-          memory: 4G
-
-    # Security settings
-    security_opt:
-      - no-new-privileges:true
-
-    # Capabilities for network analysis
-    cap_add:
-      - NET_ADMIN
-      - NET_RAW
-
-    # Keep container running for interactive use
-    stdin_open: true
-    tty: true
-
-    # Restart policy
+      dockerfile: deployments/docker/Dockerfile.orchestrator
+    container_name: quantumsentinel-orchestrator
     restart: unless-stopped
-
-    # Healthcheck
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - TIMESCALE_HOST=timescaledb
+      - TIMESCALE_PORT=5432
+      - TIMESCALE_DATABASE=quantumsentinel
+      - TIMESCALE_USERNAME=quantumsentinel
+      - TIMESCALE_PASSWORD=secure-password-change-me
+      - LOG_LEVEL=INFO
+      - FRAMEWORK_VERSION=6.0
+    volumes:
+      - ./reports:/app/reports
+      - ./logs:/app/logs
+      - ./data:/app/data
+    depends_on:
+      - redis
+      - timescaledb
+    networks:
+      - quantumsentinel-network
     healthcheck:
-      test: ["CMD", "python3", "-c", "import sys; sys.exit(0)"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
 
-  # Optional: Web interface service (if developing web UI)
-  web-interface:
+  # SAST Agent
+  sast-agent:
     build:
       context: .
-      dockerfile: Dockerfile
-    image: quantumsentinel/nexus:4.0
-    container_name: quantumsentinel-web
-
-    environment:
-      - FLASK_APP=web_interface.py
-      - FLASK_ENV=production
-      - PYTHONPATH=/app
-      - QUANTUMSENTINEL_MODE=comprehensive
-
-    volumes:
-      - ./security_testing:/app/assessments:rw
-
+      dockerfile: deployments/docker/Dockerfile.sast-agent
+    container_name: quantumsentinel-sast-agent
+    restart: unless-stopped
     ports:
-      - "5000:5000"
-
-    command: ["python3", "quantumsentinel_orchestrator.py", "--web-interface", "--host=0.0.0.0", "--port=5000"]
-
+      - "8081:8081"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - AGENT_TYPE=sast
+      - ML_MODEL_PATH=/app/models
+    volumes:
+      - ./ml_models:/app/models
+      - ./data:/app/data
     depends_on:
-      - quantumsentinel-nexus
+      - redis
+    networks:
+      - quantumsentinel-network
+    deploy:
+      replicas: 2
 
-    profiles:
-      - web
-
+  # DAST Agent
+  dast-agent:
+    build:
+      context: .
+      dockerfile: deployments/docker/Dockerfile.dast-agent
+    container_name: quantumsentinel-dast-agent
     restart: unless-stopped
-
-  # Optional: Database service for storing results
-  database:
-    image: postgres:15-alpine
-    container_name: quantumsentinel-db
-
-    environment:
-      - POSTGRES_DB=quantumsentinel
-      - POSTGRES_USER=security
-      - POSTGRES_PASSWORD=secure_password_change_me
-
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-
     ports:
-      - "5432:5432"
+      - "8082:8082"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - AGENT_TYPE=dast
+    depends_on:
+      - redis
+    networks:
+      - quantumsentinel-network
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
 
-    profiles:
-      - database
-
+  # Binary Agent
+  binary-agent:
+    build:
+      context: .
+      dockerfile: deployments/docker/Dockerfile.binary-agent
+    container_name: quantumsentinel-binary-agent
     restart: unless-stopped
+    ports:
+      - "8083:8083"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - AGENT_TYPE=binary
+    volumes:
+      - ./tools:/app/tools
+    depends_on:
+      - redis
+    networks:
+      - quantumsentinel-network
+
+  # Recon Agent
+  recon-agent:
+    build:
+      context: .
+      dockerfile: deployments/docker/Dockerfile.recon-agent
+    container_name: quantumsentinel-recon-agent
+    restart: unless-stopped
+    ports:
+      - "8084:8084"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - AGENT_TYPE=recon
+      - SHODAN_API_KEY=${SHODAN_API_KEY:-your-shodan-api-key}
+    depends_on:
+      - redis
+    networks:
+      - quantumsentinel-network
+
+  # Research Agent
+  research-agent:
+    build:
+      context: .
+      dockerfile: deployments/docker/Dockerfile.research-agent
+    container_name: quantumsentinel-research-agent
+    restart: unless-stopped
+    ports:
+      - "8085:8085"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - AGENT_TYPE=research
+    volumes:
+      - ./research:/app/research
+    depends_on:
+      - redis
+    networks:
+      - quantumsentinel-network
+
+  # Validator Agent
+  validator-agent:
+    build:
+      context: .
+      dockerfile: deployments/docker/Dockerfile.validator-agent
+    container_name: quantumsentinel-validator-agent
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - AGENT_TYPE=validator
+    depends_on:
+      - redis
+    networks:
+      - quantumsentinel-network
+
+  # Nginx Load Balancer
+  nginx:
+    image: nginx:alpine
+    container_name: quantumsentinel-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deployments/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./deployments/nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - orchestrator
+    networks:
+      - quantumsentinel-network
+
+  # Monitoring with Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: quantumsentinel-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./deployments/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+    networks:
+      - quantumsentinel-network
+
+  # Grafana for Dashboards
+  grafana:
+    image: grafana/grafana:latest
+    container_name: quantumsentinel-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./deployments/grafana/dashboards:/var/lib/grafana/dashboards
+    depends_on:
+      - prometheus
+    networks:
+      - quantumsentinel-network
 
 volumes:
-  postgres_data:
+  redis_data:
+    driver: local
+  timescaledb_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
     driver: local
 
 networks:
-  default:
+  quantumsentinel-network:
     driver: bridge
     ipam:
-      driver: default
       config:
         - subnet: 172.20.0.0/16
