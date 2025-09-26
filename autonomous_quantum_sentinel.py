@@ -31,15 +31,15 @@ from pathlib import Path
 
 class QuantumSentinelNexusUltimate:
     """
-    🎯 ULTIMATE QUANTUMSENTINEL-NEXUS v4.0
+    🎯 QUANTUMSENTINEL-NEXUS v4.0
 
-    The world's most comprehensive autonomous AI security testing system.
-    Every scan automatically executes ALL security modules with zero exclusion:
-    - 10 Comprehensive Security Modules
-    - 327+ Vulnerability Discovery Capabilities
-    - Zero-Day Research & Exploit Development
-    - Advanced Threat Intelligence Correlation
-    - Complete Attack Chain Analysis
+    Comprehensive AI-powered security testing framework with multi-vector assessment.
+    Features complete security module integration:
+    - 10 Security Testing Modules
+    - Multi-platform vulnerability assessment
+    - Research-grade security analysis
+    - Advanced threat intelligence
+    - Professional reporting capabilities
     """
 
     def __init__(self, config_path: Optional[str] = None):
