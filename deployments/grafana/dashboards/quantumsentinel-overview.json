@@ -1,0 +1,25 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "QuantumSentinel-Nexus Overview",
+    "tags": ["quantumsentinel"],
+    "style": "dark",
+    "timezone": "browser",
+    "panels": [],
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "templating": {
+      "list": []
+    },
+    "annotations": {
+      "list": []
+    },
+    "refresh": "30s",
+    "schemaVersion": 16,
+    "version": 0,
+    "links": []
+  }
+}

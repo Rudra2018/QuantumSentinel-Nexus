@@ -10,8 +10,12 @@ RUN apt-get update && apt-get install -y \
     curl \
     git \
     nmap \
-    nikto \
     && rm -rf /var/lib/apt/lists/*
+
+# Install nikto from GitHub since it's not available in current apt repo
+RUN git clone https://github.com/sullo/nikto.git /opt/nikto && \
+    ln -sf /opt/nikto/program/nikto.pl /usr/local/bin/nikto && \
+    chmod +x /usr/local/bin/nikto
 
 # Copy requirements and install Python dependencies
 COPY requirements-docker.txt .
