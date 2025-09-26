@@ -1,0 +1,426 @@
+---
+# SAST Agent Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sast-agent-deployment
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: sast-agent
+    tier: agent
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: quantumsentinel
+      component: sast-agent
+  template:
+    metadata:
+      labels:
+        app: quantumsentinel
+        component: sast-agent
+    spec:
+      containers:
+      - name: sast-agent
+        image: quantumsentinel/sast-agent:v6.0
+        ports:
+        - containerPort: 8081
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: quantumsentinel-config
+              key: REDIS_HOST
+        - name: AGENT_TYPE
+          value: "sast"
+        - name: ML_MODEL_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: quantumsentinel-config
+              key: ML_MODEL_PATH
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8081
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        volumeMounts:
+        - name: ml-models
+          mountPath: /app/models
+          readOnly: true
+      volumes:
+      - name: ml-models
+        persistentVolumeClaim:
+          claimName: ml-models-pvc
+
+---
+# DAST Agent Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dast-agent-deployment
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: dast-agent
+    tier: agent
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: quantumsentinel
+      component: dast-agent
+  template:
+    metadata:
+      labels:
+        app: quantumsentinel
+        component: dast-agent
+    spec:
+      containers:
+      - name: dast-agent
+        image: quantumsentinel/dast-agent:v6.0
+        ports:
+        - containerPort: 8082
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: quantumsentinel-config
+              key: REDIS_HOST
+        - name: AGENT_TYPE
+          value: "dast"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8082
+          initialDelaySeconds: 15
+          periodSeconds: 10
+
+---
+# Binary Agent Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: binary-agent-deployment
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: binary-agent
+    tier: agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quantumsentinel
+      component: binary-agent
+  template:
+    metadata:
+      labels:
+        app: quantumsentinel
+        component: binary-agent
+    spec:
+      containers:
+      - name: binary-agent
+        image: quantumsentinel/binary-agent:v6.0
+        ports:
+        - containerPort: 8083
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: quantumsentinel-config
+              key: REDIS_HOST
+        - name: AGENT_TYPE
+          value: "binary"
+        resources:
+          requests:
+            memory: "3Gi"
+            cpu: "1500m"
+          limits:
+            memory: "6Gi"
+            cpu: "3000m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8083
+          initialDelaySeconds: 30
+          periodSeconds: 15
+
+---
+# Recon Agent Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recon-agent-deployment
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: recon-agent
+    tier: agent
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: quantumsentinel
+      component: recon-agent
+  template:
+    metadata:
+      labels:
+        app: quantumsentinel
+        component: recon-agent
+    spec:
+      containers:
+      - name: recon-agent
+        image: quantumsentinel/recon-agent:v6.0
+        ports:
+        - containerPort: 8084
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: quantumsentinel-config
+              key: REDIS_HOST
+        - name: AGENT_TYPE
+          value: "recon"
+        - name: SHODAN_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: quantumsentinel-secrets
+              key: SHODAN_API_KEY
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+
+---
+# Research Agent Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: research-agent-deployment
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: research-agent
+    tier: agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quantumsentinel
+      component: research-agent
+  template:
+    metadata:
+      labels:
+        app: quantumsentinel
+        component: research-agent
+    spec:
+      containers:
+      - name: research-agent
+        image: quantumsentinel/research-agent:v6.0
+        ports:
+        - containerPort: 8085
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: quantumsentinel-config
+              key: REDIS_HOST
+        - name: AGENT_TYPE
+          value: "research"
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        volumeMounts:
+        - name: research-data
+          mountPath: /app/research
+      volumes:
+      - name: research-data
+        persistentVolumeClaim:
+          claimName: research-data-pvc
+
+---
+# Validator Agent Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: validator-agent-deployment
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: validator-agent
+    tier: agent
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: quantumsentinel
+      component: validator-agent
+  template:
+    metadata:
+      labels:
+        app: quantumsentinel
+        component: validator-agent
+    spec:
+      containers:
+      - name: validator-agent
+        image: quantumsentinel/validator-agent:v6.0
+        ports:
+        - containerPort: 8086
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: quantumsentinel-config
+              key: REDIS_HOST
+        - name: AGENT_TYPE
+          value: "validator"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+
+---
+# Agent Services
+apiVersion: v1
+kind: Service
+metadata:
+  name: sast-agent-service
+  namespace: quantumsentinel
+spec:
+  selector:
+    app: quantumsentinel
+    component: sast-agent
+  ports:
+  - port: 8081
+    targetPort: 8081
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dast-agent-service
+  namespace: quantumsentinel
+spec:
+  selector:
+    app: quantumsentinel
+    component: dast-agent
+  ports:
+  - port: 8082
+    targetPort: 8082
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: binary-agent-service
+  namespace: quantumsentinel
+spec:
+  selector:
+    app: quantumsentinel
+    component: binary-agent
+  ports:
+  - port: 8083
+    targetPort: 8083
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: recon-agent-service
+  namespace: quantumsentinel
+spec:
+  selector:
+    app: quantumsentinel
+    component: recon-agent
+  ports:
+  - port: 8084
+    targetPort: 8084
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: research-agent-service
+  namespace: quantumsentinel
+spec:
+  selector:
+    app: quantumsentinel
+    component: research-agent
+  ports:
+  - port: 8085
+    targetPort: 8085
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: validator-agent-service
+  namespace: quantumsentinel
+spec:
+  selector:
+    app: quantumsentinel
+    component: validator-agent
+  ports:
+  - port: 8086
+    targetPort: 8086
+  type: ClusterIP
+
+---
+# Persistent Volume Claims
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ml-models-pvc
+  namespace: quantumsentinel
+spec:
+  accessModes:
+  - ReadOnlyMany
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: nfs-storage
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: research-data-pvc
+  namespace: quantumsentinel
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: fast-ssd

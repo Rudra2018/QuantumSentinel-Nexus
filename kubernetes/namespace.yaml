@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: quantumsentinel
+  labels:
+    name: quantumsentinel
+    purpose: ai-security-testing
+    version: v6.0
+  annotations:
+    description: "QuantumSentinel-Nexus v6.0 AI-Powered Security Testing Framework"
+    created-by: "QuantumSentinel Deployment System"

@@ -1,0 +1,108 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timescaledb-deployment
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: timescaledb
+    tier: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quantumsentinel
+      component: timescaledb
+  template:
+    metadata:
+      labels:
+        app: quantumsentinel
+        component: timescaledb
+    spec:
+      containers:
+      - name: timescaledb
+        image: timescale/timescaledb:latest-pg15
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: quantumsentinel-config
+              key: TIMESCALE_DATABASE
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: quantumsentinel-secrets
+              key: TIMESCALE_USERNAME
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: quantumsentinel-secrets
+              key: TIMESCALE_PASSWORD
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        volumeMounts:
+        - name: timescaledb-data
+          mountPath: /var/lib/postgresql/data
+        readinessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - quantumsentinel
+          initialDelaySeconds: 15
+          periodSeconds: 5
+        livenessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - quantumsentinel
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      volumes:
+      - name: timescaledb-data
+        persistentVolumeClaim:
+          claimName: timescaledb-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: timescaledb-service
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: timescaledb
+spec:
+  selector:
+    app: quantumsentinel
+    component: timescaledb
+  ports:
+  - port: 5432
+    targetPort: 5432
+    protocol: TCP
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: timescaledb-pvc
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: timescaledb
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: fast-ssd

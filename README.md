@@ -42,15 +42,43 @@ QuantumSentinel-Nexus is an advanced, autonomous AI-powered security testing fra
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.8+
-- Docker (optional)
+- Python 3.9+
+- Docker and Docker Compose
 - Git
 
 ### Installation
 ```bash
 git clone https://github.com/your-repo/QuantumSentinel-Nexus.git
 cd QuantumSentinel-Nexus
+```
+
+### Docker Deployment (Recommended)
+```bash
+# Build and start all services
+docker-compose up -d
+
+# Check service status
+docker-compose ps
+
+# View logs
+docker-compose logs -f orchestrator
+```
+
+### Available Services
+- **Orchestrator**: http://localhost:8000 - Main framework controller
+- **SAST Agent**: http://localhost:8081 - Static analysis service
+- **DAST Agent**: http://localhost:8082 - Dynamic analysis service
+- **Binary Agent**: http://localhost:8083 - Binary analysis service
+- **Recon Agent**: http://localhost:8084 - Reconnaissance service
+- **Research Agent**: http://localhost:8085 - Vulnerability research
+- **Validator Agent**: http://localhost:8086 - Result validation
+- **Grafana Dashboard**: http://localhost:3000 - Monitoring (admin/admin)
+- **Prometheus**: http://localhost:9090 - Metrics collection
+
+### Manual Installation (Alternative)
+```bash
 pip install -r requirements.txt
+python main_orchestrator.py
 ```
 
 ### Basic Usage
@@ -70,16 +98,27 @@ python run_redbull_comprehensive_assessment.py
 ## 🏗️ Architecture
 
 ### Core Components
-- **AI Agents** - Specialized security testing agents
-- **ML Core** - Advanced machine learning frameworks
+- **Orchestrator** - Central framework controller and API gateway
+- **AI Agents** - Specialized security testing agents (SAST, DAST, Binary, Recon, Research, Validator)
+- **ML Core** - Advanced machine learning frameworks for vulnerability prediction
 - **Assessment Modules** - Platform-specific testing logic
 - **Reporting Engine** - Comprehensive report generation
 
+### Docker Architecture
+- **Multi-Agent System** - Each agent runs in isolated containers
+- **Redis** - Inter-agent communication and knowledge graph storage
+- **TimescaleDB** - Time-series data for vulnerability tracking
+- **Nginx** - Load balancer and reverse proxy
+- **Monitoring Stack** - Prometheus + Grafana for system monitoring
+
 ### Key Technologies
+- **Docker & Docker Compose** - Containerized deployment
 - **PyTorch** - Deep learning for vulnerability prediction
 - **NetworkX** - Graph-based code analysis
 - **ReportLab** - Professional PDF report generation
 - **AsyncIO** - Concurrent security testing
+- **Redis** - High-performance in-memory data structure store
+- **TimescaleDB** - PostgreSQL-based time-series database
 
 ## 📊 Testing Methodology
 

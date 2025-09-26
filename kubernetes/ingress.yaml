@@ -1,0 +1,67 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: quantumsentinel-ingress
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/secure-backends: "true"
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+    nginx.ingress.kubernetes.io/rate-limit-window: "1m"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - quantumsentinel.yourdomain.com
+    - api.quantumsentinel.yourdomain.com
+    secretName: quantumsentinel-tls
+  rules:
+  - host: quantumsentinel.yourdomain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: orchestrator-service
+            port:
+              number: 8000
+  - host: api.quantumsentinel.yourdomain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: orchestrator-service
+            port:
+              number: 8000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quantumsentinel-loadbalancer
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: quantumsentinel
+    component: orchestrator
+  ports:
+  - port: 443
+    targetPort: 8000
+    protocol: TCP
+    name: https
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+    name: http

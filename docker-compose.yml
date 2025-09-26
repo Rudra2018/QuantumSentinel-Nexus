@@ -1,4 +1,4 @@
-version: '3.8'
+# Docker Compose configuration for QuantumSentinel-Nexus
 
 services:
   # Redis - Knowledge Graph Database
@@ -95,8 +95,7 @@ services:
       - redis
     networks:
       - quantumsentinel-network
-    deploy:
-      replicas: 2
+# Removed replicas due to container_name conflict
 
   # DAST Agent
   dast-agent:

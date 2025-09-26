@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: redis
+    tier: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quantumsentinel
+      component: redis
+  template:
+    metadata:
+      labels:
+        app: quantumsentinel
+        component: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7.0-alpine
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+        args:
+        - redis-server
+        - --save
+        - "60"
+        - "1"
+        - --loglevel
+        - notice
+      volumes:
+      - name: redis-data
+        persistentVolumeClaim:
+          claimName: redis-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: redis
+spec:
+  selector:
+    app: quantumsentinel
+    component: redis
+  ports:
+  - port: 6379
+    targetPort: 6379
+    protocol: TCP
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-pvc
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: redis
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: fast-ssd

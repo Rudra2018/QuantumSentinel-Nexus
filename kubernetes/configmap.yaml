@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: quantumsentinel-config
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: config
+data:
+  # Redis Configuration
+  REDIS_HOST: "redis-service"
+  REDIS_PORT: "6379"
+  REDIS_DB: "0"
+
+  # TimescaleDB Configuration
+  TIMESCALE_HOST: "timescaledb-service"
+  TIMESCALE_PORT: "5432"
+  TIMESCALE_DATABASE: "quantumsentinel"
+
+  # Orchestrator Configuration
+  ORCHESTRATOR_HOST: "0.0.0.0"
+  ORCHESTRATOR_PORT: "8000"
+  LOG_LEVEL: "INFO"
+
+  # Agent Configuration
+  AGENT_TIMEOUT: "300"
+  MAX_PARALLEL_TASKS: "10"
+
+  # ML Configuration
+  ML_MODEL_PATH: "/app/models"
+  ENABLE_GPU: "false"
+
+  # Security Configuration
+  ENABLE_HTTPS: "true"
+  API_RATE_LIMIT: "1000"
+  MAX_REPORT_SIZE_MB: "100"
+
+  # Framework Configuration
+  FRAMEWORK_VERSION: "6.0"
+  ENABLE_RESEARCH_AGENT: "true"
+  ENABLE_AI_ENHANCEMENT: "true"
+  ZERO_FALSE_POSITIVES: "true"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: quantumsentinel-secrets
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: secrets
+type: Opaque
+stringData:
+  # Database Credentials
+  TIMESCALE_USERNAME: "quantumsentinel"
+  TIMESCALE_PASSWORD: "secure-password-change-me"
+
+  # API Keys (Base64 encoded in real deployment)
+  VIRUSTOTAL_API_KEY: "your-virustotal-api-key"
+  SHODAN_API_KEY: "your-shodan-api-key"
+
+  # JWT Secret for API Authentication
+  JWT_SECRET: "your-jwt-secret-key-change-me"
+
+  # Encryption Keys
+  ENCRYPTION_KEY: "your-encryption-key-32-chars-long"

@@ -1,0 +1,134 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orchestrator-deployment
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: orchestrator
+    tier: core
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: quantumsentinel
+      component: orchestrator
+  template:
+    metadata:
+      labels:
+        app: quantumsentinel
+        component: orchestrator
+    spec:
+      containers:
+      - name: orchestrator
+        image: quantumsentinel/orchestrator:v6.0
+        ports:
+        - containerPort: 8000
+        env:
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: quantumsentinel-config
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: quantumsentinel-config
+              key: REDIS_PORT
+        - name: TIMESCALE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: quantumsentinel-config
+              key: TIMESCALE_HOST
+        - name: TIMESCALE_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: quantumsentinel-config
+              key: TIMESCALE_PORT
+        - name: TIMESCALE_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: quantumsentinel-config
+              key: TIMESCALE_DATABASE
+        - name: TIMESCALE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: quantumsentinel-secrets
+              key: TIMESCALE_USERNAME
+        - name: TIMESCALE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: quantumsentinel-secrets
+              key: TIMESCALE_PASSWORD
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: quantumsentinel-secrets
+              key: JWT_SECRET
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 45
+          periodSeconds: 15
+        volumeMounts:
+        - name: orchestrator-logs
+          mountPath: /app/logs
+        - name: reports-storage
+          mountPath: /app/reports
+      volumes:
+      - name: orchestrator-logs
+        emptyDir: {}
+      - name: reports-storage
+        persistentVolumeClaim:
+          claimName: reports-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orchestrator-service
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: orchestrator
+spec:
+  selector:
+    app: quantumsentinel
+    component: orchestrator
+  ports:
+  - port: 8000
+    targetPort: 8000
+    protocol: TCP
+    name: http
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: reports-pvc
+  namespace: quantumsentinel
+  labels:
+    app: quantumsentinel
+    component: storage
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: nfs-storage
