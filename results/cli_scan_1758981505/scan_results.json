@@ -1,0 +1,15 @@
+[
+  {
+    "environment": "local",
+    "scan_id": "cli_scan_1758981505",
+    "start_time": "2025-09-27T19:28:25.427336",
+    "status": "completed",
+    "type": "mobile_comprehensive",
+    "programs_scanned": 1,
+    "apps_analyzed": 42,
+    "findings_generated": true,
+    "reports_created": true,
+    "output": "\ud83d\ude80 Starting Comprehensive HackerOne Mobile App Security Scan\n================================================================================\n\n\ud83d\udcf1 Scanning SHOPIFY Mobile Applications\n------------------------------------------------------------\n\n\ud83e\udd16 Android: com.shopify.mobile\n\ud83d\udcf1 Downloading android app: com.shopify.mobile\n\u26a0\ufe0f Could not download com.shopify.mobile, creating analysis placeholder\n\n\ud83e\udd16 Android: com.shopify.arrive\n\ud83d\udcf1 Downloading android app: com.shopify.arrive\n\u26a0\ufe0f Could not download com.shopify.arrive, creating analysis placeholder\n\n\ud83e\udd16 Android: com.shopify.ping\n\ud83d\udcf1 Downloading android app: com.shopify.ping\n\u26a0\ufe0f Could not download com.shopify.ping, creating analysis placeholder\n\n\ud83e\udd16 Android: com.shopify.pos\n\ud83d\udcf1 Downloading android app: com.shopify.pos\n\u26a0\ufe0f Could not download com.shopify.pos, creating analysis placeholder\n\n\ud83c\udf4e iOS: com.shopify.ShopifyMobile\n\ud83d\udcf1 Downloading ios app: com.shopify.ShopifyMobile\n\ud83d\udcdd iOS app com.shopify.ShopifyMobile - Manual download required\n\n\ud83c\udf4e iOS: com.shopify.Arrive\n\ud83d\udcf1 Do",
+    "end_time": "2025-09-27T19:28:26.126697"
+  }
+]

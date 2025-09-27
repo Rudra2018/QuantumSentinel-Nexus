@@ -1,0 +1,16 @@
+{
+  "scan_id": "cli_scan_1758980765",
+  "scan_type": "mobile",
+  "targets": [
+    "shopify",
+    "uber"
+  ],
+  "platforms": [],
+  "execution_env": "local",
+  "options": {
+    "depth": "quick",
+    "max_duration_minutes": 60,
+    "output_format": "both",
+    "timestamp": "2025-09-27T19:16:05.103294"
+  }
+}

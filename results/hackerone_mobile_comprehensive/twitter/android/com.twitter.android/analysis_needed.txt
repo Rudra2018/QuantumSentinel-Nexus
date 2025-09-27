@@ -1,0 +1,4 @@
+Package: com.twitter.android
+Platform: android
+Program: twitter
+Status: Download required for full analysis

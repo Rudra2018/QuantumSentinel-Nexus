@@ -1,0 +1,4 @@
+Package: com.yahoo.mobile.client.android.yahoo
+Platform: android
+Program: yahoo
+Status: Download required for full analysis

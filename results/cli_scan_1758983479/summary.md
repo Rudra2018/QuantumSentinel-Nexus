@@ -1,0 +1,1 @@
+# QuantumSentinel Scan Report\n\n**Scan ID:** cli_scan_1758983479\n**Timestamp:** 2025-09-27T20:01:19.182249\n**Type:** mobile\n**Targets:** shopify, uber, gitlab, dropbox, slack, spotify, yahoo, twitter\n\n## Local Execution\n\n**Status:** completed\n\n- Programs Scanned: 8\n- Apps Analyzed: 42\n

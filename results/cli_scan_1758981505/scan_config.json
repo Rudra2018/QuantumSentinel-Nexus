@@ -1,0 +1,15 @@
+{
+  "scan_id": "cli_scan_1758981505",
+  "scan_type": "mobile",
+  "targets": [
+    "shopify"
+  ],
+  "platforms": [],
+  "execution_env": "local",
+  "options": {
+    "depth": "quick",
+    "max_duration_minutes": 5,
+    "output_format": "both",
+    "timestamp": "2025-09-27T19:28:25.427311"
+  }
+}

@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumSentinel-Nexus | Advanced Bug Bounty Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h1>QuantumSentinel-Nexus</h1>
+                    <span class="version">v2.0</span>
+                </div>
+                <nav class="nav">
+                    <button class="nav-btn active" data-tab="dashboard">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </button>
+                    <button class="nav-btn" data-tab="scanner">
+                        <i class="fas fa-search"></i> Scanner
+                    </button>
+                    <button class="nav-btn" data-tab="mobile">
+                        <i class="fas fa-mobile-alt"></i> Mobile
+                    </button>
+                    <button class="nav-btn" data-tab="cloud">
+                        <i class="fas fa-cloud"></i> Cloud
+                    </button>
+                    <button class="nav-btn" data-tab="claude">
+                        <i class="fas fa-robot"></i> Claude AI
+                    </button>
+                    <button class="nav-btn" data-tab="results">
+                        <i class="fas fa-chart-line"></i> Results
+                    </button>
+                    <button class="nav-btn" data-tab="settings">
+                        <i class="fas fa-cog"></i> Settings
+                    </button>
+                </nav>
+                <div class="status-indicator">
+                    <span class="status-dot active"></span>
+                    <span>Cloud Connected</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <div class="container">
+                <div class="dashboard-grid">
+                    <!-- System Status -->
+                    <div class="card system-status">
+                        <div class="card-header">
+                            <h3><i class="fas fa-heartbeat"></i> System Status</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="status-grid">
+                                <div class="status-item">
+                                    <span class="status-label">Local Engine</span>
+                                    <span class="status-value online">Online</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Cloud Function</span>
+                                    <span class="status-value online">Active</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Storage Bucket</span>
+                                    <span class="status-value online">Connected</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Claude Integration</span>
+                                    <span class="status-value online">Ready</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="card quick-stats">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-pie"></i> Quick Stats</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <div class="stat-number">42</div>
+                                    <div class="stat-label">Mobile Apps</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">8</div>
+                                    <div class="stat-label">Programs</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">7</div>
+                                    <div class="stat-label">Platforms</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">$500K+</div>
+                                    <div class="stat-label">Bounty Potential</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Scans -->
+                    <div class="card recent-scans">
+                        <div class="card-header">
+                            <h3><i class="fas fa-history"></i> Recent Scans</h3>
+                            <button class="btn btn-secondary btn-sm">View All</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="scan-list">
+                                <div class="scan-item">
+                                    <div class="scan-info">
+                                        <div class="scan-name">HackerOne Mobile Comprehensive</div>
+                                        <div class="scan-details">42 apps • 8 programs • 2025-09-27 20:01</div>
+                                    </div>
+                                    <div class="scan-status completed">Completed</div>
+                                </div>
+                                <div class="scan-item">
+                                    <div class="scan-info">
+                                        <div class="scan-name">Multi-Platform Assessment</div>
+                                        <div class="scan-details">5 platforms • example.com • 2025-09-27 19:45</div>
+                                    </div>
+                                    <div class="scan-status running">Running</div>
+                                </div>
+                                <div class="scan-item">
+                                    <div class="scan-info">
+                                        <div class="scan-name">Chaos Discovery</div>
+                                        <div class="scan-details">3 targets • Domain enumeration • 2025-09-27 19:30</div>
+                                    </div>
+                                    <div class="scan-status completed">Completed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="card quick-actions">
+                        <div class="card-header">
+                            <h3><i class="fas fa-zap"></i> Quick Actions</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="action-buttons">
+                                <button class="btn btn-primary" onclick="quickScan('mobile')">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    Mobile Scan
+                                </button>
+                                <button class="btn btn-primary" onclick="quickScan('multi-platform')">
+                                    <i class="fas fa-globe"></i>
+                                    Multi-Platform
+                                </button>
+                                <button class="btn btn-primary" onclick="quickScan('chaos')">
+                                    <i class="fas fa-search-plus"></i>
+                                    Chaos Discovery
+                                </button>
+                                <button class="btn btn-primary" onclick="openClaudeChat()">
+                                    <i class="fas fa-robot"></i>
+                                    Ask Claude
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cloud Resources -->
+                    <div class="card cloud-resources">
+                        <div class="card-header">
+                            <h3><i class="fas fa-cloud"></i> Cloud Resources</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="resource-list">
+                                <div class="resource-item">
+                                    <i class="fas fa-server"></i>
+                                    <div class="resource-info">
+                                        <div class="resource-name">Cloud Function</div>
+                                        <div class="resource-url">quantumsentinel-20250927</div>
+                                    </div>
+                                    <div class="resource-status active">Active</div>
+                                </div>
+                                <div class="resource-item">
+                                    <i class="fas fa-database"></i>
+                                    <div class="resource-info">
+                                        <div class="resource-name">Storage Bucket</div>
+                                        <div class="resource-url">gs://quantumsentinel-nexus-*-results</div>
+                                    </div>
+                                    <div class="resource-status active">Active</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scanner Tab -->
+        <div id="scanner" class="tab-content">
+            <div class="container">
+                <div class="scanner-interface">
+                    <div class="scanner-header">
+                        <h2><i class="fas fa-search"></i> Advanced Scanner Interface</h2>
+                        <p>Configure and execute comprehensive security assessments</p>
+                    </div>
+
+                    <div class="scanner-grid">
+                        <!-- Scan Configuration -->
+                        <div class="card scan-config">
+                            <div class="card-header">
+                                <h3><i class="fas fa-cog"></i> Scan Configuration</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="scan-type">Scan Type</label>
+                                    <select id="scan-type" class="form-control">
+                                        <option value="mobile">Mobile Application</option>
+                                        <option value="multi-platform">Multi-Platform</option>
+                                        <option value="comprehensive">Comprehensive</option>
+                                        <option value="chaos">Chaos Discovery</option>
+                                        <option value="custom">Custom</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="scan-targets">Targets</label>
+                                    <textarea id="scan-targets" class="form-control" rows="3"
+                                        placeholder="Enter targets (comma-separated)&#10;Examples:&#10;shopify,uber,gitlab&#10;example.com,target.com&#10;192.168.1.0/24"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="scan-platforms">Platforms</label>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" value="hackerone" checked>
+                                            <span>HackerOne</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" value="bugcrowd" checked>
+                                            <span>Bugcrowd</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" value="intigriti">
+                                            <span>Intigriti</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" value="google_vrp">
+                                            <span>Google VRP</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" value="apple_security">
+                                            <span>Apple Security</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" value="microsoft_msrc">
+                                            <span>Microsoft MSRC</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" value="samsung_mobile">
+                                            <span>Samsung Mobile</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="scan-depth">Scan Depth</label>
+                                    <select id="scan-depth" class="form-control">
+                                        <option value="quick">Quick (5-10 minutes)</option>
+                                        <option value="standard" selected>Standard (15-30 minutes)</option>
+                                        <option value="comprehensive">Comprehensive (30-60 minutes)</option>
+                                        <option value="deep">Deep (1-2 hours)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" id="cloud-execution">
+                                        <span>Execute on Cloud</span>
+                                    </label>
+                                </div>
+
+                                <div class="scan-actions">
+                                    <button class="btn btn-primary btn-lg" onclick="startScan()">
+                                        <i class="fas fa-play"></i> Start Scan
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="validateConfig()">
+                                        <i class="fas fa-check"></i> Validate
+                                    </button>
+                                    <button class="btn btn-outline" onclick="resetConfig()">
+                                        <i class="fas fa-undo"></i> Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Scan Output -->
+                        <div class="card scan-output">
+                            <div class="card-header">
+                                <h3><i class="fas fa-terminal"></i> Scan Output</h3>
+                                <div class="output-controls">
+                                    <button class="btn btn-sm btn-outline" onclick="clearOutput()">
+                                        <i class="fas fa-trash"></i> Clear
+                                    </button>
+                                    <button class="btn btn-sm btn-outline" onclick="downloadOutput()">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="scan-terminal" class="terminal">
+                                    <div class="terminal-line">
+                                        <span class="prompt">quantum@nexus:~$</span>
+                                        <span class="text">Ready for scan execution...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scan Templates -->
+                    <div class="card scan-templates">
+                        <div class="card-header">
+                            <h3><i class="fas fa-layer-group"></i> Scan Templates</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="template-grid">
+                                <div class="template-card" onclick="loadTemplate('hackerone-mobile')">
+                                    <div class="template-icon">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <div class="template-info">
+                                        <h4>HackerOne Mobile</h4>
+                                        <p>42 mobile apps across 8 programs</p>
+                                        <span class="template-tag">High Bounty</span>
+                                    </div>
+                                </div>
+
+                                <div class="template-card" onclick="loadTemplate('multi-platform-web')">
+                                    <div class="template-icon">
+                                        <i class="fas fa-globe"></i>
+                                    </div>
+                                    <div class="template-info">
+                                        <h4>Multi-Platform Web</h4>
+                                        <p>Web applications across all platforms</p>
+                                        <span class="template-tag">Comprehensive</span>
+                                    </div>
+                                </div>
+
+                                <div class="template-card" onclick="loadTemplate('chaos-enterprise')">
+                                    <div class="template-icon">
+                                        <i class="fas fa-search-plus"></i>
+                                    </div>
+                                    <div class="template-info">
+                                        <h4>Chaos Enterprise</h4>
+                                        <p>Large-scale domain discovery</p>
+                                        <span class="template-tag">Discovery</span>
+                                    </div>
+                                </div>
+
+                                <div class="template-card" onclick="loadTemplate('ai-assisted')">
+                                    <div class="template-icon">
+                                        <i class="fas fa-robot"></i>
+                                    </div>
+                                    <div class="template-info">
+                                        <h4>AI-Assisted Analysis</h4>
+                                        <p>Claude-powered vulnerability detection</p>
+                                        <span class="template-tag">AI-Enhanced</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Tab -->
+        <div id="mobile" class="tab-content">
+            <div class="container">
+                <div class="mobile-interface">
+                    <div class="mobile-header">
+                        <h2><i class="fas fa-mobile-alt"></i> Mobile Application Security</h2>
+                        <p>Comprehensive mobile app analysis across all major bug bounty programs</p>
+                    </div>
+
+                    <div class="mobile-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">42</div>
+                            <div class="stat-label">Mobile Apps</div>
+                            <div class="stat-detail">Across 8 programs</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">$500K+</div>
+                            <div class="stat-label">Bounty Potential</div>
+                            <div class="stat-detail">Combined maximum</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">16</div>
+                            <div class="stat-label">Android Apps</div>
+                            <div class="stat-detail">Ready for APK analysis</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">26</div>
+                            <div class="stat-label">iOS Apps</div>
+                            <div class="stat-detail">Ready for IPA analysis</div>
+                        </div>
+                    </div>
+
+                    <div class="mobile-programs">
+                        <div class="program-grid">
+                            <!-- Shopify -->
+                            <div class="program-card high-priority">
+                                <div class="program-header">
+                                    <div class="program-logo">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="program-info">
+                                        <h3>Shopify</h3>
+                                        <div class="bounty-range">$5,000 - $50,000+</div>
+                                    </div>
+                                    <div class="program-status">
+                                        <span class="status-badge ready">Ready</span>
+                                    </div>
+                                </div>
+                                <div class="program-apps">
+                                    <div class="app-count">8 Applications</div>
+                                    <div class="app-types">
+                                        <span class="app-type android">4 Android</span>
+                                        <span class="app-type ios">4 iOS</span>
+                                    </div>
+                                </div>
+                                <div class="program-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="scanMobileProgram('shopify')">
+                                        <i class="fas fa-play"></i> Scan Now
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="viewMobileApps('shopify')">
+                                        <i class="fas fa-list"></i> View Apps
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Uber -->
+                            <div class="program-card high-priority">
+                                <div class="program-header">
+                                    <div class="program-logo">
+                                        <i class="fas fa-car"></i>
+                                    </div>
+                                    <div class="program-info">
+                                        <h3>Uber</h3>
+                                        <div class="bounty-range">$1,000 - $25,000+</div>
+                                    </div>
+                                    <div class="program-status">
+                                        <span class="status-badge ready">Ready</span>
+                                    </div>
+                                </div>
+                                <div class="program-apps">
+                                    <div class="app-count">8 Applications</div>
+                                    <div class="app-types">
+                                        <span class="app-type android">4 Android</span>
+                                        <span class="app-type ios">4 iOS</span>
+                                    </div>
+                                </div>
+                                <div class="program-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="scanMobileProgram('uber')">
+                                        <i class="fas fa-play"></i> Scan Now
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="viewMobileApps('uber')">
+                                        <i class="fas fa-list"></i> View Apps
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Dropbox -->
+                            <div class="program-card medium-priority">
+                                <div class="program-header">
+                                    <div class="program-logo">
+                                        <i class="fas fa-dropbox"></i>
+                                    </div>
+                                    <div class="program-info">
+                                        <h3>Dropbox</h3>
+                                        <div class="bounty-range">$1,000 - $15,000+</div>
+                                    </div>
+                                    <div class="program-status">
+                                        <span class="status-badge ready">Ready</span>
+                                    </div>
+                                </div>
+                                <div class="program-apps">
+                                    <div class="app-count">6 Applications</div>
+                                    <div class="app-types">
+                                        <span class="app-type android">3 Android</span>
+                                        <span class="app-type ios">3 iOS</span>
+                                    </div>
+                                </div>
+                                <div class="program-actions">
+                                    <button class="btn btn-primary btn-sm" onclick="scanMobileProgram('dropbox')">
+                                        <i class="fas fa-play"></i> Scan Now
+                                    </button>
+                                    <button class="btn btn-outline btn-sm" onclick="viewMobileApps('dropbox')">
+                                        <i class="fas fa-list"></i> View Apps
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Continue with other programs... -->
+                        </div>
+                    </div>
+
+                    <!-- Mobile Analysis Tools -->
+                    <div class="card mobile-tools">
+                        <div class="card-header">
+                            <h3><i class="fas fa-wrench"></i> Mobile Analysis Tools</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="tools-grid">
+                                <div class="tool-item">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-android"></i>
+                                    </div>
+                                    <div class="tool-info">
+                                        <h4>APK Analysis</h4>
+                                        <p>Static analysis, decompilation, manifest inspection</p>
+                                    </div>
+                                    <button class="btn btn-outline btn-sm">Configure</button>
+                                </div>
+
+                                <div class="tool-item">
+                                    <div class="tool-icon">
+                                        <i class="fab fa-apple"></i>
+                                    </div>
+                                    <div class="tool-info">
+                                        <h4>iOS Analysis</h4>
+                                        <p>IPA inspection, class-dump, binary analysis</p>
+                                    </div>
+                                    <button class="btn btn-outline btn-sm">Configure</button>
+                                </div>
+
+                                <div class="tool-item">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-bug"></i>
+                                    </div>
+                                    <div class="tool-info">
+                                        <h4>Dynamic Testing</h4>
+                                        <p>Frida, Objection, runtime manipulation</p>
+                                    </div>
+                                    <button class="btn btn-outline btn-sm">Configure</button>
+                                </div>
+
+                                <div class="tool-item">
+                                    <div class="tool-icon">
+                                        <i class="fas fa-network-wired"></i>
+                                    </div>
+                                    <div class="tool-info">
+                                        <h4>Network Analysis</h4>
+                                        <p>Traffic interception, SSL pinning bypass</p>
+                                    </div>
+                                    <button class="btn btn-outline btn-sm">Configure</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cloud Tab -->
+        <div id="cloud" class="tab-content">
+            <div class="container">
+                <div class="cloud-interface">
+                    <div class="cloud-header">
+                        <h2><i class="fas fa-cloud"></i> Cloud Infrastructure</h2>
+                        <p>Manage Google Cloud deployment and scale your security assessments</p>
+                    </div>
+
+                    <div class="cloud-status-grid">
+                        <div class="status-card online">
+                            <div class="status-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="status-info">
+                                <h3>Cloud Function</h3>
+                                <div class="status-value">Active</div>
+                                <div class="status-detail">quantumsentinel-20250927</div>
+                            </div>
+                            <button class="btn btn-outline btn-sm" onclick="testCloudFunction()">Test</button>
+                        </div>
+
+                        <div class="status-card online">
+                            <div class="status-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="status-info">
+                                <h3>Storage Bucket</h3>
+                                <div class="status-value">Connected</div>
+                                <div class="status-detail">52 files, 28.7 KiB</div>
+                            </div>
+                            <button class="btn btn-outline btn-sm" onclick="browseStorage()">Browse</button>
+                        </div>
+
+                        <div class="status-card online">
+                            <div class="status-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="status-info">
+                                <h3>Billing</h3>
+                                <div class="status-value">Active</div>
+                                <div class="status-detail">hacking4bucks@gmail.com</div>
+                            </div>
+                            <button class="btn btn-outline btn-sm" onclick="viewBilling()">Monitor</button>
+                        </div>
+
+                        <div class="status-card online">
+                            <div class="status-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="status-info">
+                                <h3>Performance</h3>
+                                <div class="status-value">Optimal</div>
+                                <div class="status-detail">98% uptime</div>
+                            </div>
+                            <button class="btn btn-outline btn-sm" onclick="viewMetrics()">Metrics</button>
+                        </div>
+                    </div>
+
+                    <!-- Cloud Controls -->
+                    <div class="card cloud-controls">
+                        <div class="card-header">
+                            <h3><i class="fas fa-sliders-h"></i> Cloud Controls</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="control-sections">
+                                <div class="control-section">
+                                    <h4>Deployment Management</h4>
+                                    <div class="control-actions">
+                                        <button class="btn btn-primary" onclick="deployUpdate()">
+                                            <i class="fas fa-upload"></i> Deploy Update
+                                        </button>
+                                        <button class="btn btn-secondary" onclick="scaleResources()">
+                                            <i class="fas fa-expand-arrows-alt"></i> Scale Resources
+                                        </button>
+                                        <button class="btn btn-outline" onclick="viewLogs()">
+                                            <i class="fas fa-file-alt"></i> View Logs
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="control-section">
+                                    <h4>Cost Optimization</h4>
+                                    <div class="control-actions">
+                                        <button class="btn btn-secondary" onclick="optimizeCosts()">
+                                            <i class="fas fa-piggy-bank"></i> Optimize Costs
+                                        </button>
+                                        <button class="btn btn-outline" onclick="setBudgetAlerts()">
+                                            <i class="fas fa-bell"></i> Budget Alerts
+                                        </button>
+                                        <button class="btn btn-outline" onclick="viewUsage()">
+                                            <i class="fas fa-chart-bar"></i> View Usage
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="control-section">
+                                    <h4>Security & Access</h4>
+                                    <div class="control-actions">
+                                        <button class="btn btn-secondary" onclick="manageAccess()">
+                                            <i class="fas fa-key"></i> Manage Access
+                                        </button>
+                                        <button class="btn btn-outline" onclick="auditLogs()">
+                                            <i class="fas fa-shield-alt"></i> Audit Logs
+                                        </button>
+                                        <button class="btn btn-outline" onclick="backupConfig()">
+                                            <i class="fas fa-save"></i> Backup Config
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cloud Storage Browser -->
+                    <div class="card storage-browser">
+                        <div class="card-header">
+                            <h3><i class="fas fa-folder-open"></i> Cloud Storage Browser</h3>
+                            <div class="storage-path">
+                                <span>gs://quantumsentinel-nexus-1758983113-results/</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="storage-tree">
+                                <div class="tree-item folder" onclick="toggleFolder(this)">
+                                    <i class="fas fa-folder"></i>
+                                    <span>comprehensive_reports/</span>
+                                    <div class="tree-children" style="display: none;">
+                                        <div class="tree-item folder">
+                                            <i class="fas fa-folder"></i>
+                                            <span>hackerone_mobile_comprehensive/</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tree-item folder" onclick="toggleFolder(this)">
+                                    <i class="fas fa-folder"></i>
+                                    <span>scans/</span>
+                                    <div class="tree-children" style="display: none;">
+                                        <div class="tree-item folder">
+                                            <i class="fas fa-folder"></i>
+                                            <span>cli_scan_1758983479/</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Claude AI Tab -->
+        <div id="claude" class="tab-content">
+            <div class="container">
+                <div class="claude-interface">
+                    <div class="claude-header">
+                        <h2><i class="fas fa-robot"></i> Claude AI Integration</h2>
+                        <p>AI-powered vulnerability analysis and intelligent security recommendations</p>
+                    </div>
+
+                    <div class="claude-grid">
+                        <!-- Chat Interface -->
+                        <div class="card claude-chat">
+                            <div class="card-header">
+                                <h3><i class="fas fa-comments"></i> AI Security Advisor</h3>
+                                <div class="chat-controls">
+                                    <button class="btn btn-sm btn-outline" onclick="clearChat()">
+                                        <i class="fas fa-trash"></i> Clear
+                                    </button>
+                                    <button class="btn btn-sm btn-outline" onclick="exportChat()">
+                                        <i class="fas fa-download"></i> Export
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="claude-messages" class="chat-messages">
+                                    <div class="message assistant">
+                                        <div class="message-avatar">
+                                            <i class="fas fa-robot"></i>
+                                        </div>
+                                        <div class="message-content">
+                                            <div class="message-text">
+                                                Hello! I'm Claude, your AI security advisor. I can help you with:
+                                                <ul>
+                                                    <li>Vulnerability analysis and prioritization</li>
+                                                    <li>Mobile app security assessment guidance</li>
+                                                    <li>Bug bounty strategy optimization</li>
+                                                    <li>Report writing and documentation</li>
+                                                    <li>Tool configuration and usage</li>
+                                                </ul>
+                                                What would you like to explore today?
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat-input">
+                                    <div class="input-group">
+                                        <input type="text" id="claude-input" class="form-control"
+                                               placeholder="Ask Claude about security analysis, vulnerabilities, or bug bounty strategies..."
+                                               onkeypress="handleChatKeyPress(event)">
+                                        <button class="btn btn-primary" onclick="sendClaudeMessage()">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Analysis Tools -->
+                        <div class="card ai-tools">
+                            <div class="card-header">
+                                <h3><i class="fas fa-brain"></i> AI Analysis Tools</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="ai-tool-grid">
+                                    <div class="ai-tool" onclick="analyzeVulnerabilities()">
+                                        <div class="tool-icon">
+                                            <i class="fas fa-bug"></i>
+                                        </div>
+                                        <div class="tool-info">
+                                            <h4>Vulnerability Analysis</h4>
+                                            <p>AI-powered threat assessment</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="ai-tool" onclick="optimizeBountyStrategy()">
+                                        <div class="tool-icon">
+                                            <i class="fas fa-target"></i>
+                                        </div>
+                                        <div class="tool-info">
+                                            <h4>Bounty Strategy</h4>
+                                            <p>Optimize targeting and prioritization</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="ai-tool" onclick="generateReports()">
+                                        <div class="tool-icon">
+                                            <i class="fas fa-file-alt"></i>
+                                        </div>
+                                        <div class="tool-info">
+                                            <h4>Report Generation</h4>
+                                            <p>AI-assisted documentation</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="ai-tool" onclick="riskAssessment()">
+                                        <div class="tool-icon">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="tool-info">
+                                            <h4>Risk Assessment</h4>
+                                            <p>Intelligent risk scoring</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="card claude-actions">
+                            <div class="card-header">
+                                <h3><i class="fas fa-zap"></i> Quick AI Actions</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="action-buttons">
+                                    <button class="btn btn-primary" onclick="askClaudeAbout('mobile-security')">
+                                        <i class="fas fa-mobile-alt"></i>
+                                        Mobile Security Best Practices
+                                    </button>
+                                    <button class="btn btn-primary" onclick="askClaudeAbout('bug-bounty-tips')">
+                                        <i class="fas fa-lightbulb"></i>
+                                        Bug Bounty Tips
+                                    </button>
+                                    <button class="btn btn-primary" onclick="askClaudeAbout('vulnerability-prioritization')">
+                                        <i class="fas fa-sort-amount-down"></i>
+                                        Vulnerability Prioritization
+                                    </button>
+                                    <button class="btn btn-primary" onclick="askClaudeAbout('reporting-template')">
+                                        <i class="fas fa-file-medical"></i>
+                                        Report Template
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Tab -->
+        <div id="results" class="tab-content">
+            <div class="container">
+                <div class="results-interface">
+                    <div class="results-header">
+                        <h2><i class="fas fa-chart-line"></i> Scan Results & Analytics</h2>
+                        <p>Comprehensive analysis of security assessments and findings</p>
+                    </div>
+
+                    <!-- Results Dashboard -->
+                    <div class="results-dashboard">
+                        <div class="dashboard-cards">
+                            <div class="result-card">
+                                <div class="card-icon critical">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="card-data">
+                                    <div class="card-number">23</div>
+                                    <div class="card-label">Critical Issues</div>
+                                </div>
+                            </div>
+
+                            <div class="result-card">
+                                <div class="card-icon high">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                                <div class="card-data">
+                                    <div class="card-number">47</div>
+                                    <div class="card-label">High Priority</div>
+                                </div>
+                            </div>
+
+                            <div class="result-card">
+                                <div class="card-icon medium">
+                                    <i class="fas fa-minus"></i>
+                                </div>
+                                <div class="card-data">
+                                    <div class="card-number">89</div>
+                                    <div class="card-label">Medium Risk</div>
+                                </div>
+                            </div>
+
+                            <div class="result-card">
+                                <div class="card-icon success">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <div class="card-data">
+                                    <div class="card-number">$125K</div>
+                                    <div class="card-label">Estimated Value</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results Table -->
+                    <div class="card results-table">
+                        <div class="card-header">
+                            <h3><i class="fas fa-table"></i> Recent Findings</h3>
+                            <div class="table-controls">
+                                <select class="form-control form-control-sm">
+                                    <option>All Severities</option>
+                                    <option>Critical</option>
+                                    <option>High</option>
+                                    <option>Medium</option>
+                                    <option>Low</option>
+                                </select>
+                                <button class="btn btn-outline btn-sm">
+                                    <i class="fas fa-download"></i> Export
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-container">
+                                <table class="results-data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Severity</th>
+                                            <th>Finding</th>
+                                            <th>Target</th>
+                                            <th>Platform</th>
+                                            <th>Bounty Est.</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="severity-badge critical">Critical</span></td>
+                                            <td>Authentication Bypass in Mobile App</td>
+                                            <td>com.shopify.mobile</td>
+                                            <td>HackerOne</td>
+                                            <td>$15,000+</td>
+                                            <td><span class="status-badge new">New</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline">View</button>
+                                                <button class="btn btn-sm btn-primary">Report</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="severity-badge high">High</span></td>
+                                            <td>SQL Injection in API Endpoint</td>
+                                            <td>api.uber.com</td>
+                                            <td>HackerOne</td>
+                                            <td>$8,000+</td>
+                                            <td><span class="status-badge verified">Verified</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline">View</button>
+                                                <button class="btn btn-sm btn-primary">Report</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="severity-badge medium">Medium</span></td>
+                                            <td>Information Disclosure</td>
+                                            <td>gitlab.com</td>
+                                            <td>HackerOne</td>
+                                            <td>$2,500</td>
+                                            <td><span class="status-badge submitted">Submitted</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline">View</button>
+                                                <button class="btn btn-sm btn-secondary">Track</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settings" class="tab-content">
+            <div class="container">
+                <div class="settings-interface">
+                    <div class="settings-header">
+                        <h2><i class="fas fa-cog"></i> Settings & Configuration</h2>
+                        <p>Configure QuantumSentinel-Nexus for optimal performance</p>
+                    </div>
+
+                    <div class="settings-grid">
+                        <!-- General Settings -->
+                        <div class="card settings-section">
+                            <div class="card-header">
+                                <h3><i class="fas fa-sliders-h"></i> General Settings</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="default-scan-type">Default Scan Type</label>
+                                    <select id="default-scan-type" class="form-control">
+                                        <option value="mobile">Mobile Application</option>
+                                        <option value="multi-platform">Multi-Platform</option>
+                                        <option value="comprehensive">Comprehensive</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="scan-timeout">Scan Timeout (minutes)</label>
+                                    <input type="number" id="scan-timeout" class="form-control" value="60" min="5" max="300">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="concurrent-scans">Max Concurrent Scans</label>
+                                    <input type="number" id="concurrent-scans" class="form-control" value="3" min="1" max="10">
+                                </div>
+
+                                <div class="checkbox-group">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" checked>
+                                        <span>Auto-save scan results</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" checked>
+                                        <span>Enable cloud storage sync</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox">
+                                        <span>Send notification on completion</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cloud Settings -->
+                        <div class="card settings-section">
+                            <div class="card-header">
+                                <h3><i class="fas fa-cloud"></i> Cloud Configuration</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="gcp-project">GCP Project ID</label>
+                                    <input type="text" id="gcp-project" class="form-control" value="quantumsentinel-20250927" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cloud-function-url">Cloud Function URL</label>
+                                    <input type="url" id="cloud-function-url" class="form-control"
+                                           value="https://us-central1-quantumsentinel-20250927.cloudfunctions.net/quantum-scanner" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="storage-bucket">Storage Bucket</label>
+                                    <input type="text" id="storage-bucket" class="form-control"
+                                           value="gs://quantumsentinel-nexus-1758983113-results" readonly>
+                                </div>
+
+                                <div class="cloud-actions">
+                                    <button class="btn btn-primary" onclick="testCloudConnection()">
+                                        <i class="fas fa-plug"></i> Test Connection
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="refreshCloudConfig()">
+                                        <i class="fas fa-sync"></i> Refresh Config
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- API Keys -->
+                        <div class="card settings-section">
+                            <div class="card-header">
+                                <h3><i class="fas fa-key"></i> API Keys & Credentials</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="chaos-api-key">Chaos ProjectDiscovery API Key</label>
+                                    <div class="input-group">
+                                        <input type="password" id="chaos-api-key" class="form-control"
+                                               value="1545c524-7e20-4b62-aa4a-8235255cff96">
+                                        <button class="btn btn-outline" onclick="toggleApiKeyVisibility('chaos-api-key')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="claude-api-key">Claude API Key (Optional)</label>
+                                    <div class="input-group">
+                                        <input type="password" id="claude-api-key" class="form-control"
+                                               placeholder="Enter Claude API key for enhanced analysis">
+                                        <button class="btn btn-outline" onclick="toggleApiKeyVisibility('claude-api-key')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="api-actions">
+                                    <button class="btn btn-primary" onclick="saveApiKeys()">
+                                        <i class="fas fa-save"></i> Save Keys
+                                    </button>
+                                    <button class="btn btn-outline" onclick="testApiKeys()">
+                                        <i class="fas fa-check"></i> Test Keys
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notification Settings -->
+                        <div class="card settings-section">
+                            <div class="card-header">
+                                <h3><i class="fas fa-bell"></i> Notifications</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="checkbox-group">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" checked>
+                                        <span>Scan completion notifications</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox">
+                                        <span>Critical vulnerability alerts</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox">
+                                        <span>Cloud resource usage warnings</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox">
+                                        <span>New bounty program notifications</span>
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="notification-email">Notification Email</label>
+                                    <input type="email" id="notification-email" class="form-control"
+                                           placeholder="Enter email for notifications">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Export/Import -->
+                        <div class="card settings-section">
+                            <div class="card-header">
+                                <h3><i class="fas fa-exchange-alt"></i> Export/Import</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="export-import-actions">
+                                    <button class="btn btn-secondary" onclick="exportSettings()">
+                                        <i class="fas fa-download"></i> Export Settings
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="importSettings()">
+                                        <i class="fas fa-upload"></i> Import Settings
+                                    </button>
+                                    <button class="btn btn-outline" onclick="resetToDefaults()">
+                                        <i class="fas fa-undo"></i> Reset to Defaults
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Executing scan...</div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Dynamic content -->
+            </div>
+            <div class="modal-footer" id="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" id="modal-action">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

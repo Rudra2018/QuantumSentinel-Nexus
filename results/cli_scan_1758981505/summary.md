@@ -1,0 +1,1 @@
+# QuantumSentinel Scan Report\n\n**Scan ID:** cli_scan_1758981505\n**Timestamp:** 2025-09-27T19:28:25.427311\n**Type:** mobile\n**Targets:** shopify\n\n## Local Execution\n\n**Status:** completed\n\n- Programs Scanned: 1\n- Apps Analyzed: 42\n

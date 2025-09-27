@@ -1,0 +1,14 @@
+cloud:
+  bucket_name: ''
+  enabled: false
+  function_url: ''
+  project_id: ''
+local:
+  default_timeout: 3600
+  max_concurrent_scans: 3
+  results_retention_days: 30
+preferences:
+  auto_upload_results: false
+  default_platform: hackerone
+  default_scan_depth: comprehensive
+  notification_enabled: true

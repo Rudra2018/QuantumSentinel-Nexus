@@ -1,0 +1,174 @@
+# QuantumSentinel-Nexus Configuration for Huntr.com Bug Bounty Programs
+# Specialized configuration for AI/ML security testing
+
+platform_config:
+  name: "huntr"
+  type: "ai_ml_security"
+  base_url: "https://huntr.com"
+  api_endpoint: "https://api.huntr.com/v1"
+
+# Huntr-specific program categories
+program_categories:
+  model_file_formats:
+    count: 56
+    focus: "Model serialization vulnerabilities, file parsing issues"
+    common_targets:
+      - "*.pkl" # Pickle files - high risk
+      - "*.pth" # PyTorch models
+      - "*.h5"  # Keras/TensorFlow models
+      - "*.onnx" # ONNX models
+      - "*.safetensors" # SafeTensors format
+
+  ml_frameworks:
+    count: 43
+    focus: "Framework-level vulnerabilities, API security"
+    common_targets:
+      - "pytorch"
+      - "tensorflow"
+      - "huggingface_transformers"
+      - "scikit-learn"
+      - "keras"
+      - "xgboost"
+
+  inference_systems:
+    count: 37
+    focus: "Model serving, inference API vulnerabilities"
+    common_targets:
+      - "torchserve"
+      - "tensorflow_serving"
+      - "triton_inference_server"
+      - "mlflow"
+      - "bentoml"
+
+  data_science_tools:
+    count: 63
+    focus: "Jupyter, data processing, visualization tools"
+    common_targets:
+      - "jupyter"
+      - "pandas"
+      - "numpy"
+      - "matplotlib"
+      - "streamlit"
+
+  ml_ops:
+    count: 52
+    focus: "ML pipeline, deployment, monitoring tools"
+    common_targets:
+      - "kubeflow"
+      - "mlflow"
+      - "wandb"
+      - "dvc"
+
+# Vulnerability types specific to AI/ML
+vulnerability_types:
+  model_security:
+    - "pickle_deserialization"
+    - "model_poisoning"
+    - "adversarial_attacks"
+    - "model_extraction"
+    - "membership_inference"
+
+  data_security:
+    - "data_poisoning"
+    - "privacy_leakage"
+    - "training_data_extraction"
+    - "pii_exposure"
+
+  infrastructure:
+    - "container_escape"
+    - "privilege_escalation"
+    - "api_injection"
+    - "dependency_confusion"
+
+  framework_specific:
+    - "unsafe_deserialization"
+    - "code_injection"
+    - "path_traversal"
+    - "remote_code_execution"
+
+# Scan configuration for AI/ML targets
+scan_profiles:
+  ai_ml_basic:
+    scan_depth: "basic"
+    timeout_minutes: 30
+    focus_areas:
+      - "dependency_analysis"
+      - "configuration_review"
+      - "basic_input_validation"
+
+  ai_ml_comprehensive:
+    scan_depth: "comprehensive"
+    timeout_minutes: 120
+    focus_areas:
+      - "model_file_analysis"
+      - "framework_vulnerability_scan"
+      - "dependency_security_audit"
+      - "api_security_testing"
+      - "container_security_scan"
+
+  ai_ml_deep:
+    scan_depth: "extreme"
+    timeout_minutes: 300
+    focus_areas:
+      - "advanced_model_analysis"
+      - "pickle_exploitation"
+      - "adversarial_testing"
+      - "data_poisoning_detection"
+      - "inference_api_fuzzing"
+
+# Huntr-specific payloads and test cases
+test_payloads:
+  pickle_deserialization:
+    - "pickle.loads(malicious_data)"
+    - "torch.load(untrusted_model)"
+    - "joblib.load(suspicious_file)"
+
+  model_injection:
+    - "__reduce__ method exploitation"
+    - "Custom __setstate__ attacks"
+    - "Lambda function injection"
+
+  api_injection:
+    - "GraphQL injection in ML APIs"
+    - "Model parameter manipulation"
+    - "Inference endpoint abuse"
+
+# Evidence collection for AI/ML vulnerabilities
+evidence_types:
+  - "model_file_samples"
+  - "exploit_demonstrations"
+  - "api_request_responses"
+  - "container_breakout_proof"
+  - "data_extraction_evidence"
+  - "privilege_escalation_proof"
+
+# Reporting templates for Huntr submissions
+reporting:
+  template_type: "huntr_submission"
+  required_fields:
+    - "vulnerability_type"
+    - "affected_component"
+    - "severity_assessment"
+    - "proof_of_concept"
+    - "impact_analysis"
+    - "remediation_guidance"
+
+  severity_mapping:
+    critical: "Critical (RCE, Data Breach)"
+    high: "High (Privilege Escalation, Model Theft)"
+    medium: "Medium (DoS, Information Disclosure)"
+    low: "Low (Configuration Issues)"
+
+# Bounty ranges from Huntr
+bounty_ranges:
+  critical: "$2000-$4000"
+  high: "$1000-$2000"
+  medium: "$500-$1000"
+  low: "$100-$500"
+
+# Compliance and ethics
+compliance:
+  responsible_disclosure: true
+  no_public_exploitation: true
+  respect_scope_limits: true
+  report_within_timeframe: "90 days"

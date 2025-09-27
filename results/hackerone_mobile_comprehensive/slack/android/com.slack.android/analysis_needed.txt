@@ -1,0 +1,4 @@
+Package: com.slack.android
+Platform: android
+Program: slack
+Status: Download required for full analysis

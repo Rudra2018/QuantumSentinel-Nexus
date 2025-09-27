@@ -1,0 +1,4 @@
+Package: com.ubercab.eats
+Platform: android
+Program: uber
+Status: Download required for full analysis

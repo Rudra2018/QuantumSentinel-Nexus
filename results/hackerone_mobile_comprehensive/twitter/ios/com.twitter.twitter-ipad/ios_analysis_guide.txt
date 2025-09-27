@@ -1,0 +1,20 @@
+iOS App Analysis Guide for com.twitter.twitter-ipad
+==================================================
+
+Bundle ID: com.twitter.twitter-ipad
+Program: twitter
+
+Manual Steps:
+1. Download IPA from App Store using tools like:
+   - iMazing
+   - 3uTools
+   - Apple Configurator 2
+2. Extract IPA and analyze with:
+   - class-dump
+   - otool
+   - Hopper/IDA Pro
+   - MobSF
+3. Runtime analysis with:
+   - Frida
+   - Cycript
+   - LLDB

@@ -1,0 +1,4 @@
+Package: com.spotify.music
+Platform: android
+Program: spotify
+Status: Download required for full analysis
