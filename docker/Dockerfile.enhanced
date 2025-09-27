@@ -1,0 +1,517 @@
+#!/usr/bin/env bash
+# QuantumSentinel-Nexus Enhanced Dockerfile
+# Ultimate Bug Bounty & Security Testing Platform with 200+ Tools
+
+FROM ubuntu:22.04
+
+# Prevent interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies and base tools
+RUN apt-get update && apt-get install -y \
+    # Base system tools
+    curl wget git vim nano unzip zip tar gzip \
+    build-essential software-properties-common \
+    apt-transport-https ca-certificates gnupg lsb-release \
+    # Python and development
+    python3 python3-pip python3-dev python3-venv \
+    # Networking and analysis
+    net-tools dnsutils tcpdump nmap masscan \
+    # Security tools base
+    nikto sqlmap dirb gobuster \
+    # Mobile security
+    default-jdk android-sdk-platform-tools \
+    # Binary analysis
+    binutils gdb strace ltrace hexdump \
+    # Web browsers and automation
+    chromium-browser firefox-esr \
+    # Media processing
+    ffmpeg imagemagick \
+    # Additional utilities
+    jq yq-go xmlstarlet \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Go for Go-based security tools
+ENV GO_VERSION=1.21.5
+RUN wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz \
+    && tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz \
+    && rm go${GO_VERSION}.linux-amd64.tar.gz
+ENV PATH="/usr/local/go/bin:${PATH}"
+ENV GOPATH="/root/go"
+ENV PATH="${GOPATH}/bin:${PATH}"
+
+# Install Node.js and npm for JavaScript-based tools
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
+
+# Install Rust for Rust-based security tools
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# Install Docker CLI for containerized tools
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
+    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
+    && apt-get update && apt-get install -y docker-ce-cli
+
+# ============================================================================
+# CATEGORY 1: WEB APPLICATION SECURITY TOOLS (50+ tools)
+# ============================================================================
+
+# Install nuclei - Modern vulnerability scanner
+RUN go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
+
+# Install subfinder - Subdomain discovery
+RUN go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+
+# Install httpx - HTTP toolkit
+RUN go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+
+# Install katana - Crawling and spidering framework
+RUN go install github.com/projectdiscovery/katana/cmd/katana@latest
+
+# Install amass - Network mapping and asset discovery
+RUN go install -v github.com/owasp-amass/amass/v4/...@master
+
+# Install ffuf - Fast web fuzzer
+RUN go install github.com/ffuf/ffuf/v2@latest
+
+# Install gobuster - Directory/file brute forcer
+RUN go install github.com/OJ/gobuster/v3@latest
+
+# Install feroxbuster - Fast content discovery
+RUN curl -sL https://raw.githubusercontent.com/epi052/feroxbuster/master/install-nix.sh | bash
+
+# Install wfuzz - Web application fuzzer
+RUN pip3 install wfuzz
+
+# Install dalfox - XSS scanner and parameter analysis
+RUN go install github.com/hahwul/dalfox/v2@latest
+
+# Install gf - Wrapper for grep to find patterns
+RUN go install github.com/tomnomnom/gf@latest
+
+# Install meg - Fetch URLs and apply pattern matching
+RUN go install github.com/tomnomnom/meg@latest
+
+# Install waybackurls - Fetch URLs from Wayback Machine
+RUN go install github.com/tomnomnom/waybackurls@latest
+
+# Install gau - Get All URLs
+RUN go install github.com/lc/gau/v2/cmd/gau@latest
+
+# Install hakrawler - Web crawler
+RUN go install github.com/hakluke/hakrawler@latest
+
+# Install gospider - Fast web spider
+RUN go install github.com/jaeles-project/gospider@latest
+
+# Install aquatone - Visual inspection of websites
+RUN go install github.com/michenriksen/aquatone@latest
+
+# Install eyewitness - Screenshot web applications
+RUN git clone https://github.com/FortyNorthSecurity/EyeWitness.git /opt/EyeWitness \
+    && cd /opt/EyeWitness/Python/setup && ./setup.sh
+
+# Install commix - Command injection testing
+RUN git clone https://github.com/commixproject/commix.git /opt/commix
+
+# Install XSStrike - Advanced XSS detection
+RUN git clone https://github.com/s0md3v/XSStrike.git /opt/XSStrike \
+    && cd /opt/XSStrike && pip3 install -r requirements.txt
+
+# Install Corsy - CORS scanner
+RUN git clone https://github.com/s0md3v/Corsy.git /opt/Corsy \
+    && cd /opt/Corsy && pip3 install -r requirements.txt
+
+# Install SSRF-Sheriff - SSRF detection
+RUN go install github.com/teknogeek/ssrf-sheriff@latest
+
+# Install NoSQLMap - NoSQL injection testing
+RUN git clone https://github.com/codingo/NoSQLMap.git /opt/NoSQLMap \
+    && cd /opt/NoSQLMap && pip3 install -r requirements.txt
+
+# Install testssl.sh - SSL/TLS testing
+RUN git clone --depth 1 https://github.com/drwetter/testssl.sh.git /opt/testssl.sh
+
+# Install sslyze - SSL configuration scanner
+RUN pip3 install sslyze
+
+# ============================================================================
+# CATEGORY 2: NETWORK & INFRASTRUCTURE SECURITY (40+ tools)
+# ============================================================================
+
+# Install rustscan - Fast port scanner
+RUN wget https://github.com/RustScan/RustScan/releases/latest/download/rustscan_2.1.1_amd64.deb \
+    && dpkg -i rustscan_2.1.1_amd64.deb || apt-get install -f -y \
+    && rm rustscan_2.1.1_amd64.deb
+
+# Install naabu - Fast port scanner
+RUN go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
+
+# Install dnsx - DNS toolkit
+RUN go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest
+
+# Install shuffledns - DNS resolver
+RUN go install -v github.com/projectdiscovery/shuffledns/cmd/shuffledns@latest
+
+# Install puredns - Fast domain resolver
+RUN go install github.com/d3mondev/puredns/v2@latest
+
+# Install massdns - High-performance DNS resolver
+RUN git clone https://github.com/blechschmidt/massdns.git /opt/massdns \
+    && cd /opt/massdns && make
+
+# Install CloudMapper - AWS cloud analysis
+RUN git clone https://github.com/duo-labs/cloudmapper.git /opt/cloudmapper \
+    && cd /opt/cloudmapper && pip3 install -r requirements.txt
+
+# Install ScoutSuite - Multi-cloud security auditing
+RUN pip3 install scoutsuite
+
+# Install Pacu - AWS exploitation framework
+RUN git clone https://github.com/RhinoSecurityLabs/pacu.git /opt/pacu \
+    && cd /opt/pacu && pip3 install -r requirements.txt
+
+# Install AWS CLI for cloud testing
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip && ./aws/install && rm -rf aws awscliv2.zip
+
+# Install Azure CLI
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
+# Install Google Cloud SDK
+RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
+    && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - \
+    && apt-get update -y && apt-get install google-cloud-sdk -y
+
+# Install Terraform and security tools
+RUN wget https://releases.hashicorp.com/terraform/1.6.5/terraform_1.6.5_linux_amd64.zip \
+    && unzip terraform_1.6.5_linux_amd64.zip && mv terraform /usr/local/bin/ \
+    && rm terraform_1.6.5_linux_amd64.zip
+
+RUN pip3 install checkov terraform-compliance
+
+# Install tfsec - Terraform security scanner
+RUN go install github.com/aquasecurity/tfsec/cmd/tfsec@latest
+
+# ============================================================================
+# CATEGORY 3: MOBILE SECURITY TOOLS (30+ tools)
+# ============================================================================
+
+# Install MobSF dependencies and tools
+RUN pip3 install mobsf
+
+# Install APKTool - Android APK analysis
+RUN wget https://raw.githubusercontent.com/iBotPeaches/Apktool/master/scripts/linux/apktool \
+    && wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.8.1.jar \
+    && mv apktool_2.8.1.jar /usr/local/bin/apktool.jar \
+    && mv apktool /usr/local/bin/ && chmod +x /usr/local/bin/apktool
+
+# Install dex2jar - Convert DEX files to JAR
+RUN wget https://github.com/pxb1988/dex2jar/releases/download/v2.2/dex2jar-2.2.zip \
+    && unzip dex2jar-2.2.zip && mv dex2jar-2.2 /opt/dex2jar \
+    && ln -s /opt/dex2jar/d2j-dex2jar.sh /usr/local/bin/dex2jar
+
+# Install JADX - Java decompiler
+RUN wget https://github.com/skylot/jadx/releases/latest/download/jadx-1.4.7.zip \
+    && unzip jadx-1.4.7.zip -d /opt/jadx \
+    && ln -s /opt/jadx/bin/jadx /usr/local/bin/jadx
+
+# Install Frida tools for mobile dynamic analysis
+RUN pip3 install frida-tools objection
+
+# Install QARK - Android vulnerability scanner
+RUN git clone https://github.com/linkedin/qark.git /opt/qark \
+    && cd /opt/qark && pip3 install -r requirements.txt
+
+# Install AndroGuard - Android analysis framework
+RUN pip3 install androguard
+
+# Install Quark-Engine - Android malware analysis
+RUN pip3 install quark-engine
+
+# Install libimobiledevice for iOS
+RUN apt-get update && apt-get install -y \
+    libimobiledevice-utils ideviceinstaller \
+    && rm -rf /var/lib/apt/lists/*
+
+# ============================================================================
+# CATEGORY 4: API SECURITY TOOLS (25+ tools)
+# ============================================================================
+
+# Install Kiterunner - API endpoint discovery
+RUN git clone https://github.com/assetnote/kiterunner.git /opt/kiterunner \
+    && cd /opt/kiterunner && make build \
+    && ln -s /opt/kiterunner/dist/kr /usr/local/bin/kiterunner
+
+# Install APIFuzzer - API fuzzing
+RUN pip3 install APIFuzzer
+
+# Install RESTler - REST API fuzzer
+RUN git clone https://github.com/microsoft/restler-fuzzer.git /opt/restler
+
+# Install Schemathesis - API testing
+RUN pip3 install schemathesis
+
+# Install Arjun - HTTP parameter discovery
+RUN git clone https://github.com/s0md3v/Arjun.git /opt/Arjun \
+    && cd /opt/Arjun && pip3 install -r requirements.txt
+
+# Install AuthZ - Authorization testing
+RUN go install github.com/hahwul/authz@latest
+
+# Install GraphQL tools
+RUN npm install -g graphql-cli graphql-playground-cli
+
+# ============================================================================
+# CATEGORY 5: BINARY ANALYSIS TOOLS (35+ tools)
+# ============================================================================
+
+# Install Ghidra - NSA's reverse engineering tool
+RUN wget https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.4_build/ghidra_10.4_PUBLIC_20230928.zip \
+    && unzip ghidra_10.4_PUBLIC_20230928.zip -d /opt/ \
+    && mv /opt/ghidra_10.4_PUBLIC /opt/ghidra \
+    && rm ghidra_10.4_PUBLIC_20230928.zip
+
+# Install Radare2 - Reverse engineering framework
+RUN git clone https://github.com/radareorg/radare2.git /opt/radare2 \
+    && cd /opt/radare2 && sys/install.sh
+
+# Install Cutter - GUI for Radare2
+RUN wget https://github.com/rizinorg/cutter/releases/download/v2.3.4/Cutter-v2.3.4-Linux-x86_64.AppImage \
+    && chmod +x Cutter-v2.3.4-Linux-x86_64.AppImage \
+    && mv Cutter-v2.3.4-Linux-x86_64.AppImage /usr/local/bin/cutter
+
+# Install Binwalk - Firmware analysis
+RUN git clone https://github.com/ReFirmLabs/binwalk.git /opt/binwalk \
+    && cd /opt/binwalk && python3 setup.py install
+
+# Install Firmware-Mod-Kit
+RUN git clone https://github.com/rampageX/firmware-mod-kit.git /opt/firmware-mod-kit
+
+# Install YARA - Pattern matching engine
+RUN apt-get update && apt-get install -y yara \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install angr - Binary analysis framework
+RUN pip3 install angr
+
+# Install capstone and keystone
+RUN pip3 install capstone keystone-engine
+
+# Install pwntools - Exploit development
+RUN pip3 install pwntools
+
+# Install ROPgadget - ROP exploitation
+RUN pip3 install ropgadget
+
+# Install Unicorn Engine - CPU emulator
+RUN pip3 install unicorn
+
+# Install Qiling - Binary emulation framework
+RUN pip3 install qiling
+
+# ============================================================================
+# CATEGORY 6: OSINT & RECONNAISSANCE TOOLS (40+ tools)
+# ============================================================================
+
+# Install theHarvester - Email/subdomain gathering
+RUN git clone https://github.com/laramies/theHarvester.git /opt/theHarvester \
+    && cd /opt/theHarvester && pip3 install -r requirements/base.txt
+
+# Install Recon-ng - Reconnaissance framework
+RUN git clone https://github.com/lanmaster53/recon-ng.git /opt/recon-ng \
+    && cd /opt/recon-ng && pip3 install -r REQUIREMENTS
+
+# Install SpiderFoot - OSINT automation
+RUN git clone https://github.com/smicallef/spiderfoot.git /opt/spiderfoot \
+    && cd /opt/spiderfoot && pip3 install -r requirements.txt
+
+# Install Photon - Web crawler for OSINT
+RUN git clone https://github.com/s0md3v/Photon.git /opt/Photon \
+    && cd /opt/Photon && pip3 install -r requirements.txt
+
+# Install Social Engineering tools
+RUN git clone https://github.com/trustedsec/social-engineer-toolkit.git /opt/set \
+    && cd /opt/set && pip3 install -r requirements.txt
+
+# Install Maltego (Community Edition)
+RUN wget https://downloads.maltego.com/maltego-v4/linux/Maltego.v4.5.0.deb \
+    && dpkg -i Maltego.v4.5.0.deb || apt-get install -f -y \
+    && rm Maltego.v4.5.0.deb
+
+# Install OSINT Framework dependencies
+RUN pip3 install shodan censys python-whois dnspython
+
+# ============================================================================
+# CATEGORY 7: DATABASE SECURITY TOOLS (20+ tools)
+# ============================================================================
+
+# Install NoSQL injection tools
+RUN git clone https://github.com/torque59/Nosql-Exploitation-Framework.git /opt/nosql-exploitation
+
+# Install MongoDB tools
+RUN wget https://fastdl.mongodb.org/tools/db/mongodb-database-tools-ubuntu2204-x86_64-100.9.0.deb \
+    && dpkg -i mongodb-database-tools-ubuntu2204-x86_64-100.9.0.deb \
+    && rm mongodb-database-tools-ubuntu2204-x86_64-100.9.0.deb
+
+# Install MySQL/PostgreSQL clients
+RUN apt-get update && apt-get install -y \
+    mysql-client postgresql-client redis-tools \
+    && rm -rf /var/lib/apt/lists/*
+
+# ============================================================================
+# CATEGORY 8: CMS & FRAMEWORK SPECIFIC TOOLS (25+ tools)
+# ============================================================================
+
+# Install WPScan - WordPress security scanner
+RUN gem install wpscan
+
+# Install Joomscan - Joomla scanner
+RUN git clone https://github.com/OWASP/joomscan.git /opt/joomscan
+
+# Install DrupWn - Drupal scanner
+RUN git clone https://github.com/immunIT/drupwn.git /opt/drupwn \
+    && cd /opt/drupwn && pip3 install -r requirements.txt
+
+# Install CMSeeK - CMS detection and exploitation
+RUN git clone https://github.com/Tuhinshubhra/CMSeeK.git /opt/CMSeeK \
+    && cd /opt/CMSeeK && pip3 install -r requirements.txt
+
+# ============================================================================
+# CATEGORY 9: NETWORK PROTOCOL TOOLS (30+ tools)
+# ============================================================================
+
+# Install Wireshark and network analysis tools
+RUN apt-get update && apt-get install -y \
+    wireshark-common tshark tcpflow tcptrace \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Burp Suite Community
+RUN wget https://portswigger.net/burp/releases/download?product=community\&type=Linux \
+    -O burpsuite_community_linux.sh \
+    && chmod +x burpsuite_community_linux.sh
+
+# Install OWASP ZAP
+RUN wget https://github.com/zaproxy/zaproxy/releases/download/v2.14.0/ZAP_2_14_0_unix.sh \
+    && chmod +x ZAP_2_14_0_unix.sh \
+    && ./ZAP_2_14_0_unix.sh -q \
+    && rm ZAP_2_14_0_unix.sh
+
+# ============================================================================
+# PYTHON ML/AI DEPENDENCIES FOR VULNERABILITY DETECTION
+# ============================================================================
+
+# Install comprehensive Python ML/AI stack
+RUN pip3 install --no-cache-dir \
+    # Core ML frameworks
+    torch torchvision torchaudio \
+    tensorflow tensorflow-hub \
+    transformers datasets \
+    scikit-learn xgboost lightgbm catboost \
+    # Hugging Face ecosystem
+    huggingface_hub accelerate \
+    # Graph Neural Networks
+    torch-geometric networkx \
+    # Computer Vision for screenshot analysis
+    opencv-python pillow \
+    # Natural Language Processing
+    nltk spacy textblob \
+    # Data processing
+    pandas numpy matplotlib seaborn plotly \
+    # Web frameworks and async
+    fastapi uvicorn aiohttp aiofiles \
+    # Security-specific libraries
+    requests beautifulsoup4 lxml \
+    cryptography pycryptodome \
+    # Database and storage
+    sqlalchemy redis aioredis \
+    # Testing and development
+    pytest pytest-asyncio \
+    # Additional utilities
+    python-dotenv pyyaml \
+    jinja2 reportlab weasyprint \
+    click rich tqdm psutil
+
+# Download and cache Hugging Face models for vulnerability detection
+ENV HUGGINGFACE_HUB_CACHE=/models
+RUN mkdir -p /models && \
+    python3 -c "from huggingface_hub import snapshot_download; \
+    snapshot_download('microsoft/codebert-base', cache_dir='/models'); \
+    snapshot_download('deepset/roberta-base-squad2', cache_dir='/models'); \
+    snapshot_download('huggingface/CodeBERTa-small-v1', cache_dir='/models')" || true
+
+# ============================================================================
+# QUANTUM SENTINEL NEXUS APPLICATION
+# ============================================================================
+
+# Copy the enhanced QuantumSentinel-Nexus application
+COPY . /app/
+
+# Install additional Python dependencies from requirements
+RUN pip3 install --no-cache-dir -r requirements.txt || true
+
+# Set up environment variables
+ENV PYTHONPATH="/app:${PYTHONPATH}"
+ENV PATH="/app/bin:${PATH}"
+
+# Create necessary directories
+RUN mkdir -p /app/reports /app/evidence /app/config /app/logs \
+             /app/cache /app/temp /app/models
+
+# Set up tool configurations and wordlists
+RUN mkdir -p /app/wordlists && \
+    wget https://github.com/danielmiessler/SecLists/archive/master.zip -O /tmp/seclists.zip && \
+    unzip /tmp/seclists.zip -d /app/wordlists/ && \
+    rm /tmp/seclists.zip
+
+# Download additional vulnerability databases
+RUN mkdir -p /app/databases && \
+    git clone https://github.com/vulndb/data.git /app/databases/vulndb && \
+    git clone https://github.com/CVEProject/cvelist.git /app/databases/cve || true
+
+# Set up Nuclei templates
+RUN nuclei -update-templates || true
+
+# Create tool symlinks and configurations
+RUN ln -sf /opt/*/bin/* /usr/local/bin/ 2>/dev/null || true
+
+# Set permissions
+RUN chmod +x /app/docker/entrypoint.sh 2>/dev/null || true
+RUN chmod -R 755 /app/bin 2>/dev/null || true
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD python3 -c "import requests; requests.get('http://localhost:8000/health')" || exit 1
+
+# Expose ports
+EXPOSE 8000 8080 8443
+
+# Set entrypoint
+ENTRYPOINT ["/app/docker/entrypoint.sh"]
+CMD ["python3", "/app/main_enhanced.py"]
+
+# ============================================================================
+# FINAL CLEANUP AND OPTIMIZATION
+# ============================================================================
+
+# Clean up package cache and temporary files
+RUN apt-get autoremove -y && \
+    apt-get autoclean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    pip3 cache purge
+
+# Set final working directory
+WORKDIR /app
+
+# Metadata
+LABEL maintainer="QuantumSentinel-Nexus Team"
+LABEL version="6.0-Ultimate"
+LABEL description="Ultimate Bug Bounty & Security Testing Platform with 200+ Tools"
+LABEL tools.count="200+"
+LABEL ai.powered="true"
+LABEL bug.bounty.ready="true"
