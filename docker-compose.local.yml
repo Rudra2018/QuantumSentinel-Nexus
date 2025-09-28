@@ -1,0 +1,221 @@
+version: '3.8'
+
+services:
+  # Binary Analysis Service
+  binary-analysis:
+    build:
+      context: ./services/binary-analysis
+      dockerfile: Dockerfile
+    ports:
+      - "8008:8008"
+    environment:
+      - SERVICE_NAME=BINARY_ANALYSIS_LOCAL
+      - SERVICE_PORT=8008
+      - ANALYSIS_TIMEOUT=3600
+      - MAX_CONCURRENT_ANALYSES=3
+    volumes:
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+    networks:
+      - quantum-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8008/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # IBB Research Engine with Binary Analysis Integration
+  ibb-research:
+    build:
+      context: ./services/ibb-research
+      dockerfile: Dockerfile.simple
+    ports:
+      - "8002:8002"
+    environment:
+      - SERVICE_NAME=IBB_RESEARCH_LOCAL
+      - SERVICE_PORT=8002
+      - BINARY_ANALYSIS_URL=http://binary-analysis:8008
+    depends_on:
+      - binary-analysis
+    volumes:
+      - ./research-data:/app/research-data
+      - ./findings:/app/findings
+      - ./logs:/app/logs
+    networks:
+      - quantum-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Web UI Dashboard
+  web-ui:
+    build: ./services/web-ui
+    ports:
+      - "8080:80"
+    environment:
+      - BACKEND_URL=http://ibb-research:8002
+      - BINARY_ANALYSIS_URL=http://binary-analysis:8008
+      - SERVICE_NAME=WEB_UI_LOCAL
+    depends_on:
+      - ibb-research
+      - binary-analysis
+    networks:
+      - quantum-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ML Intelligence Service
+  ml-intelligence:
+    build: ./services/ml-intelligence
+    ports:
+      - "8001:8001"
+    environment:
+      - SERVICE_NAME=ML_INTELLIGENCE_LOCAL
+      - SERVICE_PORT=8001
+    volumes:
+      - ./ml-models:/app/models
+      - ./logs:/app/logs
+    networks:
+      - quantum-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Reconnaissance Service
+  reconnaissance:
+    build: ./services/reconnaissance
+    ports:
+      - "8007:8007"
+    environment:
+      - SERVICE_NAME=RECONNAISSANCE_LOCAL
+      - SERVICE_PORT=8007
+    volumes:
+      - ./recon-data:/app/recon-data
+      - ./logs:/app/logs
+    networks:
+      - quantum-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8007/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Fuzzing Engine (Optional)
+  fuzzing:
+    build: ./services/fuzzing
+    ports:
+      - "8003:8003"
+    environment:
+      - SERVICE_NAME=FUZZING_LOCAL
+      - SERVICE_PORT=8003
+    volumes:
+      - ./fuzzing-corpus:/app/corpus
+      - ./logs:/app/logs
+    networks:
+      - quantum-network
+    profiles:
+      - full-stack
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # SAST-DAST Service (Optional)
+  sast-dast:
+    build: ./services/sast-dast
+    ports:
+      - "8005:8005"
+    environment:
+      - SERVICE_NAME=SAST_DAST_LOCAL
+      - SERVICE_PORT=8005
+    volumes:
+      - ./scan-results:/app/results
+      - ./logs:/app/logs
+    networks:
+      - quantum-network
+    profiles:
+      - full-stack
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8005/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Reporting Engine (Optional)
+  reporting:
+    build: ./services/reporting
+    ports:
+      - "8004:8004"
+    environment:
+      - SERVICE_NAME=REPORTING_LOCAL
+      - SERVICE_PORT=8004
+    volumes:
+      - ./reports:/app/reports
+      - ./logs:/app/logs
+    networks:
+      - quantum-network
+    profiles:
+      - full-stack
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8004/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Reverse Engineering Service (Optional)
+  reverse-engineering:
+    build: ./services/reverse-engineering
+    ports:
+      - "8006:8006"
+    environment:
+      - SERVICE_NAME=REVERSE_ENGINEERING_LOCAL
+      - SERVICE_PORT=8006
+    volumes:
+      - ./reversing-data:/app/reversing-data
+      - ./logs:/app/logs
+    networks:
+      - quantum-network
+    profiles:
+      - full-stack
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8006/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  quantum-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  uploads:
+    driver: local
+  logs:
+    driver: local
+  research-data:
+    driver: local
+  findings:
+    driver: local
+  ml-models:
+    driver: local
+  recon-data:
+    driver: local
+  fuzzing-corpus:
+    driver: local
+  scan-results:
+    driver: local
+  reports:
+    driver: local
+  reversing-data:
+    driver: local

@@ -102,17 +102,34 @@ cd QuantumSentinel-Nexus
 ./deploy-binary-analysis.sh  # Deploy binary analysis service
 ```
 
-### **2. Local Development**
+### **2. Local Development (Complete Stack)**
 ```bash
-# Install dependencies
-pip install -r requirements.txt
+# Quick start with core services (5 microservices)
+./local-start.sh
 
-# Start local development
-python quantum_commander.py --mode local
+# Full stack with all services (11 microservices)
+./local-start.sh --full
 
-# Run specific service
-cd services/ml-intelligence
+# Run in background
+./local-start.sh --full --detached
+
+# Individual service development
+cd services/binary-analysis
+pip install -r requirements-simple.txt
 python main.py
+```
+
+### **🚀 One-Command Local Setup**
+```bash
+# Clone and start complete local environment
+git clone https://github.com/Rudra2018/QuantumSentinel-Nexus.git
+cd QuantumSentinel-Nexus
+./local-start.sh --full --detached
+
+# Access services
+open http://localhost:8080  # Web Dashboard
+curl http://localhost:8008/health  # Binary Analysis
+curl http://localhost:8002/programs  # IBB Research
 ```
 
 ### **3. API Usage**
@@ -214,13 +231,66 @@ nano .env
 - **Secrets Management**: Encrypted credential storage
 - **Security Groups**: Granular network access control
 
+## 🏠 **Local Development Setup**
+
+### **Quick Start (Recommended)**
+```bash
+git clone https://github.com/Rudra2018/QuantumSentinel-Nexus.git
+cd QuantumSentinel-Nexus
+./local-start.sh --full --detached
+```
+
+### **Local Service Architecture**
+| Service | Local Port | Purpose | Docker Command |
+|---------|------------|---------|----------------|
+| **Binary Analysis** | 8008 | Advanced binary analysis & exploit development | `docker-compose up binary-analysis` |
+| **IBB Research** | 8002 | 24/7 bounty research with binary integration | `docker-compose up ibb-research` |
+| **Web Dashboard** | 8080 | Interactive management interface | `docker-compose up web-ui` |
+| **ML Intelligence** | 8001 | Machine learning and AI analysis | `docker-compose up ml-intelligence` |
+| **Reconnaissance** | 8007 | OSINT and information gathering | `docker-compose up reconnaissance` |
+
+### **Development Commands**
+```bash
+# Start core services (5 microservices)
+./local-start.sh
+
+# Start full stack (11 microservices)
+./local-start.sh --full
+
+# Rebuild and start
+./local-start.sh --full --rebuild
+
+# View logs
+docker-compose -f docker-compose.local.yml logs -f
+
+# Stop all services
+docker-compose -f docker-compose.local.yml down
+```
+
+### **Testing Local Setup**
+```bash
+# Health checks
+curl http://localhost:8008/health  # Binary Analysis
+curl http://localhost:8002/health  # IBB Research
+curl http://localhost:8080/health  # Web UI
+
+# Test binary analysis
+curl -X POST http://localhost:8008/analyze \
+  -H "Content-Type: application/json" \
+  -d '{"target": "example.com", "analysis_depth": "basic"}'
+
+# Access web dashboard
+open http://localhost:8080
+```
+
 ## 📚 **Documentation**
 
-- [**Architecture Guide**](docs/ARCHITECTURE.md)
-- [**Deployment Guide**](deployment/aws/README.md)
-- [**API Documentation**](docs/API.md)
-- [**Security Guide**](docs/SECURITY.md)
-- [**Troubleshooting**](docs/TROUBLESHOOTING.md)
+- [**📖 Local Setup Guide**](LOCAL_SETUP_GUIDE.md) - Complete local development setup
+- [**🏗️ Architecture Guide**](docs/ARCHITECTURE.md) - System architecture overview
+- [**🚀 Deployment Guide**](deployment/aws/README.md) - AWS deployment instructions
+- [**📡 API Documentation**](docs/API.md) - REST API reference
+- [**🔒 Security Guide**](docs/SECURITY.md) - Security features and best practices
+- [**🛠️ Troubleshooting**](docs/TROUBLESHOOTING.md) - Common issues and solutions
 
 ## 🤝 **Contributing**
 
