@@ -1,0 +1,60 @@
+# QuantumSentinel Reconnaissance Service - Core Dependencies
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+httpx>=0.25.2
+aiofiles>=23.2.1
+aiohttp>=3.9.1
+
+# Network Discovery and Scanning
+python-nmap>=0.7.1
+scapy>=2.5.0
+netaddr>=0.10.1
+dnspython>=2.4.2
+
+# OSINT and Passive Reconnaissance
+shodan>=1.31.0
+censys>=2.2.8
+python-whois>=0.8.0
+
+# Web Technology Discovery
+requests>=2.31.0
+beautifulsoup4>=4.12.2
+lxml>=4.9.3
+
+# Social Media and People OSINT
+tweepy>=4.14.0
+
+# Certificate and SSL Analysis
+pyopenssl>=23.3.0
+cryptography>=41.0.7
+
+# Geolocation and IP Intelligence
+geoip2>=4.8.0
+ipwhois>=1.2.0
+
+# Vulnerability Database Integration
+vulners>=2.0.7
+
+# Data Processing and Analysis
+pandas>=2.1.4
+numpy>=1.24.4
+
+# Machine Learning for Pattern Recognition
+scikit-learn>=1.3.2
+
+# Network Protocol Analysis
+pycryptodome>=3.19.0
+
+# Database and Storage
+sqlalchemy>=2.0.23
+
+# Dark Web and Tor Integration
+pysocks>=1.7.1
+
+# Logging and Monitoring
+structlog>=23.2.0
+
+# Testing
+pytest>=7.4.3
+pytest-asyncio>=0.21.1

@@ -1,0 +1,44 @@
+steps:
+  # Build the Docker image with extended timeout
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'gcr.io/quantumsentinel-nexus-9957/quantum-sentinel-ibb-research-full:latest',
+      '-f', 'Dockerfile.full',
+      '.'
+    ]
+    timeout: 3600s
+
+  # Push the image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      'gcr.io/quantumsentinel-nexus-9957/quantum-sentinel-ibb-research-full:latest'
+    ]
+
+  # Deploy to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+      'run', 'deploy', 'quantum-sentinel-ibb-research-full',
+      '--image=gcr.io/quantumsentinel-nexus-9957/quantum-sentinel-ibb-research-full:latest',
+      '--platform=managed',
+      '--region=us-central1',
+      '--allow-unauthenticated',
+      '--port=8000',
+      '--memory=8Gi',
+      '--cpu=4',
+      '--timeout=3600',
+      '--max-instances=10',
+      '--concurrency=1000'
+    ]
+
+options:
+  # Use high-performance machine type for build
+  machineType: 'E2_HIGHCPU_32'
+  diskSizeGb: 100
+
+# Set overall timeout to 24 hours for complex ML builds
+timeout: 86400s
+
+# Configure logging
+logsBucket: 'gs://quantumsentinel-build-logs'

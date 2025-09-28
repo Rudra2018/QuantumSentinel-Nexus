@@ -1,0 +1,79 @@
+# Use TensorFlow base image for comprehensive ML support
+FROM tensorflow/tensorflow:2.14.0-gpu as tensorflow-base
+
+# Install PyTorch and additional ML libraries
+RUN pip install --no-cache-dir \
+    torch>=2.0.1 \
+    torchvision>=0.15.0 \
+    torchaudio>=2.0.0 \
+    transformers>=4.30.0 \
+    huggingface-hub \
+    accelerate \
+    datasets \
+    evaluate \
+    tokenizers \
+    sentencepiece \
+    protobuf
+
+# Install additional ML and AI libraries
+RUN pip install --no-cache-dir \
+    scikit-learn>=1.3.0 \
+    xgboost \
+    lightgbm \
+    catboost \
+    pandas \
+    numpy \
+    scipy \
+    matplotlib \
+    seaborn \
+    plotly \
+    jupyter \
+    ipykernel
+
+# Production stage
+FROM tensorflow-base as production
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    jq \
+    wget \
+    unzip \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd -r quantum && useradd -r -g quantum quantum
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements and install additional dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . /app/
+
+# Create necessary directories for ML models and data
+RUN mkdir -p /app/models /app/datasets /app/checkpoints /app/experiments
+
+# Set permissions
+RUN chown -R quantum:quantum /app
+USER quantum
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Expose port
+EXPOSE 8000
+
+# Set environment variables for ML optimizations
+ENV PYTHONUNBUFFERED=1
+ENV TRANSFORMERS_CACHE=/app/models
+ENV HF_HOME=/app/models
+ENV TORCH_HOME=/app/models
+ENV TF_ENABLE_ONEDNN_OPTS=1
+ENV TF_CPP_MIN_LOG_LEVEL=2
+
+# Start application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

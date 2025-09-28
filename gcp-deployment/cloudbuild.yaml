@@ -1,0 +1,389 @@
+# Google Cloud Build configuration for QuantumSentinel-Nexus
+steps:
+  # Build base image with security tools
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-base-image'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-base:latest'
+      - '-f'
+      - 'docker/Dockerfile.base'
+      - '.'
+
+  # Build orchestration service
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-orchestration'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-orchestration:$BUILD_ID'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-orchestration:latest'
+      - '-f'
+      - 'services/orchestration/Dockerfile'
+      - 'services/orchestration'
+    waitFor: ['build-base-image']
+
+  # Build reconnaissance service
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-reconnaissance'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-reconnaissance:$BUILD_ID'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-reconnaissance:latest'
+      - '-f'
+      - 'services/reconnaissance/Dockerfile'
+      - 'services/reconnaissance'
+    waitFor: ['build-base-image']
+
+  # Build SAST/DAST engine
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-sast-dast'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-sast-dast:$BUILD_ID'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-sast-dast:latest'
+      - '-f'
+      - 'services/sast-dast/Dockerfile'
+      - 'services/sast-dast'
+    waitFor: ['build-base-image']
+
+  # Build fuzzing service
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-fuzzing'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-fuzzing:$BUILD_ID'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-fuzzing:latest'
+      - '-f'
+      - 'services/fuzzing/Dockerfile'
+      - 'services/fuzzing'
+    waitFor: ['build-base-image']
+
+  # Build reverse engineering service
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-reverse-engineering'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-reverse-engineering:$BUILD_ID'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-reverse-engineering:latest'
+      - '-f'
+      - 'services/reverse-engineering/Dockerfile'
+      - 'services/reverse-engineering'
+    waitFor: ['build-base-image']
+
+  # Build ML intelligence service
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-ml-intelligence'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-ml-intelligence:$BUILD_ID'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-ml-intelligence:latest'
+      - '-f'
+      - 'services/ml-intelligence/Dockerfile'
+      - 'services/ml-intelligence'
+    waitFor: ['build-base-image']
+
+  # Build IBB research service
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-ibb-research'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-ibb-research:$BUILD_ID'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-ibb-research:latest'
+      - '-f'
+      - 'services/ibb-research/Dockerfile'
+      - 'services/ibb-research'
+    waitFor: ['build-base-image']
+
+  # Build reporting service
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-reporting'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-reporting:$BUILD_ID'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-reporting:latest'
+      - '-f'
+      - 'services/reporting/Dockerfile'
+      - 'services/reporting'
+    waitFor: ['build-base-image']
+
+  # Build web UI
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'build-web-ui'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-web-ui:$BUILD_ID'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-web-ui:latest'
+      - '-f'
+      - 'services/web-ui/Dockerfile'
+      - 'services/web-ui'
+
+  # Run security scans on images
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'security-scan-orchestration'
+    args:
+      - 'container'
+      - 'images'
+      - 'scan'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-orchestration:$BUILD_ID'
+    waitFor: ['build-orchestration']
+
+  # Run tests
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'run-tests'
+    args:
+      - 'run'
+      - '--rm'
+      - '-v'
+      - '/workspace:/workspace'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-orchestration:$BUILD_ID'
+      - 'python'
+      - '-m'
+      - 'pytest'
+      - '/workspace/tests/'
+    waitFor: ['build-orchestration']
+
+  # Deploy to Cloud Run - Orchestration Service
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'deploy-orchestration'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'quantum-sentinel-orchestration'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-orchestration:$BUILD_ID'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '8Gi'
+      - '--cpu'
+      - '4'
+      - '--concurrency'
+      - '100'
+      - '--timeout'
+      - '3600'
+      - '--max-instances'
+      - '10'
+      - '--min-instances'
+      - '1'
+      - '--set-env-vars'
+      - 'ENVIRONMENT=production,SCAN_TIMEOUT=14400,MAX_CONCURRENT_SCANS=50'
+      - '--vpc-connector'
+      - 'quantum-vpc-connector'
+      - '--vpc-egress'
+      - 'all-traffic'
+    waitFor: ['security-scan-orchestration', 'run-tests']
+
+  # Deploy to Cloud Run - IBB Research Service
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'deploy-ibb-research'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'quantum-sentinel-ibb-research'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-ibb-research:$BUILD_ID'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--no-allow-unauthenticated'
+      - '--memory'
+      - '16Gi'
+      - '--cpu'
+      - '4'
+      - '--concurrency'
+      - '10'
+      - '--timeout'
+      - '7200'
+      - '--max-instances'
+      - '5'
+      - '--min-instances'
+      - '1'
+      - '--set-env-vars'
+      - 'IBB_CONTINUOUS_MODE=true,RESEARCH_INTERVAL=3600'
+      - '--vpc-connector'
+      - 'quantum-vpc-connector'
+      - '--vpc-egress'
+      - 'all-traffic'
+    waitFor: ['build-ibb-research']
+
+  # Deploy to Cloud Run - ML Intelligence Service
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'deploy-ml-intelligence'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'quantum-sentinel-ml-intelligence'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-ml-intelligence:$BUILD_ID'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--no-allow-unauthenticated'
+      - '--memory'
+      - '32Gi'
+      - '--cpu'
+      - '8'
+      - '--concurrency'
+      - '5'
+      - '--timeout'
+      - '7200'
+      - '--max-instances'
+      - '3'
+      - '--min-instances'
+      - '1'
+      - '--set-env-vars'
+      - 'MODEL_CACHE_PATH=/app/models,GPU_ENABLED=true'
+      - '--vpc-connector'
+      - 'quantum-vpc-connector'
+      - '--vpc-egress'
+      - 'all-traffic'
+    waitFor: ['build-ml-intelligence']
+
+  # Deploy to Cloud Run - Web UI
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'deploy-web-ui'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'quantum-sentinel-web-ui'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/quantum-sentinel-web-ui:$BUILD_ID'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '2Gi'
+      - '--cpu'
+      - '2'
+      - '--concurrency'
+      - '50'
+      - '--timeout'
+      - '300'
+      - '--max-instances'
+      - '5'
+      - '--min-instances'
+      - '1'
+      - '--port'
+      - '3000'
+    waitFor: ['build-web-ui']
+
+  # Update Cloud Run services configuration
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'update-service-configs'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        # Update orchestration service with secrets
+        gcloud run services update quantum-sentinel-orchestration \
+          --region=us-central1 \
+          --update-secrets=POSTGRES_URL=quantum-postgres-url:latest \
+          --update-secrets=REDIS_URL=quantum-redis-url:latest
+
+        # Update IBB research service with API keys
+        gcloud run services update quantum-sentinel-ibb-research \
+          --region=us-central1 \
+          --update-secrets=CHAOS_API_KEY=chaos-api-key:latest \
+          --update-secrets=CVE_API_KEY=cve-api-key:latest
+
+        # Update ML intelligence service with tokens
+        gcloud run services update quantum-sentinel-ml-intelligence \
+          --region=us-central1 \
+          --update-secrets=HUGGINGFACE_API_TOKEN=huggingface-token:latest
+    waitFor: ['deploy-orchestration', 'deploy-ibb-research', 'deploy-ml-intelligence']
+
+  # Set up Cloud Monitoring and Alerting
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: 'setup-monitoring'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        # Create monitoring dashboard
+        gcloud monitoring dashboards create --config-from-file=gcp-deployment/monitoring/dashboard.yaml
+
+        # Create alert policies
+        gcloud alpha monitoring policies create --policy-from-file=gcp-deployment/monitoring/alert-policies.yaml
+    waitFor: ['deploy-orchestration']
+
+  # Warm up services
+  - name: 'gcr.io/cloud-builders/curl'
+    id: 'warm-up-services'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        # Get service URLs
+        ORCHESTRATION_URL=$(gcloud run services describe quantum-sentinel-orchestration --region=us-central1 --format="value(status.url)")
+
+        # Warm up orchestration service
+        curl -f "$ORCHESTRATION_URL/health" || echo "Orchestration service warming up..."
+
+        # Wait for services to be ready
+        sleep 30
+
+        # Test health endpoints
+        curl -f "$ORCHESTRATION_URL/health" && echo "✅ Orchestration service ready"
+    waitFor: ['update-service-configs']
+
+# Build options
+options:
+  machineType: 'E2_HIGHCPU_32'
+  diskSizeGb: 100
+  logging: CLOUD_LOGGING_ONLY
+
+# Build timeout (2 hours)
+timeout: 7200s
+
+# Images to push to Container Registry
+images:
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-base:latest'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-orchestration:$BUILD_ID'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-orchestration:latest'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-reconnaissance:$BUILD_ID'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-reconnaissance:latest'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-sast-dast:$BUILD_ID'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-sast-dast:latest'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-fuzzing:$BUILD_ID'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-fuzzing:latest'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-reverse-engineering:$BUILD_ID'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-reverse-engineering:latest'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-ml-intelligence:$BUILD_ID'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-ml-intelligence:latest'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-ibb-research:$BUILD_ID'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-ibb-research:latest'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-reporting:$BUILD_ID'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-reporting:latest'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-web-ui:$BUILD_ID'
+  - 'gcr.io/$PROJECT_ID/quantum-sentinel-web-ui:latest'
+
+# Substitutions
+substitutions:
+  _REGION: 'us-central1'
+  _ENVIRONMENT: 'production'

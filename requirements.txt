@@ -1,5 +1,11 @@
 # QuantumSentinel-Nexus Comprehensive Security Framework Requirements
 # Version 3.0 - Recon, OSINT, and Bug Bounty Tools Integration
+# AWS Cloud Integration
+
+# AWS SDK and Cloud Services
+boto3>=1.34.0
+botocore>=1.34.0
+awscli>=2.15.0
 
 # Core Python framework
 aiofiles>=23.2.1
@@ -40,6 +46,11 @@ plotly>=5.17.0
 jinja2>=3.1.2
 weasyprint>=60.1
 reportlab>=4.0.7
+click==8.1.7  # For CLI commands
+requests==2.32.3  # For API calls
+anthropic==0.3.11  # For Claude AI (get API key from anthropic.com)
+frida==16.4.3  # For mobile dynamic analysis (install via pip, but needs Frida server on device)
+mobsfscan==0.3.1  # Mobile Security Framework for static APK analysis
 
 # PDF and document processing
 pypdf2>=3.0.1
@@ -129,7 +140,7 @@ androguard>=3.4.0a1
 tensorflow>=2.13.0
 torch>=2.0.1
 transformers>=4.35.0
-sklearn>=0.0.post10
+scikit-learn>=1.3.0
 xgboost>=2.0.0
 
 # Advanced ML libraries for AI validation

@@ -1,0 +1,299 @@
+version: '3.8'
+
+services:
+  # Core Orchestration Service
+  orchestration-service:
+    build:
+      context: ./services/orchestration
+      dockerfile: Dockerfile
+    container_name: quantum-orchestration
+    environment:
+      - ENVIRONMENT=production
+      - REDIS_URL=redis://redis:6379
+      - POSTGRES_URL=postgresql://postgres:password@postgres:5432/quantum_sentinel
+      - SCAN_TIMEOUT=14400
+      - MAX_CONCURRENT_SCANS=10
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - postgres
+      - pubsub-emulator
+    volumes:
+      - ./logs:/app/logs
+      - ./reports:/app/reports
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Reconnaissance Agent Service
+  recon-agent:
+    build:
+      context: ./services/reconnaissance
+      dockerfile: Dockerfile
+    container_name: quantum-recon
+    environment:
+      - CHAOS_API_KEY=${CHAOS_API_KEY}
+      - SUBFINDER_API_KEYS=${SUBFINDER_API_KEYS}
+      - AMASS_CONFIG=/app/config/amass.ini
+      - WORKER_CONCURRENCY=5
+    volumes:
+      - ./tools:/app/tools
+      - ./wordlists:/app/wordlists
+      - ./config:/app/config
+    restart: unless-stopped
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          memory: 4G
+          cpus: '2.0'
+
+  # SAST/DAST Engine Service
+  sast-dast-engine:
+    build:
+      context: ./services/sast-dast
+      dockerfile: Dockerfile
+    container_name: quantum-sast-dast
+    environment:
+      - SEMGREP_APP_TOKEN=${SEMGREP_APP_TOKEN}
+      - NUCLEI_TEMPLATES_PATH=/app/nuclei-templates
+      - ZAP_DAEMON_PORT=8080
+    volumes:
+      - ./nuclei-templates:/app/nuclei-templates
+      - ./semgrep-rules:/app/semgrep-rules
+      - ./scan-results:/app/scan-results
+    ports:
+      - "8080:8080"  # ZAP daemon
+    restart: unless-stopped
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          memory: 8G
+          cpus: '4.0'
+
+  # Fuzzing Framework Service
+  fuzzing-service:
+    build:
+      context: ./services/fuzzing
+      dockerfile: Dockerfile
+    container_name: quantum-fuzzing
+    environment:
+      - AFL_CORES=4
+      - FUZZING_TIMEOUT=3600
+      - CORPUS_PATH=/app/corpus
+    volumes:
+      - ./fuzzing-corpus:/app/corpus
+      - ./fuzzing-results:/app/results
+    privileged: true  # Required for AFL++
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+          cpus: '4.0'
+
+  # Reverse Engineering Module
+  reverse-engineering:
+    build:
+      context: ./services/reverse-engineering
+      dockerfile: Dockerfile
+    container_name: quantum-reverse-eng
+    environment:
+      - GHIDRA_HEADLESS=true
+      - RADARE2_CONFIG=/app/config/radare2.conf
+    volumes:
+      - ./binaries:/app/binaries
+      - ./reverse-results:/app/results
+      - ./ghidra-projects:/app/ghidra-projects
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 16G
+          cpus: '8.0'
+
+  # ML Intelligence Agent
+  ml-intelligence:
+    build:
+      context: ./services/ml-intelligence
+      dockerfile: Dockerfile
+    container_name: quantum-ml
+    environment:
+      - HUGGINGFACE_API_TOKEN=${HUGGINGFACE_API_TOKEN}
+      - MODEL_CACHE_PATH=/app/models
+      - GPU_ENABLED=true
+    volumes:
+      - ./ml-models:/app/models
+      - ./ml-data:/app/data
+      - ./ml-results:/app/results
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 32G
+          cpus: '8.0'
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  # IBB Research Module
+  ibb-research:
+    build:
+      context: ./services/ibb-research
+      dockerfile: Dockerfile
+    container_name: quantum-ibb-research
+    environment:
+      - IBB_CONTINUOUS_MODE=true
+      - RESEARCH_INTERVAL=3600
+      - CVE_API_KEY=${CVE_API_KEY}
+      - EXPLOIT_DB_API=${EXPLOIT_DB_API}
+    volumes:
+      - ./research-data:/app/research-data
+      - ./research-findings:/app/findings
+      - ./academic-papers:/app/papers
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 16G
+          cpus: '4.0'
+
+  # Reporting Service
+  reporting-service:
+    build:
+      context: ./services/reporting
+      dockerfile: Dockerfile
+    container_name: quantum-reporting
+    environment:
+      - REPORT_STORAGE_PATH=/app/reports
+      - PDF_GENERATION_TIMEOUT=300
+      - EVIDENCE_STORAGE_PATH=/app/evidence
+    volumes:
+      - ./reports:/app/reports
+      - ./evidence:/app/evidence
+      - ./templates:/app/templates
+    ports:
+      - "8001:8000"
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: '2.0'
+
+  # Web UI Dashboard
+  web-dashboard:
+    build:
+      context: ./services/web-ui
+      dockerfile: Dockerfile
+    container_name: quantum-dashboard
+    environment:
+      - REACT_APP_API_URL=http://orchestration-service:8000
+      - REACT_APP_WEBSOCKET_URL=ws://orchestration-service:8000/ws
+    ports:
+      - "3000:3000"
+    depends_on:
+      - orchestration-service
+    restart: unless-stopped
+
+  # Database Services
+  postgres:
+    image: postgres:15-alpine
+    container_name: quantum-postgres
+    environment:
+      - POSTGRES_DB=quantum_sentinel
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: quantum-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+
+  # Google Cloud Pub/Sub Emulator for local development
+  pubsub-emulator:
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+    container_name: quantum-pubsub
+    ports:
+      - "8085:8085"
+    command: gcloud beta emulators pubsub start --host-port=0.0.0.0:8085
+    restart: unless-stopped
+
+  # Monitoring and Observability
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: quantum-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: quantum-grafana
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana-dashboards:/var/lib/grafana/dashboards
+    restart: unless-stopped
+
+  # Log aggregation
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: quantum-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    restart: unless-stopped
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: quantum-kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:
+  elasticsearch_data:
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

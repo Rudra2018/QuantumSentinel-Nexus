@@ -1,0 +1,35 @@
+steps:
+  # Build the Docker image with extended timeout
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'gcr.io/quantumsentinel-nexus-9957/quantum-sentinel-ml-intelligence:latest',
+      '-f', 'Dockerfile.full',
+      '.'
+    ]
+    timeout: 3600s
+
+  # Push the image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      'gcr.io/quantumsentinel-nexus-9957/quantum-sentinel-ml-intelligence:latest'
+    ]
+
+  # Deploy to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+      'run', 'deploy', 'quantum-sentinel-ml-intelligence',
+      '--image=gcr.io/quantumsentinel-nexus-9957/quantum-sentinel-ml-intelligence:latest',
+      '--platform=managed',
+      '--region=us-central1',
+      '--allow-unauthenticated',
+      '--port=8000',
+      '--memory=8Gi',
+      '--cpu=4',
+      '--timeout=3600',
+      '--max-instances=5'
+    ]
+
+# Set timeout for complex ML builds
+timeout: 7200s

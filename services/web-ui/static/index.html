@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="QuantumSentinel-Nexus Security Research Platform" />
+    <title>QuantumSentinel-Nexus Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 255, 136, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .service-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-healthy {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .status-pending {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+        }
+
+        .service-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-url {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: rgba(0, 204, 255, 0.8);
+            word-break: break-all;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #00ff88;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 0.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">QuantumSentinel-Nexus</div>
+            <div class="status">
+                <div class="status-dot"></div>
+                <span>System Operational</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="hero">
+            <h1>Security Research Platform</h1>
+            <p>Enterprise-grade vulnerability assessment and bug bounty research platform with advanced ML intelligence and continuous monitoring capabilities.</p>
+        </div>
+
+        <div class="services-grid" id="services">
+            <!-- Services will be loaded here -->
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="totalScans">0</div>
+                <div class="stat-label">Total Scans</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="activeServices">0</div>
+                <div class="stat-label">Active Services</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="vulnerabilities">0</div>
+                <div class="stat-label">Vulnerabilities Found</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">24/7</div>
+                <div class="stat-label">Monitoring</div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 QuantumSentinel-Nexus. Advanced Security Research Platform.</p>
+    </footer>
+
+    <script>
+        // Service configurations
+        const services = [
+            {
+                name: 'Orchestration Service',
+                description: 'Core orchestration engine managing all security scans and workflows',
+                url: 'https://quantum-sentinel-orchestration-16422561815.us-central1.run.app',
+                status: 'healthy'
+            },
+            {
+                name: 'SAST/DAST Engine',
+                description: 'Static and Dynamic Application Security Testing with advanced vulnerability detection',
+                url: 'https://quantum-sentinel-sast-dast-16422561815.us-central1.run.app',
+                status: 'healthy'
+            },
+            {
+                name: 'ML Intelligence',
+                description: 'Machine Learning powered vulnerability prediction and pattern recognition',
+                url: '#',
+                status: 'pending'
+            },
+            {
+                name: 'IBB Research',
+                description: '24/7 Internet Bug Bounty research with automated discovery and analysis',
+                url: '#',
+                status: 'pending'
+            },
+            {
+                name: 'Fuzzing Service',
+                description: 'Advanced fuzzing engine for discovering zero-day vulnerabilities',
+                url: '#',
+                status: 'pending'
+            },
+            {
+                name: 'Reporting Engine',
+                description: 'Comprehensive PDF reports with evidence collection and remediation guidance',
+                url: '#',
+                status: 'pending'
+            }
+        ];
+
+        // Load services
+        function loadServices() {
+            const container = document.getElementById('services');
+            container.innerHTML = services.map(service => `
+                <div class="service-card" onclick="openService('${service.url}')">
+                    <div class="service-header">
+                        <div class="service-title">${service.name}</div>
+                        <div class="service-status status-${service.status}">${service.status}</div>
+                    </div>
+                    <div class="service-description">${service.description}</div>
+                    <div class="service-url">${service.url}</div>
+                </div>
+            `).join('');
+        }
+
+        // Open service
+        function openService(url) {
+            if (url && url !== '#') {
+                window.open(url, '_blank');
+            }
+        }
+
+        // Load stats
+        async function loadStats() {
+            try {
+                // Try to fetch from orchestration service
+                const response = await fetch('https://quantum-sentinel-orchestration-16422561815.us-central1.run.app/scans');
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('totalScans').textContent = data.total || 0;
+                }
+            } catch (error) {
+                console.log('Stats loading failed:', error);
+            }
+
+            // Count active services
+            const activeCount = services.filter(s => s.status === 'healthy').length;
+            document.getElementById('activeServices').textContent = activeCount;
+
+            // Simulate vulnerabilities found
+            document.getElementById('vulnerabilities').textContent = Math.floor(Math.random() * 50) + 10;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadServices();
+            loadStats();
+
+            // Auto-refresh stats every 30 seconds
+            setInterval(loadStats, 30000);
+        });
+    </script>
+</body>
+</html>

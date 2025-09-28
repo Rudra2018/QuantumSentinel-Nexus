@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 QuantumSentinel-Nexus Cloud Infrastructure Security Engine
-Comprehensive cloud security assessment for AWS, Azure, GCP, and Kubernetes
+Comprehensive cloud security assessment for AWS, Azure, and Kubernetes
 """
 
 import asyncio
@@ -59,7 +59,6 @@ class CloudInfrastructureSecurityEngine:
         # Cloud security scanners
         self.aws_scanner = AWSSecurityScanner()
         self.azure_scanner = AzureSecurityScanner()
-        self.gcp_scanner = GCPSecurityScanner()
         self.k8s_scanner = KubernetesSecurityScanner()
 
     async def comprehensive_cloud_security_assessment(self) -> Dict[str, Any]:
@@ -77,10 +76,10 @@ class CloudInfrastructureSecurityEngine:
         azure_results = await self.azure_scanner.assess_azure_infrastructure()
         self.assessment_results["azure_assessment"] = azure_results
 
-        # Phase 3: Google Cloud Security Assessment
-        print("\n🟡 Google Cloud Security Assessment")
-        gcp_results = await self.gcp_scanner.assess_gcp_infrastructure()
-        self.assessment_results["gcp_assessment"] = gcp_results
+        # Phase 3: AWS-Focused Enhanced Assessment
+        print("\n🟠 AWS Enhanced Security Scanning")
+        aws_enhanced_results = await self.aws_scanner.enhanced_aws_assessment()
+        self.assessment_results["aws_enhanced_assessment"] = aws_enhanced_results
 
         # Phase 4: Kubernetes Security Assessment
         print("\n⚓ Kubernetes Security Assessment")
@@ -123,7 +122,7 @@ class CloudInfrastructureSecurityEngine:
             affected_clouds = []
 
             # Check each cloud provider
-            for provider in ["aws_assessment", "azure_assessment", "gcp_assessment"]:
+            for provider in ["aws_assessment", "azure_assessment"]:
                 if provider in self.assessment_results:
                     resources = self.assessment_results[provider].get("resources", [])
                     for resource in resources:
@@ -184,7 +183,7 @@ class CloudInfrastructureSecurityEngine:
         total_vulns = 0
         high_severity_vulns = 0
 
-        for assessment_key in ["aws_assessment", "azure_assessment", "gcp_assessment", "kubernetes_assessment"]:
+        for assessment_key in ["aws_assessment", "azure_assessment", "kubernetes_assessment"]:
             if assessment_key in self.assessment_results:
                 resources = self.assessment_results[assessment_key].get("resources", [])
                 for resource in resources:
@@ -491,95 +490,6 @@ class AzureSecurityScanner:
             }
         }
 
-class GCPSecurityScanner:
-    """Google Cloud Platform security scanner"""
-
-    async def assess_gcp_infrastructure(self) -> Dict[str, Any]:
-        """Assess GCP infrastructure security"""
-        print("  🔍 Scanning GCP Resources...")
-
-        gcp_results = {
-            "provider": "GCP",
-            "projects_scanned": ["healthcare-prod", "healthcare-dev"],
-            "regions_assessed": ["us-central1", "us-east1"],
-            "services_assessed": ["Compute Engine", "Cloud Storage", "Cloud SQL", "IAM"],
-            "resources": [],
-            "total_vulnerabilities": 0
-        }
-
-        # Simulate Cloud Storage assessment
-        storage_resource = await self._assess_cloud_storage()
-        gcp_results["resources"].append(storage_resource)
-
-        # Simulate Compute Engine assessment
-        compute_resource = await self._assess_compute_engine()
-        gcp_results["resources"].append(compute_resource)
-
-        gcp_results["total_vulnerabilities"] = sum(
-            len(resource.get("vulnerabilities", [])) for resource in gcp_results["resources"]
-        )
-
-        return gcp_results
-
-    async def _assess_cloud_storage(self) -> Dict[str, Any]:
-        """Assess Cloud Storage buckets"""
-        vulnerabilities = []
-
-        # Public bucket
-        public_bucket_vuln = {
-            "vuln_id": "GCP-CS-001",
-            "vuln_type": "Publicly Accessible Bucket",
-            "severity": "Critical",
-            "description": "Cloud Storage bucket is publicly readable",
-            "remediation": "Remove allUsers and allAuthenticatedUsers from bucket IAM",
-            "cvss_score": 9.0,
-            "confidence": 0.96
-        }
-        vulnerabilities.append(public_bucket_vuln)
-
-        return {
-            "resource_type": "Cloud Storage Bucket",
-            "resource_id": "healthcare-patient-data",
-            "resource_name": "patient-records-bucket",
-            "region": "us-central1",
-            "vulnerabilities": vulnerabilities,
-            "configuration": {
-                "uniform_bucket_access": False,
-                "public_access_prevention": False,
-                "encryption": "Google-managed",
-                "lifecycle_policy": None
-            }
-        }
-
-    async def _assess_compute_engine(self) -> Dict[str, Any]:
-        """Assess Compute Engine instances"""
-        vulnerabilities = []
-
-        # External IP exposure
-        external_ip_vuln = {
-            "vuln_id": "GCP-CE-001",
-            "vuln_type": "External IP Exposure",
-            "severity": "Medium",
-            "description": "Compute instance has external IP with broad firewall rules",
-            "remediation": "Use internal IPs and Cloud NAT for outbound traffic",
-            "cvss_score": 6.1,
-            "confidence": 0.81
-        }
-        vulnerabilities.append(external_ip_vuln)
-
-        return {
-            "resource_type": "Compute Engine Instance",
-            "resource_id": "healthcare-web-vm",
-            "resource_name": "web-application-server",
-            "region": "us-central1-a",
-            "vulnerabilities": vulnerabilities,
-            "configuration": {
-                "external_ip": True,
-                "disk_encryption": "Google-managed",
-                "service_account": "default",
-                "firewall_tags": ["web-server"]
-            }
-        }
 
 class KubernetesSecurityScanner:
     """Kubernetes security scanner"""
@@ -737,14 +647,14 @@ async def main():
     total_vulns = 0
     critical_vulns = 0
 
-    for assessment_key in ["aws_assessment", "azure_assessment", "gcp_assessment", "kubernetes_assessment"]:
+    for assessment_key in ["aws_assessment", "azure_assessment", "kubernetes_assessment"]:
         if assessment_key in results:
             total_vulns += results[assessment_key].get("total_vulnerabilities", 0)
             for resource in results[assessment_key].get("resources", []):
                 critical_vulns += len([v for v in resource.get("vulnerabilities", []) if v.get("severity") == "Critical"])
 
     print(f"\n📈 CLOUD SECURITY SUMMARY:")
-    print(f"  • Cloud Providers Assessed: 4 (AWS, Azure, GCP, Kubernetes)")
+    print(f"  • Cloud Providers Assessed: 3 (AWS, Azure, Kubernetes)")
     print(f"  • Total Vulnerabilities: {total_vulns}")
     print(f"  • Critical Vulnerabilities: {critical_vulns}")
     print(f"  • Overall Risk Level: {results.get('risk_assessment', {}).get('risk_level', 'UNKNOWN')}")

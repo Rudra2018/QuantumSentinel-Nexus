@@ -1,0 +1,127 @@
+# Use Ubuntu base for better package availability and reverse engineering tools
+FROM ubuntu:22.04 as base
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+
+# Install system dependencies for reverse engineering and binary analysis
+RUN apt-get update && apt-get install -y \
+    python3.11 \
+    python3.11-dev \
+    python3-pip \
+    python3.11-venv \
+    curl \
+    git \
+    jq \
+    wget \
+    unzip \
+    build-essential \
+    cmake \
+    pkg-config \
+    # Reverse engineering tools
+    binutils \
+    gdb \
+    strace \
+    ltrace \
+    xxd \
+    file \
+    # Binary analysis tools
+    binwalk \
+    # Network analysis
+    nmap \
+    netcat-openbsd \
+    # Cryptographic tools
+    openssl \
+    # System libraries for Python packages
+    libmagic1 \
+    libmagic-dev \
+    libssl-dev \
+    libffi-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    zlib1g-dev \
+    # Image processing
+    libjpeg-dev \
+    libpng-dev \
+    # Archive tools
+    p7zip-full \
+    # Additional utilities
+    htop \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create Python alias and install pip
+RUN ln -s /usr/bin/python3.11 /usr/bin/python && \
+    python -m pip install --upgrade pip
+
+# Create virtual environment
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Install Python dependencies with extended timeout
+COPY requirements.txt .
+RUN pip install --no-cache-dir \
+    --timeout 1000 \
+    --retries 5 \
+    -r requirements.txt
+
+# Production stage
+FROM ubuntu:22.04 as production
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+
+# Install only runtime dependencies
+RUN apt-get update && apt-get install -y \
+    python3.11 \
+    curl \
+    binutils \
+    gdb \
+    strace \
+    xxd \
+    file \
+    binwalk \
+    nmap \
+    netcat-openbsd \
+    openssl \
+    libmagic1 \
+    p7zip-full \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd -r quantum && useradd -r -g quantum quantum
+
+# Create Python alias
+RUN ln -s /usr/bin/python3.11 /usr/bin/python
+
+# Copy virtual environment from builder
+COPY --from=base /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Set working directory
+WORKDIR /app
+
+# Copy application code
+COPY . /app/
+
+# Create necessary directories for reverse engineering
+RUN mkdir -p /app/uploads /app/analysis /app/yara_rules /app/models /app/results /app/sandbox
+
+# Set permissions
+RUN chown -R quantum:quantum /app
+USER quantum
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Expose port
+EXPOSE 8000
+
+# Set environment variables for reverse engineering optimizations
+ENV RADARE2_HOME=/app/radare2
+ENV YARA_RULES_DIR=/app/yara_rules
+ENV ANALYSIS_DIR=/app/analysis
+
+# Start application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

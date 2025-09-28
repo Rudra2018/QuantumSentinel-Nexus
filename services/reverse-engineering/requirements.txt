@@ -1,0 +1,81 @@
+# QuantumSentinel Reverse Engineering Service - Core Binary Analysis
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+httpx>=0.25.2
+aiofiles>=23.2.1
+aiohttp>=3.9.1
+
+# Binary Analysis and Disassembly
+capstone>=5.0.1
+pefile>=2023.2.7
+pyelftools>=0.30
+lief>=0.13.2
+
+# Malware Analysis
+yara-python>=4.3.1
+python-magic>=0.4.27
+ssdeep>=3.4
+tlsh>=4.7.2
+
+# Cryptographic Analysis
+cryptography>=41.0.7
+pycryptodome>=3.19.0
+
+# Assembly and Machine Code Analysis
+r2pipe>=1.7.4
+
+# Network Protocol Analysis
+scapy>=2.5.0
+impacket>=0.11.0
+
+# Firmware Analysis
+binwalk>=2.3.4
+
+# Code Analysis and Decompilation
+uncompyle6>=3.9.1
+
+# Web Technology Analysis
+beautifulsoup4>=4.12.2
+requests>=2.31.0
+
+# Machine Learning for Pattern Recognition
+scikit-learn>=1.3.2
+joblib>=1.3.2
+numpy>=1.24.4
+pandas>=2.1.4
+
+# Database and Storage
+sqlalchemy>=2.0.23
+
+# File Format Analysis
+pypdf>=3.17.0
+python-docx>=1.1.0
+openpyxl>=3.1.2
+oletools>=0.60.1
+
+# Hex Editors and Binary Utilities
+hexdump>=3.3
+binaryornot>=0.4.4
+
+# System Analysis
+psutil>=5.9.6
+
+# Steganography and Forensics
+pillow>=10.1.0
+exifread>=3.0.0
+
+# Compression and Archives
+py7zr>=0.20.8
+
+# Network Analysis
+python-nmap>=0.7.1
+netaddr>=0.10.1
+dnspython>=2.4.2
+
+# Logging and Monitoring
+structlog>=23.2.0
+
+# Testing
+pytest>=7.4.3
+pytest-asyncio>=0.21.1

@@ -1,0 +1,131 @@
+# Use Ubuntu base for better package availability
+FROM ubuntu:22.04 as base
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+
+# Install system dependencies for PDF generation and reporting
+RUN apt-get update && apt-get install -y \
+    python3.11 \
+    python3.11-dev \
+    python3-pip \
+    python3.11-venv \
+    curl \
+    git \
+    jq \
+    wget \
+    unzip \
+    build-essential \
+    cmake \
+    pkg-config \
+    # PDF generation dependencies
+    wkhtmltopdf \
+    xvfb \
+    fontconfig \
+    fonts-liberation \
+    fonts-dejavu-core \
+    # WeasyPrint dependencies
+    libcairo2-dev \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libgdk-pixbuf-2.0-0 \
+    libffi-dev \
+    shared-mime-info \
+    # Image processing
+    libjpeg-dev \
+    libpng-dev \
+    libfreetype6-dev \
+    # OpenCV dependencies
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgomp1 \
+    # Network tools
+    nmap \
+    dnsutils \
+    netcat-openbsd \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create Python alias and install pip
+RUN ln -s /usr/bin/python3.11 /usr/bin/python && \
+    python -m pip install --upgrade pip
+
+# Create virtual environment
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Install Python dependencies with optimized versions
+COPY requirements.txt .
+RUN pip install --no-cache-dir \
+    --timeout 1000 \
+    --retries 5 \
+    -r requirements.txt
+
+# Production stage
+FROM ubuntu:22.04 as production
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+
+# Install only runtime dependencies
+RUN apt-get update && apt-get install -y \
+    python3.11 \
+    curl \
+    wkhtmltopdf \
+    xvfb \
+    fontconfig \
+    fonts-liberation \
+    fonts-dejavu-core \
+    libcairo2 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libgdk-pixbuf-2.0-0 \
+    libffi8 \
+    shared-mime-info \
+    libjpeg8 \
+    libpng16-16 \
+    libfreetype6 \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender1 \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd -r quantum && useradd -r -g quantum quantum
+
+# Create Python alias
+RUN ln -s /usr/bin/python3.11 /usr/bin/python
+
+# Copy virtual environment from builder
+COPY --from=base /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Set working directory
+WORKDIR /app
+
+# Copy application code
+COPY . /app/
+
+# Create necessary directories for reports
+RUN mkdir -p /app/reports /app/templates /app/assets /app/charts /app/exports
+
+# Set permissions
+RUN chown -R quantum:quantum /app
+USER quantum
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Expose port
+EXPOSE 8000
+
+# Set environment variables for optimizations
+ENV MPLBACKEND=Agg
+ENV WEASYPRINT_DPI=96
+
+# Start application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

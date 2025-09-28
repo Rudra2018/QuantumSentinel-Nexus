@@ -1,0 +1,476 @@
+# QuantumSentinel-Nexus Enterprise Integration Configuration
+# This file contains configuration for all external API integrations
+
+# ================================================
+# OSINT AND INTELLIGENCE PLATFORMS
+# ================================================
+
+# Shodan - Internet-connected device search engine
+shodan:
+  api_key: "${SHODAN_API_KEY}"
+  url: "https://api.shodan.io"
+  rate_limit: 1000  # requests per month for free tier
+  features:
+    - host_search
+    - vulnerability_data
+    - network_monitoring
+    - industrial_control_systems
+
+# Censys - Internet scanning and intelligence
+censys:
+  api_id: "${CENSYS_API_ID}"
+  secret: "${CENSYS_SECRET}"
+  url: "https://search.censys.io/api/v2"
+  rate_limit: 120  # requests per hour
+  features:
+    - certificate_search
+    - host_discovery
+    - internet_scanning
+
+# VirusTotal - File and URL analysis
+virustotal:
+  api_key: "${VIRUSTOTAL_API_KEY}"
+  url: "https://www.virustotal.com/vtapi/v2"
+  rate_limit: 4  # requests per minute for free tier
+  features:
+    - file_analysis
+    - url_analysis
+    - domain_analysis
+    - ip_analysis
+
+# Have I Been Pwned - Breach data
+hibp:
+  api_key: "${HIBP_API_KEY}"
+  url: "https://haveibeenpwned.com/api/v3"
+  features:
+    - breach_search
+    - paste_search
+    - password_exposure
+
+# ================================================
+# VULNERABILITY DATABASES
+# ================================================
+
+# National Vulnerability Database
+nvd:
+  url: "https://services.nvd.nist.gov/rest/json"
+  api_key: "${NVD_API_KEY}"  # Optional, increases rate limits
+  rate_limit: 2000  # requests per hour without key
+  features:
+    - cve_data
+    - cpn_data
+    - vulnerability_metrics
+
+# CVE Details
+cve_details:
+  url: "https://cvedetails.com/api"
+  features:
+    - vulnerability_statistics
+    - vendor_data
+    - product_data
+
+# Vulners.com
+vulners:
+  api_key: "${VULNERS_API_KEY}"
+  url: "https://vulners.com/api/v3"
+  rate_limit: 1000  # requests per day
+  features:
+    - vulnerability_search
+    - exploit_database
+    - security_bulletins
+
+# ================================================
+# CLOUD SECURITY PLATFORMS
+# ================================================
+
+# AWS Security Hub
+aws_security_hub:
+  access_key: "${AWS_ACCESS_KEY_ID}"
+  secret_key: "${AWS_SECRET_ACCESS_KEY}"
+  region: "${AWS_DEFAULT_REGION}"
+  features:
+    - security_findings
+    - compliance_status
+    - threat_intelligence
+
+# Azure Security Center
+azure_security_center:
+  client_id: "${AZURE_CLIENT_ID}"
+  client_secret: "${AZURE_CLIENT_SECRET}"
+  tenant_id: "${AZURE_TENANT_ID}"
+  subscription_id: "${AZURE_SUBSCRIPTION_ID}"
+  features:
+    - security_alerts
+    - recommendations
+    - compliance_assessment
+
+# Google Cloud Security Command Center
+gcp_scc:
+  service_account_key: "${GCP_SERVICE_ACCOUNT_KEY}"
+  project_id: "${GCP_PROJECT_ID}"
+  features:
+    - security_findings
+    - asset_discovery
+    - threat_detection
+
+# ================================================
+# THREAT INTELLIGENCE PLATFORMS
+# ================================================
+
+# IBM X-Force Exchange
+ibm_xforce:
+  api_key: "${IBM_XFORCE_API_KEY}"
+  password: "${IBM_XFORCE_PASSWORD}"
+  url: "https://api.xforce.ibmcloud.com"
+  features:
+    - threat_intelligence
+    - malware_analysis
+    - vulnerability_data
+
+# AlienVault OTX
+otx:
+  api_key: "${OTX_API_KEY}"
+  url: "https://otx.alienvault.com/api/v1"
+  features:
+    - threat_indicators
+    - pulse_data
+    - reputation_data
+
+# ThreatCrowd
+threatcrowd:
+  url: "https://www.threatcrowd.org/searchApi/v2"
+  rate_limit: 1  # request per 10 seconds
+  features:
+    - domain_search
+    - ip_search
+    - file_search
+
+# ================================================
+# SOCIAL MEDIA AND OSINT
+# ================================================
+
+# Twitter API v2
+twitter:
+  bearer_token: "${TWITTER_BEARER_TOKEN}"
+  api_key: "${TWITTER_API_KEY}"
+  api_secret: "${TWITTER_API_SECRET}"
+  access_token: "${TWITTER_ACCESS_TOKEN}"
+  access_token_secret: "${TWITTER_ACCESS_TOKEN_SECRET}"
+  url: "https://api.twitter.com/2"
+  features:
+    - tweet_search
+    - user_timeline
+    - trend_analysis
+
+# LinkedIn API
+linkedin:
+  client_id: "${LINKEDIN_CLIENT_ID}"
+  client_secret: "${LINKEDIN_CLIENT_SECRET}"
+  url: "https://api.linkedin.com/v2"
+  features:
+    - profile_search
+    - company_data
+    - network_analysis
+
+# GitHub API
+github:
+  token: "${GITHUB_TOKEN}"
+  url: "https://api.github.com"
+  features:
+    - repository_search
+    - user_data
+    - code_search
+    - organization_data
+
+# ================================================
+# MALWARE ANALYSIS PLATFORMS
+# ================================================
+
+# Hybrid Analysis
+hybrid_analysis:
+  api_key: "${HYBRID_ANALYSIS_API_KEY}"
+  url: "https://www.hybrid-analysis.com/api/v2"
+  features:
+    - malware_analysis
+    - sandbox_execution
+    - threat_assessment
+
+# Joe Sandbox
+joe_sandbox:
+  api_key: "${JOE_SANDBOX_API_KEY}"
+  url: "https://jbxcloud.joesecurity.org/api"
+  features:
+    - dynamic_analysis
+    - behavioral_analysis
+    - threat_classification
+
+# Cuckoo Sandbox
+cuckoo:
+  url: "${CUCKOO_API_URL}"
+  token: "${CUCKOO_API_TOKEN}"
+  features:
+    - malware_analysis
+    - network_analysis
+    - memory_forensics
+
+# ================================================
+# BUG BOUNTY PLATFORMS
+# ================================================
+
+# HackerOne
+hackerone:
+  api_identifier: "${HACKERONE_API_IDENTIFIER}"
+  api_token: "${HACKERONE_API_TOKEN}"
+  url: "https://api.hackerone.com/v1"
+  features:
+    - program_data
+    - report_submission
+    - vulnerability_disclosure
+
+# Bugcrowd
+bugcrowd:
+  email: "${BUGCROWD_EMAIL}"
+  token: "${BUGCROWD_TOKEN}"
+  url: "https://api.bugcrowd.com"
+  features:
+    - program_discovery
+    - submission_management
+    - reward_tracking
+
+# YesWeHack
+yeswehack:
+  login: "${YWH_LOGIN}"
+  token: "${YWH_TOKEN}"
+  url: "https://api.yeswehack.com"
+  features:
+    - program_listing
+    - vulnerability_submission
+    - researcher_stats
+
+# ================================================
+# SEARCH AND DATA SOURCES
+# ================================================
+
+# Google Custom Search
+google_custom_search:
+  api_key: "${GOOGLE_CSE_API_KEY}"
+  search_engine_id: "${GOOGLE_CSE_ID}"
+  url: "https://www.googleapis.com/customsearch/v1"
+  features:
+    - web_search
+    - site_enumeration
+    - content_discovery
+
+# Bing Search API
+bing_search:
+  subscription_key: "${BING_SEARCH_KEY}"
+  url: "https://api.cognitive.microsoft.com/bing/v7.0/search"
+  features:
+    - web_search
+    - image_search
+    - news_search
+
+# Pipl (People Search)
+pipl:
+  api_key: "${PIPL_API_KEY}"
+  url: "https://api.pipl.com/search"
+  features:
+    - people_search
+    - identity_resolution
+    - social_discovery
+
+# ================================================
+# GEOLOCATION AND IP INTELLIGENCE
+# ================================================
+
+# MaxMind GeoIP
+maxmind:
+  user_id: "${MAXMIND_USER_ID}"
+  license_key: "${MAXMIND_LICENSE_KEY}"
+  url: "https://geoip.maxmind.com"
+  features:
+    - ip_geolocation
+    - isp_data
+    - threat_intelligence
+
+# IP2Location
+ip2location:
+  api_key: "${IP2LOCATION_API_KEY}"
+  url: "https://api.ip2location.com/v2"
+  features:
+    - ip_geolocation
+    - proxy_detection
+    - threat_analysis
+
+# IPinfo
+ipinfo:
+  token: "${IPINFO_TOKEN}"
+  url: "https://ipinfo.io"
+  features:
+    - ip_details
+    - asn_data
+    - privacy_detection
+
+# ================================================
+# CERTIFICATE AND SSL/TLS
+# ================================================
+
+# Certificate Transparency Logs
+certificate_transparency:
+  url: "https://crt.sh"
+  features:
+    - certificate_search
+    - subdomain_discovery
+    - ssl_monitoring
+
+# SSL Labs API
+ssl_labs:
+  url: "https://api.ssllabs.com/api/v3"
+  rate_limit: 25  # assessments per hour
+  features:
+    - ssl_assessment
+    - vulnerability_detection
+    - configuration_analysis
+
+# ================================================
+# NETWORK SCANNING
+# ================================================
+
+# Rapid7 Project Sonar
+rapid7_sonar:
+  url: "https://sonar.labs.rapid7.com"
+  features:
+    - internet_scan_data
+    - service_discovery
+    - vulnerability_research
+
+# SecurityTrails
+securitytrails:
+  api_key: "${SECURITYTRAILS_API_KEY}"
+  url: "https://api.securitytrails.com/v1"
+  features:
+    - dns_history
+    - subdomain_discovery
+    - ip_history
+
+# ================================================
+# DARK WEB MONITORING
+# ================================================
+
+# Sixgill
+sixgill:
+  client_id: "${SIXGILL_CLIENT_ID}"
+  client_secret: "${SIXGILL_CLIENT_SECRET}"
+  url: "https://api.cybersixgill.com"
+  features:
+    - dark_web_monitoring
+    - threat_intelligence
+    - credential_exposure
+
+# ================================================
+# ENTERPRISE SECURITY TOOLS
+# ================================================
+
+# Splunk
+splunk:
+  url: "${SPLUNK_URL}"
+  username: "${SPLUNK_USERNAME}"
+  password: "${SPLUNK_PASSWORD}"
+  features:
+    - log_analysis
+    - threat_hunting
+    - security_monitoring
+
+# ElasticSearch/ELK
+elasticsearch:
+  url: "${ELASTICSEARCH_URL}"
+  username: "${ELASTICSEARCH_USERNAME}"
+  password: "${ELASTICSEARCH_PASSWORD}"
+  features:
+    - log_aggregation
+    - threat_detection
+    - security_analytics
+
+# QRadar
+qradar:
+  url: "${QRADAR_URL}"
+  sec_token: "${QRADAR_SEC_TOKEN}"
+  features:
+    - siem_integration
+    - threat_correlation
+    - incident_response
+
+# ================================================
+# PENETRATION TESTING TOOLS
+# ================================================
+
+# Metasploit Pro
+metasploit:
+  url: "${METASPLOIT_URL}"
+  api_token: "${METASPLOIT_API_TOKEN}"
+  features:
+    - exploit_management
+    - vulnerability_validation
+    - post_exploitation
+
+# Burp Suite Enterprise
+burp_enterprise:
+  url: "${BURP_ENTERPRISE_URL}"
+  api_key: "${BURP_ENTERPRISE_API_KEY}"
+  features:
+    - web_application_scanning
+    - vulnerability_assessment
+    - continuous_monitoring
+
+# ================================================
+# BLOCKCHAIN AND CRYPTOCURRENCY
+# ================================================
+
+# Blockchain.info
+blockchain_info:
+  url: "https://blockchain.info/api"
+  features:
+    - bitcoin_analysis
+    - transaction_tracking
+    - address_clustering
+
+# Chainalysis
+chainalysis:
+  api_key: "${CHAINALYSIS_API_KEY}"
+  url: "https://api.chainalysis.com"
+  features:
+    - cryptocurrency_investigation
+    - compliance_screening
+    - risk_assessment
+
+# ================================================
+# CONFIGURATION MANAGEMENT
+# ================================================
+rate_limiting:
+  default_requests_per_minute: 60
+  burst_limit: 10
+  cooldown_seconds: 5
+
+retry_policy:
+  max_retries: 3
+  backoff_factor: 2
+  max_delay: 60
+
+timeout_settings:
+  connect_timeout: 10
+  read_timeout: 30
+  total_timeout: 60
+
+# API Health Monitoring
+health_checks:
+  enabled: true
+  interval_seconds: 300
+  failure_threshold: 3
+  recovery_threshold: 2
+
+# Security Settings
+security:
+  encrypt_api_keys: true
+  key_rotation_days: 90
+  audit_logging: true
+  access_control: true

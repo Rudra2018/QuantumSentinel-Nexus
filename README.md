@@ -6,6 +6,7 @@
 [![Mobile Apps](https://img.shields.io/badge/Mobile%20Apps-42-green)](docs/ARCHITECTURE.md)
 [![Cloud Ready](https://img.shields.io/badge/Cloud-Ready-brightgreen)](docs/DEPLOYMENT_GUIDE.md)
 [![AI Powered](https://img.shields.io/badge/AI-Claude%20Integration-purple)](web_ui/README.md)
+[![AWS Deployed](https://img.shields.io/badge/AWS-Fully%20Deployed-orange)](deployment/aws/)
 
 ## 🎯 Overview
 
@@ -24,158 +25,213 @@ QuantumSentinel-Nexus is a comprehensive security assessment platform designed f
 - **Report Generation**: AI-assisted professional documentation
 
 ### ☁️ **Cloud-Scale Processing**
-- **Google Cloud Integration**: Scalable scan execution
+- **Multi-Cloud Support**: AWS, Google Cloud Platform deployment ready
 - **Real-time Monitoring**: Live progress tracking and results
 - **Cost Optimization**: Smart resource management
 
-### 🌐 **Professional Web Interface**
-- **Complete Dashboard**: Comprehensive control panel
-- **Real-time Results**: Live scan monitoring and analysis
-- **Mobile-First Design**: Responsive interface for all devices
+## 🚀 **FULLY DEPLOYED AWS ARCHITECTURE**
 
-## 🚀 Quick Start
+### **Live Production Environment**
+- **AWS Account**: `077732578302`
+- **Region**: `us-east-1`
+- **API Gateway**: `https://2p83ibp3ai.execute-api.us-east-1.amazonaws.com/prod`
+- **CloudFormation Stack**: `quantum-auto-t09281201`
 
-### 1. **Web Interface (Recommended)**
+### **10 Microservices Running on ECS Fargate**
+
+| Service | Status | Purpose | Port |
+|---------|--------|---------|------|
+| **Core Platform** | ✅ ACTIVE | Main security testing orchestration | 8000 |
+| **ML Intelligence** | ✅ ACTIVE | Vulnerability prediction & pattern recognition | 8001 |
+| **IBB Research** | ✅ ACTIVE | 24/7 Internet Bug Bounty research | 8002 |
+| **Fuzzing Engine** | ✅ ACTIVE | Zero-day vulnerability discovery | 8003 |
+| **Reporting Engine** | ✅ ACTIVE | Comprehensive PDF reports | 8004 |
+| **SAST-DAST** | ✅ ACTIVE | Static & dynamic analysis | 8005 |
+| **Reverse Engineering** | ✅ ACTIVE | Binary analysis & malware research | 8006 |
+| **Reconnaissance** | ✅ ACTIVE | OSINT & information gathering | 8007 |
+| **Web UI Dashboard** | ✅ ACTIVE | Interactive web interface | 80 |
+| **Orchestration** | ✅ ACTIVE | Workflow management | 8008 |
+
+### **Infrastructure Components**
+- **ECS Cluster**: `quantumsentinel-nexus-cluster`
+- **Lambda Functions**: Serverless API endpoints
+- **S3 Buckets**: 6 buckets for data storage
+- **Secrets Manager**: 7 secrets for secure configuration
+- **VPC & Networking**: Complete isolation and security
+- **CloudWatch**: Comprehensive monitoring and logging
+
+## 🔗 **Access Points**
+
+### **API Endpoints**
 ```bash
-cd web_ui
-./start_ui.sh
-# Access at: http://localhost:8080
-```
+# Health Check
+curl https://2p83ibp3ai.execute-api.us-east-1.amazonaws.com/prod/health
 
-### 2. **Command Line Interface**
-```bash
-# Mobile security scan
-python3 quantum_commander.py scan mobile --targets shopify,uber,gitlab
+# Service Information
+curl https://2p83ibp3ai.execute-api.us-east-1.amazonaws.com/prod/info
 
-# Multi-platform assessment
-python3 quantum_commander.py scan multi-platform --platforms hackerone,bugcrowd --targets example.com
-
-# Interactive mode
-python3 quantum_commander.py interactive
-```
-
-### 3. **Cloud Function API**
-```bash
-curl -X POST https://us-central1-quantum-nexus-0927.cloudfunctions.net/quantum-scanner \
+# Vulnerability Scan
+curl -X POST https://2p83ibp3ai.execute-api.us-east-1.amazonaws.com/prod/scan \
   -H "Content-Type: application/json" \
-  -d '{"scan_type": "mobile_comprehensive", "targets": ["shopify", "uber"]}'
+  -d '{"target": "example.com"}'
 ```
 
-## 📱 Mobile Security Analysis
+### **AWS Management**
+- **AWS Console**: https://console.aws.amazon.com/
+- **ECS Services**: https://console.aws.amazon.com/ecs/v2/clusters/quantumsentinel-nexus-cluster
+- **CloudWatch Logs**: https://console.aws.amazon.com/cloudwatch/home?region=us-east-1
+- **S3 Buckets**: https://s3.console.aws.amazon.com/s3/buckets?region=us-east-1
 
-### **High-Value Targets**
-- **Shopify**: $5,000-$50,000+ (8 mobile apps)
-- **Uber**: $1,000-$25,000+ (8 mobile apps)
-- **Dropbox**: $1,000-$15,000+ (6 mobile apps)
-- **Plus 5 more programs** with comprehensive app coverage
+## 🛠️ **Quick Start**
 
-### **Analysis Capabilities**
-- Static analysis and decompilation
-- Dynamic testing and runtime analysis
-- Network traffic interception
-- Business logic testing
-
-## 🎯 Platform Coverage
-
-| Platform | Programs | Focus Areas | Bounty Range |
-|----------|----------|-------------|--------------|
-| **HackerOne** | 8 | Web/Mobile/API | $500-$50,000+ |
-| **Bugcrowd** | Multiple | Enterprise Security | $100-$25,000+ |
-| **Intigriti** | European Focus | Web Applications | $50-$10,000+ |
-| **Google VRP** | Core Products | Infrastructure | $100-$100,000+ |
-| **Apple Security** | iOS/macOS | Mobile/Desktop | $25-$1,000,000+ |
-| **Samsung Mobile** | Android/Tizen | Mobile Security | $200-$50,000+ |
-| **Microsoft MSRC** | Enterprise | Cloud/Desktop | $500-$250,000+ |
-
-## 🔧 Installation
-
-### **Prerequisites**
-- Python 3.8+
-- Google Cloud SDK (for cloud features)
-- Chrome/Firefox (for web interface)
-
-### **Dependencies**
+### **1. Automated AWS Deployment**
 ```bash
-pip3 install -r requirements.txt
+# Clone the repository
+git clone https://github.com/yourusername/QuantumSentinel-Nexus.git
+cd QuantumSentinel-Nexus
+
+# Run complete automated deployment
+./auto-deploy-aws.sh
+
+# Or manual deployment
+./setup-aws.sh --auto --region us-east-1
+./deploy-aws.sh --auto --stack-name your-stack-name
 ```
 
-### **Cloud Setup (Optional)**
+### **2. Local Development**
 ```bash
-# Authenticate with Google Cloud
-gcloud auth login
+# Install dependencies
+pip install -r requirements.txt
 
-# Deploy cloud infrastructure
-python3 deploy_cloud_function.py
+# Start local development
+python quantum_commander.py --mode local
+
+# Run specific service
+cd services/ml-intelligence
+python main.py
 ```
 
-## 📚 Documentation
+### **3. API Usage**
+```python
+import requests
 
-- **[Deployment Guide](docs/DEPLOYMENT_GUIDE.md)** - Setup and deployment instructions
-- **[Architecture Overview](docs/ARCHITECTURE.md)** - System design and components
-- **[Web UI Guide](web_ui/README.md)** - Complete web interface documentation
-- **[Command Reference](COMMAND_EXAMPLES.md)** - CLI usage examples
-- **[Platform Guide](README_PLATFORMS.md)** - Platform-specific configurations
+# Test the deployed API
+response = requests.get('https://2p83ibp3ai.execute-api.us-east-1.amazonaws.com/prod/health')
+print(response.json())
 
-## 🎯 Current Status
+# Start a security scan
+scan_request = {
+    "target": "example.com",
+    "scan_type": "comprehensive"
+}
+response = requests.post('https://2p83ibp3ai.execute-api.us-east-1.amazonaws.com/prod/scan',
+                        json=scan_request)
+print(response.json())
+```
 
-**✅ Fully Operational**
-- **Account**: rbcag789@gmail.com
-- **Project**: quantum-nexus-0927
-- **Cloud Function**: Active and responding
-- **Storage**: 55 files (comprehensive reports + scan data)
-- **Web UI**: Ready at http://localhost:8080
+## 📁 **Project Structure**
 
-## 🛠️ Core Scripts
+```
+QuantumSentinel-Nexus/
+├── deployment/
+│   ├── aws/                    # AWS deployment scripts
+│   ├── task-definitions/       # ECS task definitions
+│   └── scripts/               # Automation scripts
+├── services/                  # Microservices
+│   ├── ml-intelligence/       # ML vulnerability prediction
+│   ├── ibb-research/         # Bug bounty research
+│   ├── fuzzing/              # Fuzzing engine
+│   ├── reporting/            # PDF report generation
+│   ├── sast-dast/            # Static/dynamic analysis
+│   ├── reverse-engineering/   # Binary analysis
+│   ├── reconnaissance/        # OSINT gathering
+│   ├── web-ui/               # Dashboard interface
+│   └── orchestration/        # Workflow management
+├── ai_agents/                # AI-powered agents
+├── security_engines/         # Core security engines
+├── web_ui/                   # Web interface
+└── configs/                  # Configuration files
+```
 
-| Script | Purpose | Usage |
-|--------|---------|-------|
-| `quantum_commander.py` | Main CLI interface | `python3 quantum_commander.py scan mobile --targets shopify` |
-| `platform_quick_commands.sh` | Quick access commands | `./platform_quick_commands.sh hackerone_mobile` |
-| `hackerone_mobile_scanner.py` | Mobile app analysis | `python3 hackerone_mobile_scanner.py` |
-| `web_ui/start_ui.sh` | Web interface | `./start_ui.sh` |
+## 🔧 **Configuration**
 
-## 🎨 Web Interface Features
+### **AWS Configuration**
+Update secrets in AWS Secrets Manager:
+```bash
+aws secretsmanager update-secret --secret-id quantum/chaos-api-key --secret-string 'your-api-key'
+aws secretsmanager update-secret --secret-id quantum/huggingface-token --secret-string 'your-token'
+aws secretsmanager update-secret --secret-id quantum/cve-api-key --secret-string 'your-cve-key'
+aws secretsmanager update-secret --secret-id quantum/nuclei-api-key --secret-string 'your-nuclei-key'
+```
 
-- **Dashboard**: System status and quick actions
-- **Scanner**: Advanced configuration and execution
-- **Mobile Suite**: 42 app analysis interface
-- **Cloud Management**: Infrastructure monitoring
-- **Claude AI**: Intelligent security advisor
-- **Results**: Comprehensive findings analysis
+### **Local Configuration**
+```bash
+# Create environment file
+cp .env.template .env
 
-## 📊 Results & Analytics
+# Edit configuration
+nano .env
+```
 
-### **Latest Scan Results**
-- **42 Mobile Apps** analyzed across 8 programs
-- **Comprehensive reports** generated for each platform
-- **Professional documentation** ready for submission
-- **Cloud storage** with organized results structure
+## 📊 **Monitoring & Observability**
 
-### **Bounty Potential Analysis**
-- **Critical vulnerabilities**: $2,000-$15,000 each
-- **High-impact findings**: $1,000-$10,000 each
-- **Business logic flaws**: $500-$5,000 each
-- **Combined potential**: $50,000-$500,000+
+### **CloudWatch Dashboards**
+- **Service Health**: Real-time service status monitoring
+- **Performance Metrics**: CPU, memory, and network utilization
+- **Security Alerts**: Anomaly detection and threat monitoring
+- **Cost Tracking**: Resource usage and optimization
 
-## 🔐 Security & Ethics
+### **Logging**
+- **Centralized Logging**: All services log to CloudWatch
+- **Log Groups**: `/ecs/quantumsentinel-nexus`
+- **Real-time Monitoring**: Live log streaming and alerts
 
-- **Responsible disclosure** protocols
-- **Ethical testing** guidelines
-- **Evidence collection** systems
-- **Professional reporting** standards
+## 🔒 **Security Features**
 
-## 🤝 Contributing
+### **Advanced Capabilities**
+- **ML-Powered Vulnerability Detection**: Machine learning models for zero-day discovery
+- **Behavioral Analysis**: Anomaly detection and pattern recognition
+- **Automated Reporting**: Professional PDF reports with evidence
+- **Real-time Threat Intelligence**: Continuous monitoring and analysis
 
-This is a professional bug bounty platform. Contributions should follow responsible disclosure practices and ethical testing guidelines.
+### **Security Controls**
+- **IAM Roles**: Least privilege access controls
+- **VPC Isolation**: Network-level security and isolation
+- **Secrets Management**: Encrypted credential storage
+- **Security Groups**: Granular network access control
 
-## 📄 License
+## 📚 **Documentation**
 
-Licensed under MIT License. See [LICENSE](LICENSE) for details.
+- [**Architecture Guide**](docs/ARCHITECTURE.md)
+- [**Deployment Guide**](deployment/aws/README.md)
+- [**API Documentation**](docs/API.md)
+- [**Security Guide**](docs/SECURITY.md)
+- [**Troubleshooting**](docs/TROUBLESHOOTING.md)
+
+## 🤝 **Contributing**
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 **License**
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🚨 **Disclaimer**
+
+This tool is for authorized security testing only. Users are responsible for ensuring they have proper authorization before testing any systems. The authors are not responsible for any misuse or damage caused by this tool.
+
+## 🎯 **Support**
+
+- **Issues**: [GitHub Issues](https://github.com/yourusername/QuantumSentinel-Nexus/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yourusername/QuantumSentinel-Nexus/discussions)
+- **Documentation**: [Wiki](https://github.com/yourusername/QuantumSentinel-Nexus/wiki)
 
 ---
 
-**🎯 Ready for professional bug bounty hunting with enterprise-scale capabilities!**
+**🛡️ QuantumSentinel-Nexus - Where Security Meets Intelligence**
 
-**Start Web UI**: `cd web_ui && ./start_ui.sh` → http://localhost:8080
-**Cloud Function**: https://us-central1-quantum-nexus-0927.cloudfunctions.net/quantum-scanner
-**Documentation**: [docs/](docs/) directory
+*Built with ❤️ for the security community*

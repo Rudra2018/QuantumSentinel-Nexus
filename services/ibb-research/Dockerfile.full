@@ -1,0 +1,83 @@
+# Use PyTorch base image with CUDA support for full ML capabilities
+FROM pytorch/pytorch:2.1.0-cuda11.8-cudnn8-devel as ml-base
+
+# Install system dependencies for security tools and research
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    jq \
+    wget \
+    unzip \
+    build-essential \
+    cmake \
+    pkg-config \
+    libssl-dev \
+    libffi-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    zlib1g-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libfreetype6-dev \
+    python3-dev \
+    python3-pip \
+    nmap \
+    dnsutils \
+    netcat-openbsd \
+    tcpdump \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install additional ML and AI libraries
+RUN pip install --no-cache-dir \
+    transformers>=4.30.0 \
+    torch-audio \
+    torch-vision \
+    accelerate \
+    datasets \
+    evaluate \
+    scikit-learn \
+    pandas \
+    numpy \
+    scipy \
+    matplotlib \
+    seaborn \
+    plotly
+
+# Production stage
+FROM ml-base as production
+
+# Create non-root user
+RUN groupadd -r quantum && useradd -r -g quantum quantum
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements and install additional dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . /app/
+
+# Create necessary directories for research data
+RUN mkdir -p /app/research-data /app/findings /app/papers /app/models /app/datasets
+
+# Set permissions
+RUN chown -R quantum:quantum /app
+USER quantum
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Expose port
+EXPOSE 8000
+
+# Set environment variables for ML optimizations
+ENV PYTHONUNBUFFERED=1
+ENV TRANSFORMERS_CACHE=/app/models
+ENV HF_HOME=/app/models
+ENV TORCH_HOME=/app/models
+
+# Start application with optimized settings
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

@@ -1,0 +1,34 @@
+steps:
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'gcr.io/quantumsentinel-nexus-9957/quantum-sentinel-ml-intelligence-simple:latest',
+      '-f', 'Dockerfile.simple',
+      '.'
+    ]
+    timeout: 1200s
+
+  # Push the image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      'gcr.io/quantumsentinel-nexus-9957/quantum-sentinel-ml-intelligence-simple:latest'
+    ]
+
+  # Deploy to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+      'run', 'deploy', 'quantum-sentinel-ml-intelligence',
+      '--image=gcr.io/quantumsentinel-nexus-9957/quantum-sentinel-ml-intelligence-simple:latest',
+      '--platform=managed',
+      '--region=us-central1',
+      '--allow-unauthenticated',
+      '--port=8000',
+      '--memory=4Gi',
+      '--cpu=2',
+      '--timeout=300',
+      '--max-instances=5'
+    ]
+
+timeout: 3600s

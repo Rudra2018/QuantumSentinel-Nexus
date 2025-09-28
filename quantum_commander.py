@@ -145,14 +145,14 @@ class QuantumCommander:
         # Execution environment
         print("\n🖥️ Execution Environment:")
         print("  1. local     - Run on local machine")
-        print("  2. cloud     - Run on Google Cloud")
-        print("  3. hybrid    - Local + Cloud parallel execution")
+        print("  2. docker    - Run in Docker container")
+        print("  3. distributed - Distributed parallel execution")
 
         env_choice = input("Select environment (1-3): ").strip()
         if env_choice == '2':
-            execution_env = 'cloud'
+            execution_env = 'docker'
         elif env_choice == '3':
-            execution_env = 'hybrid'
+            execution_env = 'distributed'
         else:
             execution_env = 'local'
 
@@ -400,37 +400,10 @@ class QuantumCommander:
         }
 
     def execute_cloud_scan(self, scan_config: Dict[str, Any]):
-        """Execute scan on Google Cloud"""
-        cloud_url = self.cloud_config.get('cloud_function_url')
-        if not cloud_url:
-            print("⚠️ Cloud function URL not configured")
-            return None
-
-        print(f"☁️ Triggering cloud scan at {cloud_url}")
-
-        try:
-            response = requests.post(
-                cloud_url,
-                json={
-                    'scan_type': scan_config['scan_type'],
-                    'targets': scan_config['targets'],
-                    'platforms': scan_config.get('platforms', []),
-                    'options': scan_config.get('options', {})
-                },
-                timeout=60
-            )
-
-            if response.status_code == 200:
-                cloud_result = response.json()
-                cloud_result['environment'] = 'cloud'
-                return cloud_result
-            else:
-                print(f"❌ Cloud scan failed: {response.status_code}")
-                return {'environment': 'cloud', 'status': 'failed', 'error': response.text}
-
-        except Exception as e:
-            print(f"❌ Error executing cloud scan: {str(e)}")
-            return {'environment': 'cloud', 'status': 'error', 'error': str(e)}
+        """Execute scan in distributed environment"""
+        print("⚠️ Distributed cloud scanning not available - Google Cloud integration removed")
+        print("💡 Use docker or local execution instead")
+        return {'environment': 'cloud', 'status': 'unavailable', 'message': 'Google Cloud integration removed'}
 
     def save_scan_results(self, scan_config: Dict[str, Any], results: List[Dict]):
         """Save scan results to local files"""
@@ -523,7 +496,7 @@ Examples:
                            help='Type of scan to perform')
     scan_parser.add_argument('--targets', required=True, help='Comma-separated list of targets')
     scan_parser.add_argument('--platforms', help='Comma-separated list of platforms (for multi-platform scans)')
-    scan_parser.add_argument('--cloud', action='store_true', help='Execute on Google Cloud')
+    scan_parser.add_argument('--cloud', action='store_true', help='Execute in Docker container')
     scan_parser.add_argument('--depth', choices=['quick', 'standard', 'comprehensive'], default='comprehensive',
                            help='Scan depth')
     scan_parser.add_argument('--timeout', type=int, default=60, help='Max duration in minutes')
@@ -553,7 +526,7 @@ def main():
             'scan_type': args.scan_type.replace('-', '_'),
             'targets': [t.strip() for t in args.targets.split(',')],
             'platforms': [p.strip() for p in args.platforms.split(',')] if args.platforms else [],
-            'execution_env': 'cloud' if args.cloud else 'local',
+            'execution_env': 'docker' if args.cloud else 'local',
             'options': {
                 'depth': args.depth,
                 'max_duration_minutes': args.timeout,

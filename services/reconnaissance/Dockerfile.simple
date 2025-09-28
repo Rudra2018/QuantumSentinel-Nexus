@@ -1,0 +1,58 @@
+# Simple Dockerfile for OSINT Reconnaissance Service
+FROM python:3.11-slim
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV PORT=8000
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    nmap \
+    dnsutils \
+    whois \
+    netcat-openbsd \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements first for better caching
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir \
+    fastapi>=0.104.1 \
+    uvicorn[standard]>=0.24.0 \
+    pydantic>=2.5.0 \
+    httpx>=0.25.2 \
+    aiofiles>=23.2.1 \
+    aiohttp>=3.9.1 \
+    python-nmap>=0.7.1 \
+    netaddr>=0.10.1 \
+    dnspython>=2.4.2 \
+    shodan>=1.31.0 \
+    python-whois>=0.8.0 \
+    requests>=2.31.0 \
+    beautifulsoup4>=4.12.2 \
+    pandas>=2.1.4 \
+    numpy>=1.24.4 \
+    scikit-learn>=1.3.2
+
+# Copy application code
+COPY . .
+
+# Create non-root user
+RUN groupadd -r quantum && useradd -r -g quantum quantum
+RUN chown -R quantum:quantum /app
+USER quantum
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Expose port
+EXPOSE 8000
+
+# Start application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

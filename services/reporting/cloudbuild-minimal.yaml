@@ -1,0 +1,34 @@
+steps:
+  # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'gcr.io/quantumsentinel-nexus-9957/quantum-sentinel-reporting-minimal:latest',
+      '-f', 'Dockerfile.minimal',
+      '.'
+    ]
+    timeout: 600s
+
+  # Push the image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      'gcr.io/quantumsentinel-nexus-9957/quantum-sentinel-reporting-minimal:latest'
+    ]
+
+  # Deploy to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+      'run', 'deploy', 'quantum-sentinel-reporting',
+      '--image=gcr.io/quantumsentinel-nexus-9957/quantum-sentinel-reporting-minimal:latest',
+      '--platform=managed',
+      '--region=us-central1',
+      '--allow-unauthenticated',
+      '--port=8000',
+      '--memory=2Gi',
+      '--cpu=1',
+      '--timeout=300',
+      '--max-instances=3'
+    ]
+
+timeout: 1800s

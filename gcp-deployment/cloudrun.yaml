@@ -1,0 +1,197 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: quantum-sentinel-orchestration
+  annotations:
+    run.googleapis.com/ingress: all
+    run.googleapis.com/execution-environment: gen2
+    run.googleapis.com/cpu-throttling: "false"
+spec:
+  template:
+    metadata:
+      annotations:
+        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/cpu-throttling: "false"
+        autoscaling.knative.dev/maxScale: "10"
+        autoscaling.knative.dev/minScale: "1"
+        run.googleapis.com/vpc-access-connector: quantum-vpc-connector
+        run.googleapis.com/vpc-access-egress: all-traffic
+    spec:
+      containerConcurrency: 100
+      timeoutSeconds: 3600
+      serviceAccountName: quantum-sentinel-sa@PROJECT_ID.iam.gserviceaccount.com
+      containers:
+      - name: orchestration
+        image: gcr.io/PROJECT_ID/quantum-sentinel-orchestration:latest
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        - name: REDIS_URL
+          value: "redis://10.0.0.3:6379"
+        - name: POSTGRES_URL
+          valueFrom:
+            secretKeyRef:
+              name: quantum-secrets
+              key: postgres-url
+        - name: SCAN_TIMEOUT
+          value: "14400"
+        - name: MAX_CONCURRENT_SCANS
+          value: "50"
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: "/secrets/service-account.json"
+        resources:
+          limits:
+            memory: "8Gi"
+            cpu: "4000m"
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+        volumeMounts:
+        - name: service-account
+          mountPath: /secrets
+          readOnly: true
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+      volumes:
+      - name: service-account
+        secret:
+          secretName: quantum-service-account
+
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: quantum-sentinel-ibb-research
+  annotations:
+    run.googleapis.com/ingress: internal
+    run.googleapis.com/execution-environment: gen2
+    run.googleapis.com/cpu-throttling: "false"
+spec:
+  template:
+    metadata:
+      annotations:
+        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/cpu-throttling: "false"
+        autoscaling.knative.dev/maxScale: "5"
+        autoscaling.knative.dev/minScale: "1"
+        run.googleapis.com/vpc-access-connector: quantum-vpc-connector
+        run.googleapis.com/vpc-access-egress: all-traffic
+    spec:
+      containerConcurrency: 10
+      timeoutSeconds: 7200
+      serviceAccountName: quantum-sentinel-sa@PROJECT_ID.iam.gserviceaccount.com
+      containers:
+      - name: ibb-research
+        image: gcr.io/PROJECT_ID/quantum-sentinel-ibb-research:latest
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        env:
+        - name: IBB_CONTINUOUS_MODE
+          value: "true"
+        - name: RESEARCH_INTERVAL
+          value: "3600"
+        - name: CHAOS_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: quantum-secrets
+              key: chaos-api-key
+        - name: CVE_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: quantum-secrets
+              key: cve-api-key
+        resources:
+          limits:
+            memory: "16Gi"
+            cpu: "4000m"
+          requests:
+            memory: "4Gi"
+            cpu: "1000m"
+        volumeMounts:
+        - name: research-data
+          mountPath: /app/research-data
+        - name: service-account
+          mountPath: /secrets
+          readOnly: true
+      volumes:
+      - name: research-data
+        persistentVolumeClaim:
+          claimName: quantum-research-data
+      - name: service-account
+        secret:
+          secretName: quantum-service-account
+
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: quantum-sentinel-ml-intelligence
+  annotations:
+    run.googleapis.com/ingress: internal
+    run.googleapis.com/execution-environment: gen2
+    run.googleapis.com/cpu-throttling: "false"
+spec:
+  template:
+    metadata:
+      annotations:
+        run.googleapis.com/execution-environment: gen2
+        run.googleapis.com/cpu-throttling: "false"
+        autoscaling.knative.dev/maxScale: "3"
+        autoscaling.knative.dev/minScale: "1"
+        run.googleapis.com/vpc-access-connector: quantum-vpc-connector
+        run.googleapis.com/vpc-access-egress: all-traffic
+    spec:
+      containerConcurrency: 5
+      timeoutSeconds: 7200
+      serviceAccountName: quantum-sentinel-sa@PROJECT_ID.iam.gserviceaccount.com
+      containers:
+      - name: ml-intelligence
+        image: gcr.io/PROJECT_ID/quantum-sentinel-ml-intelligence:latest
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        env:
+        - name: HUGGINGFACE_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: quantum-secrets
+              key: huggingface-token
+        - name: MODEL_CACHE_PATH
+          value: "/app/models"
+        - name: GPU_ENABLED
+          value: "true"
+        resources:
+          limits:
+            memory: "32Gi"
+            cpu: "8000m"
+            nvidia.com/gpu: "1"
+          requests:
+            memory: "8Gi"
+            cpu: "2000m"
+        volumeMounts:
+        - name: ml-models
+          mountPath: /app/models
+        - name: service-account
+          mountPath: /secrets
+          readOnly: true
+      volumes:
+      - name: ml-models
+        persistentVolumeClaim:
+          claimName: quantum-ml-models
+      - name: service-account
+        secret:
+          secretName: quantum-service-account
