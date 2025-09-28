@@ -578,28 +578,7 @@ async def get_scans():
     logger.info(f"Returning {len(result['bug_bounty_programs'])} bug bounty programs, {len(result['active_scans'])} active scans, {len(result['scan_history'])} total scan history")
     return result
 
-@app.get("/api/scans/{scan_id}")
-async def get_scan(scan_id: str):
-    """Get specific scan details"""
-    if scan_id in active_scans:
-        return active_scans[scan_id]
-
-    # Search in history
-    for scan in scan_history:
-        if scan["id"] == scan_id:
-            return scan
-
-    raise HTTPException(status_code=404, detail="Scan not found")
-
-@app.delete("/api/scans/{scan_id}")
-async def stop_scan(scan_id: str):
-    """Stop an active scan"""
-    if scan_id in active_scans:
-        active_scans[scan_id]["status"] = "stopped"
-        active_scans[scan_id]["stopped_at"] = datetime.utcnow().isoformat()
-        return {"message": "Scan stopped successfully"}
-
-    raise HTTPException(status_code=404, detail="Active scan not found")
+# These endpoints moved to after specific routes to avoid conflicts
 
 @app.post("/api/reports/generate")
 async def generate_report():
@@ -2927,6 +2906,45 @@ async def get_scan_details_page(request: Request, scan_id: str):
     except Exception as e:
         logger.error(f"Error getting scan details: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+# =============================================================================
+# PARAMETERIZED ROUTES (Must be at end to avoid conflicts)
+# =============================================================================
+
+@app.get("/api/scans/{scan_id}")
+async def get_scan(scan_id: str):
+    """Get specific scan details"""
+    # Check SCAN_RESULTS first
+    if scan_id in SCAN_RESULTS:
+        return SCAN_RESULTS[scan_id]
+
+    # Check active scans
+    if scan_id in active_scans:
+        return active_scans[scan_id]
+
+    # Search in history
+    for scan in scan_history:
+        if scan["id"] == scan_id:
+            return scan
+
+    raise HTTPException(status_code=404, detail="Scan not found")
+
+@app.delete("/api/scans/{scan_id}")
+async def stop_scan(scan_id: str):
+    """Stop an active scan"""
+    # Check SCAN_RESULTS first
+    if scan_id in SCAN_RESULTS:
+        SCAN_RESULTS[scan_id]["status"] = "stopped"
+        SCAN_RESULTS[scan_id]["stopped_at"] = datetime.utcnow().isoformat()
+        return {"message": "Scan stopped successfully"}
+
+    # Check active scans
+    if scan_id in active_scans:
+        active_scans[scan_id]["status"] = "stopped"
+        active_scans[scan_id]["stopped_at"] = datetime.utcnow().isoformat()
+        return {"message": "Scan stopped successfully"}
+
+    raise HTTPException(status_code=404, detail="Active scan not found")
 
 if __name__ == "__main__":
     import uvicorn
