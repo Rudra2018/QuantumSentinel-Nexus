@@ -8,11 +8,7 @@ RUN apt-get update && apt-get install -y \
     binutils \
     file \
     gdb \
-    radare2 \
-    hexdump \
-    objdump \
-    readelf \
-    strings \
+    bsdextrautils \
     strace \
     ltrace \
     && rm -rf /var/lib/apt/lists/* \
@@ -22,15 +18,15 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Copy requirements and install Python dependencies
-COPY requirements.txt requirements.txt
+COPY requirements-simple.txt requirements.txt
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY main.py /app/main.py
 
-# Copy the binary analysis agent from project root
-COPY ../../ai_agents/binary_analysis_agent.py /app/ai_agents/binary_analysis_agent.py
+# Copy the simplified binary analysis agent
+COPY simple_binary_agent.py /app/ai_agents/binary_analysis_agent.py
 
 # Create necessary directories
 RUN mkdir -p /app/ai_agents /app/uploads /app/temp /app/logs && \

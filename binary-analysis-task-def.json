@@ -47,16 +47,7 @@
                     "value": "5"
                 }
             ],
-            "secrets": [
-                {
-                    "name": "AWS_ACCESS_KEY_ID",
-                    "valueFrom": "arn:aws:secretsmanager:us-east-1:077732578302:secret:quantum/aws-access-key"
-                },
-                {
-                    "name": "AWS_SECRET_ACCESS_KEY",
-                    "valueFrom": "arn:aws:secretsmanager:us-east-1:077732578302:secret:quantum/aws-secret-key"
-                }
-            ],
+            "secrets": [],
             "mountPoints": [],
             "volumesFrom": [],
             "logConfiguration": {
