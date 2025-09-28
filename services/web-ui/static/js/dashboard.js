@@ -1,7 +1,7 @@
 // QuantumSentinel-Nexus Dashboard JavaScript
-// Configuration
-const API_BASE_URL = 'https://2p83ibp3ai.execute-api.us-east-1.amazonaws.com/prod';
-const WS_URL = 'wss://2p83ibp3ai.execute-api.us-east-1.amazonaws.com/prod/ws'; // WebSocket for real-time updates
+// Configuration - Use local development URLs
+const API_BASE_URL = '';  // Empty for same-origin requests
+const WS_URL = 'ws://localhost:8080/ws'; // WebSocket for real-time updates
 
 // Global state
 let currentTab = 'dashboard';
@@ -274,53 +274,114 @@ function openService(url) {
 }
 
 // Scans functions
-function loadScans() {
+async function loadScans() {
     const container = document.getElementById('scansTable');
 
-    const mockScans = [
-        { id: 'SC001', target: 'api.example.com', type: 'API Security', status: 'completed', vulnerabilities: 3, started: '2025-01-15 10:30' },
-        { id: 'SC002', target: 'app.example.com', type: 'Web Application', status: 'running', vulnerabilities: 0, started: '2025-01-15 11:15' },
-        { id: 'SC003', target: '192.168.1.100', type: 'Network Infrastructure', status: 'pending', vulnerabilities: 0, started: '2025-01-15 11:45' }
-    ];
+    try {
+        // Show loading state
+        container.innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <p>Loading scans...</p>
+            </div>
+        `;
 
-    container.innerHTML = `
-        <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
-            <thead>
-                <tr style="border-bottom: 1px solid var(--border);">
-                    <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Scan ID</th>
-                    <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Target</th>
-                    <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Type</th>
-                    <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Status</th>
-                    <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Vulnerabilities</th>
-                    <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Started</th>
-                    <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${mockScans.map(scan => `
+        const response = await fetch('/api/scans');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Combine all scan types: manual scans, active scans, and bug bounty programs
+        const allScans = [
+            ...data.active_scans || [],
+            ...data.scan_history || [],
+            ...data.bug_bounty_programs || []
+        ];
+
+        if (allScans.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                    <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <p>No scans found. Start a new scan to see results here.</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = `
+            <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                <thead>
                     <tr style="border-bottom: 1px solid var(--border);">
-                        <td style="padding: 1rem; font-family: monospace;">${scan.id}</td>
-                        <td style="padding: 1rem;">${scan.target}</td>
-                        <td style="padding: 1rem;">${scan.type}</td>
-                        <td style="padding: 1rem;">
-                            <span class="service-status status-${scan.status === 'completed' ? 'healthy' : scan.status === 'running' ? 'warning' : 'error'}">
-                                ${scan.status}
-                            </span>
-                        </td>
-                        <td style="padding: 1rem; color: ${scan.vulnerabilities > 0 ? 'var(--danger)' : 'var(--text-secondary)'};">
-                            ${scan.vulnerabilities}
-                        </td>
-                        <td style="padding: 1rem; color: var(--text-secondary);">${scan.started}</td>
-                        <td style="padding: 1rem;">
-                            <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
-                                <i class="fas fa-eye"></i> View
-                            </button>
-                        </td>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Scan ID</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Target</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Type</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Platform</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Status</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Progress</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Max Reward</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Actions</th>
                     </tr>
-                `).join('')}
-            </tbody>
-        </table>
-    `;
+                </thead>
+                <tbody>
+                    ${allScans.map(scan => `
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 1rem; font-family: monospace;">${scan.id || 'N/A'}</td>
+                            <td style="padding: 1rem; max-width: 200px; overflow: hidden; text-overflow: ellipsis;" title="${scan.target}">
+                                ${scan.target}
+                            </td>
+                            <td style="padding: 1rem;">${formatScanType(scan.scan_type)}</td>
+                            <td style="padding: 1rem;">${formatPlatform(scan.platform)}</td>
+                            <td style="padding: 1rem;">
+                                <span class="service-status status-${getStatusClass(scan.status)}">
+                                    ${scan.status}
+                                </span>
+                            </td>
+                            <td style="padding: 1rem;">
+                                <div style="width: 100px; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden;">
+                                    <div style="width: ${scan.progress || 0}%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width 0.3s ease;"></div>
+                                </div>
+                                <span style="font-size: 0.75rem; color: var(--text-secondary); margin-left: 0.5rem;">${scan.progress || 0}%</span>
+                            </td>
+                            <td style="padding: 1rem; color: var(--primary); font-weight: 600;">
+                                ${scan.max_reward ? '$' + scan.max_reward.toLocaleString() : 'N/A'}
+                            </td>
+                            <td style="padding: 1rem;">
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;" onclick="viewScan('${scan.id}')">
+                                        <i class="fas fa-eye"></i> View
+                                    </button>
+                                    ${scan.program_url ? `
+                                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;" onclick="window.open('${scan.program_url}', '_blank')">
+                                            <i class="fas fa-external-link-alt"></i>
+                                        </button>
+                                    ` : ''}
+                                </div>
+                            </td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+            <div style="margin-top: 1rem; padding: 1rem; background: rgba(0, 255, 136, 0.05); border-radius: 8px; border: 1px solid rgba(0, 255, 136, 0.2);">
+                <p style="margin: 0; color: var(--text-secondary); font-size: 0.875rem;">
+                    <i class="fas fa-info-circle" style="margin-right: 0.5rem; color: var(--primary);"></i>
+                    Showing ${data.total_programs || allScans.length} active bug bounty programs and security scans
+                </p>
+            </div>
+        `;
+    } catch (error) {
+        console.error('Error loading scans:', error);
+        container.innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: var(--danger);">
+                <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <p>Error loading scans: ${error.message}</p>
+                <button class="btn btn-outline" onclick="loadScans()" style="margin-top: 1rem;">
+                    <i class="fas fa-redo"></i> Retry
+                </button>
+            </div>
+        `;
+    }
 }
 
 // ML Intelligence functions
@@ -455,48 +516,101 @@ function loadFuzzing() {
 }
 
 // Reports functions
-function loadReports() {
+async function loadReports() {
     const container = document.getElementById('reportsList');
 
-    const reports = [
-        { id: 'RPT001', name: 'Comprehensive Security Assessment - example.com', type: 'PDF', size: '2.3 MB', created: '2025-01-15 14:30' },
-        { id: 'RPT002', name: 'API Security Analysis Report', type: 'PDF', size: '1.8 MB', created: '2025-01-15 12:15' },
-        { id: 'RPT003', name: 'Weekly Vulnerability Summary', type: 'PDF', size: '945 KB', created: '2025-01-14 16:45' }
-    ];
+    try {
+        // Show loading state
+        container.innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                <i class="fas fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <p>Loading reports...</p>
+            </div>
+        `;
 
-    container.innerHTML = `
-        <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
-            <thead>
-                <tr style="border-bottom: 1px solid var(--border);">
-                    <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Report ID</th>
-                    <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Name</th>
-                    <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Type</th>
-                    <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Size</th>
-                    <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Created</th>
-                    <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${reports.map(report => `
+        const response = await fetch('/api/reports');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const reports = data.reports || [];
+
+        if (reports.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                    <i class="fas fa-file-pdf" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <p>No reports generated yet. Generate your first report to see it here.</p>
+                    <button class="btn btn-primary" onclick="generateReport()" style="margin-top: 1rem;">
+                        <i class="fas fa-plus"></i> Generate Report
+                    </button>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = `
+            <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                <thead>
                     <tr style="border-bottom: 1px solid var(--border);">
-                        <td style="padding: 1rem; font-family: monospace;">${report.id}</td>
-                        <td style="padding: 1rem;">${report.name}</td>
-                        <td style="padding: 1rem;">${report.type}</td>
-                        <td style="padding: 1rem; color: var(--text-secondary);">${report.size}</td>
-                        <td style="padding: 1rem; color: var(--text-secondary);">${report.created}</td>
-                        <td style="padding: 1rem;">
-                            <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; margin-right: 0.5rem;">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                            <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;">
-                                <i class="fas fa-eye"></i> View
-                            </button>
-                        </td>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Report ID</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Name</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Type</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Size</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Created</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--text-secondary);">Actions</th>
                     </tr>
-                `).join('')}
-            </tbody>
-        </table>
-    `;
+                </thead>
+                <tbody>
+                    ${reports.map(report => `
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 1rem; font-family: monospace;">${report.id}</td>
+                            <td style="padding: 1rem; max-width: 300px; overflow: hidden; text-overflow: ellipsis;" title="${report.title}">
+                                ${report.title}
+                            </td>
+                            <td style="padding: 1rem; text-transform: uppercase; font-weight: 600;">
+                                ${report.format || 'PDF'}
+                            </td>
+                            <td style="padding: 1rem; color: var(--text-secondary);">${report.size || 'N/A'}</td>
+                            <td style="padding: 1rem; color: var(--text-secondary);">${formatDate(report.created_at)}</td>
+                            <td style="padding: 1rem;">
+                                <div style="display: flex; gap: 0.5rem;">
+                                    ${report.download_url ? `
+                                        <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;" onclick="downloadReport('${report.download_url}', '${report.title}')">
+                                            <i class="fas fa-download"></i> Download
+                                        </button>
+                                    ` : ''}
+                                    <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;" onclick="viewReport('${report.id}')">
+                                        <i class="fas fa-eye"></i> View
+                                    </button>
+                                    <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem; color: var(--danger);" onclick="deleteReport('${report.id}')" title="Delete Report">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+            <div style="margin-top: 1rem; padding: 1rem; background: rgba(0, 255, 136, 0.05); border-radius: 8px; border: 1px solid rgba(0, 255, 136, 0.2);">
+                <p style="margin: 0; color: var(--text-secondary); font-size: 0.875rem;">
+                    <i class="fas fa-info-circle" style="margin-right: 0.5rem; color: var(--primary);"></i>
+                    ${reports.length} report(s) available. All reports include comprehensive vulnerability details, POCs, and remediation steps.
+                </p>
+            </div>
+        `;
+    } catch (error) {
+        console.error('Error loading reports:', error);
+        container.innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: var(--danger);">
+                <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <p>Error loading reports: ${error.message}</p>
+                <button class="btn btn-outline" onclick="loadReports()" style="margin-top: 1rem;">
+                    <i class="fas fa-redo"></i> Retry
+                </button>
+            </div>
+        `;
+    }
 }
 
 // Monitoring functions
@@ -955,5 +1069,387 @@ window.addEventListener('beforeunload', function() {
 window.addEventListener('click', function(e) {
     if (e.target.classList.contains('modal')) {
         e.target.style.display = 'none';
+    }
+});
+
+// Helper functions for scan display
+function formatScanType(scanType) {
+    if (!scanType) return 'Unknown';
+
+    const typeMap = {
+        'bug_bounty_research': 'Bug Bounty Research',
+        'comprehensive': 'Comprehensive Scan',
+        'web': 'Web Application',
+        'network': 'Network Infrastructure',
+        'api': 'API Security',
+        'mobile': 'Mobile Application'
+    };
+
+    return typeMap[scanType] || scanType.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function formatPlatform(platform) {
+    if (!platform) return 'Manual';
+
+    const platformMap = {
+        'google_bug_hunters': 'Google Bug Hunters',
+        'hackerone': 'HackerOne',
+        'internet_bug_bounty': 'Internet Bug Bounty',
+        'huntr': 'Huntr',
+        'manual': 'Manual'
+    };
+
+    return platformMap[platform] || platform.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function getStatusClass(status) {
+    const statusMap = {
+        'completed': 'healthy',
+        'running': 'warning',
+        'scanning': 'warning',
+        'active': 'healthy',
+        'pending': 'error',
+        'failed': 'error',
+        'stopped': 'error'
+    };
+
+    return statusMap[status] || 'error';
+}
+
+function viewScan(scanId) {
+    if (scanId && scanId !== 'N/A') {
+        // Fetch scan details and show in modal or navigate to details page
+        fetch(`/api/scans/${scanId}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Scan details:', data);
+                // Show scan details in a modal or alert for now
+                alert(`Scan Details:\nID: ${data.id}\nTarget: ${data.target}\nStatus: ${data.status}\nProgress: ${data.progress}%`);
+            })
+            .catch(error => {
+                console.error('Error fetching scan details:', error);
+                alert('Error loading scan details');
+            });
+    } else {
+        alert('Scan details not available');
+    }
+}
+
+// Reports helper functions
+function formatDate(dateString) {
+    if (!dateString) return 'N/A';
+    try {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    } catch (error) {
+        return dateString;
+    }
+}
+
+function downloadReport(downloadUrl, reportTitle) {
+    if (downloadUrl) {
+        // Create a temporary link and trigger download
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = `${reportTitle}.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else {
+        alert('Download URL not available');
+    }
+}
+
+function viewReport(reportId) {
+    if (reportId) {
+        // Open report in new tab/window
+        window.open(`/api/reports/${reportId}/view`, '_blank');
+    } else {
+        alert('Report not available');
+    }
+}
+
+function deleteReport(reportId) {
+    if (reportId && confirm('Are you sure you want to delete this report? This action cannot be undone.')) {
+        fetch(`/api/reports/${reportId}`, { method: 'DELETE' })
+            .then(response => {
+                if (response.ok) {
+                    alert('Report deleted successfully');
+                    // Refresh reports list
+                    if (currentTab === 'reports') {
+                        loadReports();
+                    }
+                } else {
+                    throw new Error('Failed to delete report');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting report:', error);
+                alert('Error deleting report: ' + error.message);
+            });
+    }
+}
+
+async function generateReport() {
+    try {
+        // Show generating state
+        const generateBtn = event.target;
+        const originalText = generateBtn.innerHTML;
+        generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+        generateBtn.disabled = true;
+
+        const response = await fetch('/api/reports/generate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                report_type: 'comprehensive',
+                target: 'bug-bounty-summary',
+                include_evidence: true,
+                include_recommendations: true
+            })
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Report generation started:', result);
+            alert('Report generation started! It will appear in the list once complete.');
+            // Refresh reports list
+            if (currentTab === 'reports') {
+                loadReports();
+            }
+        } else {
+            throw new Error('Failed to generate report');
+        }
+    } catch (error) {
+        console.error('Error generating report:', error);
+        alert('Error generating report: ' + error.message);
+    } finally {
+        // Reset button
+        if (generateBtn) {
+            generateBtn.innerHTML = originalText;
+            generateBtn.disabled = false;
+        }
+    }
+}
+
+// APK Upload Form Handler
+document.getElementById('apkForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const fileInput = document.getElementById('apkFile');
+    const analysisDepth = document.getElementById('apkAnalysisDepth').value;
+    const priority = document.getElementById('apkPriority').value;
+
+    if (!fileInput.files[0]) {
+        alert('Please select an APK file');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+    formData.append('analysis_depth', analysisDepth);
+    formData.append('priority', priority);
+
+    try {
+        const response = await fetch('/api/scan/apk', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert(`APK analysis started! Scan ID: ${result.scan_id}`);
+            closeModal('apkModal');
+            // Refresh scans if on scans tab
+            if (currentTab === 'scans') {
+                loadScans();
+            }
+        } else {
+            const error = await response.json();
+            throw new Error(error.detail || 'APK upload failed');
+        }
+    } catch (error) {
+        console.error('Error uploading APK:', error);
+        alert('Error uploading APK: ' + error.message);
+    }
+});
+
+// IPA Upload Form Handler
+document.getElementById('ipaForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const fileInput = document.getElementById('ipaFile');
+    const analysisDepth = document.getElementById('ipaAnalysisDepth').value;
+    const priority = document.getElementById('ipaPriority').value;
+
+    if (!fileInput.files[0]) {
+        alert('Please select an IPA file');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+    formData.append('analysis_depth', analysisDepth);
+    formData.append('priority', priority);
+
+    try {
+        const response = await fetch('/api/scan/ipa', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert(`IPA analysis started! Scan ID: ${result.scan_id}`);
+            closeModal('ipaModal');
+            // Refresh scans if on scans tab
+            if (currentTab === 'scans') {
+                loadScans();
+            }
+        } else {
+            const error = await response.json();
+            throw new Error(error.detail || 'IPA upload failed');
+        }
+    } catch (error) {
+        console.error('Error uploading IPA:', error);
+        alert('Error uploading IPA: ' + error.message);
+    }
+});
+
+// Domain Scan Form Handler
+document.getElementById('domainForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const target = document.getElementById('domainTarget').value;
+    const scanType = document.getElementById('domainScanType').value;
+    const priority = document.getElementById('domainPriority').value;
+
+    try {
+        const response = await fetch('/api/scan/domain', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                target: target,
+                scan_type: scanType,
+                priority: priority
+            })
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert(`Domain scan started! Scan ID: ${result.scan_id}`);
+            closeModal('domainModal');
+            // Refresh scans if on scans tab
+            if (currentTab === 'scans') {
+                loadScans();
+            }
+        } else {
+            const error = await response.json();
+            throw new Error(error.detail || 'Domain scan failed');
+        }
+    } catch (error) {
+        console.error('Error starting domain scan:', error);
+        alert('Error starting domain scan: ' + error.message);
+    }
+});
+
+// Bug Bounty Program Form Handler
+document.getElementById('programForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const programName = document.getElementById('programName').value;
+    const programUrl = document.getElementById('programUrl').value;
+    const priority = document.getElementById('programPriority').value;
+
+    const formData = new FormData();
+    formData.append('program_name', programName);
+    formData.append('program_url', programUrl);
+    formData.append('priority', priority);
+
+    try {
+        const response = await fetch('/api/scan/program', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert(`Bug bounty program analysis started! Scan ID: ${result.scan_id}`);
+            closeModal('programModal');
+            // Refresh scans if on scans tab
+            if (currentTab === 'scans') {
+                loadScans();
+            }
+        } else {
+            const error = await response.json();
+            throw new Error(error.detail || 'Program analysis failed');
+        }
+    } catch (error) {
+        console.error('Error starting program analysis:', error);
+        alert('Error starting program analysis: ' + error.message);
+    }
+});
+
+// Platform Bulk Scan Form Handler
+document.getElementById('platformForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // Get selected platforms
+    const selectedPlatforms = [];
+    const platformCheckboxes = document.querySelectorAll('input[name="platforms"]:checked');
+    platformCheckboxes.forEach(checkbox => {
+        selectedPlatforms.push(checkbox.value);
+    });
+
+    if (selectedPlatforms.length === 0) {
+        alert('Please select at least one platform to scan');
+        return;
+    }
+
+    const scanDepth = document.getElementById('platformScanDepth').value;
+    const priority = document.getElementById('platformPriority').value;
+    const filters = document.getElementById('platformFilters').value;
+
+    const formData = new FormData();
+    selectedPlatforms.forEach(platform => {
+        formData.append('platforms', platform);
+    });
+    formData.append('scan_depth', scanDepth);
+    formData.append('priority', priority);
+    if (filters.trim()) {
+        formData.append('filters', filters);
+    }
+
+    try {
+        const response = await fetch('/api/platform/scan', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert(`Platform bulk scan started! Scan ID: ${result.scan_id}\nScanning ${result.platforms.length} platforms: ${result.platforms.join(', ')}`);
+            closeModal('platformModal');
+            // Refresh scans if on scans tab
+            if (currentTab === 'scans') {
+                loadScans();
+            }
+        } else {
+            const error = await response.json();
+            throw new Error(error.detail || 'Platform scan failed');
+        }
+    } catch (error) {
+        console.error('Error starting platform scan:', error);
+        alert('Error starting platform scan: ' + error.message);
     }
 });

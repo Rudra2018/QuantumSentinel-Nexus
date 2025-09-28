@@ -20,10 +20,26 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Production stage
 FROM python:3.11-slim
 
-# Install runtime dependencies
+# Install runtime dependencies and security tools
 RUN apt-get update && apt-get install -y \
     curl \
     jq \
+    wget \
+    git \
+    # Network scanning tools
+    nmap \
+    masscan \
+    netcat-openbsd \
+    # Additional security tools
+    openssl \
+    binutils \
+    file \
+    # Browser dependencies for Selenium
+    chromium \
+    firefox-esr \
+    # System tools
+    unzip \
+    zip \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd -r quantum && useradd -r -g quantum quantum
 

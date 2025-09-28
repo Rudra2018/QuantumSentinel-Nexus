@@ -716,10 +716,27 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Security Scans</h3>
-                        <button class="btn btn-primary" onclick="openModal('scanModal')">
-                            <i class="fas fa-plus"></i>
-                            New Scan
-                        </button>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            <button class="btn btn-primary" onclick="openModal('scanModal')">
+                                <i class="fas fa-plus"></i>
+                                New Scan
+                            </button>
+                            <button class="btn btn-secondary" onclick="openModal('apkModal')">
+                                📱 APK
+                            </button>
+                            <button class="btn btn-secondary" onclick="openModal('ipaModal')">
+                                📱 IPA
+                            </button>
+                            <button class="btn btn-secondary" onclick="openModal('domainModal')">
+                                🌐 Domain
+                            </button>
+                            <button class="btn btn-secondary" onclick="openModal('programModal')">
+                                🎯 Program
+                            </button>
+                            <button class="btn btn-success" onclick="openModal('platformModal')">
+                                🌐 Platform Scan
+                            </button>
+                        </div>
                     </div>
                     <div id="scansTable">
                         <!-- Scans table will be loaded here -->
@@ -912,6 +929,214 @@
                 <div style="display: flex; gap: 1rem; justify-content: flex-end;">
                     <button type="button" class="btn btn-outline" onclick="closeModal('fuzzingModal')">Cancel</button>
                     <button type="submit" class="btn btn-primary">Start Campaign</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- APK Upload Modal -->
+    <div id="apkModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📱 Android APK Analysis</h3>
+                <button class="close" onclick="closeModal('apkModal')">&times;</button>
+            </div>
+            <form id="apkForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="form-label">📱 APK File</label>
+                    <input type="file" class="form-input" id="apkFile" accept=".apk" required>
+                    <small class="form-help">Upload Android APK file for comprehensive security analysis</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Analysis Depth</label>
+                    <select class="form-select" id="apkAnalysisDepth">
+                        <option value="comprehensive">Comprehensive</option>
+                        <option value="basic">Basic</option>
+                        <option value="deep">Deep Analysis</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" id="apkPriority">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('apkModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">🔍 Analyze APK</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- IPA Upload Modal -->
+    <div id="ipaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📱 iOS IPA Analysis</h3>
+                <button class="close" onclick="closeModal('ipaModal')">&times;</button>
+            </div>
+            <form id="ipaForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="form-label">📱 IPA File</label>
+                    <input type="file" class="form-input" id="ipaFile" accept=".ipa" required>
+                    <small class="form-help">Upload iOS IPA file for comprehensive security analysis</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Analysis Depth</label>
+                    <select class="form-select" id="ipaAnalysisDepth">
+                        <option value="comprehensive">Comprehensive</option>
+                        <option value="basic">Basic</option>
+                        <option value="deep">Deep Analysis</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" id="ipaPriority">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('ipaModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">🔍 Analyze IPA</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Domain Scan Modal -->
+    <div id="domainModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🌐 Domain Security Scan</h3>
+                <button class="close" onclick="closeModal('domainModal')">&times;</button>
+            </div>
+            <form id="domainForm">
+                <div class="form-group">
+                    <label class="form-label">🌐 Domain/URL</label>
+                    <input type="text" class="form-input" id="domainTarget" placeholder="example.com or https://example.com" required>
+                    <small class="form-help">Enter domain name or full URL for security analysis</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Scan Type</label>
+                    <select class="form-select" id="domainScanType">
+                        <option value="domain_analysis">Full Domain Analysis</option>
+                        <option value="web_security">Web Security Focus</option>
+                        <option value="infrastructure">Infrastructure Scan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" id="domainPriority">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('domainModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">🚀 Start Domain Scan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bug Bounty Program Modal -->
+    <div id="programModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🎯 Bug Bounty Program Analysis</h3>
+                <button class="close" onclick="closeModal('programModal')">&times;</button>
+            </div>
+            <form id="programForm">
+                <div class="form-group">
+                    <label class="form-label">🎯 Program Name</label>
+                    <input type="text" class="form-input" id="programName" placeholder="Google VRP, Microsoft MSRC..." required>
+                    <small class="form-help">Name of the bug bounty program</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">🔗 Program URL</label>
+                    <input type="url" class="form-input" id="programUrl" placeholder="https://hackerone.com/program-name" required>
+                    <small class="form-help">URL to the bug bounty program page</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" id="programPriority">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('programModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">🎯 Analyze Program</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Platform Bulk Scan Modal -->
+    <div id="platformModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🌐 Platform Bulk Scanner</h3>
+                <button class="close" onclick="closeModal('platformModal')">&times;</button>
+            </div>
+            <form id="platformForm">
+                <div class="form-group">
+                    <label class="form-label">🎯 Select Platforms</label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="platforms" value="huntr.com" checked>
+                            🐛 Huntr.com
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="platforms" value="intigriti.com" checked>
+                            🛡️ Intigriti.com
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="platforms" value="hackerone.com">
+                            🎯 HackerOne
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="platforms" value="google.com">
+                            🔍 Google VRP
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" name="platforms" value="ibb.bugbounty.security">
+                            🔬 IBB Research
+                        </label>
+                    </div>
+                    <small class="form-help">Select platforms to scan all their bug bounty programs</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Scan Depth</label>
+                    <select class="form-select" id="platformScanDepth">
+                        <option value="comprehensive">Comprehensive Analysis</option>
+                        <option value="quick">Quick Overview</option>
+                        <option value="deep">Deep Investigation</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Filters (JSON)</label>
+                    <textarea class="form-textarea" id="platformFilters" rows="3" placeholder='{"min_reward": 500, "status": "open", "type": ["web", "mobile"]}'></textarea>
+                    <small class="form-help">Optional: JSON filters for program selection</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Priority</label>
+                    <select class="form-select" id="platformPriority">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('platformModal')">Cancel</button>
+                    <button type="submit" class="btn btn-success">🚀 Start Platform Scan</button>
                 </div>
             </form>
         </div>

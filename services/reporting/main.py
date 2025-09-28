@@ -124,6 +124,19 @@ class VulnerabilityFinding:
     discovery_date: datetime
     service_source: str
 
+    # Enhanced fields for comprehensive reporting
+    proof_of_concept: Optional[str] = None
+    reproduction_steps: Optional[List[str]] = None
+    screenshots: Optional[List[str]] = None  # Base64 encoded images
+    exploit_code: Optional[str] = None
+    impact_analysis: Optional[str] = None
+    technical_details: Optional[Dict[str, Any]] = None
+    remediation_steps: Optional[List[str]] = None
+    business_impact: Optional[str] = None
+    attack_vector: Optional[str] = None
+    cwe_id: Optional[str] = None
+    owasp_category: Optional[str] = None
+
 @dataclass
 class ReportMetadata:
     report_id: str
@@ -952,10 +965,140 @@ class PDFReportGenerator:
             elements.append(Paragraph(finding.evidence[:500] + "..." if len(finding.evidence) > 500 else finding.evidence, evidence_style))
             elements.append(Spacer(1, 8))
 
-            # Recommendation
-            elements.append(Paragraph("<b>Recommendation:</b>", self.styles['Normal']))
-            elements.append(Paragraph(finding.recommendation, self.styles['Normal']))
-            elements.append(Spacer(1, 8))
+            # CWE and OWASP Classification
+            if finding.cwe_id or finding.owasp_category:
+                classification_data = []
+                if finding.cwe_id:
+                    classification_data.append(['CWE:', finding.cwe_id])
+                if finding.owasp_category:
+                    classification_data.append(['OWASP:', finding.owasp_category])
+                if finding.attack_vector:
+                    classification_data.append(['Attack Vector:', finding.attack_vector])
+
+                if classification_data:
+                    elements.append(Paragraph("<b>Classification:</b>", self.styles['Normal']))
+                    classification_table = Table(classification_data, colWidths=[1*inch, 4.5*inch])
+                    classification_table.setStyle(TableStyle([
+                        ('BACKGROUND', (0, 0), (0, -1), colors.HexColor('#F8F9FA')),
+                        ('FONTSIZE', (0, 0), (-1, -1), 9),
+                        ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#E9ECEF'))
+                    ]))
+                    elements.append(classification_table)
+                    elements.append(Spacer(1, 8))
+
+            # Proof of Concept
+            if finding.proof_of_concept:
+                elements.append(Paragraph("<b>Proof of Concept:</b>", self.styles['Normal']))
+                poc_style = ParagraphStyle(
+                    'POC',
+                    parent=self.styles['Normal'],
+                    fontName='Courier',
+                    fontSize=8,
+                    backgroundColor=colors.HexColor('#FFF3CD'),
+                    borderWidth=1,
+                    borderColor=colors.HexColor('#FFC107'),
+                    borderPadding=5
+                )
+                elements.append(Paragraph(finding.proof_of_concept, poc_style))
+                elements.append(Spacer(1, 8))
+
+            # Reproduction Steps
+            if finding.reproduction_steps:
+                elements.append(Paragraph("<b>Reproduction Steps:</b>", self.styles['Normal']))
+                for i, step in enumerate(finding.reproduction_steps, 1):
+                    elements.append(Paragraph(f"{i}. {step}", self.styles['Normal']))
+                elements.append(Spacer(1, 8))
+
+            # Screenshots
+            if finding.screenshots:
+                elements.append(Paragraph("<b>Screenshots:</b>", self.styles['Normal']))
+                for i, screenshot_b64 in enumerate(finding.screenshots, 1):
+                    try:
+                        # Decode base64 image
+                        screenshot_data = base64.b64decode(screenshot_b64)
+                        screenshot_img = PILImage.open(io.BytesIO(screenshot_data))
+
+                        # Resize if too large
+                        max_width, max_height = 400, 300
+                        screenshot_img.thumbnail((max_width, max_height), PILImage.Resampling.LANCZOS)
+
+                        # Save to temporary buffer
+                        img_buffer = io.BytesIO()
+                        screenshot_img.save(img_buffer, format='PNG')
+                        img_buffer.seek(0)
+
+                        # Add to PDF
+                        img = Image(img_buffer, width=screenshot_img.width, height=screenshot_img.height)
+                        elements.append(Paragraph(f"Screenshot {i}:", self.styles['Normal']))
+                        elements.append(img)
+                        elements.append(Spacer(1, 8))
+                    except Exception as e:
+                        elements.append(Paragraph(f"Screenshot {i}: [Error loading image: {str(e)}]", self.styles['Normal']))
+                        elements.append(Spacer(1, 8))
+
+            # Exploit Code
+            if finding.exploit_code:
+                elements.append(Paragraph("<b>Exploit Code:</b>", self.styles['Normal']))
+                exploit_style = ParagraphStyle(
+                    'Exploit',
+                    parent=self.styles['Normal'],
+                    fontName='Courier',
+                    fontSize=7,
+                    backgroundColor=colors.HexColor('#F8D7DA'),
+                    borderWidth=1,
+                    borderColor=colors.HexColor('#DC3545'),
+                    borderPadding=5
+                )
+                elements.append(Paragraph(finding.exploit_code, exploit_style))
+                elements.append(Spacer(1, 8))
+
+            # Impact Analysis
+            if finding.impact_analysis:
+                elements.append(Paragraph("<b>Impact Analysis:</b>", self.styles['Normal']))
+                elements.append(Paragraph(finding.impact_analysis, self.styles['Normal']))
+                elements.append(Spacer(1, 8))
+
+            # Business Impact
+            if finding.business_impact:
+                elements.append(Paragraph("<b>Business Impact:</b>", self.styles['Normal']))
+                business_style = ParagraphStyle(
+                    'BusinessImpact',
+                    parent=self.styles['Normal'],
+                    backgroundColor=colors.HexColor('#E1F5FE'),
+                    borderWidth=1,
+                    borderColor=colors.HexColor('#0277BD'),
+                    borderPadding=5
+                )
+                elements.append(Paragraph(finding.business_impact, business_style))
+                elements.append(Spacer(1, 8))
+
+            # Technical Details
+            if finding.technical_details:
+                elements.append(Paragraph("<b>Technical Details:</b>", self.styles['Normal']))
+                tech_data = []
+                for key, value in finding.technical_details.items():
+                    tech_data.append([key.title() + ':', str(value)])
+
+                tech_table = Table(tech_data, colWidths=[1.5*inch, 4*inch])
+                tech_table.setStyle(TableStyle([
+                    ('BACKGROUND', (0, 0), (0, -1), colors.HexColor('#F0F0F0')),
+                    ('FONTSIZE', (0, 0), (-1, -1), 8),
+                    ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#CCCCCC'))
+                ]))
+                elements.append(tech_table)
+                elements.append(Spacer(1, 8))
+
+            # Remediation Steps
+            if finding.remediation_steps:
+                elements.append(Paragraph("<b>Detailed Remediation Steps:</b>", self.styles['Normal']))
+                for i, step in enumerate(finding.remediation_steps, 1):
+                    elements.append(Paragraph(f"{i}. {step}", self.styles['Normal']))
+                elements.append(Spacer(1, 8))
+            else:
+                # Fallback to basic recommendation
+                elements.append(Paragraph("<b>Recommendation:</b>", self.styles['Normal']))
+                elements.append(Paragraph(finding.recommendation, self.styles['Normal']))
+                elements.append(Spacer(1, 8))
 
             # References
             if finding.references:

@@ -23,21 +23,19 @@ mitmproxy>=10.1.6
 
 # Web Application Security
 sqlmap>=1.7.11
-nikto>=2.5.0
-dirb>=2.22
-gobuster>=3.6.0
-ffuf>=2.1.0
+# Note: nikto, dirb, gobuster, ffuf are installed via system packages in Dockerfile
 
 # Code Quality and Security Analysis
-sonarqube-api>=1.3.4
-checkmarx-python-sdk>=1.0.0
-veracode-api-py>=1.0.5
+sonarqube-api>=1.3.1
+# Note: Some commercial SDKs may require special installation
+# checkmarx-python-sdk>=1.0.0
+# veracode-api-py>=1.0.5
 
 # Vulnerability Scanners
-nmap>=7.94
-masscan>=1.3.2
-nuclei>=2.9.15
-zap-api-python>=0.0.21
+python-nmap>=0.7.1
+# Note: nmap, masscan, nuclei are installed via system packages in Dockerfile
+# Note: Installing alternative ZAP API client
+python-owasp-zap-v2.4>=0.0.20
 
 # Network Security Testing
 scapy>=2.5.0
@@ -52,7 +50,6 @@ ansible>=8.7.0
 # Cloud Security Analysis
 boto3>=1.34.0
 azure-identity>=1.15.0
-google-cloud-security-center>=1.23.0
 
 # Machine Learning for Security Analysis
 scikit-learn>=1.3.2

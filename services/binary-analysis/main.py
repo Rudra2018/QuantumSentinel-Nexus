@@ -34,7 +34,8 @@ logger = logging.getLogger("QuantumSentinel.BinaryAnalysis")
 app = FastAPI(
     title="QuantumSentinel Binary Analysis Service",
     description="Advanced binary analysis and reverse engineering service",
-    version="6.0.0"
+    version="6.0.0",
+    lifespan=lifespan
 )
 
 # Global agent instance
@@ -69,7 +70,16 @@ class BinaryAnalysisResult(BaseModel):
 analysis_results = {}
 active_analyses = {}
 
-@app.on_startup
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    await startup_event()
+    yield
+    # Shutdown
+    await shutdown_event()
+
 async def startup_event():
     """Initialize the binary analysis service"""
     global binary_agent, service_ips
@@ -92,6 +102,10 @@ async def startup_event():
         service_ips = {}
 
     logger.info("✅ Binary Analysis Service initialized successfully")
+
+async def shutdown_event():
+    """Cleanup on shutdown"""
+    logger.info("🔬 Binary Analysis Service shutting down")
 
 @app.get("/")
 async def root():

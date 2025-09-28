@@ -1,12 +1,13 @@
 # 🛡️ QuantumSentinel-Nexus
 
-**Advanced Bug Bounty Platform with AI Integration and Multi-Cloud Capabilities**
+**Complete Enterprise Security Testing Platform with 24/7 Bug Bounty Intelligence**
 
-[![Platform Support](https://img.shields.io/badge/Platforms-7-blue)](docs/ARCHITECTURE.md)
-[![Mobile Apps](https://img.shields.io/badge/Mobile%20Apps-42-green)](docs/ARCHITECTURE.md)
-[![Cloud Ready](https://img.shields.io/badge/Cloud-Ready-brightgreen)](docs/DEPLOYMENT_GUIDE.md)
-[![AI Powered](https://img.shields.io/badge/AI-Claude%20Integration-purple)](web_ui/README.md)
-[![AWS Deployed](https://img.shields.io/badge/AWS-Fully%20Deployed-orange)](deployment/aws/)
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/user/quantumsentinel-nexus)
+[![Platform](https://img.shields.io/badge/platform-AWS%20%7C%20Docker%20%7C%20Local-green.svg)](https://github.com/user/quantumsentinel-nexus)
+[![Mobile Security](https://img.shields.io/badge/Mobile-APK%20%7C%20IPA-blue)](DASHBOARD-GUIDE.md)
+[![Bug Bounty](https://img.shields.io/badge/Platforms-5+-brightgreen)](DASHBOARD-GUIDE.md)
+[![24/7 Dashboard](https://img.shields.io/badge/Dashboard-24%2F7-orange)](http://localhost:8080)
+[![AWS Ready](https://img.shields.io/badge/AWS-Production%20Ready-red)](deployment/aws/)
 
 ## 🎯 Overview
 
