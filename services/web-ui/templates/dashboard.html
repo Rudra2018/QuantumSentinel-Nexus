@@ -486,6 +486,158 @@
             100% { transform: rotate(360deg); }
         }
 
+        .scans-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .scans-table th,
+        .scans-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .scans-table th {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .scans-table td {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .scans-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .scan-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .scan-status.running {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--primary);
+        }
+
+        .scan-status.completed {
+            background: rgba(46, 213, 115, 0.2);
+            color: var(--success);
+        }
+
+        .scan-status.failed {
+            background: rgba(255, 71, 87, 0.2);
+            color: var(--danger);
+        }
+
+        .scan-status.paused {
+            background: rgba(255, 165, 2, 0.2);
+            color: var(--warning);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .scan-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: var(--card-bg);
+            color: var(--text-primary);
+        }
+
+        .action-btn.danger:hover {
+            background: rgba(255, 71, 87, 0.2);
+            color: var(--danger);
+            border-color: var(--danger);
+        }
+
+        .btn-sm {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.8rem;
+        }
+
+        .running-scan-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .running-scan-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 255, 136, 0.3);
+        }
+
+        .running-scan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            animation: pulse 2s infinite;
+        }
+
+        .alert-item {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .alert-item.warning {
+            border-left-color: var(--warning);
+        }
+
+        .alert-item.error {
+            border-left-color: var(--danger);
+        }
+
+        .alert-item.info {
+            border-left-color: var(--secondary);
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -633,26 +785,79 @@
         <div class="content">
             <!-- Dashboard Tab -->
             <div id="dashboard" class="tab-content active">
+                <!-- Quick Actions Bar -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="card-header">
+                        <h3 class="card-title">🚀 Quick Actions</h3>
+                        <div class="status-indicator">
+                            <div class="status-dot"></div>
+                            <span>Real-time Control Center</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; padding: 1rem 0;">
+                        <button class="btn btn-primary" onclick="openModal('quickScanModal')">
+                            <i class="fas fa-play"></i>
+                            Start Quick Scan
+                        </button>
+                        <button class="btn btn-success" onclick="openModal('comprehensiveScanModal')">
+                            <i class="fas fa-rocket"></i>
+                            Comprehensive Scan
+                        </button>
+                        <button class="btn btn-secondary" onclick="refreshAllData()">
+                            <i class="fas fa-sync"></i>
+                            Refresh Data
+                        </button>
+                        <button class="btn btn-outline" onclick="pauseAllScans()">
+                            <i class="fas fa-pause"></i>
+                            Pause All
+                        </button>
+                        <button class="btn btn-outline" onclick="generateLiveReport()">
+                            <i class="fas fa-file-alt"></i>
+                            Live Report
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Real-time Stats Grid -->
                 <div class="stats-grid">
                     <div class="card stat-card">
                         <div class="stat-value" id="totalScans">0</div>
                         <div class="stat-label">Total Scans</div>
-                        <div class="stat-change positive">↗ +12% this week</div>
+                        <div class="stat-change" id="scansChange">↗ Loading...</div>
                     </div>
                     <div class="card stat-card">
-                        <div class="stat-value" id="activeServices">10</div>
-                        <div class="stat-label">Active Services</div>
-                        <div class="stat-change positive">↗ All operational</div>
+                        <div class="stat-value" id="activeScans">0</div>
+                        <div class="stat-label">Active Scans</div>
+                        <div class="stat-change" id="activeChange">↗ Real-time</div>
                     </div>
                     <div class="card stat-card">
-                        <div class="stat-value" id="vulnerabilities">247</div>
+                        <div class="stat-value" id="vulnerabilities">0</div>
                         <div class="stat-label">Vulnerabilities Found</div>
-                        <div class="stat-change positive">↗ +34 today</div>
+                        <div class="stat-change" id="vulnChange">↗ Live count</div>
                     </div>
                     <div class="card stat-card">
-                        <div class="stat-value">99.9%</div>
-                        <div class="stat-label">Uptime</div>
-                        <div class="stat-change positive">↗ Last 30 days</div>
+                        <div class="stat-value" id="systemUptime">100%</div>
+                        <div class="stat-label">System Status</div>
+                        <div class="stat-change positive" id="uptimeChange">↗ All systems operational</div>
+                    </div>
+                </div>
+
+                <!-- Running Scans Grid -->
+                <div class="card" style="margin-bottom: 1.5rem;">
+                    <div class="card-header">
+                        <h3 class="card-title">⚡ Running Scans</h3>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <div class="loading" id="runningScansLoader" style="display: none;">
+                                <div class="spinner"></div>
+                                <span>Updating...</span>
+                            </div>
+                            <button class="btn btn-outline btn-sm" onclick="loadRunningScans()">
+                                <i class="fas fa-sync"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="runningScansGrid" class="service-grid">
+                        <!-- Running scans will be loaded here -->
                     </div>
                 </div>
 
@@ -713,33 +918,183 @@
 
             <!-- Scans Tab -->
             <div id="scans" class="tab-content">
+                <!-- Individual Module Cards -->
+                <div class="card" style="margin-bottom: 2rem;">
+                    <div class="card-header">
+                        <h3 class="card-title">🔧 Individual Security Modules</h3>
+                        <div class="status-indicator">
+                            <div class="status-dot"></div>
+                            <span>Run specific modules with custom inputs</span>
+                        </div>
+                    </div>
+
+                    <div class="service-grid" style="margin-bottom: 1rem;">
+                        <!-- Reconnaissance Module -->
+                        <div class="service-card" onclick="openModal('reconModal')">
+                            <div class="card-header">
+                                <div class="card-icon" style="background: rgba(0, 255, 136, 0.2); color: var(--primary);">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <span class="service-status status-healthy">
+                                    <div class="status-dot"></div>
+                                    Ready
+                                </span>
+                            </div>
+                            <h4>Reconnaissance</h4>
+                            <p>Domain enumeration, subdomain discovery, port scanning</p>
+                            <small><strong>Input:</strong> Domain, IP, CIDR range</small>
+                        </div>
+
+                        <!-- Binary Analysis Module -->
+                        <div class="service-card" onclick="openModal('binaryModal')">
+                            <div class="card-header">
+                                <div class="card-icon" style="background: rgba(255, 165, 2, 0.2); color: var(--warning);">
+                                    <i class="fas fa-file-code"></i>
+                                </div>
+                                <span class="service-status status-healthy">
+                                    <div class="status-dot"></div>
+                                    Ready
+                                </span>
+                            </div>
+                            <h4>Binary Analysis</h4>
+                            <p>Static analysis, malware detection, CFG construction</p>
+                            <small><strong>Input:</strong> .exe, .dll, .so, .dylib files</small>
+                        </div>
+
+                        <!-- Reverse Engineering Module -->
+                        <div class="service-card" onclick="openModal('reverseModal')">
+                            <div class="card-header">
+                                <div class="card-icon" style="background: rgba(0, 204, 255, 0.2); color: var(--secondary);">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <span class="service-status status-healthy">
+                                    <div class="status-dot"></div>
+                                    Ready
+                                </span>
+                            </div>
+                            <h4>Reverse Engineering</h4>
+                            <p>Disassembly, decompilation, vulnerability analysis</p>
+                            <small><strong>Input:</strong> Binary files, firmware</small>
+                        </div>
+
+                        <!-- Kernel Module Analysis -->
+                        <div class="service-card" onclick="openModal('kernelModal')">
+                            <div class="card-header">
+                                <div class="card-icon" style="background: rgba(255, 71, 87, 0.2); color: var(--danger);">
+                                    <i class="fas fa-microchip"></i>
+                                </div>
+                                <span class="service-status status-healthy">
+                                    <div class="status-dot"></div>
+                                    Ready
+                                </span>
+                            </div>
+                            <h4>Kernel Analysis</h4>
+                            <p>Kernel module security, rootkit detection</p>
+                            <small><strong>Input:</strong> .ko files, kernel directories</small>
+                        </div>
+
+                        <!-- SAST/DAST Module -->
+                        <div class="service-card" onclick="openModal('sastDastModal')">
+                            <div class="card-header">
+                                <div class="card-icon" style="background: rgba(46, 213, 115, 0.2); color: var(--success);">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <span class="service-status status-healthy">
+                                    <div class="status-dot"></div>
+                                    Ready
+                                </span>
+                            </div>
+                            <h4>SAST/DAST</h4>
+                            <p>Static & dynamic application security testing</p>
+                            <small><strong>Input:</strong> Source code, URLs, API endpoints</small>
+                        </div>
+
+                        <!-- ML Intelligence Module -->
+                        <div class="service-card" onclick="openModal('mlModal')">
+                            <div class="card-header">
+                                <div class="card-icon" style="background: rgba(147, 51, 234, 0.2); color: #9333ea;">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <span class="service-status status-healthy">
+                                    <div class="status-dot"></div>
+                                    Ready
+                                </span>
+                            </div>
+                            <h4>ML Intelligence</h4>
+                            <p>AI-powered vulnerability prediction</p>
+                            <small><strong>Input:</strong> Code, binaries, scan data</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Traditional Scan Options -->
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Security Scans</h3>
+                        <h3 class="card-title">🚀 Quick Scan Templates</h3>
                         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
                             <button class="btn btn-primary" onclick="openModal('scanModal')">
                                 <i class="fas fa-plus"></i>
-                                New Scan
+                                Comprehensive Scan
                             </button>
                             <button class="btn btn-secondary" onclick="openModal('apkModal')">
-                                📱 APK
+                                📱 APK Analysis
                             </button>
                             <button class="btn btn-secondary" onclick="openModal('ipaModal')">
-                                📱 IPA
+                                📱 IPA Analysis
                             </button>
                             <button class="btn btn-secondary" onclick="openModal('domainModal')">
-                                🌐 Domain
+                                🌐 Domain Scan
                             </button>
                             <button class="btn btn-secondary" onclick="openModal('programModal')">
-                                🎯 Program
+                                🎯 Bug Bounty Program
                             </button>
                             <button class="btn btn-success" onclick="openModal('platformModal')">
-                                🌐 Platform Scan
+                                🌐 Platform Bulk Scan
                             </button>
                         </div>
                     </div>
                     <div id="scansTable">
-                        <!-- Scans table will be loaded here -->
+                        <!-- Real-time scans table will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Advanced Scan Management -->
+                <div class="card" style="margin-top: 2rem;">
+                    <div class="card-header">
+                        <h3 class="card-title">📊 Advanced Scan Management</h3>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <select class="form-select" id="scanFilter" onchange="filterScans()" style="width: auto;">
+                                <option value="all">All Scans</option>
+                                <option value="running">Running</option>
+                                <option value="completed">Completed</option>
+                                <option value="failed">Failed</option>
+                                <option value="paused">Paused</option>
+                            </select>
+                            <button class="btn btn-outline btn-sm" onclick="exportScans()">
+                                <i class="fas fa-download"></i>
+                                Export
+                            </button>
+                        </div>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="scans-table" id="advancedScansTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Target</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th>Progress</th>
+                                    <th>Started</th>
+                                    <th>Duration</th>
+                                    <th>Findings</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scansTableBody">
+                                <!-- Real-time scan data will be loaded here -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -816,21 +1171,112 @@
 
             <!-- Monitoring Tab -->
             <div id="monitoring" class="tab-content">
+                <!-- Real-time System Status -->
+                <div class="card" style="margin-bottom: 2rem;">
+                    <div class="card-header">
+                        <h3 class="card-title">🔴 LIVE System Status</h3>
+                        <div class="status-indicator">
+                            <div class="status-dot"></div>
+                            <span id="systemStatusText">All Systems Operational</span>
+                        </div>
+                    </div>
+                    <div class="service-grid">
+                        <div id="servicesStatus">
+                            <!-- Real-time service status will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
                 <div class="dashboard-grid">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Real-time Metrics</h3>
+                            <h3 class="card-title">📈 Real-time Performance</h3>
+                            <button class="btn btn-outline btn-sm" onclick="refreshMetrics()">
+                                <i class="fas fa-sync"></i>
+                                Refresh
+                            </button>
                         </div>
                         <div class="chart-container">
-                            <canvas id="monitoringChart"></canvas>
+                            <canvas id="realTimeChart"></canvas>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr);">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--primary);" id="currentThroughput">0</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">Scans/Hour</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--success);" id="completionRate">100%</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">Success Rate</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--warning);" id="avgDuration">5m</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">Avg Duration</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--secondary);" id="queueSize">0</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-muted);">Queue Size</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Alert Center</h3>
+                            <h3 class="card-title">🚨 Live Alert Center</h3>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="btn btn-outline btn-sm" onclick="clearAlerts()">
+                                    <i class="fas fa-trash"></i>
+                                    Clear
+                                </button>
+                                <button class="btn btn-outline btn-sm" onclick="refreshAlerts()">
+                                    <i class="fas fa-sync"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div id="alertCenter">
-                            <!-- Alerts will be loaded here -->
+                        <div id="liveAlertCenter" style="max-height: 400px; overflow-y: auto;">
+                            <!-- Live alerts will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resource Usage -->
+                <div class="card" style="margin-top: 2rem;">
+                    <div class="card-header">
+                        <h3 class="card-title">💻 Resource Usage</h3>
+                        <div class="status-indicator">
+                            <div class="status-dot"></div>
+                            <span>Live monitoring</span>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="card">
+                            <h4>CPU Usage</h4>
+                            <div class="progress-bar" style="margin: 1rem 0;">
+                                <div class="progress-fill" id="cpuProgress" style="width: 45%; background: var(--primary);"></div>
+                            </div>
+                            <span id="cpuText">45% (8 cores)</span>
+                        </div>
+                        <div class="card">
+                            <h4>Memory Usage</h4>
+                            <div class="progress-bar" style="margin: 1rem 0;">
+                                <div class="progress-fill" id="memoryProgress" style="width: 62%; background: var(--warning);"></div>
+                            </div>
+                            <span id="memoryText">62% (16 GB)</span>
+                        </div>
+                        <div class="card">
+                            <h4>Network I/O</h4>
+                            <div class="progress-bar" style="margin: 1rem 0;">
+                                <div class="progress-fill" id="networkProgress" style="width: 30%; background: var(--success);"></div>
+                            </div>
+                            <span id="networkText">30% (1.2 GB/s)</span>
+                        </div>
+                        <div class="card">
+                            <h4>Storage</h4>
+                            <div class="progress-bar" style="margin: 1rem 0;">
+                                <div class="progress-fill" id="storageProgress" style="width: 78%; background: var(--danger);"></div>
+                            </div>
+                            <span id="storageText">78% (1.2 TB)</span>
                         </div>
                     </div>
                 </div>
@@ -1142,8 +1588,902 @@
         </div>
     </div>
 
+    <!-- Individual Module Modals -->
+
+    <!-- Reconnaissance Module Modal -->
+    <div id="reconModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔍 Reconnaissance Module</h3>
+                <button class="close" onclick="closeModal('reconModal')">&times;</button>
+            </div>
+            <form id="reconForm">
+                <div class="form-group">
+                    <label class="form-label">🎯 Target</label>
+                    <input type="text" class="form-input" id="reconTarget" placeholder="example.com, 192.168.1.0/24, 8.8.8.8" required>
+                    <small class="form-help">Domain, IP address, or CIDR range</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Scan Type</label>
+                    <select class="form-select" id="reconType">
+                        <option value="subdomain">Subdomain Enumeration</option>
+                        <option value="port_scan">Port Scanning</option>
+                        <option value="dns_enum">DNS Enumeration</option>
+                        <option value="comprehensive">Comprehensive Recon</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Output Format</label>
+                    <select class="form-select" id="reconFormat">
+                        <option value="json">JSON</option>
+                        <option value="csv">CSV</option>
+                        <option value="xml">XML</option>
+                        <option value="txt">Text</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('reconModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">🚀 Start Reconnaissance</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Binary Analysis Module Modal -->
+    <div id="binaryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔬 Binary Analysis Module</h3>
+                <button class="close" onclick="closeModal('binaryModal')">&times;</button>
+            </div>
+            <form id="binaryForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="form-label">📁 Binary File</label>
+                    <input type="file" class="form-input" id="binaryFile" accept=".exe,.dll,.so,.dylib,.bin,.elf" required>
+                    <small class="form-help">Upload .exe, .dll, .so, .dylib, or other binary files</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Analysis Type</label>
+                    <select class="form-select" id="binaryAnalysisType">
+                        <option value="static">Static Analysis</option>
+                        <option value="dynamic">Dynamic Analysis</option>
+                        <option value="malware">Malware Detection</option>
+                        <option value="cfg">Control Flow Graph</option>
+                        <option value="comprehensive">Full Analysis</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Platform</label>
+                    <select class="form-select" id="binaryPlatform">
+                        <option value="auto">Auto-detect</option>
+                        <option value="windows">Windows (PE)</option>
+                        <option value="linux">Linux (ELF)</option>
+                        <option value="macos">macOS (Mach-O)</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('binaryModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">🔍 Analyze Binary</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reverse Engineering Module Modal -->
+    <div id="reverseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>⚙️ Reverse Engineering Module</h3>
+                <button class="close" onclick="closeModal('reverseModal')">&times;</button>
+            </div>
+            <form id="reverseForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="form-label">📁 Target File</label>
+                    <input type="file" class="form-input" id="reverseFile" required>
+                    <small class="form-help">Binary files, firmware, or executables</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Reverse Engineering Type</label>
+                    <select class="form-select" id="reverseType">
+                        <option value="disassembly">Disassembly</option>
+                        <option value="decompilation">Decompilation</option>
+                        <option value="string_analysis">String Analysis</option>
+                        <option value="crypto_analysis">Cryptographic Analysis</option>
+                        <option value="firmware">Firmware Analysis</option>
+                        <option value="comprehensive">Full Reverse Engineering</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Architecture</label>
+                    <select class="form-select" id="reverseArch">
+                        <option value="auto">Auto-detect</option>
+                        <option value="x86">x86 (32-bit)</option>
+                        <option value="x64">x64 (64-bit)</option>
+                        <option value="arm">ARM</option>
+                        <option value="arm64">ARM64</option>
+                        <option value="mips">MIPS</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('reverseModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">🔧 Start Reverse Engineering</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Kernel Analysis Module Modal -->
+    <div id="kernelModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🖥️ Kernel Analysis Module</h3>
+                <button class="close" onclick="closeModal('kernelModal')">&times;</button>
+            </div>
+            <form id="kernelForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="form-label">📁 Kernel Module/Directory</label>
+                    <input type="file" class="form-input" id="kernelFile" accept=".ko" multiple>
+                    <small class="form-help">Upload .ko files or specify directory path below</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Directory Path (Alternative)</label>
+                    <input type="text" class="form-input" id="kernelPath" placeholder="/lib/modules/$(uname -r)/kernel/">
+                    <small class="form-help">Path to kernel modules directory on target system</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Analysis Type</label>
+                    <select class="form-select" id="kernelAnalysisType">
+                        <option value="rootkit">Rootkit Detection</option>
+                        <option value="malware">Malware Scanning</option>
+                        <option value="security">Security Analysis</option>
+                        <option value="dependency">Dependency Analysis</option>
+                        <option value="comprehensive">Full Kernel Analysis</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('kernelModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">🖥️ Analyze Kernel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SAST/DAST Module Modal -->
+    <div id="sastDastModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🛡️ SAST/DAST Module</h3>
+                <button class="close" onclick="closeModal('sastDastModal')">&times;</button>
+            </div>
+            <form id="sastDastForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="form-label">Analysis Mode</label>
+                    <select class="form-select" id="sastDastMode" onchange="toggleSastDastInputs()">
+                        <option value="sast">SAST (Static Analysis)</option>
+                        <option value="dast">DAST (Dynamic Analysis)</option>
+                        <option value="both">SAST + DAST</option>
+                    </select>
+                </div>
+                <div class="form-group" id="sastInputs">
+                    <label class="form-label">📁 Source Code</label>
+                    <input type="file" class="form-input" id="sourceCode" multiple webkitdirectory>
+                    <small class="form-help">Upload source code directory for static analysis</small>
+                </div>
+                <div class="form-group" id="dastInputs">
+                    <label class="form-label">🌐 Target URL</label>
+                    <input type="url" class="form-input" id="dastTarget" placeholder="https://example.com">
+                    <small class="form-help">Target URL for dynamic analysis</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Technology Stack</label>
+                    <select class="form-select" id="techStack">
+                        <option value="auto">Auto-detect</option>
+                        <option value="java">Java</option>
+                        <option value="python">Python</option>
+                        <option value="javascript">JavaScript/Node.js</option>
+                        <option value="csharp">C#/.NET</option>
+                        <option value="php">PHP</option>
+                        <option value="go">Go</option>
+                        <option value="ruby">Ruby</option>
+                        <option value="cpp">C/C++</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('sastDastModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">🛡️ Start Analysis</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ML Intelligence Module Modal -->
+    <div id="mlModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🧠 ML Intelligence Module</h3>
+                <button class="close" onclick="closeModal('mlModal')">&times;</button>
+            </div>
+            <form id="mlForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="form-label">Input Type</label>
+                    <select class="form-select" id="mlInputType" onchange="toggleMLInputs()">
+                        <option value="code">Source Code Analysis</option>
+                        <option value="binary">Binary Analysis</option>
+                        <option value="scan_data">Scan Data Analysis</option>
+                        <option value="text">Text/Log Analysis</option>
+                    </select>
+                </div>
+                <div class="form-group" id="mlFileInput">
+                    <label class="form-label">📁 Input Files</label>
+                    <input type="file" class="form-input" id="mlFiles" multiple>
+                    <small class="form-help">Upload files for ML analysis</small>
+                </div>
+                <div class="form-group" id="mlTextInput" style="display: none;">
+                    <label class="form-label">📝 Text Input</label>
+                    <textarea class="form-textarea" id="mlText" rows="6" placeholder="Paste scan results, logs, or text data..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">ML Model</label>
+                    <select class="form-select" id="mlModel">
+                        <option value="vulnerability_detector">Vulnerability Detector</option>
+                        <option value="malware_classifier">Malware Classifier</option>
+                        <option value="pattern_recognition">Pattern Recognition</option>
+                        <option value="threat_prediction">Threat Prediction</option>
+                        <option value="risk_assessment">Risk Assessment</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Confidence Threshold</label>
+                    <input type="range" class="form-input" id="mlConfidence" min="0.1" max="1.0" step="0.1" value="0.7">
+                    <small class="form-help">Minimum confidence level: <span id="confidenceValue">0.7</span></small>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('mlModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">🧠 Run ML Analysis</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/static/js/dashboard.js"></script>
+
+    <script>
+    // Additional JavaScript for new modals
+    function toggleSastDastInputs() {
+        const mode = document.getElementById('sastDastMode').value;
+        const sastInputs = document.getElementById('sastInputs');
+        const dastInputs = document.getElementById('dastInputs');
+
+        if (mode === 'sast') {
+            sastInputs.style.display = 'block';
+            dastInputs.style.display = 'none';
+        } else if (mode === 'dast') {
+            sastInputs.style.display = 'none';
+            dastInputs.style.display = 'block';
+        } else {
+            sastInputs.style.display = 'block';
+            dastInputs.style.display = 'block';
+        }
+    }
+
+    function toggleMLInputs() {
+        const inputType = document.getElementById('mlInputType').value;
+        const fileInput = document.getElementById('mlFileInput');
+        const textInput = document.getElementById('mlTextInput');
+
+        if (inputType === 'text') {
+            fileInput.style.display = 'none';
+            textInput.style.display = 'block';
+        } else {
+            fileInput.style.display = 'block';
+            textInput.style.display = 'none';
+        }
+    }
+
+    // Update confidence value display
+    document.getElementById('mlConfidence').addEventListener('input', function() {
+        document.getElementById('confidenceValue').textContent = this.value;
+    });
+
+    // Form submission handlers for individual modules
+    document.getElementById('reconForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = {
+            module: 'reconnaissance',
+            target: document.getElementById('reconTarget').value,
+            type: document.getElementById('reconType').value,
+            format: document.getElementById('reconFormat').value
+        };
+        runIndividualModule(formData, 'reconModal');
+    });
+
+    document.getElementById('binaryForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('module', 'binary_analysis');
+        formData.append('file', document.getElementById('binaryFile').files[0]);
+        formData.append('analysis_type', document.getElementById('binaryAnalysisType').value);
+        formData.append('platform', document.getElementById('binaryPlatform').value);
+        runIndividualModuleWithFile(formData, 'binaryModal');
+    });
+
+    document.getElementById('reverseForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('module', 'reverse_engineering');
+        formData.append('file', document.getElementById('reverseFile').files[0]);
+        formData.append('type', document.getElementById('reverseType').value);
+        formData.append('architecture', document.getElementById('reverseArch').value);
+        runIndividualModuleWithFile(formData, 'reverseModal');
+    });
+
+    document.getElementById('kernelForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('module', 'kernel_analysis');
+
+        const files = document.getElementById('kernelFile').files;
+        for (let i = 0; i < files.length; i++) {
+            formData.append('files', files[i]);
+        }
+
+        formData.append('path', document.getElementById('kernelPath').value);
+        formData.append('analysis_type', document.getElementById('kernelAnalysisType').value);
+        runIndividualModuleWithFile(formData, 'kernelModal');
+    });
+
+    document.getElementById('sastDastForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('module', 'sast_dast');
+        formData.append('mode', document.getElementById('sastDastMode').value);
+        formData.append('tech_stack', document.getElementById('techStack').value);
+
+        const sourceFiles = document.getElementById('sourceCode').files;
+        for (let i = 0; i < sourceFiles.length; i++) {
+            formData.append('source_files', sourceFiles[i]);
+        }
+
+        formData.append('target_url', document.getElementById('dastTarget').value);
+        runIndividualModuleWithFile(formData, 'sastDastModal');
+    });
+
+    document.getElementById('mlForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const inputType = document.getElementById('mlInputType').value;
+
+        if (inputType === 'text') {
+            const formData = {
+                module: 'ml_intelligence',
+                input_type: inputType,
+                text_data: document.getElementById('mlText').value,
+                model: document.getElementById('mlModel').value,
+                confidence: document.getElementById('mlConfidence').value
+            };
+            runIndividualModule(formData, 'mlModal');
+        } else {
+            const formData = new FormData();
+            formData.append('module', 'ml_intelligence');
+            formData.append('input_type', inputType);
+            formData.append('model', document.getElementById('mlModel').value);
+            formData.append('confidence', document.getElementById('mlConfidence').value);
+
+            const files = document.getElementById('mlFiles').files;
+            for (let i = 0; i < files.length; i++) {
+                formData.append('files', files[i]);
+            }
+            runIndividualModuleWithFile(formData, 'mlModal');
+        }
+    });
+
+    // Helper functions for module execution
+    function runIndividualModule(data, modalId) {
+        fetch('/api/module/run', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            closeModal(modalId);
+            if (data.scan_id) {
+                alert(`Module started successfully! Scan ID: ${data.scan_id}`);
+                // Refresh scans table or show progress
+                loadScans();
+            } else {
+                alert('Error starting module: ' + (data.detail || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error starting module: ' + error.message);
+        });
+    }
+
+    function runIndividualModuleWithFile(formData, modalId) {
+        fetch('/api/module/run-file', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            closeModal(modalId);
+            if (data.scan_id) {
+                alert(`Module started successfully! Scan ID: ${data.scan_id}`);
+                // Refresh scans table or show progress
+                loadScans();
+            } else {
+                alert('Error starting module: ' + (data.detail || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error starting module: ' + error.message);
+        });
+    }
+
+    // =============================================================================
+    // REAL-TIME DATA INTEGRATION FUNCTIONS
+    // =============================================================================
+
+    // Global state for real-time updates
+    let realTimeUpdates = {
+        enabled: true,
+        interval: 5000, // 5 seconds
+        intervals: {}
+    };
+
+    // Initialize real-time dashboard
+    function initializeRealTime() {
+        if (!realTimeUpdates.enabled) return;
+
+        // Start real-time data fetching
+        startRealTimeStats();
+        startRealTimeScans();
+        startRealTimeServices();
+        startRealTimeAlerts();
+        startRealTimeMetrics();
+
+        console.log('🔴 Real-time dashboard initialized');
+    }
+
+    // Real-time statistics updates
+    function startRealTimeStats() {
+        const updateStats = async () => {
+            try {
+                const response = await fetch('/api/stats/real-time');
+                const stats = await response.json();
+
+                // Update dashboard stats
+                document.getElementById('totalScans').textContent = stats.total_scans || '0';
+                document.getElementById('activeScans').textContent = stats.active_scans || '0';
+                document.getElementById('vulnerabilities').textContent = stats.vulnerabilities_found || '0';
+                document.getElementById('systemUptime').textContent = stats.system_uptime || '100%';
+
+                // Update change indicators
+                document.getElementById('scansChange').innerHTML = `↗ +${stats.scans_change || 0} today`;
+                document.getElementById('activeChange').innerHTML = `⚡ ${stats.active_scans || 0} running`;
+                document.getElementById('vulnChange').innerHTML = `🔍 +${stats.new_vulnerabilities || 0} new`;
+                document.getElementById('uptimeChange').innerHTML = `✅ ${stats.uptime_status || 'All systems operational'}`;
+
+            } catch (error) {
+                console.error('Error updating real-time stats:', error);
+            }
+        };
+
+        updateStats(); // Initial update
+        realTimeUpdates.intervals.stats = setInterval(updateStats, realTimeUpdates.interval);
+    }
+
+    // Real-time running scans updates
+    function startRealTimeScans() {
+        const updateRunningScans = async () => {
+            try {
+                const response = await fetch('/api/scans/running');
+                const scans = await response.json();
+
+                const grid = document.getElementById('runningScansGrid');
+                if (!grid) return;
+
+                if (scans.length === 0) {
+                    grid.innerHTML = '<div class="card"><p>No scans currently running</p></div>';
+                    return;
+                }
+
+                grid.innerHTML = scans.map(scan => `
+                    <div class="running-scan-card">
+                        <div class="card-header">
+                            <h4>${scan.module || scan.type || 'Unknown'}</h4>
+                            <span class="scan-status running">
+                                <div class="status-dot"></div>
+                                Running
+                            </span>
+                        </div>
+                        <p><strong>Target:</strong> ${scan.target || 'N/A'}</p>
+                        <p><strong>Started:</strong> ${formatTime(scan.started_at)}</p>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: ${scan.progress || 0}%"></div>
+                        </div>
+                        <small>${scan.progress || 0}% complete</small>
+                        <div style="margin-top: 0.5rem;">
+                            <button class="action-btn" onclick="viewScanDetails('${scan.id}')">View</button>
+                            <button class="action-btn danger" onclick="stopScan('${scan.id}')">Stop</button>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Error updating running scans:', error);
+            }
+        };
+
+        updateRunningScans(); // Initial update
+        realTimeUpdates.intervals.scans = setInterval(updateRunningScans, realTimeUpdates.interval);
+    }
+
+    // Real-time services status updates
+    function startRealTimeServices() {
+        const updateServicesStatus = async () => {
+            try {
+                const response = await fetch('/api/services/status');
+                const services = await response.json();
+
+                const container = document.getElementById('servicesStatus');
+                if (!container) return;
+
+                container.innerHTML = services.map(service => `
+                    <div class="service-card">
+                        <div class="card-header">
+                            <div class="card-icon" style="background: ${getServiceIconBg(service.status)};">
+                                <i class="${getServiceIcon(service.name)}"></i>
+                            </div>
+                            <span class="service-status ${getServiceStatusClass(service.status)}">
+                                <div class="status-dot"></div>
+                                ${service.status}
+                            </span>
+                        </div>
+                        <h4>${service.name}</h4>
+                        <p>${service.description || 'No description'}</p>
+                        <small><strong>Uptime:</strong> ${service.uptime || 'Unknown'}</small>
+                        <small><strong>CPU:</strong> ${service.cpu_usage || '0'}% | <strong>Memory:</strong> ${service.memory_usage || '0'}%</small>
+                    </div>
+                `).join('');
+
+                // Update system status text
+                const systemStatusText = document.getElementById('systemStatusText');
+                if (systemStatusText) {
+                    const healthyServices = services.filter(s => s.status === 'healthy').length;
+                    const totalServices = services.length;
+
+                    if (healthyServices === totalServices) {
+                        systemStatusText.textContent = 'All Systems Operational';
+                    } else {
+                        systemStatusText.textContent = `${healthyServices}/${totalServices} Services Healthy`;
+                    }
+                }
+
+            } catch (error) {
+                console.error('Error updating services status:', error);
+            }
+        };
+
+        updateServicesStatus(); // Initial update
+        realTimeUpdates.intervals.services = setInterval(updateServicesStatus, realTimeUpdates.interval * 2); // Update every 10 seconds
+    }
+
+    // Real-time alerts updates
+    function startRealTimeAlerts() {
+        const updateAlerts = async () => {
+            try {
+                const response = await fetch('/api/alerts/live');
+                const alerts = await response.json();
+
+                const container = document.getElementById('liveAlertCenter');
+                if (!container) return;
+
+                if (alerts.length === 0) {
+                    container.innerHTML = '<div class="alert-item info"><p>No active alerts</p></div>';
+                    return;
+                }
+
+                container.innerHTML = alerts.map(alert => `
+                    <div class="alert-item ${alert.type || 'info'}">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <strong>${alert.title || 'Alert'}</strong>
+                                <p>${alert.message || 'No details available'}</p>
+                                <small>${formatTime(alert.timestamp)}</small>
+                            </div>
+                            <button class="action-btn" onclick="dismissAlert('${alert.id}')">×</button>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Error updating alerts:', error);
+            }
+        };
+
+        updateAlerts(); // Initial update
+        realTimeUpdates.intervals.alerts = setInterval(updateAlerts, realTimeUpdates.interval);
+    }
+
+    // Real-time performance metrics
+    function startRealTimeMetrics() {
+        const updateMetrics = async () => {
+            try {
+                const response = await fetch('/api/metrics/real-time');
+                const metrics = await response.json();
+
+                // Update performance metrics
+                document.getElementById('currentThroughput').textContent = metrics.throughput || '0';
+                document.getElementById('completionRate').textContent = `${metrics.completion_rate || 100}%`;
+                document.getElementById('avgDuration').textContent = metrics.avg_duration || '5m';
+                document.getElementById('queueSize').textContent = metrics.queue_size || '0';
+
+                // Update resource usage
+                updateResourceUsage('cpu', metrics.cpu_usage || 45);
+                updateResourceUsage('memory', metrics.memory_usage || 62);
+                updateResourceUsage('network', metrics.network_usage || 30);
+                updateResourceUsage('storage', metrics.storage_usage || 78);
+
+            } catch (error) {
+                console.error('Error updating metrics:', error);
+            }
+        };
+
+        updateMetrics(); // Initial update
+        realTimeUpdates.intervals.metrics = setInterval(updateMetrics, realTimeUpdates.interval);
+    }
+
+    // Helper function to update resource usage bars
+    function updateResourceUsage(type, percentage) {
+        const progressBar = document.getElementById(`${type}Progress`);
+        const textElement = document.getElementById(`${type}Text`);
+
+        if (progressBar) {
+            progressBar.style.width = `${percentage}%`;
+
+            // Change color based on usage
+            if (percentage > 80) {
+                progressBar.style.background = 'var(--danger)';
+            } else if (percentage > 60) {
+                progressBar.style.background = 'var(--warning)';
+            } else {
+                progressBar.style.background = 'var(--success)';
+            }
+        }
+
+        if (textElement) {
+            const units = {
+                cpu: `${percentage}% (8 cores)`,
+                memory: `${percentage}% (16 GB)`,
+                network: `${percentage}% (1.2 GB/s)`,
+                storage: `${percentage}% (1.2 TB)`
+            };
+            textElement.textContent = units[type] || `${percentage}%`;
+        }
+    }
+
+    // Real-time advanced scan management table
+    function loadAdvancedScansTable() {
+        const loadScansTable = async () => {
+            try {
+                const response = await fetch('/api/scans/all');
+                const scans = await response.json();
+
+                const tbody = document.getElementById('scansTableBody');
+                if (!tbody) return;
+
+                tbody.innerHTML = scans.map(scan => `
+                    <tr>
+                        <td><code>${scan.id.slice(0, 8)}</code></td>
+                        <td>${scan.target || 'N/A'}</td>
+                        <td>${scan.type || scan.module || 'Unknown'}</td>
+                        <td>
+                            <span class="scan-status ${scan.status}">
+                                <div class="status-dot"></div>
+                                ${scan.status}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="progress-bar" style="width: 80px; height: 6px;">
+                                <div class="progress-fill" style="width: ${scan.progress || 0}%"></div>
+                            </div>
+                            <small>${scan.progress || 0}%</small>
+                        </td>
+                        <td>${formatTime(scan.started_at)}</td>
+                        <td>${calculateDuration(scan.started_at, scan.completed_at)}</td>
+                        <td>
+                            <span style="color: ${scan.findings_count > 0 ? 'var(--danger)' : 'var(--success)'};">
+                                ${scan.findings_count || 0}
+                            </span>
+                        </td>
+                        <td class="scan-actions">
+                            <button class="action-btn" onclick="viewScanDetails('${scan.id}')">View</button>
+                            ${scan.status === 'running' ?
+                                `<button class="action-btn danger" onclick="stopScan('${scan.id}')">Stop</button>` :
+                                `<button class="action-btn" onclick="downloadReport('${scan.id}')">Report</button>`
+                            }
+                        </td>
+                    </tr>
+                `).join('');
+
+            } catch (error) {
+                console.error('Error loading scans table:', error);
+            }
+        };
+
+        loadScansTable(); // Initial load
+        realTimeUpdates.intervals.scansTable = setInterval(loadScansTable, realTimeUpdates.interval * 2); // Update every 10 seconds
+    }
+
+    // Control functions for real-time updates
+    function refreshAllData() {
+        console.log('🔄 Refreshing all real-time data...');
+
+        // Stop existing intervals
+        Object.values(realTimeUpdates.intervals).forEach(interval => clearInterval(interval));
+        realTimeUpdates.intervals = {};
+
+        // Restart real-time updates
+        initializeRealTime();
+        loadAdvancedScansTable();
+
+        // Show loading indicator
+        const indicators = document.querySelectorAll('.loading');
+        indicators.forEach(indicator => {
+            indicator.style.display = 'flex';
+            setTimeout(() => indicator.style.display = 'none', 2000);
+        });
+    }
+
+    function pauseAllScans() {
+        if (confirm('Are you sure you want to pause all running scans?')) {
+            fetch('/api/scans/pause-all', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    alert(`Paused ${data.paused_count || 0} scans`);
+                    refreshAllData();
+                })
+                .catch(error => console.error('Error pausing scans:', error));
+        }
+    }
+
+    function generateLiveReport() {
+        fetch('/api/reports/generate-live', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.report_url) {
+                    window.open(data.report_url, '_blank');
+                } else {
+                    alert('Report generated! Check the Reports section.');
+                }
+            })
+            .catch(error => console.error('Error generating report:', error));
+    }
+
+    // Utility functions
+    function formatTime(timestamp) {
+        if (!timestamp) return 'N/A';
+        const date = new Date(timestamp);
+        return date.toLocaleString();
+    }
+
+    function calculateDuration(start, end) {
+        if (!start) return 'N/A';
+        const startTime = new Date(start);
+        const endTime = end ? new Date(end) : new Date();
+        const diff = Math.abs(endTime - startTime);
+
+        const minutes = Math.floor(diff / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+
+        if (minutes > 0) {
+            return `${minutes}m ${seconds}s`;
+        } else {
+            return `${seconds}s`;
+        }
+    }
+
+    function getServiceIcon(serviceName) {
+        const icons = {
+            'ML Intelligence': 'fas fa-brain',
+            'IBB Research': 'fas fa-microscope',
+            'Fuzzing Engine': 'fas fa-bolt',
+            'Reporting Engine': 'fas fa-file-alt',
+            'SAST-DAST': 'fas fa-shield-alt',
+            'Reverse Engineering': 'fas fa-cogs',
+            'Reconnaissance': 'fas fa-search',
+            'Web UI': 'fas fa-desktop',
+            'Core Platform': 'fas fa-server'
+        };
+        return icons[serviceName] || 'fas fa-cube';
+    }
+
+    function getServiceIconBg(status) {
+        const colors = {
+            'healthy': 'rgba(46, 213, 115, 0.2)',
+            'warning': 'rgba(255, 165, 2, 0.2)',
+            'error': 'rgba(255, 71, 87, 0.2)'
+        };
+        return colors[status] || 'rgba(255, 255, 255, 0.1)';
+    }
+
+    function getServiceStatusClass(status) {
+        return `status-${status}` || 'status-unknown';
+    }
+
+    // Scan management functions
+    function viewScanDetails(scanId) {
+        window.open(`/scan/${scanId}`, '_blank');
+    }
+
+    function stopScan(scanId) {
+        if (confirm('Are you sure you want to stop this scan?')) {
+            fetch(`/api/scans/${scanId}/stop`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Scan stopped successfully');
+                    refreshAllData();
+                })
+                .catch(error => console.error('Error stopping scan:', error));
+        }
+    }
+
+    function downloadReport(scanId) {
+        window.open(`/api/scans/${scanId}/report`, '_blank');
+    }
+
+    function dismissAlert(alertId) {
+        fetch(`/api/alerts/${alertId}/dismiss`, { method: 'POST' })
+            .then(() => startRealTimeAlerts())
+            .catch(error => console.error('Error dismissing alert:', error));
+    }
+
+    function filterScans() {
+        const filter = document.getElementById('scanFilter').value;
+        // Implementation would filter the table based on status
+        console.log('Filtering scans by:', filter);
+    }
+
+    function exportScans() {
+        window.open('/api/scans/export', '_blank');
+    }
+
+    function clearAlerts() {
+        if (confirm('Clear all alerts?')) {
+            fetch('/api/alerts/clear', { method: 'POST' })
+                .then(() => startRealTimeAlerts())
+                .catch(error => console.error('Error clearing alerts:', error));
+        }
+    }
+
+    function refreshAlerts() {
+        startRealTimeAlerts();
+    }
+
+    function refreshMetrics() {
+        startRealTimeMetrics();
+    }
+
+    // Initialize everything when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 Initializing QuantumSentinel-Nexus Dashboard');
+        initializeRealTime();
+        loadAdvancedScansTable();
+
+        // Initialize tab switching (existing functionality)
+        if (typeof initializeTabs === 'function') {
+            initializeTabs();
+        }
+
+        console.log('✅ Dashboard initialization complete');
+    });
+    </script>
 </body>
 </html>

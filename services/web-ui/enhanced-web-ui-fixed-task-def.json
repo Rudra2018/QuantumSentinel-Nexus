@@ -1,0 +1,73 @@
+{
+    "family": "quantumsentinel-web-ui-enhanced",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "512",
+    "memory": "1024",
+    "executionRoleArn": "arn:aws:iam::077732578302:role/quantumsentinel-nexus-execution-role",
+    "taskRoleArn": "arn:aws:iam::077732578302:role/quantumsentinel-nexus-execution-role",
+    "containerDefinitions": [
+        {
+            "name": "web-ui-enhanced",
+            "image": "077732578302.dkr.ecr.us-east-1.amazonaws.com/quantumsentinel-nexus:web-ui-enhanced-fixed",
+            "portMappings": [
+                {
+                    "containerPort": 8000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/quantumsentinel-web-ui-enhanced",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs",
+                    "awslogs-create-group": "true"
+                }
+            },
+            "environment": [
+                {
+                    "name": "AWS_DEFAULT_REGION",
+                    "value": "us-east-1"
+                },
+                {
+                    "name": "IBB_RESEARCH_URL",
+                    "value": "http://quantumsentinel-ibb-research.quantumsentinel-nexus-cluster.local:8002"
+                },
+                {
+                    "name": "BINARY_ANALYSIS_URL", 
+                    "value": "http://quantumsentinel-binary-analysis.quantumsentinel-nexus-cluster.local:8008"
+                },
+                {
+                    "name": "ML_INTELLIGENCE_URL",
+                    "value": "http://quantumsentinel-ml-intelligence.quantumsentinel-nexus-cluster.local:8001"
+                },
+                {
+                    "name": "RECONNAISSANCE_URL",
+                    "value": "http://quantumsentinel-reconnaissance.quantumsentinel-nexus-cluster.local:8007"
+                },
+                {
+                    "name": "FUZZING_URL",
+                    "value": "http://quantumsentinel-fuzzing.quantumsentinel-nexus-cluster.local:8003"
+                },
+                {
+                    "name": "SAST_DAST_URL",
+                    "value": "http://quantumsentinel-sast-dast.quantumsentinel-nexus-cluster.local:8005"
+                },
+                {
+                    "name": "REPORTING_URL",
+                    "value": "http://quantumsentinel-reporting.quantumsentinel-nexus-cluster.local:8004"
+                },
+                {
+                    "name": "REVERSE_ENGINEERING_URL",
+                    "value": "http://quantumsentinel-reverse-engineering.quantumsentinel-nexus-cluster.local:8006"
+                },
+                {
+                    "name": "ORCHESTRATION_URL",
+                    "value": "http://quantumsentinel-orchestration.quantumsentinel-nexus-cluster.local:8000"
+                }
+            ]
+        }
+    ]
+}
