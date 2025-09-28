@@ -1,0 +1,8 @@
+# Service Discovery Configuration
+quantumsentinel-ml-intelligence: 54.90.183.81
+quantumsentinel-fuzzing: 44.200.2.10
+quantumsentinel-sast-dast: 44.203.43.108
+quantumsentinel-reverse-engineering: 3.237.205.73
+quantumsentinel-reconnaissance: 44.214.6.41
+quantumsentinel-binary-analysis: binary-analysis-service
+quantumsentinel-web-ui: 44.204.114.79

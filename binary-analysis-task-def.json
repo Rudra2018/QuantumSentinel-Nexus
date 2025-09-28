@@ -1,0 +1,72 @@
+{
+    "family": "quantumsentinel-binary-analysis",
+    "taskRoleArn": "arn:aws:iam::077732578302:role/quantumsentinel-nexus-execution-role",
+    "executionRoleArn": "arn:aws:iam::077732578302:role/quantumsentinel-nexus-execution-role",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "2048",
+    "memory": "4096",
+    "containerDefinitions": [
+        {
+            "name": "binary-analysis",
+            "image": "077732578302.dkr.ecr.us-east-1.amazonaws.com/quantumsentinel-binary-analysis:latest",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "containerPort": 8008,
+                    "hostPort": 8008,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "SERVICE_NAME",
+                    "value": "BINARY_ANALYSIS"
+                },
+                {
+                    "name": "SERVICE_PORT",
+                    "value": "8008"
+                },
+                {
+                    "name": "AWS_S3_REPORTS_BUCKET",
+                    "value": "quantum-sentinel-reports-1759046142"
+                },
+                {
+                    "name": "AWS_DEFAULT_REGION",
+                    "value": "us-east-1"
+                },
+                {
+                    "name": "ANALYSIS_TIMEOUT",
+                    "value": "3600"
+                },
+                {
+                    "name": "MAX_CONCURRENT_ANALYSES",
+                    "value": "5"
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "AWS_ACCESS_KEY_ID",
+                    "valueFrom": "arn:aws:secretsmanager:us-east-1:077732578302:secret:quantum/aws-access-key"
+                },
+                {
+                    "name": "AWS_SECRET_ACCESS_KEY",
+                    "valueFrom": "arn:aws:secretsmanager:us-east-1:077732578302:secret:quantum/aws-secret-key"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/quantumsentinel-nexus",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "binary-analysis"
+                }
+            }
+        }
+    ]
+}

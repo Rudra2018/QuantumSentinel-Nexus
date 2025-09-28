@@ -42,7 +42,8 @@ ENV PATH="/opt/venv/bin:$PATH"
 WORKDIR /app
 
 # Copy application code
-COPY . /app/
+COPY enhanced_main.py /app/main.py
+COPY requirements.txt /app/
 
 # Create necessary directories
 RUN mkdir -p /app/research-data /app/findings /app/papers /app/models

@@ -1,0 +1,82 @@
+{
+    "taskDefinition": {
+        "taskDefinitionArn": "arn:aws:ecs:us-east-1:077732578302:task-definition/quantumsentinel-web-ui:1",
+        "containerDefinitions": [
+            {
+                "name": "web-ui",
+                "image": "077732578302.dkr.ecr.us-east-1.amazonaws.com/quantumsentinel-web-ui:latest",
+                "cpu": 0,
+                "portMappings": [
+                    {
+                        "containerPort": 80,
+                        "hostPort": 80,
+                        "protocol": "tcp"
+                    }
+                ],
+                "essential": true,
+                "environment": [
+                    {
+                        "name": "SERVICE_NAME",
+                        "value": "WEB_UI_DASHBOARD"
+                    },
+                    {
+                        "name": "SERVICE_PORT",
+                        "value": "80"
+                    }
+                ],
+                "mountPoints": [],
+                "volumesFrom": [],
+                "logConfiguration": {
+                    "logDriver": "awslogs",
+                    "options": {
+                        "awslogs-group": "/ecs/quantumsentinel-nexus",
+                        "awslogs-region": "us-east-1",
+                        "awslogs-stream-prefix": "web-ui"
+                    }
+                },
+                "systemControls": []
+            }
+        ],
+        "family": "quantumsentinel-web-ui",
+        "taskRoleArn": "arn:aws:iam::077732578302:role/quantumsentinel-nexus-execution-role",
+        "executionRoleArn": "arn:aws:iam::077732578302:role/quantumsentinel-nexus-execution-role",
+        "networkMode": "awsvpc",
+        "revision": 1,
+        "volumes": [],
+        "status": "ACTIVE",
+        "requiresAttributes": [
+            {
+                "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+            },
+            {
+                "name": "ecs.capability.execution-role-awslogs"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.task-iam-role"
+            },
+            {
+                "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+            },
+            {
+                "name": "ecs.capability.task-eni"
+            }
+        ],
+        "placementConstraints": [],
+        "compatibilities": [
+            "EC2",
+            "MANAGED_INSTANCES",
+            "FARGATE"
+        ],
+        "requiresCompatibilities": [
+            "FARGATE"
+        ],
+        "cpu": "512",
+        "memory": "1024",
+        "registeredAt": "2025-09-28T12:31:45.272000+05:30",
+        "registeredBy": "arn:aws:iam::077732578302:user/testfile"
+    },
+    "tags": []
+}

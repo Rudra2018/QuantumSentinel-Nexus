@@ -1,0 +1,46 @@
+{
+    "family": "quantumsentinel-web-ui",
+    "taskRoleArn": "arn:aws:iam::077732578302:role/quantumsentinel-nexus-execution-role",
+    "executionRoleArn": "arn:aws:iam::077732578302:role/quantumsentinel-nexus-execution-role",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "512",
+    "memory": "1024",
+    "containerDefinitions": [
+        {
+            "name": "web-ui",
+            "image": "077732578302.dkr.ecr.us-east-1.amazonaws.com/quantumsentinel-web-ui:latest",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "containerPort": 8000,
+                    "hostPort": 8000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "SERVICE_NAME",
+                    "value": "WEB_UI_DASHBOARD"
+                },
+                {
+                    "name": "SERVICE_PORT",
+                    "value": "8000"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/quantumsentinel-nexus",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "web-ui"
+                }
+            }
+        }
+    ]
+}

@@ -37,7 +37,7 @@ QuantumSentinel-Nexus is a comprehensive security assessment platform designed f
 - **API Gateway**: `https://2p83ibp3ai.execute-api.us-east-1.amazonaws.com/prod`
 - **CloudFormation Stack**: `quantum-auto-t09281201`
 
-### **10 Microservices Running on ECS Fargate**
+### **11 Microservices Running on ECS Fargate**
 
 | Service | Status | Purpose | Port |
 |---------|--------|---------|------|
@@ -49,8 +49,9 @@ QuantumSentinel-Nexus is a comprehensive security assessment platform designed f
 | **SAST-DAST** | ✅ ACTIVE | Static & dynamic analysis | 8005 |
 | **Reverse Engineering** | ✅ ACTIVE | Binary analysis & malware research | 8006 |
 | **Reconnaissance** | ✅ ACTIVE | OSINT & information gathering | 8007 |
+| **Binary Analysis** | 🆕 NEW | Advanced binary analysis & exploit development | 8008 |
 | **Web UI Dashboard** | ✅ ACTIVE | Interactive web interface | 80 |
-| **Orchestration** | ✅ ACTIVE | Workflow management | 8008 |
+| **Orchestration** | ✅ ACTIVE | Workflow management | 8001 |
 
 ### **Infrastructure Components**
 - **ECS Cluster**: `quantumsentinel-nexus-cluster`
@@ -96,6 +97,9 @@ cd QuantumSentinel-Nexus
 # Or manual deployment
 ./setup-aws.sh --auto --region us-east-1
 ./deploy-aws.sh --auto --stack-name your-stack-name
+
+# Deploy additional services
+./deploy-binary-analysis.sh  # Deploy binary analysis service
 ```
 
 ### **2. Local Development**
@@ -190,9 +194,19 @@ nano .env
 
 ### **Advanced Capabilities**
 - **ML-Powered Vulnerability Detection**: Machine learning models for zero-day discovery
+- **Binary Analysis & Reverse Engineering**: Advanced binary analysis with exploit development
+- **Symbolic Execution**: AI-powered symbolic execution for comprehensive code paths
 - **Behavioral Analysis**: Anomaly detection and pattern recognition
 - **Automated Reporting**: Professional PDF reports with evidence
 - **Real-time Threat Intelligence**: Continuous monitoring and analysis
+
+### **🔬 Binary Analysis Engine**
+- **Multi-Architecture Support**: x86, x64, ARM, MIPS, RISC-V analysis
+- **Static & Dynamic Analysis**: Comprehensive binary examination
+- **Vulnerability Detection**: Buffer overflows, format strings, use-after-free
+- **Exploit Primitive Discovery**: ROP/JOP gadget finding and chaining
+- **ML-Powered Insights**: AI-assisted vulnerability classification
+- **Symbolic Execution**: Deep path exploration with constraint solving
 
 ### **Security Controls**
 - **IAM Roles**: Least privilege access controls

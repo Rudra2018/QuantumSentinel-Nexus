@@ -20,13 +20,15 @@ from enum import Enum
 import aiofiles
 import aiohttp
 import httpx
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, BackgroundTasks
 from pydantic import BaseModel
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
 from transformers import pipeline, AutoTokenizer, AutoModel
 import torch
+import boto3
+from botocore.exceptions import NoCredentialsError, ClientError
 
 # Configure logging
 logging.basicConfig(
