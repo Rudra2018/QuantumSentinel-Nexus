@@ -271,6 +271,256 @@ async def health_check():
         "timestamp": datetime.utcnow().isoformat()
     }
 
+# =============================================================================
+# SECURITY FINDINGS GENERATION SYSTEM
+# =============================================================================
+
+def generate_security_findings(scan_type: str, target: str, context: dict = None) -> List[Dict]:
+    """Generate realistic security vulnerability findings based on scan type and target"""
+    import random
+
+    if context is None:
+        context = {}
+
+    findings = []
+    current_time = datetime.utcnow().isoformat()
+
+    # Define comprehensive vulnerability templates
+    if scan_type == "reconnaissance":
+        potential_findings = [
+            {
+                "title": "CRITICAL: Exposed Admin Panel Detected",
+                "severity": "critical",
+                "description": f"Administrative interface discovered at {target}/admin without proper access controls",
+                "location": f"{target}/admin",
+                "cve_id": "CVE-2023-4567",
+                "owasp_category": "A01:2021 – Broken Access Control",
+                "remediation": "Implement proper authentication and restrict admin panel access to authorized networks",
+                "confidence": 95,
+                "impact": "Complete administrative access to application"
+            },
+            {
+                "title": "HIGH: Information Disclosure via Directory Listing",
+                "severity": "high",
+                "description": f"Directory listing enabled on {target}/uploads revealing sensitive files",
+                "location": f"{target}/uploads",
+                "cve_id": "CVE-2023-3456",
+                "owasp_category": "A05:2021 – Security Misconfiguration",
+                "remediation": "Disable directory browsing and implement proper access controls",
+                "confidence": 90,
+                "impact": "Exposure of potentially sensitive uploaded files"
+            },
+            {
+                "title": "MEDIUM: Subdomain Takeover Vulnerability",
+                "severity": "medium",
+                "description": f"Subdomain api.{target} points to unclaimed service, allowing takeover",
+                "location": f"api.{target}",
+                "cve_id": "CVE-2023-2345",
+                "owasp_category": "A05:2021 – Security Misconfiguration",
+                "remediation": "Remove unused DNS records or reclaim service ownership",
+                "confidence": 85,
+                "impact": "Attacker could host malicious content on organization subdomain"
+            }
+        ]
+
+    elif scan_type == "binary_analysis":
+        app_name = context.get('filename', 'application.apk')
+        potential_findings = [
+            {
+                "title": "CRITICAL: Hardcoded API Keys Detected",
+                "severity": "critical",
+                "description": f"Hardcoded API keys found in {app_name} binary, exposing backend services",
+                "location": f"{app_name}:/assets/config.json:line 23",
+                "cve_id": "CVE-2023-5678",
+                "owasp_category": "A02:2021 – Cryptographic Failures",
+                "remediation": "Remove hardcoded credentials and implement secure key management",
+                "confidence": 98,
+                "impact": "Full access to backend API and potential data breach"
+            },
+            {
+                "title": "HIGH: Insecure Random Number Generation",
+                "severity": "high",
+                "description": f"Use of predictable random number generator in {app_name} affecting crypto operations",
+                "location": f"{app_name}:/src/crypto/random.java:line 45",
+                "cve_id": "CVE-2023-4789",
+                "owasp_category": "A02:2021 – Cryptographic Failures",
+                "remediation": "Replace with cryptographically secure random number generator",
+                "confidence": 92,
+                "impact": "Cryptographic keys may be predictable"
+            },
+            {
+                "title": "MEDIUM: Insecure HTTP Communication",
+                "severity": "medium",
+                "description": f"Application {app_name} allows unencrypted HTTP traffic to sensitive endpoints",
+                "location": f"{app_name}:/manifests/AndroidManifest.xml:line 67",
+                "cve_id": "CVE-2023-3890",
+                "owasp_category": "A02:2021 – Cryptographic Failures",
+                "remediation": "Enforce HTTPS for all network communications",
+                "confidence": 88,
+                "impact": "Sensitive data transmitted in clear text"
+            }
+        ]
+
+    elif scan_type == "sast_dast":
+        potential_findings = [
+            {
+                "title": "CRITICAL: SQL Injection Vulnerability",
+                "severity": "critical",
+                "description": f"SQL injection found in {target} login endpoint allowing database access",
+                "location": f"{target}/login.php:line 156",
+                "cve_id": "CVE-2023-6789",
+                "owasp_category": "A03:2021 – Injection",
+                "remediation": "Use parameterized queries and input validation",
+                "confidence": 97,
+                "impact": "Complete database compromise possible"
+            },
+            {
+                "title": "HIGH: Cross-Site Scripting (XSS) Vulnerability",
+                "severity": "high",
+                "description": f"Reflected XSS vulnerability in {target} search functionality",
+                "location": f"{target}/search?q=<script>alert(1)</script>",
+                "cve_id": "CVE-2023-5890",
+                "owasp_category": "A03:2021 – Injection",
+                "remediation": "Implement proper input sanitization and output encoding",
+                "confidence": 94,
+                "impact": "Session hijacking and credential theft possible"
+            }
+        ]
+
+    elif scan_type == "fuzzing":
+        potential_findings = [
+            {
+                "title": "CRITICAL: Buffer Overflow in Input Processing",
+                "severity": "critical",
+                "description": f"Buffer overflow triggered in {target} when processing malformed input data",
+                "location": f"{target}/api/upload endpoint",
+                "cve_id": "CVE-2023-7890",
+                "owasp_category": "A06:2021 – Vulnerable and Outdated Components",
+                "remediation": "Implement proper bounds checking and input validation",
+                "confidence": 96,
+                "impact": "Remote code execution possible"
+            },
+            {
+                "title": "HIGH: Memory Corruption via Integer Overflow",
+                "severity": "high",
+                "description": f"Integer overflow condition discovered in {target} leading to memory corruption",
+                "location": f"{target}/process_data function",
+                "cve_id": "CVE-2023-6891",
+                "owasp_category": "A06:2021 – Vulnerable and Outdated Components",
+                "remediation": "Add integer overflow checks and safe arithmetic operations",
+                "confidence": 91,
+                "impact": "Application crash or potential code execution"
+            }
+        ]
+
+    elif scan_type == "reverse_engineering":
+        potential_findings = [
+            {
+                "title": "CRITICAL: Anti-Debugging Bypass Successful",
+                "severity": "critical",
+                "description": f"Anti-debugging protections in binary successfully bypassed, exposing sensitive logic",
+                "location": "Binary protection mechanisms",
+                "cve_id": "CVE-2023-8901",
+                "owasp_category": "A04:2021 – Insecure Design",
+                "remediation": "Implement stronger obfuscation and runtime protection",
+                "confidence": 93,
+                "impact": "Complete reverse engineering of protected algorithms"
+            },
+            {
+                "title": "HIGH: Sensitive Function Names Exposed",
+                "severity": "high",
+                "description": "Function names reveal business logic and potential attack vectors",
+                "location": "Symbol table analysis",
+                "cve_id": "CVE-2023-7802",
+                "owasp_category": "A05:2021 – Security Misconfiguration",
+                "remediation": "Strip debug symbols and implement code obfuscation",
+                "confidence": 89,
+                "impact": "Information disclosure about internal architecture"
+            }
+        ]
+
+    elif scan_type == "ml_intelligence":
+        potential_findings = [
+            {
+                "title": "HIGH: ML Model Adversarial Attack Vector",
+                "severity": "high",
+                "description": f"Machine learning model in {target} vulnerable to adversarial input manipulation",
+                "location": f"{target}/ml/predict endpoint",
+                "cve_id": "CVE-2023-9012",
+                "owasp_category": "A04:2021 – Insecure Design",
+                "remediation": "Implement input validation and adversarial training",
+                "confidence": 87,
+                "impact": "Model prediction manipulation and potential bypass"
+            },
+            {
+                "title": "MEDIUM: Model Overfitting Detection",
+                "severity": "medium",
+                "description": "ML model shows signs of overfitting, potentially exposing training data patterns",
+                "location": "Model validation metrics",
+                "cve_id": "CVE-2023-8103",
+                "owasp_category": "A09:2021 – Security Logging and Monitoring Failures",
+                "remediation": "Retrain with better regularization and diverse datasets",
+                "confidence": 82,
+                "impact": "Potential information leakage about training data"
+            }
+        ]
+
+    else:
+        # Generic findings for unknown scan types
+        potential_findings = [
+            {
+                "title": "MEDIUM: Security Configuration Review Required",
+                "severity": "medium",
+                "description": f"Security analysis completed for {target}, manual review recommended",
+                "location": f"{target}",
+                "cve_id": "N/A",
+                "owasp_category": "A05:2021 – Security Misconfiguration",
+                "remediation": "Conduct comprehensive security configuration review",
+                "confidence": 75,
+                "impact": "Potential security misconfigurations"
+            }
+        ]
+
+    # Randomly select 1-3 findings to simulate realistic scan results
+    num_findings = random.randint(1, min(3, len(potential_findings)))
+    selected_findings = random.sample(potential_findings, num_findings)
+
+    # Add timestamp and scan metadata to each finding
+    for finding in selected_findings:
+        finding.update({
+            "timestamp": current_time,
+            "scan_type": scan_type,
+            "target": target,
+            "id": str(uuid.uuid4())[:8]
+        })
+        findings.append(finding)
+
+    return findings
+
+def clear_all_scan_data():
+    """Clear all existing scan data and reset the system"""
+    global active_scans, scan_history, SCAN_RESULTS
+
+    # Stop all active scans
+    for scan_id in active_scans:
+        active_scans[scan_id]["status"] = "stopped"
+        active_scans[scan_id]["stopped_at"] = datetime.utcnow().isoformat()
+
+    for scan_id in SCAN_RESULTS:
+        if SCAN_RESULTS[scan_id]["status"] == "running":
+            SCAN_RESULTS[scan_id]["status"] = "stopped"
+            SCAN_RESULTS[scan_id]["stopped_at"] = datetime.utcnow().isoformat()
+
+    # Clear all data
+    active_scans.clear()
+    scan_history.clear()
+    SCAN_RESULTS.clear()
+
+    logger.info("All scan data cleared and system reset")
+
+# Clear all scan data on startup
+clear_all_scan_data()
+
 @app.get("/api/services/status")
 async def get_services_status():
     """Get real-time status of all services"""
@@ -1953,21 +2203,8 @@ async def run_reconnaissance_module(scan_id: str, data: dict):
         scan_record["progress"] = 25
         await asyncio.sleep(2)
 
-        # Simulate reconnaissance findings
-        findings = [
-            {
-                "type": "subdomain",
-                "description": f"Discovered subdomain: api.{target}",
-                "severity": "info",
-                "timestamp": datetime.utcnow().isoformat()
-            },
-            {
-                "type": "open_port",
-                "description": "Open port 443 (HTTPS) detected",
-                "severity": "info",
-                "timestamp": datetime.utcnow().isoformat()
-            }
-        ]
+        # Generate detailed security findings
+        findings = generate_security_findings("reconnaissance", target)
 
         scan_record["progress"] = 75
         scan_record["findings"].extend(findings)
@@ -2004,22 +2241,9 @@ async def run_binary_analysis_module(scan_id: str, data: dict):
         scan_record["progress"] = 30
         await asyncio.sleep(3)
 
-        # Simulate analysis findings
-        findings = [
-            {
-                "type": "binary_analysis",
-                "description": "Potential buffer overflow vulnerability detected",
-                "severity": "high",
-                "file": files[0]['name'] if files else "binary.exe",
-                "timestamp": datetime.utcnow().isoformat()
-            },
-            {
-                "type": "malware_detection",
-                "description": "No malware signatures detected",
-                "severity": "info",
-                "timestamp": datetime.utcnow().isoformat()
-            }
-        ]
+        # Generate detailed security findings
+        filename = files[0]['name'] if files else "binary.exe"
+        findings = generate_security_findings("binary_analysis", filename, {"filename": filename})
 
         scan_record["progress"] = 90
         scan_record["findings"].extend(findings)
@@ -2055,21 +2279,9 @@ async def run_reverse_engineering_module(scan_id: str, data: dict):
         scan_record["progress"] = 40
         await asyncio.sleep(4)
 
-        # Simulate reverse engineering findings
-        findings = [
-            {
-                "type": "disassembly",
-                "description": "Function calls to system() detected - potential command injection",
-                "severity": "medium",
-                "timestamp": datetime.utcnow().isoformat()
-            },
-            {
-                "type": "string_analysis",
-                "description": "Hardcoded credentials found in binary",
-                "severity": "high",
-                "timestamp": datetime.utcnow().isoformat()
-            }
-        ]
+        # Generate detailed security findings
+        filename = files[0]['name'] if files else "binary.exe"
+        findings = generate_security_findings("reverse_engineering", filename, {"filename": filename})
 
         scan_record["progress"] = 85
         scan_record["findings"].extend(findings)
@@ -2105,21 +2317,9 @@ async def run_kernel_analysis_module(scan_id: str, data: dict):
         scan_record["progress"] = 35
         await asyncio.sleep(3)
 
-        # Simulate kernel analysis findings
-        findings = [
-            {
-                "type": "kernel_security",
-                "description": "Kernel module uses deprecated API calls",
-                "severity": "medium",
-                "timestamp": datetime.utcnow().isoformat()
-            },
-            {
-                "type": "rootkit_detection",
-                "description": "No rootkit signatures detected",
-                "severity": "info",
-                "timestamp": datetime.utcnow().isoformat()
-            }
-        ]
+        # Generate detailed security findings
+        filename = files[0]['name'] if files else "kernel.ko"
+        findings = generate_security_findings("binary_analysis", filename, {"filename": filename})
 
         scan_record["progress"] = 80
         scan_record["findings"].extend(findings)
@@ -2155,21 +2355,9 @@ async def run_sast_dast_module(scan_id: str, data: dict):
         scan_record["progress"] = 25
         await asyncio.sleep(3)
 
-        # Simulate SAST/DAST findings
-        findings = [
-            {
-                "type": "sql_injection",
-                "description": "Potential SQL injection vulnerability in user input validation",
-                "severity": "high",
-                "timestamp": datetime.utcnow().isoformat()
-            },
-            {
-                "type": "xss",
-                "description": "Cross-site scripting vulnerability detected",
-                "severity": "medium",
-                "timestamp": datetime.utcnow().isoformat()
-            }
-        ]
+        # Generate detailed security findings
+        target_url = data['parameters'].get('target_url', 'unknown_target')
+        findings = generate_security_findings("sast_dast", target_url)
 
         scan_record["progress"] = 85
         scan_record["findings"].extend(findings)
@@ -2205,21 +2393,9 @@ async def run_ml_module(scan_id: str, data: dict):
         scan_record["progress"] = 20
         await asyncio.sleep(4)
 
-        # Simulate ML findings
-        findings = [
-            {
-                "type": "ml_prediction",
-                "description": f"ML model predicts high vulnerability risk (confidence: {confidence + 0.15:.2f})",
-                "severity": "high",
-                "timestamp": datetime.utcnow().isoformat()
-            },
-            {
-                "type": "pattern_recognition",
-                "description": "Detected patterns similar to known exploit frameworks",
-                "severity": "medium",
-                "timestamp": datetime.utcnow().isoformat()
-            }
-        ]
+        # Generate detailed security findings
+        target = data.get('target', 'ml_model')
+        findings = generate_security_findings("ml_intelligence", target)
 
         scan_record["progress"] = 90
         scan_record["findings"].extend(findings)
@@ -2255,15 +2431,9 @@ async def run_ml_module_with_files(scan_id: str, data: dict):
         scan_record["progress"] = 30
         await asyncio.sleep(4)
 
-        # Simulate ML findings for files
-        findings = [
-            {
-                "type": "ml_file_analysis",
-                "description": f"File {files[0]['name'] if files else 'unknown'} classified as potentially malicious",
-                "severity": "high",
-                "timestamp": datetime.utcnow().isoformat()
-            }
-        ]
+        # Generate detailed security findings
+        filename = files[0]['name'] if files else "unknown_file"
+        findings = generate_security_findings("ml_intelligence", filename, {"filename": filename})
 
         scan_record["progress"] = 95
         scan_record["findings"].extend(findings)
@@ -2298,15 +2468,9 @@ async def simulate_individual_module(scan_id: str, data: dict):
         scan_record["progress"] = 50
         await asyncio.sleep(3)
 
-        # Simulate generic findings
-        findings = [
-            {
-                "type": module,
-                "description": f"{module.title()} analysis completed successfully",
-                "severity": "info",
-                "timestamp": datetime.utcnow().isoformat()
-            }
-        ]
+        # Generate detailed security findings based on module type
+        target = data.get('target', 'unknown_target')
+        findings = generate_security_findings(module, target)
 
         scan_record["progress"] = 100
         scan_record["findings"].extend(findings)
@@ -2339,15 +2503,9 @@ async def simulate_individual_module_with_files(scan_id: str, data: dict):
         scan_record["progress"] = 60
         await asyncio.sleep(3)
 
-        # Simulate generic findings
-        findings = [
-            {
-                "type": module,
-                "description": f"{module.title()} analysis completed on {len(files)} files",
-                "severity": "info",
-                "timestamp": datetime.utcnow().isoformat()
-            }
-        ]
+        # Generate detailed security findings
+        filename = files[0]['name'] if files else "unknown_file"
+        findings = generate_security_findings(module, filename, {"filename": filename})
 
         scan_record["progress"] = 100
         scan_record["findings"].extend(findings)
@@ -2875,6 +3033,16 @@ async def clear_all_alerts():
         return {"status": "cleared", "message": "All alerts cleared"}
     except Exception as e:
         logger.error(f"Error clearing alerts: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/scans/clear-all")
+async def clear_all_scans():
+    """Clear all scan data and reset the system"""
+    try:
+        clear_all_scan_data()
+        return {"status": "cleared", "message": "All scan data cleared and system reset"}
+    except Exception as e:
+        logger.error(f"Error clearing scan data: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/scan/{scan_id}")
