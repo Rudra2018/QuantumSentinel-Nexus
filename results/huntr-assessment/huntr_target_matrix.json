@@ -1,0 +1,287 @@
+{
+  "generation_date": "2025-09-29T06:37:51.147276",
+  "high_priority_targets": [
+    {
+      "name": "PyTorch",
+      "category": "ML Frameworks",
+      "risk_score": 90,
+      "risk_level": "high",
+      "bounty_range": "$500-$4000",
+      "repository_url": "https://github.com/pytorch/pytorch",
+      "languages": [
+        "Python",
+        "C++",
+        "CUDA"
+      ],
+      "priority_factors": [
+        "Memory-unsafe language (C++)",
+        "Dynamic language with eval risks (Python)",
+        "ML/AI system with data handling risks",
+        "High priority target"
+      ],
+      "potential_issues": [
+        "Potential pickle deserialization vulnerabilities",
+        "SQL injection risks in database queries",
+        "Path traversal vulnerabilities in file operations",
+        "Buffer overflow vulnerabilities",
+        "Memory management issues",
+        "Use-after-free vulnerabilities",
+        "Model poisoning attack vectors",
+        "Adversarial input handling",
+        "Insecure model serialization"
+      ]
+    },
+    {
+      "name": "TensorFlow",
+      "category": "ML Frameworks",
+      "risk_score": 90,
+      "risk_level": "high",
+      "bounty_range": "$500-$4000",
+      "repository_url": "https://github.com/tensorflow/tensorflow",
+      "languages": [
+        "Python",
+        "C++",
+        "JavaScript"
+      ],
+      "priority_factors": [
+        "Memory-unsafe language (C++)",
+        "Dynamic language with eval risks (Python)",
+        "ML/AI system with data handling risks",
+        "High priority target"
+      ],
+      "potential_issues": [
+        "Potential pickle deserialization vulnerabilities",
+        "SQL injection risks in database queries",
+        "Path traversal vulnerabilities in file operations",
+        "Buffer overflow vulnerabilities",
+        "Memory management issues",
+        "Use-after-free vulnerabilities",
+        "Model poisoning attack vectors",
+        "Adversarial input handling",
+        "Insecure model serialization"
+      ]
+    }
+  ],
+  "medium_priority_targets": [
+    {
+      "name": "Apache Spark",
+      "category": "Data Science",
+      "risk_score": 35,
+      "risk_level": "low",
+      "bounty_range": "$1000-$4000",
+      "repository_url": "https://github.com/apache/spark",
+      "languages": [
+        "Scala",
+        "Java",
+        "Python"
+      ],
+      "priority_factors": [
+        "Dynamic language with eval risks (Python)",
+        "High priority target"
+      ],
+      "potential_issues": [
+        "Potential pickle deserialization vulnerabilities",
+        "SQL injection risks in database queries",
+        "Path traversal vulnerabilities in file operations"
+      ]
+    },
+    {
+      "name": "Hugging Face Transformers",
+      "category": "ML Frameworks",
+      "risk_score": 60,
+      "risk_level": "medium",
+      "bounty_range": "$500-$3000",
+      "repository_url": "https://github.com/huggingface/transformers",
+      "languages": [
+        "Python"
+      ],
+      "priority_factors": [
+        "Dynamic language with eval risks (Python)",
+        "ML/AI system with data handling risks",
+        "High priority target"
+      ],
+      "potential_issues": [
+        "Potential pickle deserialization vulnerabilities",
+        "SQL injection risks in database queries",
+        "Path traversal vulnerabilities in file operations",
+        "Model poisoning attack vectors",
+        "Adversarial input handling",
+        "Insecure model serialization"
+      ]
+    },
+    {
+      "name": "MLflow",
+      "category": "MLOps",
+      "risk_score": 60,
+      "risk_level": "medium",
+      "bounty_range": "$500-$3000",
+      "repository_url": "https://github.com/mlflow/mlflow",
+      "languages": [
+        "Python",
+        "R",
+        "Java"
+      ],
+      "priority_factors": [
+        "Dynamic language with eval risks (Python)",
+        "ML/AI system with data handling risks",
+        "High priority target"
+      ],
+      "potential_issues": [
+        "Potential pickle deserialization vulnerabilities",
+        "SQL injection risks in database queries",
+        "Path traversal vulnerabilities in file operations"
+      ]
+    },
+    {
+      "name": "Apache Airflow",
+      "category": "MLOps",
+      "risk_score": 60,
+      "risk_level": "medium",
+      "bounty_range": "$1000-$4000",
+      "repository_url": "https://github.com/apache/airflow",
+      "languages": [
+        "Python"
+      ],
+      "priority_factors": [
+        "Dynamic language with eval risks (Python)",
+        "ML/AI system with data handling risks",
+        "High priority target"
+      ],
+      "potential_issues": [
+        "Potential pickle deserialization vulnerabilities",
+        "SQL injection risks in database queries",
+        "Path traversal vulnerabilities in file operations"
+      ]
+    },
+    {
+      "name": "Jupyter",
+      "category": "Data Science",
+      "risk_score": 35,
+      "risk_level": "low",
+      "bounty_range": "$500-$2500",
+      "repository_url": "https://github.com/jupyter/jupyter",
+      "languages": [
+        "Python",
+        "JavaScript"
+      ],
+      "priority_factors": [
+        "Dynamic language with eval risks (Python)",
+        "High priority target"
+      ],
+      "potential_issues": [
+        "Potential pickle deserialization vulnerabilities",
+        "SQL injection risks in database queries",
+        "Path traversal vulnerabilities in file operations"
+      ]
+    },
+    {
+      "name": "FastAPI",
+      "category": "Web Frameworks",
+      "risk_score": 35,
+      "risk_level": "low",
+      "bounty_range": "$500-$2000",
+      "repository_url": "https://github.com/tiangolo/fastapi",
+      "languages": [
+        "Python"
+      ],
+      "priority_factors": [
+        "Dynamic language with eval risks (Python)",
+        "High priority target"
+      ],
+      "potential_issues": [
+        "Potential pickle deserialization vulnerabilities",
+        "SQL injection risks in database queries",
+        "Path traversal vulnerabilities in file operations"
+      ]
+    },
+    {
+      "name": "ONNX",
+      "category": "Model Formats",
+      "risk_score": 50,
+      "risk_level": "medium",
+      "bounty_range": "$500-$2000",
+      "repository_url": "https://github.com/onnx/onnx",
+      "languages": [
+        "Python",
+        "C++",
+        "JavaScript"
+      ],
+      "priority_factors": [
+        "Memory-unsafe language (C++)",
+        "Dynamic language with eval risks (Python)"
+      ],
+      "potential_issues": [
+        "Potential pickle deserialization vulnerabilities",
+        "SQL injection risks in database queries",
+        "Path traversal vulnerabilities in file operations",
+        "Buffer overflow vulnerabilities",
+        "Memory management issues",
+        "Use-after-free vulnerabilities"
+      ]
+    },
+    {
+      "name": "NumPy",
+      "category": "Data Science",
+      "risk_score": 20,
+      "risk_level": "low",
+      "bounty_range": "$500-$2000",
+      "repository_url": "https://github.com/numpy/numpy",
+      "languages": [
+        "Python",
+        "C"
+      ],
+      "priority_factors": [
+        "Dynamic language with eval risks (Python)"
+      ],
+      "potential_issues": [
+        "Potential pickle deserialization vulnerabilities",
+        "SQL injection risks in database queries",
+        "Path traversal vulnerabilities in file operations"
+      ]
+    }
+  ],
+  "category_analysis": {
+    "ML Frameworks": {
+      "count": 3,
+      "avg_risk_score": 0,
+      "targets": [
+        "PyTorch",
+        "TensorFlow",
+        "Hugging Face Transformers"
+      ]
+    },
+    "Data Science": {
+      "count": 3,
+      "avg_risk_score": 0,
+      "targets": [
+        "Apache Spark",
+        "Jupyter",
+        "NumPy"
+      ]
+    },
+    "MLOps": {
+      "count": 2,
+      "avg_risk_score": 0,
+      "targets": [
+        "MLflow",
+        "Apache Airflow"
+      ]
+    },
+    "Web Frameworks": {
+      "count": 1,
+      "avg_risk_score": 0,
+      "targets": [
+        "FastAPI"
+      ]
+    },
+    "Model Formats": {
+      "count": 1,
+      "avg_risk_score": 0,
+      "targets": [
+        "ONNX"
+      ]
+    }
+  },
+  "bounty_potential": {},
+  "dashboard_url": "http://localhost:8009/huntr-dashboard"
+}

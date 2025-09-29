@@ -1,0 +1,479 @@
+{
+  "assessment_metadata": {
+    "start_time": "2025-09-29T06:37:51.144649",
+    "total_targets": 10,
+    "assessment_type": "huntr_comprehensive",
+    "platform": "huntr.com",
+    "end_time": "2025-09-29T06:37:51.145137"
+  },
+  "target_analysis": {
+    "PyTorch": {
+      "target_info": {
+        "name": "PyTorch",
+        "category": "ML Frameworks",
+        "description": "Deep learning framework",
+        "repository_url": "https://github.com/pytorch/pytorch",
+        "documentation_url": "https://pytorch.org",
+        "package_managers": [
+          "pip",
+          "conda"
+        ],
+        "languages": [
+          "Python",
+          "C++",
+          "CUDA"
+        ],
+        "bounty_range": "$500-$4000",
+        "priority_level": "high"
+      },
+      "risk_assessment": {
+        "risk_score": 90,
+        "risk_level": "high",
+        "risk_factors": [
+          "Memory-unsafe language (C++)",
+          "Dynamic language with eval risks (Python)",
+          "ML/AI system with data handling risks",
+          "High priority target"
+        ],
+        "bounty_potential": "$500-$4000"
+      },
+      "security_findings": {
+        "potential_issues": [
+          "Potential pickle deserialization vulnerabilities",
+          "SQL injection risks in database queries",
+          "Path traversal vulnerabilities in file operations",
+          "Buffer overflow vulnerabilities",
+          "Memory management issues",
+          "Use-after-free vulnerabilities",
+          "Model poisoning attack vectors",
+          "Adversarial input handling",
+          "Insecure model serialization"
+        ],
+        "repository_analysis": {
+          "repository_url": "https://github.com/pytorch/pytorch",
+          "platform": "github"
+        },
+        "web_security": {
+          "documentation_url": "https://pytorch.org",
+          "accessibility": "accessible"
+        }
+      },
+      "analysis_timestamp": "2025-09-29T06:37:51.144756"
+    },
+    "TensorFlow": {
+      "target_info": {
+        "name": "TensorFlow",
+        "category": "ML Frameworks",
+        "description": "Machine learning platform",
+        "repository_url": "https://github.com/tensorflow/tensorflow",
+        "documentation_url": "https://tensorflow.org",
+        "package_managers": [
+          "pip",
+          "conda"
+        ],
+        "languages": [
+          "Python",
+          "C++",
+          "JavaScript"
+        ],
+        "bounty_range": "$500-$4000",
+        "priority_level": "high"
+      },
+      "risk_assessment": {
+        "risk_score": 90,
+        "risk_level": "high",
+        "risk_factors": [
+          "Memory-unsafe language (C++)",
+          "Dynamic language with eval risks (Python)",
+          "ML/AI system with data handling risks",
+          "High priority target"
+        ],
+        "bounty_potential": "$500-$4000"
+      },
+      "security_findings": {
+        "potential_issues": [
+          "Potential pickle deserialization vulnerabilities",
+          "SQL injection risks in database queries",
+          "Path traversal vulnerabilities in file operations",
+          "Buffer overflow vulnerabilities",
+          "Memory management issues",
+          "Use-after-free vulnerabilities",
+          "Model poisoning attack vectors",
+          "Adversarial input handling",
+          "Insecure model serialization"
+        ],
+        "repository_analysis": {
+          "repository_url": "https://github.com/tensorflow/tensorflow",
+          "platform": "github"
+        },
+        "web_security": {
+          "documentation_url": "https://tensorflow.org",
+          "accessibility": "accessible"
+        }
+      },
+      "analysis_timestamp": "2025-09-29T06:37:51.144800"
+    },
+    "Apache Spark": {
+      "target_info": {
+        "name": "Apache Spark",
+        "category": "Data Science",
+        "description": "Unified analytics engine",
+        "repository_url": "https://github.com/apache/spark",
+        "documentation_url": "https://spark.apache.org",
+        "package_managers": [
+          "maven",
+          "pip"
+        ],
+        "languages": [
+          "Scala",
+          "Java",
+          "Python"
+        ],
+        "bounty_range": "$1000-$4000",
+        "priority_level": "high"
+      },
+      "risk_assessment": {
+        "risk_score": 35,
+        "risk_level": "low",
+        "risk_factors": [
+          "Dynamic language with eval risks (Python)",
+          "High priority target"
+        ],
+        "bounty_potential": "$1000-$4000"
+      },
+      "security_findings": {
+        "potential_issues": [
+          "Potential pickle deserialization vulnerabilities",
+          "SQL injection risks in database queries",
+          "Path traversal vulnerabilities in file operations"
+        ],
+        "repository_analysis": {
+          "repository_url": "https://github.com/apache/spark",
+          "platform": "github"
+        },
+        "web_security": {
+          "documentation_url": "https://spark.apache.org",
+          "accessibility": "accessible"
+        }
+      },
+      "analysis_timestamp": "2025-09-29T06:37:51.144839"
+    },
+    "Hugging Face Transformers": {
+      "target_info": {
+        "name": "Hugging Face Transformers",
+        "category": "ML Frameworks",
+        "description": "NLP transformers library",
+        "repository_url": "https://github.com/huggingface/transformers",
+        "documentation_url": "https://huggingface.co/transformers",
+        "package_managers": [
+          "pip"
+        ],
+        "languages": [
+          "Python"
+        ],
+        "bounty_range": "$500-$3000",
+        "priority_level": "high"
+      },
+      "risk_assessment": {
+        "risk_score": 60,
+        "risk_level": "medium",
+        "risk_factors": [
+          "Dynamic language with eval risks (Python)",
+          "ML/AI system with data handling risks",
+          "High priority target"
+        ],
+        "bounty_potential": "$500-$3000"
+      },
+      "security_findings": {
+        "potential_issues": [
+          "Potential pickle deserialization vulnerabilities",
+          "SQL injection risks in database queries",
+          "Path traversal vulnerabilities in file operations",
+          "Model poisoning attack vectors",
+          "Adversarial input handling",
+          "Insecure model serialization"
+        ],
+        "repository_analysis": {
+          "repository_url": "https://github.com/huggingface/transformers",
+          "platform": "github"
+        },
+        "web_security": {
+          "documentation_url": "https://huggingface.co/transformers",
+          "accessibility": "accessible"
+        }
+      },
+      "analysis_timestamp": "2025-09-29T06:37:51.144876"
+    },
+    "MLflow": {
+      "target_info": {
+        "name": "MLflow",
+        "category": "MLOps",
+        "description": "ML lifecycle management",
+        "repository_url": "https://github.com/mlflow/mlflow",
+        "documentation_url": "https://mlflow.org",
+        "package_managers": [
+          "pip"
+        ],
+        "languages": [
+          "Python",
+          "R",
+          "Java"
+        ],
+        "bounty_range": "$500-$3000",
+        "priority_level": "high"
+      },
+      "risk_assessment": {
+        "risk_score": 60,
+        "risk_level": "medium",
+        "risk_factors": [
+          "Dynamic language with eval risks (Python)",
+          "ML/AI system with data handling risks",
+          "High priority target"
+        ],
+        "bounty_potential": "$500-$3000"
+      },
+      "security_findings": {
+        "potential_issues": [
+          "Potential pickle deserialization vulnerabilities",
+          "SQL injection risks in database queries",
+          "Path traversal vulnerabilities in file operations"
+        ],
+        "repository_analysis": {
+          "repository_url": "https://github.com/mlflow/mlflow",
+          "platform": "github"
+        },
+        "web_security": {
+          "documentation_url": "https://mlflow.org",
+          "accessibility": "accessible"
+        }
+      },
+      "analysis_timestamp": "2025-09-29T06:37:51.144943"
+    },
+    "Apache Airflow": {
+      "target_info": {
+        "name": "Apache Airflow",
+        "category": "MLOps",
+        "description": "Workflow orchestration",
+        "repository_url": "https://github.com/apache/airflow",
+        "documentation_url": "https://airflow.apache.org",
+        "package_managers": [
+          "pip"
+        ],
+        "languages": [
+          "Python"
+        ],
+        "bounty_range": "$1000-$4000",
+        "priority_level": "high"
+      },
+      "risk_assessment": {
+        "risk_score": 60,
+        "risk_level": "medium",
+        "risk_factors": [
+          "Dynamic language with eval risks (Python)",
+          "ML/AI system with data handling risks",
+          "High priority target"
+        ],
+        "bounty_potential": "$1000-$4000"
+      },
+      "security_findings": {
+        "potential_issues": [
+          "Potential pickle deserialization vulnerabilities",
+          "SQL injection risks in database queries",
+          "Path traversal vulnerabilities in file operations"
+        ],
+        "repository_analysis": {
+          "repository_url": "https://github.com/apache/airflow",
+          "platform": "github"
+        },
+        "web_security": {
+          "documentation_url": "https://airflow.apache.org",
+          "accessibility": "accessible"
+        }
+      },
+      "analysis_timestamp": "2025-09-29T06:37:51.144979"
+    },
+    "Jupyter": {
+      "target_info": {
+        "name": "Jupyter",
+        "category": "Data Science",
+        "description": "Interactive computing platform",
+        "repository_url": "https://github.com/jupyter/jupyter",
+        "documentation_url": "https://jupyter.org",
+        "package_managers": [
+          "pip",
+          "conda"
+        ],
+        "languages": [
+          "Python",
+          "JavaScript"
+        ],
+        "bounty_range": "$500-$2500",
+        "priority_level": "high"
+      },
+      "risk_assessment": {
+        "risk_score": 35,
+        "risk_level": "low",
+        "risk_factors": [
+          "Dynamic language with eval risks (Python)",
+          "High priority target"
+        ],
+        "bounty_potential": "$500-$2500"
+      },
+      "security_findings": {
+        "potential_issues": [
+          "Potential pickle deserialization vulnerabilities",
+          "SQL injection risks in database queries",
+          "Path traversal vulnerabilities in file operations"
+        ],
+        "repository_analysis": {
+          "repository_url": "https://github.com/jupyter/jupyter",
+          "platform": "github"
+        },
+        "web_security": {
+          "documentation_url": "https://jupyter.org",
+          "accessibility": "accessible"
+        }
+      },
+      "analysis_timestamp": "2025-09-29T06:37:51.145017"
+    },
+    "FastAPI": {
+      "target_info": {
+        "name": "FastAPI",
+        "category": "Web Frameworks",
+        "description": "Modern Python web framework",
+        "repository_url": "https://github.com/tiangolo/fastapi",
+        "documentation_url": "https://fastapi.tiangolo.com",
+        "package_managers": [
+          "pip"
+        ],
+        "languages": [
+          "Python"
+        ],
+        "bounty_range": "$500-$2000",
+        "priority_level": "high"
+      },
+      "risk_assessment": {
+        "risk_score": 35,
+        "risk_level": "low",
+        "risk_factors": [
+          "Dynamic language with eval risks (Python)",
+          "High priority target"
+        ],
+        "bounty_potential": "$500-$2000"
+      },
+      "security_findings": {
+        "potential_issues": [
+          "Potential pickle deserialization vulnerabilities",
+          "SQL injection risks in database queries",
+          "Path traversal vulnerabilities in file operations"
+        ],
+        "repository_analysis": {
+          "repository_url": "https://github.com/tiangolo/fastapi",
+          "platform": "github"
+        },
+        "web_security": {
+          "documentation_url": "https://fastapi.tiangolo.com",
+          "accessibility": "accessible"
+        }
+      },
+      "analysis_timestamp": "2025-09-29T06:37:51.145057"
+    },
+    "ONNX": {
+      "target_info": {
+        "name": "ONNX",
+        "category": "Model Formats",
+        "description": "Open Neural Network Exchange",
+        "repository_url": "https://github.com/onnx/onnx",
+        "documentation_url": "https://onnx.ai",
+        "package_managers": [
+          "pip",
+          "npm"
+        ],
+        "languages": [
+          "Python",
+          "C++",
+          "JavaScript"
+        ],
+        "bounty_range": "$500-$2000",
+        "priority_level": "medium"
+      },
+      "risk_assessment": {
+        "risk_score": 50,
+        "risk_level": "medium",
+        "risk_factors": [
+          "Memory-unsafe language (C++)",
+          "Dynamic language with eval risks (Python)"
+        ],
+        "bounty_potential": "$500-$2000"
+      },
+      "security_findings": {
+        "potential_issues": [
+          "Potential pickle deserialization vulnerabilities",
+          "SQL injection risks in database queries",
+          "Path traversal vulnerabilities in file operations",
+          "Buffer overflow vulnerabilities",
+          "Memory management issues",
+          "Use-after-free vulnerabilities"
+        ],
+        "repository_analysis": {
+          "repository_url": "https://github.com/onnx/onnx",
+          "platform": "github"
+        },
+        "web_security": {
+          "documentation_url": "https://onnx.ai",
+          "accessibility": "accessible"
+        }
+      },
+      "analysis_timestamp": "2025-09-29T06:37:51.145092"
+    },
+    "NumPy": {
+      "target_info": {
+        "name": "NumPy",
+        "category": "Data Science",
+        "description": "Numerical computing library",
+        "repository_url": "https://github.com/numpy/numpy",
+        "documentation_url": "https://numpy.org",
+        "package_managers": [
+          "pip",
+          "conda"
+        ],
+        "languages": [
+          "Python",
+          "C"
+        ],
+        "bounty_range": "$500-$2000",
+        "priority_level": "medium"
+      },
+      "risk_assessment": {
+        "risk_score": 20,
+        "risk_level": "low",
+        "risk_factors": [
+          "Dynamic language with eval risks (Python)"
+        ],
+        "bounty_potential": "$500-$2000"
+      },
+      "security_findings": {
+        "potential_issues": [
+          "Potential pickle deserialization vulnerabilities",
+          "SQL injection risks in database queries",
+          "Path traversal vulnerabilities in file operations"
+        ],
+        "repository_analysis": {
+          "repository_url": "https://github.com/numpy/numpy",
+          "platform": "github"
+        },
+        "web_security": {
+          "documentation_url": "https://numpy.org",
+          "accessibility": "accessible"
+        }
+      },
+      "analysis_timestamp": "2025-09-29T06:37:51.145122"
+    }
+  },
+  "summary_statistics": {
+    "high_risk_targets": 2,
+    "medium_risk_targets": 4,
+    "low_risk_targets": 4,
+    "total_analyzed": 10
+  }
+}

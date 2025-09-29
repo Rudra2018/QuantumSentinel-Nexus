@@ -21,9 +21,20 @@ selenium>=4.15.0
 playwright>=1.40.0
 mitmproxy>=10.1.6
 
-# Web Application Security
+# Web Application Security Testing
 sqlmap>=1.7.11
-# Note: nikto, dirb, gobuster, ffuf are installed via system packages in Dockerfile
+python-owasp-zap-v2.4>=0.0.20
+# Note: nikto, dirb, gobuster, ffuf, nuclei are installed via system packages in Dockerfile
+
+# Mobile Application Security Testing
+frida>=16.1.4
+objection>=1.11.0
+androguard>=4.1.0
+# Note: ADB and Android SDK tools installed via system packages
+
+# Advanced Security Scanners
+wapiti3>=3.1.7
+# Note: Burp Suite Professional would require separate licensing
 
 # Code Quality and Security Analysis
 sonarqube-api>=1.3.1
@@ -31,11 +42,15 @@ sonarqube-api>=1.3.1
 # checkmarx-python-sdk>=1.0.0
 # veracode-api-py>=1.0.5
 
-# Vulnerability Scanners
+# Vulnerability Scanners and Exploitation
 python-nmap>=0.7.1
-# Note: nmap, masscan, nuclei are installed via system packages in Dockerfile
-# Note: Installing alternative ZAP API client
-python-owasp-zap-v2.4>=0.0.20
+shodan>=1.31.0
+censys>=2.2.5
+
+# Web Application Testing
+beautifulsoup4>=4.12.2
+lxml>=4.9.3
+pyquery>=2.0.0
 
 # Network Security Testing
 scapy>=2.5.0

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Details - QuantumSentinel Nexus</title>
+    <style>
+        :root {
+            --primary: #00ff88;
+            --secondary: #0066ff;
+            --danger: #ff4444;
+            --warning: #ffaa00;
+            --success: #00ff88;
+            --info: #00aaff;
+            --dark: #1a1a1a;
+            --darker: #0d1117;
+            --light: #f0f0f0;
+            --border: #333;
+            --text: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-muted: #888;
+            --card-bg: #1e1e1e;
+            --hover: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: var(--dark);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-button {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .back-button:hover {
+            background: #00cc66;
+            transform: translateY(-1px);
+        }
+
+        .scan-header {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .scan-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .scan-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-item {
+            background: var(--dark);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .meta-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .progress-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: var(--dark);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 6px;
+            transition: width 0.3s ease;
+        }
+
+        .stages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stage {
+            background: var(--dark);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .stage.completed {
+            border-color: var(--success);
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .stage.active {
+            border-color: var(--warning);
+            background: rgba(255, 170, 0, 0.1);
+        }
+
+        .stage.pending {
+            opacity: 0.6;
+        }
+
+        .findings-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .finding {
+            background: var(--dark);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+        }
+
+        .finding-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .severity {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .severity.critical {
+            background: var(--danger);
+            color: white;
+        }
+
+        .severity.high {
+            background: #ff6600;
+            color: white;
+        }
+
+        .severity.medium {
+            background: var(--warning);
+            color: var(--dark);
+        }
+
+        .severity.low {
+            background: var(--info);
+            color: white;
+        }
+
+        .severity.info {
+            background: var(--text-muted);
+            color: white;
+        }
+
+        .logs-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .log-entry {
+            background: var(--dark);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        .log-timestamp {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-running {
+            background: var(--warning);
+            color: var(--dark);
+        }
+
+        .status-completed {
+            background: var(--success);
+            color: var(--dark);
+        }
+
+        .status-failed {
+            background: var(--danger);
+            color: white;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scan-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .stages {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">QuantumSentinel Nexus</div>
+            <a href="/" class="back-button">← Back to Dashboard</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="scan-header">
+            <h1 class="scan-title" id="scanTarget">Loading scan details...</h1>
+            <div class="scan-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Scan ID</div>
+                    <div class="meta-value" id="scanId">-</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Status</div>
+                    <div class="meta-value" id="scanStatus">-</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Started</div>
+                    <div class="meta-value" id="scanStarted">-</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Progress</div>
+                    <div class="meta-value" id="scanProgress">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <h3>Scan Progress</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+            <div class="stages" id="stagesContainer">
+                <!-- Stages will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="findings-section">
+                <h3>Security Findings</h3>
+                <div id="findingsContainer">
+                    <p>Loading findings...</p>
+                </div>
+            </div>
+
+            <div class="logs-section">
+                <h3>Scan Logs</h3>
+                <div id="logsContainer">
+                    <p>Loading logs...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scanId = window.location.pathname.split('/').pop();
+
+        async function loadScanDetails() {
+            try {
+                const response = await fetch(`/api/scans/${scanId}`);
+                const scan = await response.json();
+
+                updateScanDetails(scan);
+                updateProgress(scan);
+                updateFindings(scan.findings || []);
+                updateLogs(scan.logs || []);
+            } catch (error) {
+                console.error('Error loading scan details:', error);
+                document.getElementById('scanTarget').textContent = 'Error loading scan details';
+            }
+        }
+
+        function updateScanDetails(scan) {
+            document.getElementById('scanTarget').textContent = `Security Scan: ${scan.target}`;
+            document.getElementById('scanId').textContent = scan.id;
+            document.getElementById('scanStatus').innerHTML = `<span class="status-badge status-${scan.status.split('_')[0]}">${scan.status}</span>`;
+            document.getElementById('scanStarted').textContent = new Date(scan.started_at).toLocaleString();
+            document.getElementById('scanProgress').textContent = `${scan.progress}%`;
+        }
+
+        function updateProgress(scan) {
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = `${scan.progress}%`;
+
+            const stagesContainer = document.getElementById('stagesContainer');
+            stagesContainer.innerHTML = '';
+
+            if (scan.workflow_stages) {
+                scan.workflow_stages.forEach((stage, index) => {
+                    const stageElement = document.createElement('div');
+                    stageElement.className = 'stage';
+
+                    if (index < scan.current_stage - 1) {
+                        stageElement.classList.add('completed');
+                    } else if (index === scan.current_stage - 1) {
+                        stageElement.classList.add('active');
+                    } else {
+                        stageElement.classList.add('pending');
+                    }
+
+                    stageElement.innerHTML = `
+                        <h4>${stage.stage}</h4>
+                        <p>${stage.description}</p>
+                    `;
+
+                    stagesContainer.appendChild(stageElement);
+                });
+            }
+        }
+
+        function updateFindings(findings) {
+            const container = document.getElementById('findingsContainer');
+
+            if (findings.length === 0) {
+                container.innerHTML = '<p>No findings yet. Scan in progress...</p>';
+                return;
+            }
+
+            container.innerHTML = '';
+            findings.forEach(finding => {
+                const findingElement = document.createElement('div');
+                findingElement.className = 'finding';
+                findingElement.innerHTML = `
+                    <div class="finding-header">
+                        <h4>${finding.title}</h4>
+                        <span class="severity ${finding.severity}">${finding.severity}</span>
+                    </div>
+                    <p>${finding.description}</p>
+                    <p><strong>Recommendation:</strong> ${finding.recommendation}</p>
+                `;
+                container.appendChild(findingElement);
+            });
+        }
+
+        function updateLogs(logs) {
+            const container = document.getElementById('logsContainer');
+
+            if (logs.length === 0) {
+                container.innerHTML = '<p>No logs available.</p>';
+                return;
+            }
+
+            container.innerHTML = '';
+            logs.slice(-10).forEach(log => {
+                const logElement = document.createElement('div');
+                logElement.className = 'log-entry';
+                logElement.innerHTML = `
+                    <div class="log-timestamp">${new Date(log.timestamp).toLocaleString()}</div>
+                    <div>${log.message}</div>
+                `;
+                container.appendChild(logElement);
+            });
+        }
+
+        // Load initial data
+        loadScanDetails();
+
+        // Auto-refresh every 10 seconds
+        setInterval(loadScanDetails, 10000);
+    </script>
+</body>
+</html>
