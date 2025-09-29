@@ -1,0 +1,119 @@
+{
+  "id": "8b8cebcc-277b-401e-b765-b34964076c43",
+  "files": [
+    {
+      "id": "ff9ad242-cb4a-4900-bde7-f1a33f3927b1",
+      "original_name": "test_upload.py",
+      "path": "uploads/ff9ad242-cb4a-4900-bde7-f1a33f3927b1_test_upload.py",
+      "type": "python_source"
+    }
+  ],
+  "options": {
+    "quick": true,
+    "deep": true,
+    "reverse": true,
+    "kernel": false
+  },
+  "status": "completed",
+  "start_time": "2025-09-29T15:49:45.501374",
+  "current_module": "reverse",
+  "progress": 100,
+  "modules": {
+    "sast": {
+      "status": "completed",
+      "start_time": "2025-09-29T15:49:45.501519",
+      "progress": 100,
+      "output": [
+        "[15:49:45] \ud83d\udd0d Initializing SAST engine...",
+        "[15:49:46] \ud83d\udcc1 Scanning source code files...",
+        "[15:49:48] \ud83d\udd0e Analyzing code patterns...",
+        "[15:49:50] \u26a0\ufe0f Checking for vulnerabilities...",
+        "[15:49:52] \ud83d\udcca Generating SAST report..."
+      ],
+      "end_time": "2025-09-29T15:49:53.019181"
+    },
+    "dast": {
+      "status": "completed",
+      "start_time": "2025-09-29T15:49:53.019193",
+      "progress": 100,
+      "output": [
+        "[15:49:53] \ud83c\udf10 Initializing DAST engine...",
+        "[15:49:54] \ud83d\udd34 Starting dynamic application testing...",
+        "[15:49:56] \ud83d\udd78\ufe0f Crawling application endpoints...",
+        "[15:49:58] \ud83d\udea8 Testing for runtime vulnerabilities...",
+        "[15:50:00] \ud83d\udccb Generating DAST report..."
+      ],
+      "end_time": "2025-09-29T15:50:01.330998"
+    },
+    "mobile": {
+      "status": "completed",
+      "start_time": "2025-09-29T15:50:01.331018",
+      "progress": 100,
+      "output": [
+        "[15:50:01] \ud83d\udcf1 Loading mobile analysis engine...",
+        "[15:50:02] \ud83d\udd13 Decompiling APK/IPA files...",
+        "[15:50:05] \ud83d\udd0d Analyzing manifest permissions...",
+        "[15:50:06] \ud83d\udd12 Checking encryption methods...",
+        "[15:50:08] \ud83d\udccb Generating mobile security report..."
+      ],
+      "end_time": "2025-09-29T15:50:09.850344"
+    },
+    "binary": {
+      "status": "completed",
+      "start_time": "2025-09-29T15:50:09.850357",
+      "progress": 100,
+      "output": [
+        "[15:50:09] \ud83d\udd27 Starting binary analysis...",
+        "[15:50:10] \ud83d\udd0d Disassembling binary files...",
+        "[15:50:14] \ud83d\udd0e Analyzing assembly code...",
+        "[15:50:17] \u26a1 Checking for exploits..."
+      ],
+      "end_time": "2025-09-29T15:50:19.863794"
+    },
+    "ml": {
+      "status": "completed",
+      "start_time": "2025-09-29T15:50:19.863810",
+      "progress": 100,
+      "output": [
+        "[15:50:19] \ud83e\udde0 Loading ML models...",
+        "[15:50:21] \ud83d\udd0d Running threat detection...",
+        "[15:50:24] \ud83d\udcca Analyzing patterns...",
+        "[15:50:26] \u26a1 Generating ML insights..."
+      ],
+      "end_time": "2025-09-29T15:50:28.379687"
+    },
+    "reverse": {
+      "status": "completed",
+      "start_time": "2025-09-29T15:50:28.379701",
+      "progress": 100,
+      "output": [
+        "[15:50:28] \ud83d\udd0d Initializing reverse engineering tools...",
+        "[15:50:29] \ud83d\udee0\ufe0f Running Ghidra analysis...",
+        "[15:50:33] \ud83d\udd0e Extracting function signatures...",
+        "[15:50:36] \ud83d\udcca Building control flow graphs..."
+      ],
+      "end_time": "2025-09-29T15:50:38.391926"
+    }
+  },
+  "vulnerabilities": [
+    {
+      "module": "sast",
+      "severity": "high",
+      "description": "Security issue found in sast analysis",
+      "file": "test_upload.py"
+    },
+    {
+      "module": "sast",
+      "severity": "high",
+      "description": "Security issue found in sast analysis",
+      "file": "test_upload.py"
+    },
+    {
+      "module": "dast",
+      "severity": "high",
+      "description": "Security issue found in dast analysis",
+      "file": "test_upload.py"
+    }
+  ],
+  "end_time": "2025-09-29T15:50:38.391953"
+}

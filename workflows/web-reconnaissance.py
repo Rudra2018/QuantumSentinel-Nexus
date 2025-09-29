@@ -1,30 +1,21 @@
 #!/usr/bin/env python3
 """
-QuantumSentinel-Nexus: Web Application Domain Reconnaissance Workflow
-Complete automated domain discovery, subdomain enumeration, and attack surface mapping
+QuantumSentinel-Nexus: Enhanced Web Reconnaissance Module
+Comprehensive domain and subdomain enumeration with Chaos API integration
 """
 
-import asyncio
-import aiohttp
-import aiofiles
-import dns.resolver
-import json
-import ssl
-import socket
-import re
+import requests
 import subprocess
-import whois
+import json
+import sys
+import os
+import time
+from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Optional, Set, Tuple
-from dataclasses import dataclass, asdict
-from datetime import datetime, timedelta
-from urllib.parse import urlparse, urljoin
-import logging
-import tempfile
-import base64
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# Chaos API Configuration
+CHAOS_API_KEY = "0d2d90bd-cad5-4930-8011-bddf2208a761"
+CHAOS_API_URL = "https://dns.projectdiscovery.io/dns"
 
 @dataclass
 class DomainInfo:

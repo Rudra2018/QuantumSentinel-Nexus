@@ -1,4 +1,0 @@
-Package: com.gitlab.gitlab
-Platform: android
-Program: gitlab
-Status: Download required for full analysis

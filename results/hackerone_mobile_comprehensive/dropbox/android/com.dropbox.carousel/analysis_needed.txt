@@ -1,4 +1,0 @@
-Package: com.dropbox.carousel
-Platform: android
-Program: dropbox
-Status: Download required for full analysis

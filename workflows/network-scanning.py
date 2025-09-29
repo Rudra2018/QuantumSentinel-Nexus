@@ -1,26 +1,19 @@
 #!/usr/bin/env python3
 """
-QuantumSentinel-Nexus: Network Infrastructure Scanning Workflow
-Complete automated network discovery, port scanning, and vulnerability assessment
+QuantumSentinel-Nexus: Advanced Network Scanning Module
+Comprehensive network discovery, port scanning, and service enumeration
 """
 
-import asyncio
-import aiohttp
-import json
-import ipaddress
 import subprocess
-import concurrent.futures
-import xml.etree.ElementTree as ET
-from pathlib import Path
-from typing import List, Dict, Optional, Tuple, Set
-from dataclasses import dataclass, asdict
+import json
+import sys
+import os
+import time
+import ipaddress
+import socket
 from datetime import datetime
-import logging
-import tempfile
+from pathlib import Path
 import re
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 @dataclass
 class NetworkTarget:

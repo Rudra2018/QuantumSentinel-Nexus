@@ -1,4 +1,0 @@
-Package: com.dropbox.android
-Platform: android
-Program: dropbox
-Status: Download required for full analysis

@@ -1,4 +1,0 @@
-Package: com.shopify.arrive
-Platform: android
-Program: shopify
-Status: Download required for full analysis

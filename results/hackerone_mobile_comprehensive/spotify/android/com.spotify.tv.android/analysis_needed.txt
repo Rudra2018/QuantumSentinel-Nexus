@@ -1,4 +1,0 @@
-Package: com.spotify.tv.android
-Platform: android
-Program: spotify
-Status: Download required for full analysis

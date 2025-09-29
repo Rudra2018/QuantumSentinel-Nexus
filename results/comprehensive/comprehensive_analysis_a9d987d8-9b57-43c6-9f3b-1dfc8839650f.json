@@ -1,0 +1,134 @@
+{
+  "id": "a9d987d8-9b57-43c6-9f3b-1dfc8839650f",
+  "files": [
+    {
+      "id": "96ed20ca-dc19-4280-8a0f-89e06246f885",
+      "original_name": "H4C.apk",
+      "stored_name": "96ed20ca-dc19-4280-8a0f-89e06246f885_H4C.apk",
+      "path": "uploads/96ed20ca-dc19-4280-8a0f-89e06246f885_H4C.apk",
+      "size": 45178431,
+      "type": "android_app",
+      "uploaded_at": "2025-09-29T16:22:57.287310"
+    }
+  ],
+  "options": {
+    "quick": true,
+    "deep": true,
+    "reverse": true,
+    "kernel": true
+  },
+  "status": "completed",
+  "start_time": "2025-09-29T16:23:05.137451",
+  "current_module": "kernel",
+  "progress": 100,
+  "modules": {
+    "sast": {
+      "status": "completed",
+      "start_time": "2025-09-29T16:23:05.138135",
+      "progress": 100,
+      "output": [
+        "[16:23:05] \ud83d\udd0d Initializing SAST engine...",
+        "[16:23:06] \ud83d\udcc1 Scanning source code files...",
+        "[16:23:08] \ud83d\udd0e Analyzing code patterns...",
+        "[16:23:09] \u26a0\ufe0f Checking for vulnerabilities...",
+        "[16:23:11] \ud83d\udcca Generating SAST report..."
+      ],
+      "end_time": "2025-09-29T16:23:12.648816"
+    },
+    "dast": {
+      "status": "completed",
+      "start_time": "2025-09-29T16:23:12.648836",
+      "progress": 100,
+      "output": [
+        "[16:23:12] \ud83c\udf10 Initializing DAST engine...",
+        "[16:23:13] \ud83d\udd34 Starting dynamic application testing...",
+        "[16:23:16] \ud83d\udd78\ufe0f Crawling application endpoints...",
+        "[16:23:18] \ud83d\udea8 Testing for runtime vulnerabilities...",
+        "[16:23:20] \ud83d\udccb Generating DAST report..."
+      ],
+      "end_time": "2025-09-29T16:23:20.965839"
+    },
+    "mobile": {
+      "status": "completed",
+      "start_time": "2025-09-29T16:23:20.965867",
+      "progress": 100,
+      "output": [
+        "[16:23:20] \ud83d\udcf1 Loading mobile analysis engine...",
+        "[16:23:21] \ud83d\udd13 Decompiling APK/IPA files...",
+        "[16:23:24] \ud83d\udd0d Analyzing manifest permissions...",
+        "[16:23:26] \ud83d\udd12 Checking encryption methods...",
+        "[16:23:28] \ud83d\udccb Generating mobile security report..."
+      ],
+      "end_time": "2025-09-29T16:23:29.483808"
+    },
+    "binary": {
+      "status": "completed",
+      "start_time": "2025-09-29T16:23:29.483823",
+      "progress": 100,
+      "output": [
+        "[16:23:29] \ud83d\udd27 Starting binary analysis...",
+        "[16:23:30] \ud83d\udd0d Disassembling binary files...",
+        "[16:23:34] \ud83d\udd0e Analyzing assembly code...",
+        "[16:23:37] \u26a1 Checking for exploits..."
+      ],
+      "end_time": "2025-09-29T16:23:39.499450"
+    },
+    "ml": {
+      "status": "completed",
+      "start_time": "2025-09-29T16:23:39.499474",
+      "progress": 100,
+      "output": [
+        "[16:23:39] \ud83e\udde0 Loading ML models...",
+        "[16:23:41] \ud83d\udd0d Running threat detection...",
+        "[16:23:44] \ud83d\udcca Analyzing patterns...",
+        "[16:23:46] \u26a1 Generating ML insights..."
+      ],
+      "end_time": "2025-09-29T16:23:48.010787"
+    },
+    "reverse": {
+      "status": "completed",
+      "start_time": "2025-09-29T16:23:48.010816",
+      "progress": 100,
+      "output": [
+        "[16:23:48] \ud83d\udd0d Initializing reverse engineering tools...",
+        "[16:23:49] \ud83d\udee0\ufe0f Running Ghidra analysis...",
+        "[16:23:53] \ud83d\udd0e Extracting function signatures...",
+        "[16:23:56] \ud83d\udcca Building control flow graphs..."
+      ],
+      "end_time": "2025-09-29T16:23:58.020953"
+    },
+    "kernel": {
+      "status": "completed",
+      "start_time": "2025-09-29T16:23:58.020968",
+      "progress": 100,
+      "output": [
+        "[16:23:58] \u2699\ufe0f Initializing kernel analysis...",
+        "[16:23:59] \ud83d\udd0d Scanning kernel modules...",
+        "[16:24:03] \ud83d\udd12 Checking privilege escalation...",
+        "[16:24:05] \ud83d\udccb Generating kernel report..."
+      ],
+      "end_time": "2025-09-29T16:24:07.033215"
+    }
+  },
+  "vulnerabilities": [
+    {
+      "module": "sast",
+      "severity": "high",
+      "description": "Security issue found in sast analysis",
+      "file": "H4C.apk"
+    },
+    {
+      "module": "sast",
+      "severity": "high",
+      "description": "Security issue found in sast analysis",
+      "file": "H4C.apk"
+    },
+    {
+      "module": "dast",
+      "severity": "high",
+      "description": "Security issue found in dast analysis",
+      "file": "H4C.apk"
+    }
+  ],
+  "end_time": "2025-09-29T16:24:07.033245"
+}

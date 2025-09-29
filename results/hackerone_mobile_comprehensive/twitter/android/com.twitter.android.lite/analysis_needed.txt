@@ -1,4 +1,0 @@
-Package: com.twitter.android.lite
-Platform: android
-Program: twitter
-Status: Download required for full analysis

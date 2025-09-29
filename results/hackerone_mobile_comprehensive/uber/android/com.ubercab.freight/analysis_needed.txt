@@ -1,4 +1,0 @@
-Package: com.ubercab.freight
-Platform: android
-Program: uber
-Status: Download required for full analysis
