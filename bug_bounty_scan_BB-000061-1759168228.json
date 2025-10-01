@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000061-1759168228",
+  "target": "owasp.org",
+  "program_type": "Testing Labs",
+  "timestamp": "2025-09-29T23:20:28.033274",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 0.93,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 16
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 11
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 12
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.55,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "severity": "high",
+          "count": 3
+        },
+        {
+          "severity": "medium",
+          "count": 5
+        },
+        {
+          "severity": "low",
+          "count": 23
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 0.58,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.79,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 0.69,
+      "findings": [
+        {
+          "threat_score": 0.51
+        },
+        {
+          "risk_assessment": "High"
+        },
+        {
+          "attack_vectors": 5
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 0.91,
+      "findings": []
+    }
+  }
+}

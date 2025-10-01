@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000057-1759168216",
+  "target": "demo.testfire.net",
+  "program_type": "Testing Labs",
+  "timestamp": "2025-09-29T23:20:16.878816",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.25,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 41
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 10
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 7
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 0.9,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "severity": "high",
+          "count": 6
+        },
+        {
+          "severity": "medium",
+          "count": 5
+        },
+        {
+          "severity": "low",
+          "count": 16
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.37,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 0.96,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.2,
+      "findings": [
+        {
+          "threat_score": 0.57
+        },
+        {
+          "risk_assessment": "Low"
+        },
+        {
+          "attack_vectors": 10
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.69,
+      "findings": []
+    }
+  }
+}

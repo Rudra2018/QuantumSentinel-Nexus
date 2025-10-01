@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000047-1759168184",
+  "target": "kraken.com",
+  "program_type": "Crypto/Blockchain",
+  "timestamp": "2025-09-29T23:19:44.814205",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.24,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 36
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 5
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 5
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.79,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 0
+        },
+        {
+          "severity": "high",
+          "count": 1
+        },
+        {
+          "severity": "medium",
+          "count": 15
+        },
+        {
+          "severity": "low",
+          "count": 16
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.97,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.13,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.55,
+      "findings": [
+        {
+          "threat_score": 0.52
+        },
+        {
+          "risk_assessment": "High"
+        },
+        {
+          "attack_vectors": 11
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 0.55,
+      "findings": []
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000059-1759168216",
+  "target": "dvwa.co.uk",
+  "program_type": "Testing Labs",
+  "timestamp": "2025-09-29T23:20:16.879258",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.57,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 26
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 10
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 5
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.58,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 3
+        },
+        {
+          "severity": "high",
+          "count": 4
+        },
+        {
+          "severity": "medium",
+          "count": 12
+        },
+        {
+          "severity": "low",
+          "count": 14
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.29,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.07,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.53,
+      "findings": [
+        {
+          "threat_score": 0.61
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 9
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.82,
+      "findings": []
+    }
+  }
+}

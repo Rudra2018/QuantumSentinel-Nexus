@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000008-1759168093",
+  "target": "dropbox.com",
+  "program_type": "HackerOne Programs",
+  "timestamp": "2025-09-29T23:18:13.146092",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.28,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 47
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 8
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 11
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.1,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 0
+        },
+        {
+          "severity": "high",
+          "count": 1
+        },
+        {
+          "severity": "medium",
+          "count": 12
+        },
+        {
+          "severity": "low",
+          "count": 21
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.38,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.92,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.77,
+      "findings": [
+        {
+          "threat_score": 0.66
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 7
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.87,
+      "findings": []
+    }
+  }
+}

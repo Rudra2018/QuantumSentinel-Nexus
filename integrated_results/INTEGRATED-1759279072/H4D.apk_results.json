@@ -1,0 +1,199 @@
+{
+  "apk_config": {
+    "path": "/Users/ankitthakur/Downloads/H4D.apk",
+    "name": "H4D Healthcare App",
+    "estimated_package": "com.h4d.mobile"
+  },
+  "apk_info": {
+    "file_path": "/Users/ankitthakur/Downloads/H4D.apk",
+    "file_size": 43849733,
+    "analysis_timestamp": "2025-10-01T06:07:59.594616",
+    "dex_files": [
+      "classes.dex",
+      "classes2.dex",
+      "classes3.dex",
+      "classes4.dex",
+      "classes5.dex"
+    ],
+    "resource_files_count": 3010,
+    "assets_files_count": 12,
+    "total_files": 3468,
+    "has_manifest": true,
+    "has_resources": true,
+    "extraction_path": "integrated_results/INTEGRATED-1759279072/H4D.apk_extracted"
+  },
+  "security_analysis": {
+    "analysis_id": "SEC-1759279079",
+    "apk_path": "/Users/ankitthakur/Downloads/H4D.apk",
+    "analysis_timestamp": "2025-10-01T06:07:59.655863",
+    "vulnerabilities": [
+      {
+        "vuln_id": "APK-MULTI-DEX-1759279085",
+        "title": "Multiple DEX Files Present",
+        "severity": "LOW",
+        "description": "Application uses multiple DEX files which may increase attack surface",
+        "evidence": "Found 5 DEX files: ['classes.dex', 'classes2.dex', 'classes3.dex', 'classes4.dex', 'classes5.dex']",
+        "recommendation": "Review code in all DEX files for security issues"
+      },
+      {
+        "vuln_id": "APK-RESOURCE-1759279085",
+        "title": "Excessive Resource Files",
+        "severity": "LOW",
+        "description": "Large number of resource files may contain sensitive information",
+        "evidence": "Found 3010 resource files",
+        "recommendation": "Review resource files for hardcoded secrets or sensitive data"
+      }
+    ],
+    "findings": [
+      {
+        "type": "manifest_analysis",
+        "finding": "AndroidManifest.xml present",
+        "file_size": 68300,
+        "risk": "INFO"
+      },
+      {
+        "type": "code_analysis",
+        "finding": "Found 5 DEX files containing application code",
+        "dex_files": [
+          "classes.dex",
+          "classes2.dex",
+          "classes3.dex",
+          "classes4.dex",
+          "classes5.dex"
+        ],
+        "risk": "INFO"
+      }
+    ]
+  },
+  "poc": {
+    "poc_id": "POC-1759279086",
+    "target_apk": "H4D.apk",
+    "generation_timestamp": "2025-10-01T06:08:06.671942",
+    "poc_type": "Integrated APK Analysis PoC",
+    "target_details": {
+      "file_path": "/Users/ankitthakur/Downloads/H4D.apk",
+      "file_size_mb": 41.82,
+      "dex_files": 5,
+      "has_manifest": true,
+      "total_files": 3468
+    },
+    "automated_testing_commands": {
+      "step_1_extraction": {
+        "description": "Automated APK extraction and analysis",
+        "commands": [
+          "# Extract APK contents",
+          "unzip -q '/Users/ankitthakur/Downloads/H4D.apk' -d extracted_apk/",
+          "cd extracted_apk/",
+          "",
+          "# List all files for analysis",
+          "find . -type f | head -20",
+          "",
+          "# Check for AndroidManifest.xml",
+          "ls -la AndroidManifest.xml",
+          "",
+          "# Analyze DEX files",
+          "ls -la *.dex"
+        ],
+        "automation_status": "COMPLETED",
+        "results_path": "integrated_results/INTEGRATED-1759279072/H4D.apk_extracted"
+      },
+      "step_2_security_scan": {
+        "description": "Automated security vulnerability scanning",
+        "findings": [
+          {
+            "vuln_id": "APK-MULTI-DEX-1759279085",
+            "title": "Multiple DEX Files Present",
+            "severity": "LOW",
+            "description": "Application uses multiple DEX files which may increase attack surface",
+            "evidence": "Found 5 DEX files: ['classes.dex', 'classes2.dex', 'classes3.dex', 'classes4.dex', 'classes5.dex']",
+            "recommendation": "Review code in all DEX files for security issues"
+          },
+          {
+            "vuln_id": "APK-RESOURCE-1759279085",
+            "title": "Excessive Resource Files",
+            "severity": "LOW",
+            "description": "Large number of resource files may contain sensitive information",
+            "evidence": "Found 3010 resource files",
+            "recommendation": "Review resource files for hardcoded secrets or sensitive data"
+          }
+        ],
+        "total_vulns": 2,
+        "risk_level": "MEDIUM",
+        "automation_status": "COMPLETED"
+      },
+      "step_3_static_analysis": {
+        "description": "Static analysis for hardcoded secrets",
+        "commands": [
+          "# Search for potential API keys in extracted files",
+          "find extracted_apk/ -name '*.xml' -exec grep -l 'api\\|key\\|secret\\|token' {} \\;",
+          "",
+          "# Search in any text files",
+          "find extracted_apk/ -name '*.txt' -o -name '*.json' -o -name '*.properties' | xargs grep -l 'password\\|secret\\|key' 2>/dev/null",
+          "",
+          "# Check for configuration files",
+          "find extracted_apk/ -name 'config*' -o -name '*.config' -o -name '*.properties'"
+        ],
+        "automation_status": "READY_TO_RUN"
+      }
+    },
+    "evidence_collection": {
+      "extracted_files": "integrated_results/INTEGRATED-1759279072/H4D.apk_extracted",
+      "security_findings": {
+        "analysis_id": "SEC-1759279079",
+        "apk_path": "/Users/ankitthakur/Downloads/H4D.apk",
+        "analysis_timestamp": "2025-10-01T06:07:59.655863",
+        "vulnerabilities": [
+          {
+            "vuln_id": "APK-MULTI-DEX-1759279085",
+            "title": "Multiple DEX Files Present",
+            "severity": "LOW",
+            "description": "Application uses multiple DEX files which may increase attack surface",
+            "evidence": "Found 5 DEX files: ['classes.dex', 'classes2.dex', 'classes3.dex', 'classes4.dex', 'classes5.dex']",
+            "recommendation": "Review code in all DEX files for security issues"
+          },
+          {
+            "vuln_id": "APK-RESOURCE-1759279085",
+            "title": "Excessive Resource Files",
+            "severity": "LOW",
+            "description": "Large number of resource files may contain sensitive information",
+            "evidence": "Found 3010 resource files",
+            "recommendation": "Review resource files for hardcoded secrets or sensitive data"
+          }
+        ],
+        "findings": [
+          {
+            "type": "manifest_analysis",
+            "finding": "AndroidManifest.xml present",
+            "file_size": 68300,
+            "risk": "INFO"
+          },
+          {
+            "type": "code_analysis",
+            "finding": "Found 5 DEX files containing application code",
+            "dex_files": [
+              "classes.dex",
+              "classes2.dex",
+              "classes3.dex",
+              "classes4.dex",
+              "classes5.dex"
+            ],
+            "risk": "INFO"
+          }
+        ]
+      },
+      "file_analysis": {
+        "manifest_present": true,
+        "resources_present": true,
+        "dex_files_count": 5,
+        "total_files_in_apk": 3468
+      }
+    },
+    "next_steps": [
+      "Install APK on Android emulator for dynamic testing",
+      "Use ADB to extract runtime data",
+      "Perform UI automation for SQL injection testing",
+      "Monitor network traffic during app execution",
+      "Extract databases and SharedPreferences"
+    ]
+  }
+}

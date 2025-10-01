@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000023-1759168127",
+  "target": "hp.com",
+  "program_type": "Bugcrowd Programs",
+  "timestamp": "2025-09-29T23:18:47.529752",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 0.99,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 49
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 12
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 11
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.72,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 0
+        },
+        {
+          "severity": "high",
+          "count": 7
+        },
+        {
+          "severity": "medium",
+          "count": 5
+        },
+        {
+          "severity": "low",
+          "count": 22
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.58,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.35,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 0.86,
+      "findings": [
+        {
+          "threat_score": 0.8
+        },
+        {
+          "risk_assessment": "High"
+        },
+        {
+          "attack_vectors": 8
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 0.69,
+      "findings": []
+    }
+  }
+}

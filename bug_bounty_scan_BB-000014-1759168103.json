@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000014-1759168103",
+  "target": "apple.com",
+  "program_type": "HackerOne Programs",
+  "timestamp": "2025-09-29T23:18:23.850703",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 0.69,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 47
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 4
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 8
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.06,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 2
+        },
+        {
+          "severity": "high",
+          "count": 2
+        },
+        {
+          "severity": "medium",
+          "count": 7
+        },
+        {
+          "severity": "low",
+          "count": 25
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.05,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 0.57,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.57,
+      "findings": [
+        {
+          "threat_score": 0.46
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 7
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.23,
+      "findings": []
+    }
+  }
+}

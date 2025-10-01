@@ -1,0 +1,83 @@
+{
+  "session_id": "QUANTUM-MASTER-1759279979",
+  "analysis_timestamp": "2025-10-01T06:32:24.003292",
+  "file_categorization": {
+    "mobile": 2,
+    "binary": 0,
+    "network": 0,
+    "web": 0,
+    "unknown": 0
+  },
+  "analysis_results": {
+    "network": {
+      "analysis_type": "NETWORK_COMPREHENSIVE",
+      "timestamp": "2025-10-01T06:22:59.563916",
+      "targets": [
+        "127.0.0.1",
+        "localhost"
+      ],
+      "module_results": {
+        "network_scan_127.0.0.1": {
+          "target": "127.0.0.1",
+          "status": "SUCCESS",
+          "output": "\ud83d\ude80 Starting comprehensive network scan for 127.0.0.1\n============================================================\n\n\ud83d\udd0d Phase 1: Host Discovery\n\ud83d\udd0d Performing ping sweep on 127.0.0.1/32...\n\u2705 127.0.0.1 is alive\n\ud83d\udcca Found 1 live hosts\n\ud83d\udd0d Running nmap host discovery on 127.0.0.1/32...\n\u26a0\ufe0f nmap not installed, skipping...\n\n\ud83d\udd0c Phase 2: Port Scanning\n\ud83d\udd0c Port scanning 1 hosts...\n  \ud83c\udfaf Scanning 127.0.0.1...\n\u26a0\ufe0f nmap not installed, skipping port scan...\n\n\ud83d\udd0d Phase 3: Service Detection\n\ud83d\udd0d Performing service detection on 1 hosts...\n  \ud83c\udfaf Service detection for 127.0.0.1...\n\u26a0\ufe0f nmap not installed, skipping service detection...\n\n\ud83d\udda5\ufe0f Phase 4: OS Detection\n\ud83d\udda5\ufe0f Performing OS detection on 1 hosts...\n  \ud83c\udfaf OS detection for 127.0.0.1...\n\u26a0\ufe0f nmap not installed, skipping OS detection...\n\n\ud83d\udd0d Phase 5: Vulnerability Scanning\n\ud83d\udd0d Running vulnerability scans on 1 hosts...\n  \ud83c\udfaf Vulnerability scan for 127.0.0.1...\n\u26a0\ufe0f nmap not installed, skipping vulnerability scan...\n\n\ud83d\udcca Results saved to: results/network-scanning/network_scan_127.0.0.1_32_network_scan_1759279979.json\n\n\ud83c\udfaf NETWORK SCAN SUMMARY\n========================================\nTarget Network: 127.0.0.1/32\nLive Hosts: 1\nHosts with Open Ports: 0\nServices Detected: 0\nVulnerabilities: 0\nTools Used: ping_sweep\nResults File: results/network-scanning/network_scan_127.0.0.1_32_network_scan_1759279979.json\n\n\u2705 Network scan completed for 127.0.0.1\n",
+          "error": null
+        },
+        "network_scan_localhost": {
+          "target": "localhost",
+          "status": "SUCCESS",
+          "output": "\ud83d\ude80 Starting comprehensive network scan for localhost\n============================================================\n\u274c Invalid network format: 'localhost' does not appear to be an IPv4 or IPv6 address\n\n\u274c Network scan failed for localhost\n",
+          "error": null
+        }
+      },
+      "vulnerabilities": [],
+      "summary": {}
+    },
+    "mobile": {
+      "analysis_type": "MOBILE_COMPREHENSIVE",
+      "timestamp": "2025-10-01T06:22:59.563606",
+      "files_analyzed": 2,
+      "module_results": {
+        "apk_tester": {
+          "status": "ERROR",
+          "error": "Command '['python3', 'integrated_apk_tester.py']' timed out after 300 seconds"
+        },
+        "resource_analyzer": {
+          "status": "SUCCESS",
+          "output": "\ud83e\udd16 QuantumSentinel Enhanced Resource Analysis\nComprehensive APK resource and security analysis\n============================================================\n\n================================================================================\n\ud83d\ude80 QUANTUMSENTINEL ENHANCED RESOURCE ANALYSIS RESULTS\n================================================================================\n\ud83d\udcca Session ID: ENHANCED-RESOURCE-1759280279\n\ud83d\udcf1 APKs Analyzed: 2\n\ud83d\udd10 Secrets Found: 13\n\ud83c\udf10 Network Issues: 5216\n\ud83d\udee1\ufe0f Security Findings: 0\n\ud83d\udcc2 Results Directory: enhanced_resource_analysis/ENHANCED-RESOURCE-1759280279\n\n\ud83d\udcf1 DETAILED ANALYSIS RESULTS:\n--------------------------------------------------\n1. H4C Healthcare App\n   \ud83d\udcc1 Total Files: 7640\n   \ud83d\udd10 Secrets Found: 7\n   \ud83c\udf10 Network Issues: 3490\n   \ud83d\udee1\ufe0f Manifest Issues: 0\n   \ud83d\udd0d Top Secret Types:\n      - Base64 Encoded: 5\n\n2. H4D Healthcare App\n   \ud83d\udcc1 Total Files: 3468\n   \ud83d\udd10 Secrets Found: 6\n   \ud83c\udf10 Network Issues: 1726\n   \ud83d\udee1\ufe0f Manifest Issues: 0\n   \ud83d\udd0d Top Secret Types:\n      - Base64 Encoded: 5\n\n\ud83d\udd17 ANALYSIS COMPLETED:\n- Comprehensive manifest analysis\n- Hardcoded secret detection\n- Network security assessment\n- Complete resource enumeration\n- All results saved to JSON files\n\n================================================================================\n",
+          "error": null
+        }
+      },
+      "vulnerabilities": [],
+      "summary": {}
+    }
+  },
+  "consolidated_vulnerabilities": [],
+  "execution_summary": {
+    "total_files": 2,
+    "analyzed_files": 0,
+    "vulnerabilities_found": 0,
+    "modules_executed": [
+      "network_scanner",
+      "resource_analyzer"
+    ],
+    "errors": []
+  },
+  "recommendations": [
+    "Review mobile app permissions and secure coding practices",
+    "Implement network security hardening based on scan results"
+  ],
+  "master_summary": {
+    "total_files_analyzed": 2,
+    "total_vulnerabilities_found": 0,
+    "vulnerability_severity_breakdown": {
+      "CRITICAL": 0,
+      "HIGH": 0,
+      "MEDIUM": 0,
+      "LOW": 0
+    },
+    "analysis_modules_executed": 2,
+    "analysis_duration": "Real-time parallel execution",
+    "results_directory": "quantum_master_results/QUANTUM-MASTER-1759279979"
+  }
+}

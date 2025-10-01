@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000034-1759168162",
+  "target": "facebook.com",
+  "program_type": "Direct Programs",
+  "timestamp": "2025-09-29T23:19:22.683472",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.89,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 44
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 9
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 9
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 0.79,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "severity": "high",
+          "count": 8
+        },
+        {
+          "severity": "medium",
+          "count": 6
+        },
+        {
+          "severity": "low",
+          "count": 12
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.4,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 0.61,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.02,
+      "findings": [
+        {
+          "threat_score": 0.52
+        },
+        {
+          "risk_assessment": "High"
+        },
+        {
+          "attack_vectors": 11
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.03,
+      "findings": []
+    }
+  }
+}

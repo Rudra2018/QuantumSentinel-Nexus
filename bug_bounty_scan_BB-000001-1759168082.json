@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000001-1759168082",
+  "target": "twitter.com",
+  "program_type": "HackerOne Programs",
+  "timestamp": "2025-09-29T23:18:02.456191",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.05,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 41
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 5
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 11
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 0.75,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 0
+        },
+        {
+          "severity": "high",
+          "count": 4
+        },
+        {
+          "severity": "medium",
+          "count": 5
+        },
+        {
+          "severity": "low",
+          "count": 25
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.27,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.79,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.02,
+      "findings": [
+        {
+          "threat_score": 0.5
+        },
+        {
+          "risk_assessment": "High"
+        },
+        {
+          "attack_vectors": 6
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 0.56,
+      "findings": []
+    }
+  }
+}

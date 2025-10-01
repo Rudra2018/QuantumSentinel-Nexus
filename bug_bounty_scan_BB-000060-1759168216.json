@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000060-1759168216",
+  "target": "portswigger-labs.net",
+  "program_type": "Testing Labs",
+  "timestamp": "2025-09-29T23:20:16.879466",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.89,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 47
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 5
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 11
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.89,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 0
+        },
+        {
+          "severity": "high",
+          "count": 3
+        },
+        {
+          "severity": "medium",
+          "count": 6
+        },
+        {
+          "severity": "low",
+          "count": 24
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.63,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 0.83,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.53,
+      "findings": [
+        {
+          "threat_score": 0.65
+        },
+        {
+          "risk_assessment": "High"
+        },
+        {
+          "attack_vectors": 5
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 0.68,
+      "findings": []
+    }
+  }
+}

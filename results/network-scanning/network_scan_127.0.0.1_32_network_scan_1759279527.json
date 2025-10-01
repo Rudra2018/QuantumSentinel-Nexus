@@ -1,0 +1,21 @@
+{
+  "scan_metadata": {
+    "scan_id": "network_scan_1759279527",
+    "target_network": "127.0.0.1",
+    "start_time": "2025-10-01T06:15:27.820357",
+    "tools_used": [
+      "ping_sweep"
+    ],
+    "end_time": "2025-10-01T06:15:27.839774",
+    "total_live_hosts": 1,
+    "total_vulnerabilities": 0
+  },
+  "live_hosts": [
+    "127.0.0.1"
+  ],
+  "port_scan_results": {},
+  "service_detection": {},
+  "os_detection": {},
+  "vulnerabilities": [],
+  "network_topology": {}
+}

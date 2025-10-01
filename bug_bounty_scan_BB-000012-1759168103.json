@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000012-1759168103",
+  "target": "paypal.com",
+  "program_type": "HackerOne Programs",
+  "timestamp": "2025-09-29T23:18:23.850285",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.8,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 18
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 7
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 10
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.72,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "severity": "high",
+          "count": 2
+        },
+        {
+          "severity": "medium",
+          "count": 9
+        },
+        {
+          "severity": "low",
+          "count": 14
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.36,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.51,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 0.76,
+      "findings": [
+        {
+          "threat_score": 0.57
+        },
+        {
+          "risk_assessment": "High"
+        },
+        {
+          "attack_vectors": 5
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.59,
+      "findings": []
+    }
+  }
+}

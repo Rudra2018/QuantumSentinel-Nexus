@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000050-1759168194",
+  "target": "compound.finance",
+  "program_type": "Crypto/Blockchain",
+  "timestamp": "2025-09-29T23:19:54.357200",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.76,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 17
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 3
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 11
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.42,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "severity": "high",
+          "count": 4
+        },
+        {
+          "severity": "medium",
+          "count": 9
+        },
+        {
+          "severity": "low",
+          "count": 25
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.41,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.33,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.92,
+      "findings": [
+        {
+          "threat_score": 0.4
+        },
+        {
+          "risk_assessment": "Low"
+        },
+        {
+          "attack_vectors": 9
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 0.77,
+      "findings": []
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000058-1759168216",
+  "target": "zero.webappsecurity.com",
+  "program_type": "Testing Labs",
+  "timestamp": "2025-09-29T23:20:16.879043",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.22,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 38
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 5
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 6
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 0.76,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "severity": "high",
+          "count": 3
+        },
+        {
+          "severity": "medium",
+          "count": 5
+        },
+        {
+          "severity": "low",
+          "count": 23
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.66,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.35,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.1,
+      "findings": [
+        {
+          "threat_score": 0.55
+        },
+        {
+          "risk_assessment": "Low"
+        },
+        {
+          "attack_vectors": 12
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 0.96,
+      "findings": []
+    }
+  }
+}

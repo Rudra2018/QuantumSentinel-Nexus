@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000010-1759168103",
+  "target": "uber.com",
+  "program_type": "HackerOne Programs",
+  "timestamp": "2025-09-29T23:18:23.849815",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.73,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 12
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 5
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 6
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.7,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 2
+        },
+        {
+          "severity": "high",
+          "count": 3
+        },
+        {
+          "severity": "medium",
+          "count": 13
+        },
+        {
+          "severity": "low",
+          "count": 14
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.97,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.78,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 0.93,
+      "findings": [
+        {
+          "threat_score": 0.77
+        },
+        {
+          "risk_assessment": "High"
+        },
+        {
+          "attack_vectors": 12
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.18,
+      "findings": []
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000004-1759168082",
+  "target": "stripe.com",
+  "program_type": "HackerOne Programs",
+  "timestamp": "2025-09-29T23:18:02.456869",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.76,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 19
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 8
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 12
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.29,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 2
+        },
+        {
+          "severity": "high",
+          "count": 8
+        },
+        {
+          "severity": "medium",
+          "count": 7
+        },
+        {
+          "severity": "low",
+          "count": 12
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 0.68,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 0.52,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.59,
+      "findings": [
+        {
+          "threat_score": 0.43
+        },
+        {
+          "risk_assessment": "Low"
+        },
+        {
+          "attack_vectors": 11
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 0.67,
+      "findings": []
+    }
+  }
+}

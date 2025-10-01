@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000006-1759168093",
+  "target": "coinbase.com",
+  "program_type": "HackerOne Programs",
+  "timestamp": "2025-09-29T23:18:13.145656",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.93,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 49
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 5
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 10
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 0.6,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 3
+        },
+        {
+          "severity": "high",
+          "count": 8
+        },
+        {
+          "severity": "medium",
+          "count": 11
+        },
+        {
+          "severity": "low",
+          "count": 23
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.28,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.96,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.92,
+      "findings": [
+        {
+          "threat_score": 0.71
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 6
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.23,
+      "findings": []
+    }
+  }
+}

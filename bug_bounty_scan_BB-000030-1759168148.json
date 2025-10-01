@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000030-1759168148",
+  "target": "yeswehack.com",
+  "program_type": "YesWeHack Programs",
+  "timestamp": "2025-09-29T23:19:08.554507",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 0.79,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 15
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 5
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 7
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.95,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "severity": "high",
+          "count": 2
+        },
+        {
+          "severity": "medium",
+          "count": 10
+        },
+        {
+          "severity": "low",
+          "count": 15
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.49,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 0.72,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.96,
+      "findings": [
+        {
+          "threat_score": 0.77
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 4
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.83,
+      "findings": []
+    }
+  }
+}

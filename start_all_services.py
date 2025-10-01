@@ -19,7 +19,8 @@ SERVICES = {
     "binary-analysis": {"port": 8003, "name": "Binary Analysis Engine"},
     "ml-intelligence": {"port": 8004, "name": "ML Intelligence Core"},
     "network-scanning": {"port": 8005, "name": "Network Scanning Engine"},
-    "web-reconnaissance": {"port": 8006, "name": "Web Reconnaissance"}
+    "web-reconnaissance": {"port": 8006, "name": "Web Reconnaissance"},
+    "universal-automation": {"port": 8009, "name": "Universal Automation Engine (iOS/Android/PE/ELF/Mach-O)"}
 }
 
 class ServiceHandler(BaseHTTPRequestHandler):

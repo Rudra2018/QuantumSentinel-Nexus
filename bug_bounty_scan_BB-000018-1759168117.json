@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000018-1759168117",
+  "target": "reddit.com",
+  "program_type": "Bugcrowd Programs",
+  "timestamp": "2025-09-29T23:18:37.407332",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.33,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 24
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 13
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 11
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.86,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 3
+        },
+        {
+          "severity": "high",
+          "count": 5
+        },
+        {
+          "severity": "medium",
+          "count": 6
+        },
+        {
+          "severity": "low",
+          "count": 22
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 0.53,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 0.77,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.02,
+      "findings": [
+        {
+          "threat_score": 0.55
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 4
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 0.81,
+      "findings": []
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000056-1759168216",
+  "target": "testphp.vulnweb.com",
+  "program_type": "Testing Labs",
+  "timestamp": "2025-09-29T23:20:16.878418",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 0.53,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 18
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 13
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 10
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.58,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "severity": "high",
+          "count": 1
+        },
+        {
+          "severity": "medium",
+          "count": 9
+        },
+        {
+          "severity": "low",
+          "count": 24
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 0.67,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 0.94,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.74,
+      "findings": [
+        {
+          "threat_score": 0.47
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 9
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 2.0,
+      "findings": []
+    }
+  }
+}

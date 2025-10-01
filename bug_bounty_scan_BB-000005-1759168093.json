@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000005-1759168093",
+  "target": "gitlab.com",
+  "program_type": "HackerOne Programs",
+  "timestamp": "2025-09-29T23:18:13.145405",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 0.61,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 10
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 6
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 8
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 0.92,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 2
+        },
+        {
+          "severity": "high",
+          "count": 5
+        },
+        {
+          "severity": "medium",
+          "count": 11
+        },
+        {
+          "severity": "low",
+          "count": 23
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.87,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.09,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.73,
+      "findings": [
+        {
+          "threat_score": 0.63
+        },
+        {
+          "risk_assessment": "High"
+        },
+        {
+          "attack_vectors": 10
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.31,
+      "findings": []
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000043-1759168172",
+  "target": "sony.com",
+  "program_type": "Direct Programs",
+  "timestamp": "2025-09-29T23:19:32.222573",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 0.65,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 43
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 6
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 11
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.5,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "severity": "high",
+          "count": 2
+        },
+        {
+          "severity": "medium",
+          "count": 12
+        },
+        {
+          "severity": "low",
+          "count": 25
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.12,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.71,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 0.8,
+      "findings": [
+        {
+          "threat_score": 0.32
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 3
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.6,
+      "findings": []
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000013-1759168103",
+  "target": "microsoft.com",
+  "program_type": "HackerOne Programs",
+  "timestamp": "2025-09-29T23:18:23.850495",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.57,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 33
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 6
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 8
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.97,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 0
+        },
+        {
+          "severity": "high",
+          "count": 1
+        },
+        {
+          "severity": "medium",
+          "count": 13
+        },
+        {
+          "severity": "low",
+          "count": 16
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.73,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.43,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.06,
+      "findings": [
+        {
+          "threat_score": 0.78
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 5
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.81,
+      "findings": []
+    }
+  }
+}

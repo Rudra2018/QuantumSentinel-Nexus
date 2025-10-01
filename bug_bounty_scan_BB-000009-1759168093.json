@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000009-1759168093",
+  "target": "airbnb.com",
+  "program_type": "HackerOne Programs",
+  "timestamp": "2025-09-29T23:18:13.146308",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 0.85,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 40
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 5
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 7
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 0.58,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 0
+        },
+        {
+          "severity": "high",
+          "count": 5
+        },
+        {
+          "severity": "medium",
+          "count": 5
+        },
+        {
+          "severity": "low",
+          "count": 10
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 0.58,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 0.62,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.69,
+      "findings": [
+        {
+          "threat_score": 0.54
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 10
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.25,
+      "findings": []
+    }
+  }
+}

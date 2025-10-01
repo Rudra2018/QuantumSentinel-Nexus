@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000022-1759168127",
+  "target": "kaspersky.com",
+  "program_type": "Bugcrowd Programs",
+  "timestamp": "2025-09-29T23:18:47.529581",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.31,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 31
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 12
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 10
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.93,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "severity": "high",
+          "count": 5
+        },
+        {
+          "severity": "medium",
+          "count": 12
+        },
+        {
+          "severity": "low",
+          "count": 20
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.46,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.54,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.13,
+      "findings": [
+        {
+          "threat_score": 0.82
+        },
+        {
+          "risk_assessment": "High"
+        },
+        {
+          "attack_vectors": 9
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.79,
+      "findings": []
+    }
+  }
+}

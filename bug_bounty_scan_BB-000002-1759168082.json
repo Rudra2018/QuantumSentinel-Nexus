@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000002-1759168082",
+  "target": "github.com",
+  "program_type": "HackerOne Programs",
+  "timestamp": "2025-09-29T23:18:02.456420",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 0.99,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 30
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 9
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 12
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.37,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 2
+        },
+        {
+          "severity": "high",
+          "count": 7
+        },
+        {
+          "severity": "medium",
+          "count": 6
+        },
+        {
+          "severity": "low",
+          "count": 12
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.88,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 0.55,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.05,
+      "findings": [
+        {
+          "threat_score": 0.66
+        },
+        {
+          "risk_assessment": "Low"
+        },
+        {
+          "attack_vectors": 10
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.85,
+      "findings": []
+    }
+  }
+}

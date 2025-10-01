@@ -1,0 +1,5019 @@
+{
+  "scan_summary": {
+    "total_programs": 8,
+    "total_targets": 64,
+    "total_time": 156.61,
+    "scans_completed": 64,
+    "timestamp": "2025-09-29T23:20:34.988357"
+  },
+  "program_results": {
+    "HackerOne Programs": [
+      {
+        "scan_id": "BB-000000-1759168082",
+        "target": "hackerone.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:02.455755",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.0,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 23
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 3
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 5
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.0,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 7
+              },
+              {
+                "severity": "medium",
+                "count": 11
+              },
+              {
+                "severity": "low",
+                "count": 18
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.12,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.7,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.98,
+            "findings": [
+              {
+                "threat_score": 0.45
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 8
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.8,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000001-1759168082",
+        "target": "twitter.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:02.456191",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.05,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 41
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 5
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.75,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 0
+              },
+              {
+                "severity": "high",
+                "count": 4
+              },
+              {
+                "severity": "medium",
+                "count": 5
+              },
+              {
+                "severity": "low",
+                "count": 25
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.27,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.79,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.02,
+            "findings": [
+              {
+                "threat_score": 0.5
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 6
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.56,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000002-1759168082",
+        "target": "github.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:02.456420",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.99,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 30
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 9
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 12
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.37,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 7
+              },
+              {
+                "severity": "medium",
+                "count": 6
+              },
+              {
+                "severity": "low",
+                "count": 12
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.88,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.55,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.05,
+            "findings": [
+              {
+                "threat_score": 0.66
+              },
+              {
+                "risk_assessment": "Low"
+              },
+              {
+                "attack_vectors": 10
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.85,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000003-1759168082",
+        "target": "shopify.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:02.456638",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.65,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 21
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 6
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 6
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.73,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 4
+              },
+              {
+                "severity": "medium",
+                "count": 12
+              },
+              {
+                "severity": "low",
+                "count": 21
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.8,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.78,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.98,
+            "findings": [
+              {
+                "threat_score": 0.37
+              },
+              {
+                "risk_assessment": "Low"
+              },
+              {
+                "attack_vectors": 4
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.57,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000004-1759168082",
+        "target": "stripe.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:02.456869",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.76,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 19
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 8
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 12
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.29,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 8
+              },
+              {
+                "severity": "medium",
+                "count": 7
+              },
+              {
+                "severity": "low",
+                "count": 12
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.68,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.52,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.59,
+            "findings": [
+              {
+                "threat_score": 0.43
+              },
+              {
+                "risk_assessment": "Low"
+              },
+              {
+                "attack_vectors": 11
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.67,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000005-1759168093",
+        "target": "gitlab.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:13.145405",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.61,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 10
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 6
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 8
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.92,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 5
+              },
+              {
+                "severity": "medium",
+                "count": 11
+              },
+              {
+                "severity": "low",
+                "count": 23
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.87,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.09,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.73,
+            "findings": [
+              {
+                "threat_score": 0.63
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 10
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.31,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000006-1759168093",
+        "target": "coinbase.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:13.145656",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.93,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 49
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 5
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 10
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.6,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 3
+              },
+              {
+                "severity": "high",
+                "count": 8
+              },
+              {
+                "severity": "medium",
+                "count": 11
+              },
+              {
+                "severity": "low",
+                "count": 23
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.28,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.96,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.92,
+            "findings": [
+              {
+                "threat_score": 0.71
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 6
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.23,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000007-1759168093",
+        "target": "spotify.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:13.145844",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.99,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 11
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 14
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 12
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.1,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 8
+              },
+              {
+                "severity": "medium",
+                "count": 12
+              },
+              {
+                "severity": "low",
+                "count": 14
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.37,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.92,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.74,
+            "findings": [
+              {
+                "threat_score": 0.34
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 3
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.94,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000008-1759168093",
+        "target": "dropbox.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:13.146092",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.28,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 47
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 8
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.1,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 0
+              },
+              {
+                "severity": "high",
+                "count": 1
+              },
+              {
+                "severity": "medium",
+                "count": 12
+              },
+              {
+                "severity": "low",
+                "count": 21
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.38,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.92,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.77,
+            "findings": [
+              {
+                "threat_score": 0.66
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 7
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.87,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000009-1759168093",
+        "target": "airbnb.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:13.146308",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.85,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 40
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 5
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 7
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.58,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 0
+              },
+              {
+                "severity": "high",
+                "count": 5
+              },
+              {
+                "severity": "medium",
+                "count": 5
+              },
+              {
+                "severity": "low",
+                "count": 10
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.58,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.62,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.69,
+            "findings": [
+              {
+                "threat_score": 0.54
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 10
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.25,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000010-1759168103",
+        "target": "uber.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:23.849815",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.73,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 12
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 5
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 6
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.7,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 3
+              },
+              {
+                "severity": "medium",
+                "count": 13
+              },
+              {
+                "severity": "low",
+                "count": 14
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.97,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.78,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.93,
+            "findings": [
+              {
+                "threat_score": 0.77
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 12
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.18,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000011-1759168103",
+        "target": "netflix.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:23.850068",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.95,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 20
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 11
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 10
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.84,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 3
+              },
+              {
+                "severity": "high",
+                "count": 2
+              },
+              {
+                "severity": "medium",
+                "count": 13
+              },
+              {
+                "severity": "low",
+                "count": 15
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.9,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.73,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.89,
+            "findings": [
+              {
+                "threat_score": 0.82
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 12
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.66,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000012-1759168103",
+        "target": "paypal.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:23.850285",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.8,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 18
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 7
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 10
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.72,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 2
+              },
+              {
+                "severity": "medium",
+                "count": 9
+              },
+              {
+                "severity": "low",
+                "count": 14
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.36,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.51,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.76,
+            "findings": [
+              {
+                "threat_score": 0.57
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 5
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.59,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000013-1759168103",
+        "target": "microsoft.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:23.850495",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.57,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 33
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 6
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 8
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.97,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 0
+              },
+              {
+                "severity": "high",
+                "count": 1
+              },
+              {
+                "severity": "medium",
+                "count": 13
+              },
+              {
+                "severity": "low",
+                "count": 16
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.73,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.43,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.06,
+            "findings": [
+              {
+                "threat_score": 0.78
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 5
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.81,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000014-1759168103",
+        "target": "apple.com",
+        "program_type": "HackerOne Programs",
+        "timestamp": "2025-09-29T23:18:23.850703",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.69,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 47
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 4
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 8
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.06,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 2
+              },
+              {
+                "severity": "medium",
+                "count": 7
+              },
+              {
+                "severity": "low",
+                "count": 25
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.05,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.57,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.57,
+            "findings": [
+              {
+                "threat_score": 0.46
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 7
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.23,
+            "findings": []
+          }
+        }
+      }
+    ],
+    "Bugcrowd Programs": [
+      {
+        "scan_id": "BB-000015-1759168117",
+        "target": "bugcrowd.com",
+        "program_type": "Bugcrowd Programs",
+        "timestamp": "2025-09-29T23:18:37.406615",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.64,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 18
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 4
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 7
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.82,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 3
+              },
+              {
+                "severity": "high",
+                "count": 2
+              },
+              {
+                "severity": "medium",
+                "count": 6
+              },
+              {
+                "severity": "low",
+                "count": 24
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.63,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.15,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.96,
+            "findings": [
+              {
+                "threat_score": 0.32
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 6
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.07,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000016-1759168117",
+        "target": "tesla.com",
+        "program_type": "Bugcrowd Programs",
+        "timestamp": "2025-09-29T23:18:37.406871",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.25,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 45
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 7
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 6
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.3,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 3
+              },
+              {
+                "severity": "high",
+                "count": 4
+              },
+              {
+                "severity": "medium",
+                "count": 12
+              },
+              {
+                "severity": "low",
+                "count": 14
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.75,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.55,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.7,
+            "findings": [
+              {
+                "threat_score": 0.88
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 8
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.29,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000017-1759168117",
+        "target": "fitbit.com",
+        "program_type": "Bugcrowd Programs",
+        "timestamp": "2025-09-29T23:18:37.407096",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.46,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 50
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 14
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 9
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.67,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 8
+              },
+              {
+                "severity": "medium",
+                "count": 7
+              },
+              {
+                "severity": "low",
+                "count": 22
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.75,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.08,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.5,
+            "findings": [
+              {
+                "threat_score": 0.38
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 3
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.87,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000018-1759168117",
+        "target": "reddit.com",
+        "program_type": "Bugcrowd Programs",
+        "timestamp": "2025-09-29T23:18:37.407332",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.33,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 24
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 13
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.86,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 3
+              },
+              {
+                "severity": "high",
+                "count": 5
+              },
+              {
+                "severity": "medium",
+                "count": 6
+              },
+              {
+                "severity": "low",
+                "count": 22
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.53,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.77,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.02,
+            "findings": [
+              {
+                "threat_score": 0.55
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 4
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.81,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000019-1759168117",
+        "target": "lastpass.com",
+        "program_type": "Bugcrowd Programs",
+        "timestamp": "2025-09-29T23:18:37.407546",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.72,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 39
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 13
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 10
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.84,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 2
+              },
+              {
+                "severity": "medium",
+                "count": 8
+              },
+              {
+                "severity": "low",
+                "count": 20
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.87,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.95,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.58,
+            "findings": [
+              {
+                "threat_score": 0.3
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 7
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.48,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000020-1759168127",
+        "target": "crowdstrike.com",
+        "program_type": "Bugcrowd Programs",
+        "timestamp": "2025-09-29T23:18:47.529173",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.85,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 44
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 12
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 12
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.0,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 0
+              },
+              {
+                "severity": "high",
+                "count": 5
+              },
+              {
+                "severity": "medium",
+                "count": 15
+              },
+              {
+                "severity": "low",
+                "count": 17
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.33,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.71,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.97,
+            "findings": [
+              {
+                "threat_score": 0.49
+              },
+              {
+                "risk_assessment": "Low"
+              },
+              {
+                "attack_vectors": 10
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.84,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000021-1759168127",
+        "target": "mozilla.org",
+        "program_type": "Bugcrowd Programs",
+        "timestamp": "2025-09-29T23:18:47.529399",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.53,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 21
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 5
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 12
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.88,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 5
+              },
+              {
+                "severity": "medium",
+                "count": 6
+              },
+              {
+                "severity": "low",
+                "count": 19
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.4,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 2.0,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.32,
+            "findings": [
+              {
+                "threat_score": 0.65
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 5
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.85,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000022-1759168127",
+        "target": "kaspersky.com",
+        "program_type": "Bugcrowd Programs",
+        "timestamp": "2025-09-29T23:18:47.529581",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.31,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 31
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 12
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 10
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.93,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 5
+              },
+              {
+                "severity": "medium",
+                "count": 12
+              },
+              {
+                "severity": "low",
+                "count": 20
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.46,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.54,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.13,
+            "findings": [
+              {
+                "threat_score": 0.82
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 9
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.79,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000023-1759168127",
+        "target": "hp.com",
+        "program_type": "Bugcrowd Programs",
+        "timestamp": "2025-09-29T23:18:47.529752",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.99,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 49
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 12
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.72,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 0
+              },
+              {
+                "severity": "high",
+                "count": 7
+              },
+              {
+                "severity": "medium",
+                "count": 5
+              },
+              {
+                "severity": "low",
+                "count": 22
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.58,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.35,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.86,
+            "findings": [
+              {
+                "threat_score": 0.8
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 8
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.69,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000024-1759168127",
+        "target": "dell.com",
+        "program_type": "Bugcrowd Programs",
+        "timestamp": "2025-09-29T23:18:47.529921",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.18,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 21
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 14
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 5
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.51,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 7
+              },
+              {
+                "severity": "medium",
+                "count": 6
+              },
+              {
+                "severity": "low",
+                "count": 17
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.71,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.68,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.8,
+            "findings": [
+              {
+                "threat_score": 0.76
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 4
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.84,
+            "findings": []
+          }
+        }
+      }
+    ],
+    "Intigriti Programs": [
+      {
+        "scan_id": "BB-000025-1759168138",
+        "target": "intigriti.com",
+        "program_type": "Intigriti Programs",
+        "timestamp": "2025-09-29T23:18:58.390872",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.64,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 45
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 3
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 5
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.45,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 3
+              },
+              {
+                "severity": "high",
+                "count": 2
+              },
+              {
+                "severity": "medium",
+                "count": 14
+              },
+              {
+                "severity": "low",
+                "count": 17
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.31,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.61,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.59,
+            "findings": [
+              {
+                "threat_score": 0.82
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 8
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.14,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000026-1759168138",
+        "target": "belgacom.be",
+        "program_type": "Intigriti Programs",
+        "timestamp": "2025-09-29T23:18:58.391129",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.85,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 21
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 11
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 7
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.99,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 1
+              },
+              {
+                "severity": "medium",
+                "count": 10
+              },
+              {
+                "severity": "low",
+                "count": 19
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.74,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.58,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.66,
+            "findings": [
+              {
+                "threat_score": 0.78
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 4
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.48,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000027-1759168138",
+        "target": "ing.com",
+        "program_type": "Intigriti Programs",
+        "timestamp": "2025-09-29T23:18:58.391347",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.73,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 45
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 10
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 10
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.49,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 7
+              },
+              {
+                "severity": "medium",
+                "count": 10
+              },
+              {
+                "severity": "low",
+                "count": 24
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.71,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.89,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.31,
+            "findings": [
+              {
+                "threat_score": 0.42
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 9
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.92,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000028-1759168138",
+        "target": "ing.be",
+        "program_type": "Intigriti Programs",
+        "timestamp": "2025-09-29T23:18:58.391558",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.31,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 24
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 11
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 9
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.58,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 0
+              },
+              {
+                "severity": "high",
+                "count": 6
+              },
+              {
+                "severity": "medium",
+                "count": 12
+              },
+              {
+                "severity": "low",
+                "count": 15
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.31,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.96,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.74,
+            "findings": [
+              {
+                "threat_score": 0.45
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 12
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.98,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000029-1759168138",
+        "target": "proximus.be",
+        "program_type": "Intigriti Programs",
+        "timestamp": "2025-09-29T23:18:58.391770",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.52,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 21
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 15
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.53,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 3
+              },
+              {
+                "severity": "medium",
+                "count": 8
+              },
+              {
+                "severity": "low",
+                "count": 25
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.56,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.13,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.25,
+            "findings": [
+              {
+                "threat_score": 0.79
+              },
+              {
+                "risk_assessment": "Low"
+              },
+              {
+                "attack_vectors": 4
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.6,
+            "findings": []
+          }
+        }
+      }
+    ],
+    "YesWeHack Programs": [
+      {
+        "scan_id": "BB-000030-1759168148",
+        "target": "yeswehack.com",
+        "program_type": "YesWeHack Programs",
+        "timestamp": "2025-09-29T23:19:08.554507",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.79,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 15
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 5
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 7
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.95,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 2
+              },
+              {
+                "severity": "medium",
+                "count": 10
+              },
+              {
+                "severity": "low",
+                "count": 15
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.49,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.72,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.96,
+            "findings": [
+              {
+                "threat_score": 0.77
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 4
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.83,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000031-1759168148",
+        "target": "orange.com",
+        "program_type": "YesWeHack Programs",
+        "timestamp": "2025-09-29T23:19:08.554769",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.74,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 33
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 4
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 7
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.83,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 4
+              },
+              {
+                "severity": "medium",
+                "count": 12
+              },
+              {
+                "severity": "low",
+                "count": 23
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.69,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.19,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.87,
+            "findings": [
+              {
+                "threat_score": 0.89
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 3
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.78,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000032-1759168148",
+        "target": "atos.com",
+        "program_type": "YesWeHack Programs",
+        "timestamp": "2025-09-29T23:19:08.554999",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.32,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 24
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 4
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 10
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.05,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 3
+              },
+              {
+                "severity": "high",
+                "count": 8
+              },
+              {
+                "severity": "medium",
+                "count": 13
+              },
+              {
+                "severity": "low",
+                "count": 20
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.29,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.45,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.43,
+            "findings": [
+              {
+                "threat_score": 0.5
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 3
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.23,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000033-1759168148",
+        "target": "airfrance.com",
+        "program_type": "YesWeHack Programs",
+        "timestamp": "2025-09-29T23:19:08.555216",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.94,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 44
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 13
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 12
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.71,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 4
+              },
+              {
+                "severity": "medium",
+                "count": 11
+              },
+              {
+                "severity": "low",
+                "count": 12
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.65,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.11,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.24,
+            "findings": [
+              {
+                "threat_score": 0.47
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 6
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.93,
+            "findings": []
+          }
+        }
+      }
+    ],
+    "Direct Programs": [
+      {
+        "scan_id": "BB-000034-1759168162",
+        "target": "facebook.com",
+        "program_type": "Direct Programs",
+        "timestamp": "2025-09-29T23:19:22.683472",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.89,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 44
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 9
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 9
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.79,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 8
+              },
+              {
+                "severity": "medium",
+                "count": 6
+              },
+              {
+                "severity": "low",
+                "count": 12
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.4,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.61,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.02,
+            "findings": [
+              {
+                "threat_score": 0.52
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 11
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.03,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000035-1759168162",
+        "target": "google.com",
+        "program_type": "Direct Programs",
+        "timestamp": "2025-09-29T23:19:22.683725",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.63,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 16
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 4
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 9
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.38,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 7
+              },
+              {
+                "severity": "medium",
+                "count": 11
+              },
+              {
+                "severity": "low",
+                "count": 10
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.41,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.86,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.64,
+            "findings": [
+              {
+                "threat_score": 0.46
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 6
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.78,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000036-1759168162",
+        "target": "amazon.com",
+        "program_type": "Direct Programs",
+        "timestamp": "2025-09-29T23:19:22.683948",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.0,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 41
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 12
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 7
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.37,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 0
+              },
+              {
+                "severity": "high",
+                "count": 1
+              },
+              {
+                "severity": "medium",
+                "count": 14
+              },
+              {
+                "severity": "low",
+                "count": 20
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.31,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.36,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.42,
+            "findings": [
+              {
+                "threat_score": 0.69
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 7
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.8,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000037-1759168162",
+        "target": "salesforce.com",
+        "program_type": "Direct Programs",
+        "timestamp": "2025-09-29T23:19:22.684170",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.45,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 20
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 12
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 6
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.62,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 3
+              },
+              {
+                "severity": "high",
+                "count": 3
+              },
+              {
+                "severity": "medium",
+                "count": 5
+              },
+              {
+                "severity": "low",
+                "count": 20
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.31,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.61,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.67,
+            "findings": [
+              {
+                "threat_score": 0.83
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 9
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.6,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000038-1759168162",
+        "target": "oracle.com",
+        "program_type": "Direct Programs",
+        "timestamp": "2025-09-29T23:19:22.684396",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.08,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 48
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 10
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.3,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 0
+              },
+              {
+                "severity": "high",
+                "count": 5
+              },
+              {
+                "severity": "medium",
+                "count": 11
+              },
+              {
+                "severity": "low",
+                "count": 14
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.7,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.58,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.51,
+            "findings": [
+              {
+                "threat_score": 0.8
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 11
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.95,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000039-1759168172",
+        "target": "ibm.com",
+        "program_type": "Direct Programs",
+        "timestamp": "2025-09-29T23:19:32.221590",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.4,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 45
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 11
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 5
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.95,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 2
+              },
+              {
+                "severity": "medium",
+                "count": 8
+              },
+              {
+                "severity": "low",
+                "count": 20
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.25,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.64,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.34,
+            "findings": [
+              {
+                "threat_score": 0.69
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 12
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.68,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000040-1759168172",
+        "target": "cisco.com",
+        "program_type": "Direct Programs",
+        "timestamp": "2025-09-29T23:19:32.221922",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.61,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 46
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 12
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.1,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 3
+              },
+              {
+                "severity": "high",
+                "count": 6
+              },
+              {
+                "severity": "medium",
+                "count": 8
+              },
+              {
+                "severity": "low",
+                "count": 15
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.55,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.04,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.24,
+            "findings": [
+              {
+                "threat_score": 0.61
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 10
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.78,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000041-1759168172",
+        "target": "intel.com",
+        "program_type": "Direct Programs",
+        "timestamp": "2025-09-29T23:19:32.222148",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.74,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 42
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 3
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.81,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 3
+              },
+              {
+                "severity": "medium",
+                "count": 7
+              },
+              {
+                "severity": "low",
+                "count": 16
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.82,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.21,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.53,
+            "findings": [
+              {
+                "threat_score": 0.81
+              },
+              {
+                "risk_assessment": "Low"
+              },
+              {
+                "attack_vectors": 12
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.96,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000042-1759168172",
+        "target": "samsung.com",
+        "program_type": "Direct Programs",
+        "timestamp": "2025-09-29T23:19:32.222361",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.08,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 19
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 9
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 5
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.76,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 6
+              },
+              {
+                "severity": "medium",
+                "count": 10
+              },
+              {
+                "severity": "low",
+                "count": 16
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.52,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.57,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.61,
+            "findings": [
+              {
+                "threat_score": 0.81
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 6
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.99,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000043-1759168172",
+        "target": "sony.com",
+        "program_type": "Direct Programs",
+        "timestamp": "2025-09-29T23:19:32.222573",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.65,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 43
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 6
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.5,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 2
+              },
+              {
+                "severity": "medium",
+                "count": 12
+              },
+              {
+                "severity": "low",
+                "count": 25
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.12,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.71,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.8,
+            "findings": [
+              {
+                "threat_score": 0.32
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 3
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.6,
+            "findings": []
+          }
+        }
+      }
+    ],
+    "Crypto/Blockchain": [
+      {
+        "scan_id": "BB-000044-1759168184",
+        "target": "ethereum.org",
+        "program_type": "Crypto/Blockchain",
+        "timestamp": "2025-09-29T23:19:44.813630",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.75,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 50
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 4
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 5
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.46,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 4
+              },
+              {
+                "severity": "medium",
+                "count": 10
+              },
+              {
+                "severity": "low",
+                "count": 23
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.55,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.65,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.72,
+            "findings": [
+              {
+                "threat_score": 0.64
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 4
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.98,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000045-1759168184",
+        "target": "bitcoin.org",
+        "program_type": "Crypto/Blockchain",
+        "timestamp": "2025-09-29T23:19:44.813849",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.46,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 26
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 13
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 6
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.82,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 0
+              },
+              {
+                "severity": "high",
+                "count": 6
+              },
+              {
+                "severity": "medium",
+                "count": 13
+              },
+              {
+                "severity": "low",
+                "count": 15
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.22,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.5,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.03,
+            "findings": [
+              {
+                "threat_score": 0.55
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 12
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.79,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000046-1759168184",
+        "target": "binance.com",
+        "program_type": "Crypto/Blockchain",
+        "timestamp": "2025-09-29T23:19:44.814020",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.0,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 48
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 5
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.4,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 3
+              },
+              {
+                "severity": "high",
+                "count": 1
+              },
+              {
+                "severity": "medium",
+                "count": 8
+              },
+              {
+                "severity": "low",
+                "count": 21
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.71,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.02,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.63,
+            "findings": [
+              {
+                "threat_score": 0.67
+              },
+              {
+                "risk_assessment": "Low"
+              },
+              {
+                "attack_vectors": 7
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.52,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000047-1759168184",
+        "target": "kraken.com",
+        "program_type": "Crypto/Blockchain",
+        "timestamp": "2025-09-29T23:19:44.814205",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.24,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 36
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 5
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 5
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.79,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 0
+              },
+              {
+                "severity": "high",
+                "count": 1
+              },
+              {
+                "severity": "medium",
+                "count": 15
+              },
+              {
+                "severity": "low",
+                "count": 16
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.97,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.13,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.55,
+            "findings": [
+              {
+                "threat_score": 0.52
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 11
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.55,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000048-1759168184",
+        "target": "metamask.io",
+        "program_type": "Crypto/Blockchain",
+        "timestamp": "2025-09-29T23:19:44.814462",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.41,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 38
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 5
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 12
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.59,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 8
+              },
+              {
+                "severity": "medium",
+                "count": 14
+              },
+              {
+                "severity": "low",
+                "count": 17
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.71,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.91,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.06,
+            "findings": [
+              {
+                "threat_score": 0.69
+              },
+              {
+                "risk_assessment": "Low"
+              },
+              {
+                "attack_vectors": 7
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.02,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000049-1759168194",
+        "target": "uniswap.org",
+        "program_type": "Crypto/Blockchain",
+        "timestamp": "2025-09-29T23:19:54.356738",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.76,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 16
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 14
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.2,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 3
+              },
+              {
+                "severity": "high",
+                "count": 3
+              },
+              {
+                "severity": "medium",
+                "count": 15
+              },
+              {
+                "severity": "low",
+                "count": 10
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.43,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.95,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.5,
+            "findings": [
+              {
+                "threat_score": 0.65
+              },
+              {
+                "risk_assessment": "Low"
+              },
+              {
+                "attack_vectors": 11
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.0,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000050-1759168194",
+        "target": "compound.finance",
+        "program_type": "Crypto/Blockchain",
+        "timestamp": "2025-09-29T23:19:54.357200",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.76,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 17
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 3
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.42,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 4
+              },
+              {
+                "severity": "medium",
+                "count": 9
+              },
+              {
+                "severity": "low",
+                "count": 25
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.41,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.33,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.92,
+            "findings": [
+              {
+                "threat_score": 0.4
+              },
+              {
+                "risk_assessment": "Low"
+              },
+              {
+                "attack_vectors": 9
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.77,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000051-1759168194",
+        "target": "aave.com",
+        "program_type": "Crypto/Blockchain",
+        "timestamp": "2025-09-29T23:19:54.357430",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.2,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 50
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 10
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 8
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.12,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 8
+              },
+              {
+                "severity": "medium",
+                "count": 10
+              },
+              {
+                "severity": "low",
+                "count": 13
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.72,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.29,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.32,
+            "findings": [
+              {
+                "threat_score": 0.82
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 6
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.32,
+            "findings": []
+          }
+        }
+      }
+    ],
+    "Government/Critical Infrastructure": [
+      {
+        "scan_id": "BB-000052-1759168205",
+        "target": "cisa.gov",
+        "program_type": "Government/Critical Infrastructure",
+        "timestamp": "2025-09-29T23:20:05.415768",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.13,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 37
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 14
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 9
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.68,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 5
+              },
+              {
+                "severity": "medium",
+                "count": 6
+              },
+              {
+                "severity": "low",
+                "count": 14
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.09,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.3,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.34,
+            "findings": [
+              {
+                "threat_score": 0.79
+              },
+              {
+                "risk_assessment": "Low"
+              },
+              {
+                "attack_vectors": 6
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.88,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000053-1759168205",
+        "target": "cert.org",
+        "program_type": "Government/Critical Infrastructure",
+        "timestamp": "2025-09-29T23:20:05.416042",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.86,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 13
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 8
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 9
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.89,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 7
+              },
+              {
+                "severity": "medium",
+                "count": 12
+              },
+              {
+                "severity": "low",
+                "count": 23
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.41,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.68,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.83,
+            "findings": [
+              {
+                "threat_score": 0.42
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 6
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.91,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000054-1759168205",
+        "target": "us-cert.gov",
+        "program_type": "Government/Critical Infrastructure",
+        "timestamp": "2025-09-29T23:20:05.416279",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.09,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 15
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 14
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 10
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.88,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 2
+              },
+              {
+                "severity": "high",
+                "count": 2
+              },
+              {
+                "severity": "medium",
+                "count": 9
+              },
+              {
+                "severity": "low",
+                "count": 20
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.7,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.42,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.25,
+            "findings": [
+              {
+                "threat_score": 0.35
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 10
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.97,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000055-1759168205",
+        "target": "europol.europa.eu",
+        "program_type": "Government/Critical Infrastructure",
+        "timestamp": "2025-09-29T23:20:05.416502",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.76,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 42
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 12
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.75,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 0
+              },
+              {
+                "severity": "high",
+                "count": 6
+              },
+              {
+                "severity": "medium",
+                "count": 6
+              },
+              {
+                "severity": "low",
+                "count": 17
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.5,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.71,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.54,
+            "findings": [
+              {
+                "threat_score": 0.64
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 3
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.5,
+            "findings": []
+          }
+        }
+      }
+    ],
+    "Testing Labs": [
+      {
+        "scan_id": "BB-000056-1759168216",
+        "target": "testphp.vulnweb.com",
+        "program_type": "Testing Labs",
+        "timestamp": "2025-09-29T23:20:16.878418",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.53,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 18
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 13
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 10
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.58,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 1
+              },
+              {
+                "severity": "medium",
+                "count": 9
+              },
+              {
+                "severity": "low",
+                "count": 24
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.67,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.94,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.74,
+            "findings": [
+              {
+                "threat_score": 0.47
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 9
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 2.0,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000057-1759168216",
+        "target": "demo.testfire.net",
+        "program_type": "Testing Labs",
+        "timestamp": "2025-09-29T23:20:16.878816",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.25,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 41
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 10
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 7
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.9,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 6
+              },
+              {
+                "severity": "medium",
+                "count": 5
+              },
+              {
+                "severity": "low",
+                "count": 16
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.37,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.96,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.2,
+            "findings": [
+              {
+                "threat_score": 0.57
+              },
+              {
+                "risk_assessment": "Low"
+              },
+              {
+                "attack_vectors": 10
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.69,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000058-1759168216",
+        "target": "zero.webappsecurity.com",
+        "program_type": "Testing Labs",
+        "timestamp": "2025-09-29T23:20:16.879043",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.22,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 38
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 5
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 6
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.76,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 3
+              },
+              {
+                "severity": "medium",
+                "count": 5
+              },
+              {
+                "severity": "low",
+                "count": 23
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.66,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.35,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.1,
+            "findings": [
+              {
+                "threat_score": 0.55
+              },
+              {
+                "risk_assessment": "Low"
+              },
+              {
+                "attack_vectors": 12
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.96,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000059-1759168216",
+        "target": "dvwa.co.uk",
+        "program_type": "Testing Labs",
+        "timestamp": "2025-09-29T23:20:16.879258",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.57,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 26
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 10
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 5
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.58,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 3
+              },
+              {
+                "severity": "high",
+                "count": 4
+              },
+              {
+                "severity": "medium",
+                "count": 12
+              },
+              {
+                "severity": "low",
+                "count": 14
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.29,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.07,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.53,
+            "findings": [
+              {
+                "threat_score": 0.61
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 9
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 1.82,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000060-1759168216",
+        "target": "portswigger-labs.net",
+        "program_type": "Testing Labs",
+        "timestamp": "2025-09-29T23:20:16.879466",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.89,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 47
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 5
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 11
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.89,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 0
+              },
+              {
+                "severity": "high",
+                "count": 3
+              },
+              {
+                "severity": "medium",
+                "count": 6
+              },
+              {
+                "severity": "low",
+                "count": 24
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.63,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 0.83,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 1.53,
+            "findings": [
+              {
+                "threat_score": 0.65
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 5
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.68,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000061-1759168228",
+        "target": "owasp.org",
+        "program_type": "Testing Labs",
+        "timestamp": "2025-09-29T23:20:28.033274",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.93,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 16
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 11
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 12
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.55,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 3
+              },
+              {
+                "severity": "medium",
+                "count": 5
+              },
+              {
+                "severity": "low",
+                "count": 23
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 0.58,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.79,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.69,
+            "findings": [
+              {
+                "threat_score": 0.51
+              },
+              {
+                "risk_assessment": "High"
+              },
+              {
+                "attack_vectors": 5
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.91,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000062-1759168228",
+        "target": "bwapp.sourceforge.net",
+        "program_type": "Testing Labs",
+        "timestamp": "2025-09-29T23:20:28.033484",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 1.99,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 19
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 13
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 7
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 0.5,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 5
+              },
+              {
+                "severity": "medium",
+                "count": 10
+              },
+              {
+                "severity": "low",
+                "count": 19
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.05,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.35,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.58,
+            "findings": [
+              {
+                "threat_score": 0.37
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 7
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.51,
+            "findings": []
+          }
+        }
+      },
+      {
+        "scan_id": "BB-000063-1759168228",
+        "target": "mutillidae.sourceforge.net",
+        "program_type": "Testing Labs",
+        "timestamp": "2025-09-29T23:20:28.033665",
+        "phases": {
+          "reconnaissance": {
+            "status": "completed",
+            "duration": 0.66,
+            "findings": [
+              {
+                "type": "subdomain_discovery",
+                "count": 38
+              },
+              {
+                "type": "port_scan",
+                "open_ports": 4
+              },
+              {
+                "type": "technology_stack",
+                "technologies": 5
+              }
+            ]
+          },
+          "vulnerability_scanning": {
+            "status": "completed",
+            "duration": 1.39,
+            "findings": [
+              {
+                "severity": "critical",
+                "count": 1
+              },
+              {
+                "severity": "high",
+                "count": 1
+              },
+              {
+                "severity": "medium",
+                "count": 6
+              },
+              {
+                "severity": "low",
+                "count": 23
+              }
+            ]
+          },
+          "binary_analysis": {
+            "status": "completed",
+            "duration": 1.35,
+            "findings": []
+          },
+          "network_analysis": {
+            "status": "completed",
+            "duration": 1.55,
+            "findings": []
+          },
+          "ml_intelligence_analysis": {
+            "status": "completed",
+            "duration": 0.77,
+            "findings": [
+              {
+                "threat_score": 0.88
+              },
+              {
+                "risk_assessment": "Medium"
+              },
+              {
+                "attack_vectors": 12
+              }
+            ]
+          },
+          "report_generation": {
+            "status": "completed",
+            "duration": 0.96,
+            "findings": []
+          }
+        }
+      }
+    ]
+  }
+}

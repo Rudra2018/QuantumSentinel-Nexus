@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000055-1759168205",
+  "target": "europol.europa.eu",
+  "program_type": "Government/Critical Infrastructure",
+  "timestamp": "2025-09-29T23:20:05.416502",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.76,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 42
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 12
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 11
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 0.75,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 0
+        },
+        {
+          "severity": "high",
+          "count": 6
+        },
+        {
+          "severity": "medium",
+          "count": 6
+        },
+        {
+          "severity": "low",
+          "count": 17
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 0.5,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.71,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 0.54,
+      "findings": [
+        {
+          "threat_score": 0.64
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 3
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 0.5,
+      "findings": []
+    }
+  }
+}

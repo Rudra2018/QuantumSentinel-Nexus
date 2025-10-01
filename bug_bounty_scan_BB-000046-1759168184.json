@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000046-1759168184",
+  "target": "binance.com",
+  "program_type": "Crypto/Blockchain",
+  "timestamp": "2025-09-29T23:19:44.814020",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.0,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 48
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 5
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 11
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.4,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 3
+        },
+        {
+          "severity": "high",
+          "count": 1
+        },
+        {
+          "severity": "medium",
+          "count": 8
+        },
+        {
+          "severity": "low",
+          "count": 21
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 0.71,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.02,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 0.63,
+      "findings": [
+        {
+          "threat_score": 0.67
+        },
+        {
+          "risk_assessment": "Low"
+        },
+        {
+          "attack_vectors": 7
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.52,
+      "findings": []
+    }
+  }
+}

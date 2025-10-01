@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000053-1759168205",
+  "target": "cert.org",
+  "program_type": "Government/Critical Infrastructure",
+  "timestamp": "2025-09-29T23:20:05.416042",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 0.86,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 13
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 8
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 9
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 0.89,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "severity": "high",
+          "count": 7
+        },
+        {
+          "severity": "medium",
+          "count": 12
+        },
+        {
+          "severity": "low",
+          "count": 23
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.41,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 0.68,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 0.83,
+      "findings": [
+        {
+          "threat_score": 0.42
+        },
+        {
+          "risk_assessment": "High"
+        },
+        {
+          "attack_vectors": 6
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 1.91,
+      "findings": []
+    }
+  }
+}

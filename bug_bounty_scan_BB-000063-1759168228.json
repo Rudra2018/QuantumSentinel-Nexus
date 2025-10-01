@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000063-1759168228",
+  "target": "mutillidae.sourceforge.net",
+  "program_type": "Testing Labs",
+  "timestamp": "2025-09-29T23:20:28.033665",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 0.66,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 38
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 4
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 5
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.39,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "severity": "high",
+          "count": 1
+        },
+        {
+          "severity": "medium",
+          "count": 6
+        },
+        {
+          "severity": "low",
+          "count": 23
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.35,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 1.55,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 0.77,
+      "findings": [
+        {
+          "threat_score": 0.88
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 12
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 0.96,
+      "findings": []
+    }
+  }
+}

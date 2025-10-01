@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000021-1759168127",
+  "target": "mozilla.org",
+  "program_type": "Bugcrowd Programs",
+  "timestamp": "2025-09-29T23:18:47.529399",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 0.53,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 21
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 5
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 12
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.88,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 1
+        },
+        {
+          "severity": "high",
+          "count": 5
+        },
+        {
+          "severity": "medium",
+          "count": 6
+        },
+        {
+          "severity": "low",
+          "count": 19
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.4,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 2.0,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.32,
+      "findings": [
+        {
+          "threat_score": 0.65
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 5
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 0.85,
+      "findings": []
+    }
+  }
+}

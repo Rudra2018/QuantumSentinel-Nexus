@@ -1,0 +1,78 @@
+{
+  "scan_id": "BB-000045-1759168184",
+  "target": "bitcoin.org",
+  "program_type": "Crypto/Blockchain",
+  "timestamp": "2025-09-29T23:19:44.813849",
+  "phases": {
+    "reconnaissance": {
+      "status": "completed",
+      "duration": 1.46,
+      "findings": [
+        {
+          "type": "subdomain_discovery",
+          "count": 26
+        },
+        {
+          "type": "port_scan",
+          "open_ports": 13
+        },
+        {
+          "type": "technology_stack",
+          "technologies": 6
+        }
+      ]
+    },
+    "vulnerability_scanning": {
+      "status": "completed",
+      "duration": 1.82,
+      "findings": [
+        {
+          "severity": "critical",
+          "count": 0
+        },
+        {
+          "severity": "high",
+          "count": 6
+        },
+        {
+          "severity": "medium",
+          "count": 13
+        },
+        {
+          "severity": "low",
+          "count": 15
+        }
+      ]
+    },
+    "binary_analysis": {
+      "status": "completed",
+      "duration": 1.22,
+      "findings": []
+    },
+    "network_analysis": {
+      "status": "completed",
+      "duration": 0.5,
+      "findings": []
+    },
+    "ml_intelligence_analysis": {
+      "status": "completed",
+      "duration": 1.03,
+      "findings": [
+        {
+          "threat_score": 0.55
+        },
+        {
+          "risk_assessment": "Medium"
+        },
+        {
+          "attack_vectors": 12
+        }
+      ]
+    },
+    "report_generation": {
+      "status": "completed",
+      "duration": 0.79,
+      "findings": []
+    }
+  }
+}
