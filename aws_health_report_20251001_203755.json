@@ -1,0 +1,109 @@
+{
+  "timestamp": "2025-10-01T20:37:46.130487",
+  "lambda_functions": [
+    {
+      "name": "quantumsentinel-unified-dashboard",
+      "status": "UNHEALTHY",
+      "error": "An error occurred (ResourceNotFoundException) when calling the GetFunction operation: Function not found: arn:aws:lambda:us-east-1:077732578302:function:quantumsentinel-unified-dashboard",
+      "invocation_test": false
+    },
+    {
+      "name": "quantumsentinel-binary-analysis",
+      "status": "UNHEALTHY",
+      "error": "An error occurred (ResourceNotFoundException) when calling the GetFunction operation: Function not found: arn:aws:lambda:us-east-1:077732578302:function:quantumsentinel-binary-analysis",
+      "invocation_test": false
+    },
+    {
+      "name": "quantumsentinel-web-dashboard",
+      "status": "HEALTHY",
+      "state": "Active",
+      "last_modified": "2025-10-01T07:30:30.000+0000",
+      "runtime": "python3.9",
+      "memory": 512,
+      "timeout": 30,
+      "invocation_test": true
+    }
+  ],
+  "ecs_tasks": [
+    {
+      "name": "quantumsentinel-web-ui",
+      "status": "HEALTHY",
+      "running_tasks": 1,
+      "revision": 3,
+      "cpu": "512",
+      "memory": "1024"
+    },
+    {
+      "name": "quantumsentinel-binary-analysis",
+      "status": "DEGRADED",
+      "running_tasks": 0,
+      "revision": 3,
+      "cpu": "2048",
+      "memory": "4096"
+    },
+    {
+      "name": "quantumsentinel-ibb-research",
+      "status": "HEALTHY",
+      "running_tasks": 1,
+      "revision": 4,
+      "cpu": "1024",
+      "memory": "2048"
+    }
+  ],
+  "api_endpoints": [
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod/frida",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.401996,
+      "response_size": 197
+    },
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod/ai",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.426566,
+      "response_size": 190
+    },
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod/dast",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.441788,
+      "response_size": 195
+    },
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod/bugbounty",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.464312,
+      "response_size": 205
+    },
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod/sast",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.472497,
+      "response_size": 195
+    },
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod/reverse-engineering",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.554972,
+      "response_size": 225
+    },
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.826204,
+      "response_size": 15920
+    }
+  ],
+  "cloudwatch_metrics": {
+    "lambda_invocations": 6.0,
+    "api_requests": 8.0
+  },
+  "overall_status": "UNHEALTHY"
+}

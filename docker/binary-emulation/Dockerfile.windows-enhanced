@@ -1,0 +1,171 @@
+# QuantumSentinel Binary Analysis - Enhanced Windows Binary Analysis Environment
+# Specialized environment for analyzing Windows binaries (PE, DLL, EXE, MSI)
+
+FROM ubuntu:22.04
+
+LABEL maintainer="QuantumSentinel-Nexus"
+LABEL description="Enhanced Windows binary analysis with WINE and Windows tools"
+LABEL version="3.0"
+LABEL binary_types="pe,exe,dll,msi,sys,scr,com"
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+ENV WINEARCH=win64
+ENV WINEPREFIX=/analysis/wine-prefix
+ENV DISPLAY=:99
+
+# Install base system packages
+RUN dpkg --add-architecture i386 && \
+    apt-get update && apt-get install -y \
+    # Core utilities
+    curl wget git vim tmux htop unzip p7zip-full \
+    # Build environment
+    build-essential cmake autoconf automake libtool pkg-config \
+    # WINE and Windows emulation
+    wine64 wine32 winetricks \
+    # X11 for GUI applications
+    xvfb x11vnc fluxbox \
+    # Python environment
+    python3 python3-pip python3-dev python3-venv \
+    # Binary analysis tools
+    binutils gdb hexdump xxd file strings objdump readelf nm \
+    # Windows-specific tools
+    cabextract \
+    msitools \
+    # Network and debugging
+    netcat nmap tcpdump strace ltrace \
+    # Additional analysis tools
+    radare2 checksec patchelf \
+    # Archive tools
+    unrar-free \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install Python packages for Windows binary analysis
+RUN pip3 install --no-cache-dir \
+    # Core binary analysis
+    capstone keystone-engine unicorn \
+    pefile pyelftools lief \
+    # Windows specific
+    python-registry \
+    dissect.cstruct \
+    # PE analysis
+    peid \
+    # Analysis frameworks
+    frida-tools \
+    ropper \
+    angr \
+    # ML and data processing
+    numpy scipy pandas scikit-learn \
+    # Malware analysis
+    yara-python \
+    # Utilities
+    requests beautifulsoup4
+
+# Install Cutter (Ghidra GUI alternative)
+RUN cd /opt && \
+    wget https://github.com/rizinorg/cutter/releases/download/v2.3.2/Cutter-v2.3.2-Linux-x86_64.AppImage && \
+    chmod +x Cutter-v2.3.2-Linux-x86_64.AppImage && \
+    ln -s /opt/Cutter-v2.3.2-Linux-x86_64.AppImage /usr/local/bin/cutter
+
+# Install PE analysis tools
+RUN git clone https://github.com/erocarrera/pefile.git /opt/pefile && \
+    cd /opt/pefile && python3 setup.py install
+
+# Install YARA for malware detection
+RUN git clone https://github.com/VirusTotal/yara.git /opt/yara && \
+    cd /opt/yara && \
+    ./bootstrap.sh && \
+    ./configure --enable-cuckoo --enable-magic --enable-dotnet && \
+    make -j$(nproc) && \
+    make install && \
+    ldconfig
+
+# Install PEiD signatures
+RUN mkdir -p /opt/peid && \
+    cd /opt/peid && \
+    wget https://github.com/Yara-Rules/rules/archive/master.zip && \
+    unzip master.zip && \
+    mv rules-master/* . && \
+    rm -rf rules-master master.zip
+
+# Install Windows analysis tools via Wine
+RUN mkdir -p $WINEPREFIX && \
+    Xvfb :99 -screen 0 1024x768x16 & \
+    sleep 5 && \
+    wineboot --init && \
+    winetricks -q vcrun2019 dotnet48 && \
+    pkill Xvfb
+
+# Create analysis environment
+RUN mkdir -p /analysis/{binaries,results,scripts,logs,configs,windows-specific,wine-logs}
+
+# Create Windows analysis user
+RUN useradd -m -s /bin/bash win-analyst && \
+    usermod -aG sudo win-analyst && \
+    echo "win-analyst ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# Create Windows-specific analysis scripts
+COPY scripts/analyze-pe-binary.sh /usr/local/bin/
+COPY scripts/analyze-dll.sh /usr/local/bin/
+COPY scripts/analyze-msi-package.sh /usr/local/bin/
+COPY scripts/extract-pe-resources.sh /usr/local/bin/
+COPY scripts/windows-dynamic-analysis.sh /usr/local/bin/
+COPY scripts/pe-static-analysis.sh /usr/local/bin/
+
+# Set ownership and permissions
+RUN chown -R win-analyst:win-analyst /analysis /home/win-analyst $WINEPREFIX && \
+    chmod +x /usr/local/bin/*.sh
+
+# Switch to analysis user
+USER win-analyst
+WORKDIR /analysis
+
+# Set environment variables
+ENV PATH="/home/win-analyst/.local/bin:$PATH"
+ENV PYTHONPATH="/analysis:$PYTHONPATH"
+ENV ANALYSIS_TYPE="windows"
+ENV SUPPORTED_FORMATS="pe,exe,dll,msi,sys,scr,com"
+
+# Initialize Wine environment for user
+RUN Xvfb :99 -screen 0 1024x768x16 & \
+    sleep 5 && \
+    wineboot --init && \
+    pkill Xvfb || true
+
+# Create analysis configuration
+RUN echo '#!/bin/bash\n\
+echo "=== QuantumSentinel Windows Binary Analysis Environment ==="\n\
+echo "Supported formats: $SUPPORTED_FORMATS"\n\
+echo "Windows tools: wine, winetricks, cabextract, msitools"\n\
+echo "PE tools: pefile, radare2, cutter, yara"\n\
+echo "Analysis tools: frida, angr, capstone"\n\
+echo "Usage:"\n\
+echo "  - analyze-pe-binary.sh <pe_path>"\n\
+echo "  - analyze-dll.sh <dll_path>"\n\
+echo "  - analyze-msi-package.sh <msi_path>"\n\
+echo "  - windows-dynamic-analysis.sh <exe_path>"\n\
+echo "============================================================"\n\
+echo "Note: GUI applications require X11 forwarding or VNC"\n\
+' > /home/win-analyst/.bashrc_custom && \
+    echo "source /home/win-analyst/.bashrc_custom" >> /home/win-analyst/.bashrc
+
+# Create Wine analysis workspace
+RUN mkdir -p /home/win-analyst/{wine-workspace,pe-workspace,malware-workspace} && \
+    echo "export WINEDEBUG=-all" >> /home/win-analyst/.bashrc && \
+    echo "export WINE_CPU_TOPOLOGY=4:2" >> /home/win-analyst/.bashrc
+
+# Create VNC server script for GUI analysis
+RUN echo '#!/bin/bash\n\
+Xvfb :99 -screen 0 1024x768x16 &\n\
+sleep 2\n\
+fluxbox &\n\
+x11vnc -display :99 -forever -usepw -create &\n\
+echo "VNC server started on display :99"\n\
+echo "Connect with VNC viewer to localhost:5900"\n\
+' > /home/win-analyst/start-vnc.sh && \
+    chmod +x /home/win-analyst/start-vnc.sh
+
+# Expose VNC and debugging ports
+EXPOSE 1234 4444 5900 8080 8888
+
+CMD ["/bin/bash"]

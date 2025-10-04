@@ -1,0 +1,91 @@
+# QuantumSentinel GDB Configuration
+# Enhanced debugging configuration for binary analysis
+
+set confirm off
+set verbose off
+set print pretty on
+set print array on
+set print array-indexes on
+set print elements 0
+set print repeats 0
+set print null-stop on
+
+# History
+set history filename ~/.gdb_history
+set history save on
+set history size unlimited
+
+# Disassembly
+set disassembly-flavor intel
+set disassemble-next-line auto
+
+# Security
+set auto-load safe-path /
+
+# Python scripting
+python
+import sys
+sys.path.insert(0, '/analysis/scripts')
+end
+
+# Aliases for common commands
+alias -a x = examine
+alias -a r = run
+alias -a c = continue
+alias -a s = step
+alias -a n = next
+alias -a b = break
+alias -a bt = backtrace
+alias -a info-reg = info registers
+alias -a info-mem = info memory
+
+# Custom functions for vulnerability analysis
+define vuln-check
+    echo \n=== Vulnerability Check ===\n
+    info registers
+    echo \n=== Stack Status ===\n
+    x/20wx $sp
+    echo \n=== Return Address ===\n
+    x/gx $sp
+    echo \n=== Function Arguments ===\n
+    info args
+    echo \n=== Local Variables ===\n
+    info locals
+end
+
+define heap-check
+    echo \n=== Heap Analysis ===\n
+    info proc mappings
+    echo \n=== Heap Chunks ===\n
+    heap chunks
+end
+
+define stack-check
+    echo \n=== Stack Analysis ===\n
+    x/40wx $sp-0x40
+    echo \n=== Stack Trace ===\n
+    bt
+end
+
+define exploit-check
+    echo \n=== Exploit Development Check ===\n
+    echo Current RIP/EIP:
+    p/x $pc
+    echo \nStack pointer:
+    p/x $sp
+    echo \nControl flow check:\n
+    x/5i $pc
+    echo \nStack contents:\n
+    x/10gx $sp
+end
+
+# Load pwndbg if available
+python
+try:
+    import pwndbg
+    print("pwndbg loaded successfully")
+except ImportError:
+    print("pwndbg not available")
+end
+
+echo QuantumSentinel GDB Configuration Loaded\n

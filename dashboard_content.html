@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumSentinel-Nexus: Unified Advanced Security Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .engine-card {
+            transition: all 0.3s ease;
+        }
+        .progress-bar {
+            width: 0%;
+            transition: width 2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg py-6 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-4xl font-bold text-center">🚀 QuantumSentinel-Nexus</h1>
+            <p class="text-xl text-center mt-2 opacity-90">Unified Advanced Security Analysis Platform</p>
+            <p class="text-center mt-1 opacity-75">14 Security Engines • 148 Minutes Analysis • Enterprise Grade</p>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <div class="max-w-7xl mx-auto px-4 py-8">
+
+        <!-- Upload Section -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-8 card-hover transition-all duration-300">
+            <h2 class="text-2xl font-bold mb-4">📁 File Upload & Analysis</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Select File for Analysis</label>
+                    <input type="file" id="fileInput"
+                           class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:border-blue-500 focus:outline-none"
+                           accept=".apk,.ipa,.jar,.exe,.dll,.zip">
+                    <p class="text-sm text-gray-400 mt-2">Supported: APK, IPA, JAR, EXE, DLL, ZIP (Max: 10GB)</p>
+                </div>
+
+                <div class="flex items-end">
+                    <button id="uploadBtn"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200">
+                        🚀 Start Advanced Analysis
+                    </button>
+                </div>
+            </div>
+
+            <div id="uploadProgress" class="hidden mt-4">
+                <div class="bg-gray-700 rounded-full h-2">
+                    <div class="bg-blue-600 h-2 rounded-full progress-bar"></div>
+                </div>
+                <p class="text-sm text-center mt-2" id="progressText">Uploading...</p>
+            </div>
+        </div>
+
+        <!-- Security Engines Overview -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-6">🛡️ Security Engine Arsenal (14 Engines)</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+
+                <!-- Basic Engines -->
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-green-500">
+                    <h3 class="font-bold text-green-400">📊 Static Analysis</h3>
+                    <p class="text-sm text-gray-300">Source code scanning</p>
+                    <span class="text-xs bg-green-600 px-2 py-1 rounded">2 min</span>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-blue-500">
+                    <h3 class="font-bold text-blue-400">🔄 Dynamic Analysis</h3>
+                    <p class="text-sm text-gray-300">Runtime behavior</p>
+                    <span class="text-xs bg-blue-600 px-2 py-1 rounded">3 min</span>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-red-500">
+                    <h3 class="font-bold text-red-400">🦠 Malware Detection</h3>
+                    <p class="text-sm text-gray-300">Signature analysis</p>
+                    <span class="text-xs bg-red-600 px-2 py-1 rounded">1 min</span>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-purple-500">
+                    <h3 class="font-bold text-purple-400">⚙️ Binary Analysis</h3>
+                    <p class="text-sm text-gray-300">Reverse engineering</p>
+                    <span class="text-xs bg-purple-600 px-2 py-1 rounded">4 min</span>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-yellow-500">
+                    <h3 class="font-bold text-yellow-400">🌐 Network Security</h3>
+                    <p class="text-sm text-gray-300">API & traffic analysis</p>
+                    <span class="text-xs bg-yellow-600 px-2 py-1 rounded">2 min</span>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-indigo-500">
+                    <h3 class="font-bold text-indigo-400">📋 Compliance Check</h3>
+                    <p class="text-sm text-gray-300">Standards validation</p>
+                    <span class="text-xs bg-indigo-600 px-2 py-1 rounded">1 min</span>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-pink-500">
+                    <h3 class="font-bold text-pink-400">🎯 Threat Intelligence</h3>
+                    <p class="text-sm text-gray-300">AI correlation</p>
+                    <span class="text-xs bg-pink-600 px-2 py-1 rounded">2 min</span>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-orange-500">
+                    <h3 class="font-bold text-orange-400">⚡ Penetration Testing</h3>
+                    <p class="text-sm text-gray-300">Exploit generation</p>
+                    <span class="text-xs bg-orange-600 px-2 py-1 rounded">5 min</span>
+                </div>
+
+                <!-- Advanced Engines -->
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-red-600">
+                    <h3 class="font-bold text-red-300">🔧 Reverse Engineering</h3>
+                    <p class="text-sm text-gray-300">Binary disassembly</p>
+                    <span class="text-xs bg-red-700 px-2 py-1 rounded">20 min</span>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-blue-600">
+                    <h3 class="font-bold text-blue-300">🔍 SAST Engine</h3>
+                    <p class="text-sm text-gray-300">Advanced source scan</p>
+                    <span class="text-xs bg-blue-700 px-2 py-1 rounded">18 min</span>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-green-600">
+                    <h3 class="font-bold text-green-300">🚦 DAST Engine</h3>
+                    <p class="text-sm text-gray-300">Dynamic testing</p>
+                    <span class="text-xs bg-green-700 px-2 py-1 rounded">22 min</span>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-purple-600">
+                    <h3 class="font-bold text-purple-300">🤖 ML Intelligence</h3>
+                    <p class="text-sm text-gray-300">AI threat detection</p>
+                    <span class="text-xs bg-purple-700 px-2 py-1 rounded">8 min</span>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-yellow-600">
+                    <h3 class="font-bold text-yellow-300">📱 Mobile Security</h3>
+                    <p class="text-sm text-gray-300">Frida instrumentation</p>
+                    <span class="text-xs bg-yellow-700 px-2 py-1 rounded">25 min</span>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg engine-card border-l-4 border-indigo-600">
+                    <h3 class="font-bold text-indigo-300">🏆 Bug Bounty Automation</h3>
+                    <p class="text-sm text-gray-300">Comprehensive hunting</p>
+                    <span class="text-xs bg-indigo-700 px-2 py-1 rounded">45 min</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Analysis Results -->
+        <div id="resultsSection" class="hidden">
+            <div class="bg-gray-800 rounded-lg p-6 mb-8">
+                <h2 class="text-2xl font-bold mb-4">📊 Analysis Results</h2>
+                <div id="analysisResults"></div>
+            </div>
+        </div>
+
+        <!-- Recent Analyses -->
+        <div class="bg-gray-800 rounded-lg p-6">
+            <h2 class="text-2xl font-bold mb-4">📈 Recent Analyses</h2>
+            <div id="recentAnalyses" class="space-y-4">
+                <p class="text-gray-400">No analyses yet. Upload a file to get started!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-400">QuantumSentinel-Nexus • Advanced Security Analysis Platform</p>
+            <p class="text-sm text-gray-500 mt-2">API Endpoint: https://v6nm1340rg.execute-api.us-east-1.amazonaws.com/prod</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_BASE = 'https://v6nm1340rg.execute-api.us-east-1.amazonaws.com/prod';
+
+        // File upload functionality
+        document.getElementById('uploadBtn').addEventListener('click', async () => {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a file first');
+                return;
+            }
+
+            const uploadBtn = document.getElementById('uploadBtn');
+            const progressDiv = document.getElementById('uploadProgress');
+            const progressBar = progressDiv.querySelector('.progress-bar');
+            const progressText = document.getElementById('progressText');
+
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+            progressDiv.classList.remove('hidden');
+
+            try {
+                // Convert file to base64
+                const base64Data = await fileToBase64(file);
+
+                progressText.textContent = 'Starting analysis...';
+                progressBar.style.width = '30%';
+
+                // Upload file
+                const response = await axios.post(`${API_BASE}/api/upload`, {
+                    action: 'upload',
+                    file_data: base64Data,
+                    filename: file.name
+                });
+
+                progressBar.style.width = '100%';
+                progressText.textContent = 'Analysis started successfully!';
+
+                // Show results
+                displayAnalysisResult(response.data);
+
+                // Load recent analyses
+                loadRecentAnalyses();
+
+            } catch (error) {
+                console.error('Upload error:', error);
+                alert('Upload failed: ' + (error.response?.data?.error || error.message));
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = '🚀 Start Advanced Analysis';
+                setTimeout(() => {
+                    progressDiv.classList.add('hidden');
+                    progressBar.style.width = '0%';
+                }, 2000);
+            }
+        });
+
+        // Helper function to convert file to base64
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => {
+                    const base64 = reader.result.split(',')[1];
+                    resolve(base64);
+                };
+                reader.onerror = reject;
+            });
+        }
+
+        // Display analysis results
+        function displayAnalysisResult(data) {
+            const resultsSection = document.getElementById('resultsSection');
+            const analysisResults = document.getElementById('analysisResults');
+
+            resultsSection.classList.remove('hidden');
+
+            analysisResults.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-gray-700 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-blue-400">${data.analysis_id || 'N/A'}</div>
+                        <div class="text-sm text-gray-400">Analysis ID</div>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-green-400">${data.status || 'Processing'}</div>
+                        <div class="text-sm text-gray-400">Status</div>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg text-center">
+                        <div class="text-2xl font-bold text-yellow-400">${data.estimated_completion || '148 min'}</div>
+                        <div class="text-sm text-gray-400">Estimated Time</div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-700 p-4 rounded-lg">
+                    <h3 class="text-lg font-bold mb-2">Analysis Details</h3>
+                    <p class="text-gray-300">${data.message || 'Analysis in progress with all 14 security engines'}</p>
+                </div>
+            `;
+        }
+
+        // Load recent analyses
+        async function loadRecentAnalyses() {
+            try {
+                const response = await axios.get(`${API_BASE}/api/analysis`);
+                const recentDiv = document.getElementById('recentAnalyses');
+
+                if (response.data.analyses && response.data.analyses.length > 0) {
+                    recentDiv.innerHTML = response.data.analyses.map(analysis => `
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-bold">${analysis.filename || 'Unknown File'}</h4>
+                                    <p class="text-sm text-gray-400">ID: ${analysis.analysis_id}</p>
+                                    <p class="text-xs text-gray-500">${analysis.upload_time || 'Recent'}</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="px-2 py-1 rounded text-xs bg-green-600">${analysis.status || 'Processing'}</span>
+                                    <p class="text-sm text-gray-400 mt-1">${analysis.engines || 14} engines</p>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Failed to load recent analyses:', error);
+            }
+        }
+
+        // Load recent analyses on page load
+        loadRecentAnalyses();
+
+        // Auto-refresh recent analyses every 30 seconds
+        setInterval(loadRecentAnalyses, 30000);
+    </script>
+</body>
+</html>

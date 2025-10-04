@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumSentinel-Nexus: Unified Advanced Security Platform</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTYgMkw0IDhWMTZDNCAyNC44IDEwLjcgMzAgMTYgMzBDMjEuMyAzMCAyOCAyNC44IDI4IDE2VjhMMTYgMloiIGZpbGw9IiM2NjdlZWEiLz48L3N2Zz4=">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        /* Production-ready CSS - No external dependencies */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.75;
+            margin-top: 0.25rem;
+        }
+
+        /* Main content */
+        .main {
+            padding: 2rem 0;
+        }
+
+        .card {
+            background: #1e293b;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid #334155;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #f1f5f9;
+        }
+
+        /* Upload section */
+        .upload-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .upload-grid {
+                grid-template-columns: 1fr auto;
+            }
+        }
+
+        .file-input {
+            width: 100%;
+            padding: 0.75rem;
+            background: #374151;
+            border: 1px solid #4b5563;
+            border-radius: 0.5rem;
+            color: #f9fafb;
+            font-size: 1rem;
+        }
+
+        .file-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+
+        .upload-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .upload-btn:hover {
+            background: #2563eb;
+        }
+
+        .upload-btn:disabled {
+            background: #6b7280;
+            cursor: not-allowed;
+        }
+
+        /* Report action buttons */
+        .btn {
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .report-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Progress bar */
+        .progress-container {
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 0.5rem;
+            background: #374151;
+            border-radius: 0.25rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3b82f6;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            color: #9ca3af;
+        }
+
+        /* Engine grid */
+        .engine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .engine-card {
+            background: #374151;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid;
+            transition: transform 0.2s;
+        }
+
+        .engine-card:hover {
+            transform: translateY(-1px);
+        }
+
+        .engine-card.basic { border-left-color: #10b981; }
+        .engine-card.advanced { border-left-color: #f59e0b; }
+
+        .engine-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .engine-card p {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-bottom: 0.5rem;
+        }
+
+        .engine-badge {
+            display: inline-block;
+            background: #4b5563;
+            color: #f9fafb;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+
+        /* Results section */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-card {
+            background: #374151;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .result-label {
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        /* Analysis list */
+        .analysis-item {
+            background: #374151;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .analysis-info h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .analysis-info p {
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        .analysis-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.25rem;
+        }
+
+        .status-badge {
+            background: #10b981;
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            padding: 2rem 0;
+            text-align: center;
+            color: #9ca3af;
+            margin-top: 3rem;
+        }
+
+        /* Utility classes */
+        .hidden { display: none; }
+        .text-center { text-align: center; }
+        .text-sm { font-size: 0.875rem; }
+        .text-xs { font-size: 0.75rem; }
+        .mt-1 { margin-top: 0.25rem; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+
+        /* Color utilities */
+        .text-blue { color: #60a5fa; }
+        .text-green { color: #34d399; }
+        .text-yellow { color: #fbbf24; }
+        .text-red { color: #f87171; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .container { padding: 0 0.5rem; }
+            .card { padding: 1rem; }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* File size indicator */
+        .file-size {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            margin-top: 0.5rem;
+        }
+
+        .size-warning {
+            color: #fbbf24;
+        }
+
+        .size-error {
+            color: #f87171;
+        }
+
+        /* Status indicators */
+        .success-indicator {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .warning-indicator {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+
+        .error-indicator {
+            color: #ef4444;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>🚀 QuantumSentinel-Nexus</h1>
+            <p>Unified Advanced Security Analysis Platform</p>
+            <p class="subtitle">14 Security Engines • 148 Minutes Analysis • Enterprise Grade</p>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="main">
+        <div class="container">
+
+            <!-- Upload Section -->
+            <div class="card">
+                <h2>📁 File Upload & Analysis</h2>
+
+                <div class="upload-grid">
+                    <div>
+                        <label for="fileInput" class="text-sm">Select File for Analysis</label>
+                        <input type="file" id="fileInput" class="file-input mt-1"
+                               accept=".apk,.ipa,.jar,.exe,.dll,.zip">
+                        <p class="text-sm text-gray-400 mt-1">Supported: APK, IPA, JAR, EXE, DLL, ZIP (Unlimited size)</p>
+                        <p id="fileSizeInfo" class="file-size hidden"></p>
+                    </div>
+                    <div style="display: flex; align-items: flex-end;">
+                        <button id="uploadBtn" class="upload-btn">
+                            🚀 Start Advanced Analysis
+                        </button>
+                    </div>
+                </div>
+
+                <div id="uploadProgress" class="progress-container">
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    <p id="progressText" class="progress-text">Uploading...</p>
+                </div>
+            </div>
+
+            <!-- Security Engines Overview -->
+            <div class="card">
+                <h2>🛡️ Security Engine Arsenal (14 Engines)</h2>
+
+                <div class="engine-grid">
+                    <!-- Basic Engines -->
+                    <div class="engine-card basic">
+                        <h3 class="text-green">📊 Static Analysis</h3>
+                        <p>Source code scanning</p>
+                        <span class="engine-badge">2 min</span>
+                    </div>
+                    <div class="engine-card basic">
+                        <h3 class="text-blue">🔄 Dynamic Analysis</h3>
+                        <p>Runtime behavior</p>
+                        <span class="engine-badge">3 min</span>
+                    </div>
+                    <div class="engine-card basic">
+                        <h3 class="text-red">🦠 Malware Detection</h3>
+                        <p>Signature analysis</p>
+                        <span class="engine-badge">1 min</span>
+                    </div>
+                    <div class="engine-card basic">
+                        <h3 class="text-blue">⚙️ Binary Analysis</h3>
+                        <p>Reverse engineering</p>
+                        <span class="engine-badge">4 min</span>
+                    </div>
+                    <div class="engine-card basic">
+                        <h3 class="text-yellow">🌐 Network Security</h3>
+                        <p>API & traffic analysis</p>
+                        <span class="engine-badge">2 min</span>
+                    </div>
+                    <div class="engine-card basic">
+                        <h3 class="text-blue">📋 Compliance Check</h3>
+                        <p>Standards validation</p>
+                        <span class="engine-badge">1 min</span>
+                    </div>
+                    <div class="engine-card basic">
+                        <h3 class="text-green">🎯 Threat Intelligence</h3>
+                        <p>AI correlation</p>
+                        <span class="engine-badge">2 min</span>
+                    </div>
+                    <div class="engine-card basic">
+                        <h3 class="text-yellow">⚡ Penetration Testing</h3>
+                        <p>Exploit generation</p>
+                        <span class="engine-badge">5 min</span>
+                    </div>
+
+                    <!-- Advanced Engines -->
+                    <div class="engine-card advanced">
+                        <h3 class="text-red">🔧 Reverse Engineering</h3>
+                        <p>Binary disassembly</p>
+                        <span class="engine-badge">20 min</span>
+                    </div>
+                    <div class="engine-card advanced">
+                        <h3 class="text-blue">🔍 SAST Engine</h3>
+                        <p>Advanced source scan</p>
+                        <span class="engine-badge">18 min</span>
+                    </div>
+                    <div class="engine-card advanced">
+                        <h3 class="text-green">🚦 DAST Engine</h3>
+                        <p>Dynamic testing</p>
+                        <span class="engine-badge">22 min</span>
+                    </div>
+                    <div class="engine-card advanced">
+                        <h3 class="text-blue">🤖 ML Intelligence</h3>
+                        <p>AI threat detection</p>
+                        <span class="engine-badge">8 min</span>
+                    </div>
+                    <div class="engine-card advanced">
+                        <h3 class="text-yellow">📱 Mobile Security</h3>
+                        <p>Frida instrumentation</p>
+                        <span class="engine-badge">25 min</span>
+                    </div>
+                    <div class="engine-card advanced">
+                        <h3 class="text-blue">🏆 Bug Bounty Automation</h3>
+                        <p>Comprehensive hunting</p>
+                        <span class="engine-badge">45 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analysis Results -->
+            <div id="resultsSection" class="card hidden">
+                <h2>📊 Analysis Results</h2>
+                <div id="analysisResults"></div>
+            </div>
+
+            <!-- Recent Analyses -->
+            <div class="card">
+                <h2>📈 Recent Analyses</h2>
+                <div id="recentAnalyses">
+                    <p class="text-center text-gray-400">Loading recent analyses...</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>QuantumSentinel-Nexus • Advanced Security Analysis Platform</p>
+            <p class="text-sm mt-1">API Endpoint: https://v6nm1340rg.execute-api.us-east-1.amazonaws.com/prod</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_BASE = 'https://v6nm1340rg.execute-api.us-east-1.amazonaws.com/prod';
+
+        // File input change handler
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const fileSizeInfo = document.getElementById('fileSizeInfo');
+
+            if (file) {
+                const sizeMB = file.size / (1024 * 1024);
+                fileSizeInfo.classList.remove('hidden');
+
+                if (sizeMB > 100) {
+                    fileSizeInfo.innerHTML = `⚠️ Large file: <span class="size-warning">${sizeMB.toFixed(1)}MB</span> - Will use secure S3 upload`;
+                } else if (sizeMB > 5) {
+                    fileSizeInfo.innerHTML = `📁 File size: <span class="warning-indicator">${sizeMB.toFixed(1)}MB</span> - Will use secure S3 upload`;
+                } else {
+                    fileSizeInfo.innerHTML = `📁 File size: <span class="success-indicator">${sizeMB.toFixed(1)}MB</span> - Direct API upload`;
+                }
+            } else {
+                fileSizeInfo.classList.add('hidden');
+            }
+        });
+
+        // File upload functionality
+        document.getElementById('uploadBtn').addEventListener('click', async () => {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a file first');
+                return;
+            }
+
+            const fileSizeMB = file.size / (1024 * 1024);
+
+            // Choose upload method based on file size
+            if (fileSizeMB > 5) {
+                await uploadLargeFile(file);
+            } else {
+                await uploadSmallFile(file);
+            }
+        });
+
+        // Large file upload using presigned POST
+        async function uploadLargeFile(file) {
+            const uploadBtn = document.getElementById('uploadBtn');
+            const progressContainer = document.getElementById('uploadProgress');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Processing Large File...';
+            progressContainer.style.display = 'block';
+
+            try {
+                // Step 1: Get presigned URL/POST data
+                progressText.textContent = 'Requesting secure upload credentials...';
+                progressFill.style.width = '10%';
+
+                const urlResponse = await axios.post(`${API_BASE}/api/upload`, {
+                    action: 'get_upload_url',
+                    filename: file.name,
+                    file_size: file.size
+                });
+
+                const { presigned_post, file_key, analysis_id } = urlResponse.data;
+
+                // Step 2: Upload using presigned POST (CORS-friendly)
+                progressText.textContent = 'Uploading to secure storage...';
+                progressFill.style.width = '30%';
+
+                const formData = new FormData();
+
+                // Add all required fields from presigned POST
+                Object.keys(presigned_post.fields).forEach(key => {
+                    formData.append(key, presigned_post.fields[key]);
+                });
+
+                // Add the file last
+                formData.append('file', file);
+
+                // Upload to S3 using presigned POST
+                await axios.post(presigned_post.url, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    onUploadProgress: (progressEvent) => {
+                        const uploadPercent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                        progressFill.style.width = `${30 + (uploadPercent * 0.5)}%`;
+                        progressText.textContent = `Uploading: ${uploadPercent}%`;
+                    }
+                });
+
+                // Step 3: Confirm upload and start analysis
+                progressText.textContent = 'Starting comprehensive security analysis...';
+                progressFill.style.width = '90%';
+
+                const confirmResponse = await axios.post(`${API_BASE}/api/upload`, {
+                    action: 'confirm_upload',
+                    file_key: file_key,
+                    analysis_id: analysis_id,
+                    filename: file.name
+                });
+
+                progressFill.style.width = '100%';
+                progressText.textContent = 'Analysis completed successfully!';
+
+                displayAnalysisResult(confirmResponse.data);
+                loadRecentAnalyses();
+
+            } catch (error) {
+                console.error('Large file upload error:', error);
+                handleUploadError(error, 'Large file upload failed');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = '🚀 Start Advanced Analysis';
+                setTimeout(() => {
+                    progressContainer.style.display = 'none';
+                    progressFill.style.width = '0%';
+                }, 3000);
+            }
+        }
+
+        // Small file upload via API
+        async function uploadSmallFile(file) {
+            const uploadBtn = document.getElementById('uploadBtn');
+            const progressContainer = document.getElementById('uploadProgress');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Processing...';
+            progressContainer.style.display = 'block';
+
+            try {
+                progressText.textContent = 'Converting file for analysis...';
+                progressFill.style.width = '25%';
+
+                const base64Data = await fileToBase64(file);
+
+                progressText.textContent = 'Starting comprehensive analysis...';
+                progressFill.style.width = '50%';
+
+                const response = await axios.post(`${API_BASE}/api/upload`, {
+                    action: 'upload',
+                    file_data: base64Data,
+                    filename: file.name
+                });
+
+                progressFill.style.width = '100%';
+                progressText.textContent = 'Analysis completed successfully!';
+
+                displayAnalysisResult(response.data);
+                loadRecentAnalyses();
+
+            } catch (error) {
+                console.error('Small file upload error:', error);
+                handleUploadError(error, 'File upload failed');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = '🚀 Start Advanced Analysis';
+                setTimeout(() => {
+                    progressContainer.style.display = 'none';
+                    progressFill.style.width = '0%';
+                }, 3000);
+            }
+        }
+
+        // Handle upload errors
+        function handleUploadError(error, defaultMessage) {
+            const progressText = document.getElementById('progressText');
+
+            let errorMessage = defaultMessage;
+
+            if (error.response?.data?.error) {
+                errorMessage += ': ' + error.response.data.error;
+            } else if (error.response?.status === 413) {
+                errorMessage = 'File too large for this upload method';
+            } else if (error.response?.status >= 500) {
+                errorMessage = 'Server error. Please try again later.';
+            } else if (error.message.includes('timeout')) {
+                errorMessage = 'Upload timeout. Please try again.';
+            } else if (error.message.includes('Network Error')) {
+                errorMessage = 'Network error. Check your connection.';
+            }
+
+            alert(errorMessage);
+            progressText.textContent = 'Upload failed - please try again';
+        }
+
+        // Helper function to convert file to base64
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => {
+                    const base64 = reader.result.split(',')[1];
+                    resolve(base64);
+                };
+                reader.onerror = reject;
+            });
+        }
+
+        // Display analysis results
+        function displayAnalysisResult(data) {
+            const resultsSection = document.getElementById('resultsSection');
+            const analysisResults = document.getElementById('analysisResults');
+
+            resultsSection.classList.remove('hidden');
+            resultsSection.classList.add('fade-in');
+
+            analysisResults.innerHTML = `
+                <div class="results-grid">
+                    <div class="result-card">
+                        <div class="result-value text-blue">${data.analysis_id || 'N/A'}</div>
+                        <div class="result-label">Analysis ID</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value text-green">${data.status || 'Processing'}</div>
+                        <div class="result-label">Status</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value text-yellow">${data.engines_executed || '14'}</div>
+                        <div class="result-label">Engines</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value text-red">${data.findings || '0'}</div>
+                        <div class="result-label">Findings</div>
+                    </div>
+                    ${data.file_size ? `
+                    <div class="result-card">
+                        <div class="result-value text-blue">${(data.file_size / 1024 / 1024).toFixed(1)}MB</div>
+                        <div class="result-label">File Size</div>
+                    </div>
+                    ` : ''}
+                    ${data.upload_method ? `
+                    <div class="result-card">
+                        <div class="result-value text-green">${data.upload_method === 'presigned_url' ? 'Secure' : 'Direct'}</div>
+                        <div class="result-label">Upload Method</div>
+                    </div>
+                    ` : ''}
+                </div>
+
+                <div class="result-card">
+                    <h3 class="mb-2">Analysis Summary</h3>
+                    <p>${data.message || 'Comprehensive security analysis completed with all 14 engines'}</p>
+                    ${data.risk_level ? `<p class="mt-2"><strong>Risk Level:</strong> <span class="text-${getRiskColor(data.risk_level)}">${data.risk_level}</span></p>` : ''}
+                </div>
+                <div class="result-card">
+                    <h3 class="mb-2">📄 Report Downloads</h3>
+                    <div class="report-actions">
+                        <button onclick="viewDetailedResults('${data.analysis_id}')" class="btn btn-secondary mb-2">
+                            📊 View Detailed Results
+                        </button>
+                        <button onclick="generatePDFReport('${data.analysis_id}')" class="btn btn-primary mb-2" id="pdfBtn-${data.analysis_id}">
+                            📄 Generate PDF Report
+                        </button>
+                        <button onclick="downloadJSONReport('${data.analysis_id}')" class="btn btn-secondary mb-2">
+                            📋 Download JSON Data
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Get color for risk level
+        function getRiskColor(riskLevel) {
+            switch(riskLevel) {
+                case 'CRITICAL': return 'red';
+                case 'HIGH': return 'yellow';
+                case 'MEDIUM': return 'blue';
+                case 'LOW': return 'green';
+                default: return 'blue';
+            }
+        }
+
+        // Load recent analyses
+        async function loadRecentAnalyses() {
+            try {
+                const response = await axios.get(`${API_BASE}/api/analysis`);
+                const recentDiv = document.getElementById('recentAnalyses');
+
+                if (response.data.analyses && response.data.analyses.length > 0) {
+                    recentDiv.innerHTML = response.data.analyses.map(analysis => `
+                        <div class="analysis-item fade-in">
+                            <div class="analysis-info">
+                                <h4>${analysis.filename || 'Unknown File'}</h4>
+                                <p class="text-sm">ID: ${analysis.analysis_id}</p>
+                                <p class="text-xs">${formatDate(analysis.upload_time)}</p>
+                                ${analysis.file_size ? `<p class="text-xs">Size: ${(analysis.file_size / 1024 / 1024).toFixed(1)}MB</p>` : ''}
+                            </div>
+                            <div class="analysis-status">
+                                <span class="status-badge">${analysis.status || 'Processing'}</span>
+                                <p class="text-sm">${analysis.engines || 14} engines</p>
+                                ${analysis.risk_level ? `<p class="text-xs text-${getRiskColor(analysis.risk_level)}">${analysis.risk_level}</p>` : ''}
+                                ${analysis.findings ? `<p class="text-xs">${analysis.findings} findings</p>` : ''}
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    recentDiv.innerHTML = '<p class="text-center text-gray-400">No analyses yet. Upload a file to get started!</p>';
+                }
+            } catch (error) {
+                console.error('Failed to load recent analyses:', error);
+                const recentDiv = document.getElementById('recentAnalyses');
+                recentDiv.innerHTML = '<p class="text-center text-gray-400">Unable to load recent analyses</p>';
+            }
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            if (!dateString) return 'Recent';
+            try {
+                return new Date(dateString).toLocaleString();
+            } catch {
+                return 'Recent';
+            }
+        }
+
+        // View detailed analysis results
+        async function viewDetailedResults(analysisId) {
+            try {
+                const response = await axios.get(`${API_BASE}/api/analysis/${analysisId}`);
+                const data = response.data;
+
+                // Create detailed view modal or new window
+                const detailWindow = window.open('', '_blank');
+                detailWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>Detailed Analysis Results - ${analysisId}</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; margin: 20px; background: #f8f9fa; }
+                            .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
+                            .header { background: #667eea; color: white; padding: 20px; margin: -20px -20px 20px -20px; border-radius: 8px 8px 0 0; }
+                            .section { margin: 20px 0; padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; }
+                            .critical { border-left: 4px solid #dc3545; }
+                            .high { border-left: 4px solid #fd7e14; }
+                            .medium { border-left: 4px solid #ffc107; }
+                            .low { border-left: 4px solid #28a745; }
+                            pre { background: #f8f9fa; padding: 10px; border-radius: 4px; overflow-x: auto; }
+                            .finding { margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 4px; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <div class="header">
+                                <h1>🔒 QuantumSentinel Security Analysis</h1>
+                                <p>Analysis ID: ${analysisId}</p>
+                                <p>File: ${data.file_info?.filename || 'N/A'}</p>
+                            </div>
+
+                            <div class="section">
+                                <h2>📊 Executive Summary</h2>
+                                <p><strong>Risk Level:</strong> ${data.unified_summary?.unified_risk_level || 'N/A'}</p>
+                                <p><strong>Risk Score:</strong> ${data.unified_summary?.unified_risk_score || 0}/100</p>
+                                <p><strong>Total Findings:</strong> ${data.unified_summary?.total_findings || 0}</p>
+                                <p><strong>Engines Executed:</strong> ${data.unified_summary?.total_engines_executed || 0}</p>
+                            </div>
+
+                            <div class="section">
+                                <h2>🔍 Security Findings</h2>
+                                ${data.findings?.map(finding =>
+                                    '<div class="finding ' + (finding.severity?.toLowerCase() || '') + '">' +
+                                        '<h4>[' + (finding.severity || 'N/A') + '] ' + (finding.type || 'Unknown') + '</h4>' +
+                                        '<p><strong>Engine:</strong> ' + (finding.engine || 'N/A') + '</p>' +
+                                        '<p><strong>Description:</strong> ' + (finding.description || 'N/A') + '</p>' +
+                                        '<p><strong>Evidence:</strong> ' + (finding.evidence || 'N/A') + '</p>' +
+                                        '<p><strong>Recommendation:</strong> ' + (finding.recommendation || 'N/A') + '</p>' +
+                                        '<p><strong>Risk Score:</strong> ' + (finding.risk_score || 0) + '/100</p>' +
+                                    '</div>'
+                                ).join('') || '<p>No detailed findings available</p>'}
+                            </div>
+
+                            <div class="section">
+                                <h2>💡 Recommendations</h2>
+                                <ul>
+                                    ${data.recommendations?.map(rec => '<li>' + rec + '</li>').join('') || '<li>No specific recommendations available</li>'}
+                                </ul>
+                            </div>
+
+                            <div class="section">
+                                <h2>🔧 Engine Results</h2>
+                                ${data.engine_results?.map(engine =>
+                                    '<div class="finding">' +
+                                        '<h4>' + (engine.engine || 'Unknown') + ' (' + (engine.duration_minutes || 0) + ' min)</h4>' +
+                                        '<p><strong>Status:</strong> ' + (engine.status || 'N/A') + '</p>' +
+                                        '<p><strong>Risk Score:</strong> ' + (engine.risk_score || 0) + '/100</p>' +
+                                        '<p><strong>Findings:</strong> ' + (engine.findings?.length || 0) + '</p>' +
+                                    '</div>'
+                                ).join('') || '<p>No engine results available</p>'}
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                `);
+                detailWindow.document.close();
+            } catch (error) {
+                console.error('Error fetching detailed results:', error);
+                alert('Failed to load detailed results. Please try again.');
+            }
+        }
+
+        // Generate and download PDF report
+        async function generatePDFReport(analysisId) {
+            const pdfBtn = document.getElementById('pdfBtn-' + analysisId);
+            const originalText = pdfBtn.textContent;
+
+            try {
+                pdfBtn.disabled = true;
+                pdfBtn.textContent = '⏳ Generating PDF...';
+
+                const response = await axios.post(API_BASE + '/api/generate-report', {
+                    analysis_id: analysisId
+                });
+
+                if (response.data.download_url) {
+                    // Create download link
+                    const link = document.createElement('a');
+                    link.href = response.data.download_url;
+                    link.download = 'QuantumSentinel_Report_' + analysisId + '.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    pdfBtn.textContent = '✅ PDF Downloaded';
+                    setTimeout(() => {
+                        pdfBtn.textContent = originalText;
+                        pdfBtn.disabled = false;
+                    }, 3000);
+                } else {
+                    throw new Error('No download URL received');
+                }
+            } catch (error) {
+                console.error('PDF generation error:', error);
+                alert('Failed to generate PDF report. Please try again.');
+                pdfBtn.textContent = originalText;
+                pdfBtn.disabled = false;
+            }
+        }
+
+        // Download JSON analysis data
+        async function downloadJSONReport(analysisId) {
+            try {
+                const response = await axios.get(API_BASE + '/api/analysis/' + analysisId);
+                const data = response.data;
+
+                // Create and download JSON file
+                const blob = new Blob([JSON.stringify(data, null, 2)], {
+                    type: 'application/json'
+                });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'QuantumSentinel_Analysis_' + analysisId + '.json';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error('JSON download error:', error);
+                alert('Failed to download JSON report. Please try again.');
+            }
+        }
+
+        // Load recent analyses on page load
+        loadRecentAnalyses();
+
+        // Auto-refresh recent analyses every 30 seconds
+        setInterval(loadRecentAnalyses, 30000);
+    </script>
+</body>
+</html>

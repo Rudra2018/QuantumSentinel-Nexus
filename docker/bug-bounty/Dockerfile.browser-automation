@@ -1,0 +1,106 @@
+# QuantumSentinel-Nexus Browser Automation for Context-Aware Testing
+# Selenium-based browser automation with ZAP proxy integration
+
+FROM python:3.11-slim
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV DISPLAY=:99
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    wget \
+    curl \
+    unzip \
+    gnupg2 \
+    software-properties-common \
+    xvfb \
+    x11vnc \
+    fluxbox \
+    ca-certificates \
+    fonts-liberation \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libatk1.0-0 \
+    libatspi2.0-0 \
+    libdrm2 \
+    libgtk-3-0 \
+    libgtk-4-1 \
+    libnspr4 \
+    libnss3 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxrandr2 \
+    xdg-utils \
+    libu2f-udev \
+    libvulkan1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Chrome
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && \
+    apt-get install -y google-chrome-stable && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Firefox ESR
+RUN wget -q -O - https://packages.mozilla.org/apt/repo-signing-key.gpg | apt-key add - && \
+    echo "deb [arch=amd64] https://packages.mozilla.org/apt mozilla main" > /etc/apt/sources.list.d/mozilla.list && \
+    apt-get update && \
+    apt-get install -y firefox-esr && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create working directories
+RUN mkdir -p /automation/{configs,scripts,results,drivers}
+
+# Set working directory
+WORKDIR /automation
+
+# Copy QuantumSentinel source code
+COPY ../../ /opt/quantumsentinel/
+
+# Install Python dependencies
+RUN pip install --upgrade pip && \
+    pip install \
+    selenium==4.15.2 \
+    webdriver-manager==4.0.1 \
+    playwright==1.40.0 \
+    requests \
+    beautifulsoup4 \
+    python-owasp-zap-v2.4 \
+    aiohttp \
+    asyncio \
+    python-dotenv \
+    Pillow \
+    pytest \
+    pytest-asyncio
+
+# Install Playwright browsers
+RUN playwright install chromium firefox webkit
+
+# Copy automation scripts
+COPY scripts/browser-automation/ /automation/scripts/
+COPY configs/browser-automation/ /automation/configs/
+
+# Make scripts executable
+RUN chmod +x /automation/scripts/*.sh
+
+# Create user for running automation
+RUN useradd -m -s /bin/bash automation && \
+    chown -R automation:automation /automation
+
+# Set up environment
+ENV PYTHONPATH="/opt/quantumsentinel:$PYTHONPATH"
+ENV SELENIUM_GRID_URL="http://selenium-hub:4444/wd/hub"
+ENV ZAP_PROXY_URL="http://quantum-zap-proxy:8090"
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python3 -c "import selenium; print('Selenium OK')" || exit 1
+
+# Switch to automation user
+USER automation
+
+# Default command
+CMD ["/automation/scripts/start-browser-automation.sh"]

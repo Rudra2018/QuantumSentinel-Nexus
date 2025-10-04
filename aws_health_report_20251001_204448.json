@@ -1,0 +1,117 @@
+{
+  "timestamp": "2025-10-01T20:44:37.685119",
+  "lambda_functions": [
+    {
+      "name": "quantumsentinel-web-dashboard",
+      "status": "HEALTHY",
+      "state": "Active",
+      "last_modified": "2025-10-01T07:30:30.000+0000",
+      "runtime": "python3.9",
+      "memory": 512,
+      "timeout": 30,
+      "invocation_test": true
+    },
+    {
+      "name": "quantumsentinel-binary-analysis",
+      "status": "HEALTHY",
+      "state": "Active",
+      "last_modified": "2025-10-01T15:14:23.332+0000",
+      "runtime": "python3.9",
+      "memory": 3008,
+      "timeout": 900,
+      "invocation_test": true
+    },
+    {
+      "name": "quantumsentinel-unified-dashboard",
+      "status": "HEALTHY",
+      "state": "Active",
+      "last_modified": "2025-10-01T15:14:22.587+0000",
+      "runtime": "python3.9",
+      "memory": 512,
+      "timeout": 30,
+      "invocation_test": true
+    }
+  ],
+  "ecs_tasks": [
+    {
+      "name": "quantumsentinel-web-ui",
+      "status": "HEALTHY",
+      "running_tasks": 1,
+      "revision": 3,
+      "cpu": "512",
+      "memory": "1024"
+    },
+    {
+      "name": "quantumsentinel-binary-analysis",
+      "status": "HEALTHY",
+      "running_tasks": 1,
+      "revision": 3,
+      "cpu": "2048",
+      "memory": "4096"
+    },
+    {
+      "name": "quantumsentinel-ibb-research",
+      "status": "HEALTHY",
+      "running_tasks": 1,
+      "revision": 4,
+      "cpu": "1024",
+      "memory": "2048"
+    }
+  ],
+  "api_endpoints": [
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod/dast",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.45619,
+      "response_size": 195
+    },
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod/sast",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.452269,
+      "response_size": 195
+    },
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod/bugbounty",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.452112,
+      "response_size": 205
+    },
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod/reverse-engineering",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.458769,
+      "response_size": 225
+    },
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod/ai",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.481564,
+      "response_size": 190
+    },
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod/frida",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.50013,
+      "response_size": 197
+    },
+    {
+      "endpoint": "https://ex57j8i2bi.execute-api.us-east-1.amazonaws.com/prod",
+      "status": "HEALTHY",
+      "status_code": 200,
+      "response_time": 1.812681,
+      "response_size": 15920
+    }
+  ],
+  "cloudwatch_metrics": {
+    "lambda_invocations": 22.0,
+    "api_requests": 15.0
+  },
+  "overall_status": "HEALTHY"
+}

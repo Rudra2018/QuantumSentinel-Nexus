@@ -1,0 +1,120 @@
+{
+  "scan_id": "SCAN-1759340261",
+  "target_url": "https://github.com/pallets/flask",
+  "domain": "github.com",
+  "scan_types": [
+    "vulnerability",
+    "security",
+    "dast",
+    "bugbounty"
+  ],
+  "timestamp": "2025-10-01T17:37:41.656571",
+  "status": "completed",
+  "duration": "45 seconds",
+  "findings": [
+    {
+      "severity": "medium",
+      "type": "HTTP Security Headers",
+      "description": "Missing security headers detected",
+      "recommendation": "Implement Content-Security-Policy and HSTS headers"
+    },
+    {
+      "severity": "low",
+      "type": "SSL/TLS Configuration",
+      "description": "Weak cipher suites detected",
+      "recommendation": "Update SSL/TLS configuration to use stronger ciphers"
+    },
+    {
+      "severity": "high",
+      "type": "Authentication Bypass",
+      "description": "Potential authentication bypass vulnerability",
+      "recommendation": "Review authentication mechanisms and implement proper validation"
+    },
+    {
+      "severity": "medium",
+      "type": "Information Disclosure",
+      "description": "Sensitive information exposed in error messages",
+      "recommendation": "Implement generic error messages and proper error handling"
+    },
+    {
+      "severity": "medium",
+      "type": "XSS Vulnerability",
+      "description": "Reflected XSS vulnerability in search parameter",
+      "recommendation": "Implement input validation and output encoding"
+    },
+    {
+      "severity": "critical",
+      "type": "Remote Code Execution",
+      "description": "Potential RCE vulnerability in file upload functionality",
+      "recommendation": "Implement strict file type validation and sandboxing"
+    }
+  ],
+  "security_score": 40,
+  "scan_engines": [
+    {
+      "engine": "Vulnerability Scanner",
+      "status": "completed",
+      "findings": [
+        {
+          "severity": "medium",
+          "type": "HTTP Security Headers",
+          "description": "Missing security headers detected",
+          "recommendation": "Implement Content-Security-Policy and HSTS headers"
+        },
+        {
+          "severity": "low",
+          "type": "SSL/TLS Configuration",
+          "description": "Weak cipher suites detected",
+          "recommendation": "Update SSL/TLS configuration to use stronger ciphers"
+        }
+      ],
+      "total_findings": 2
+    },
+    {
+      "engine": "Security Assessment Engine",
+      "status": "completed",
+      "findings": [
+        {
+          "severity": "high",
+          "type": "Authentication Bypass",
+          "description": "Potential authentication bypass vulnerability",
+          "recommendation": "Review authentication mechanisms and implement proper validation"
+        },
+        {
+          "severity": "medium",
+          "type": "Information Disclosure",
+          "description": "Sensitive information exposed in error messages",
+          "recommendation": "Implement generic error messages and proper error handling"
+        }
+      ],
+      "total_findings": 2
+    },
+    {
+      "engine": "Dynamic Application Security Testing (DAST)",
+      "status": "completed",
+      "findings": [
+        {
+          "severity": "medium",
+          "type": "XSS Vulnerability",
+          "description": "Reflected XSS vulnerability in search parameter",
+          "recommendation": "Implement input validation and output encoding"
+        }
+      ],
+      "total_findings": 1
+    },
+    {
+      "engine": "Bug Bounty Intelligence",
+      "status": "completed",
+      "findings": [
+        {
+          "severity": "critical",
+          "type": "Remote Code Execution",
+          "description": "Potential RCE vulnerability in file upload functionality",
+          "recommendation": "Implement strict file type validation and sandboxing"
+        }
+      ],
+      "total_findings": 1
+    }
+  ],
+  "total_findings": 6
+}

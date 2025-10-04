@@ -1,0 +1,106 @@
+# QuantumSentinel Binary Emulation - Windows Environment with WINE
+# Windows binary analysis and execution environment
+
+FROM ubuntu:22.04
+
+LABEL maintainer="QuantumSentinel-Nexus"
+LABEL description="Windows binary emulation with WINE for PE analysis"
+LABEL version="1.0"
+
+# Prevent interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+
+# Add Wine repository
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    wget \
+    gnupg \
+    && wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add - \
+    && add-apt-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ jammy main'
+
+# Install system dependencies and Wine
+RUN apt-get update && apt-get install -y \
+    # Core tools
+    curl \
+    git \
+    vim \
+    tmux \
+    unzip \
+    # Wine and Windows emulation
+    winehq-stable \
+    winetricks \
+    xvfb \
+    # Binary analysis tools
+    binutils \
+    gdb \
+    file \
+    strings \
+    objdump \
+    hexdump \
+    strace \
+    # Python
+    python3 \
+    python3-pip \
+    python3-dev \
+    # Network tools
+    netcat \
+    tcpdump \
+    # Windows debugging tools (will be installed via Wine)
+    # Cleanup
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python packages for Windows binary analysis
+RUN pip3 install --no-cache-dir \
+    pefile \
+    capstone \
+    lief \
+    yara-python \
+    oletools \
+    pycryptodome \
+    requests \
+    click \
+    frida-tools
+
+# Create analysis directories
+RUN mkdir -p /analysis/{binaries,results,scripts,logs,wine-prefix}
+
+# Create analyst user
+RUN useradd -m -s /bin/bash analyst && \
+    usermod -aG sudo analyst && \
+    echo "analyst ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# Set up Wine environment
+USER analyst
+WORKDIR /home/analyst
+
+# Initialize Wine prefix
+RUN WINEARCH=win64 WINEPREFIX=/analysis/wine-prefix winecfg /v win10 && \
+    WINEPREFIX=/analysis/wine-prefix winetricks -q vcrun2019 dotnet48 corefonts
+
+# Install useful Windows tools via Wine
+RUN WINEPREFIX=/analysis/wine-prefix wget -O /tmp/procmon.zip \
+    https://download.sysinternals.com/files/ProcessMonitor.zip && \
+    unzip /tmp/procmon.zip -d /analysis/wine-prefix/drive_c/tools/ && \
+    rm /tmp/procmon.zip
+
+# Copy Windows analysis scripts
+COPY scripts/analyze-windows.sh /usr/local/bin/
+COPY scripts/wine-runner.sh /usr/local/bin/
+
+USER root
+RUN chmod +x /usr/local/bin/*.sh && \
+    chown -R analyst:analyst /analysis
+
+USER analyst
+WORKDIR /analysis
+
+# Environment variables for Wine
+ENV WINEARCH=win64
+ENV WINEPREFIX=/analysis/wine-prefix
+ENV DISPLAY=:99
+ENV PYTHONPATH="/analysis:$PYTHONPATH"
+
+# Start Xvfb for headless Wine execution
+CMD ["bash", "-c", "Xvfb :99 -screen 0 1024x768x16 & exec /bin/bash"]

@@ -1,0 +1,45 @@
+# QuantumSentinel Binary Emulation - Docker Ignore
+
+# Results and temporary files
+results/
+*.log
+*.tmp
+*.pcap
+
+# Binaries (will be mounted as volumes)
+binaries/
+samples/
+malware/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# Cache
+.cache/
+*.cache
+
+# Wine directories (will be created in container)
+.wine/
+wine_prefix/
+
+# Docker
+Dockerfile.swp

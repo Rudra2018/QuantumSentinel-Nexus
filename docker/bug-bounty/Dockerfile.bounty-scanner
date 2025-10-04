@@ -1,0 +1,126 @@
+# QuantumSentinel-Nexus Bug Bounty Scanner
+# Comprehensive bug bounty automation with reconnaissance and ZAP integration
+
+FROM ubuntu:22.04
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+ENV SCAN_MODE=comprehensive
+ENV ZAP_MEMORY=2g
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
+    git \
+    curl \
+    wget \
+    unzip \
+    jq \
+    nmap \
+    dnsutils \
+    whois \
+    masscan \
+    subfinder \
+    amass \
+    httpx \
+    nuclei \
+    ffuf \
+    gobuster \
+    nikto \
+    dirb \
+    wfuzz \
+    sqlmap \
+    whatweb \
+    wafw00f \
+    eyewitness \
+    chromium-browser \
+    chromium-chromedriver \
+    firefox \
+    geckodriver \
+    ca-certificates \
+    gnupg \
+    lsb-release \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Go for additional recon tools
+RUN wget https://go.dev/dl/go1.21.5.linux-amd64.tar.gz && \
+    tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz && \
+    rm go1.21.5.linux-amd64.tar.gz
+
+ENV PATH=$PATH:/usr/local/go/bin:/root/go/bin
+
+# Install additional Go-based recon tools
+RUN go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest && \
+    go install github.com/projectdiscovery/httpx/cmd/httpx@latest && \
+    go install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest && \
+    go install github.com/projectdiscovery/chaos-client/cmd/chaos@latest && \
+    go install github.com/projectdiscovery/dnsx/cmd/dnsx@latest && \
+    go install github.com/tomnomnom/waybackurls@latest && \
+    go install github.com/tomnomnom/assetfinder@latest && \
+    go install github.com/tomnomnom/httprobe@latest
+
+# Create working directories
+RUN mkdir -p /bounty/{configs,scripts,results,wordlists,tools}
+
+# Set working directory
+WORKDIR /bounty
+
+# Copy QuantumSentinel source code
+COPY ../../ /opt/quantumsentinel/
+
+# Create Python virtual environment
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Install Python dependencies
+RUN pip install --upgrade pip && \
+    pip install -r /opt/quantumsentinel/requirements.txt
+
+# Install additional bug bounty specific tools
+RUN pip install \
+    requests \
+    beautifulsoup4 \
+    selenium \
+    webdriver-manager \
+    python-owasp-zap-v2.4 \
+    shodan \
+    censys \
+    python-whois \
+    dnspython \
+    aiohttp \
+    asyncio-throttle \
+    python-dotenv
+
+# Download and setup wordlists
+RUN mkdir -p /bounty/wordlists && \
+    wget -O /bounty/wordlists/common.txt https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/common.txt && \
+    wget -O /bounty/wordlists/subdomains.txt https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/subdomains-top1million-5000.txt && \
+    wget -O /bounty/wordlists/parameters.txt https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/burp-parameter-names.txt
+
+# Copy bug bounty scanning scripts
+COPY scripts/ /bounty/scripts/
+COPY configs/ /bounty/configs/
+
+# Make scripts executable
+RUN chmod +x /bounty/scripts/*.sh
+
+# Create user for running scans
+RUN useradd -m -s /bin/bash bounty && \
+    chown -R bounty:bounty /bounty
+
+# Switch to bounty user
+USER bounty
+
+# Set up environment
+ENV PATH="/opt/venv/bin:/root/go/bin:$PATH"
+ENV PYTHONPATH="/opt/quantumsentinel:$PYTHONPATH"
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8080/health || exit 1
+
+# Default command
+CMD ["/bounty/scripts/start-bounty-scanner.sh"]

@@ -1,0 +1,8 @@
+{
+  "body": "{\"action\": \"list\"}",
+  "httpMethod": "GET",
+  "path": "/api/analysis",
+  "headers": {
+    "Content-Type": "application/json"
+  }
+}

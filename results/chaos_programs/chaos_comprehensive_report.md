@@ -1,74 +1,103 @@
 # 🌪️ Chaos ProjectDiscovery Multi-Program Assessment Report
 
-**Generated:** 2025-09-27 14:12:00
+**Generated:** 2025-10-01 19:26:16
 
 ## 📊 Executive Summary
 
 - **Total Programs Tested:** 10
-- **Total Domains Discovered:** 10
-- **Assessment Duration:** 2025-09-27
+- **Total Domains Discovered:** 39
+- **Assessment Duration:** 2025-10-01
 
 ## 🎯 Program Breakdown
 
 ### shopify
 - **Platform:** hackerone
-- **Domains Found:** 1
+- **Domains Found:** 4
 - **Top Domains:**
-  - `{"domain":"shopify","subdomains":[],"count":0}`
+  - `shopify.com`
+  - `shop.app`
+  - `shopifypartners.com`
+  - `myshopify.com`
 
 ### gitlab
 - **Platform:** hackerone
-- **Domains Found:** 1
+- **Domains Found:** 4
 - **Top Domains:**
-  - `{"domain":"gitlab","subdomains":[],"count":0}`
+  - `gitlab.com`
+  - `about.gitlab.com`
+  - `docs.gitlab.com`
+  - `forum.gitlab.com`
 
 ### uber
 - **Platform:** hackerone
-- **Domains Found:** 1
+- **Domains Found:** 4
 - **Top Domains:**
-  - `{"domain":"uber","subdomains":[],"count":0}`
+  - `uber.com`
+  - `ubereats.com`
+  - `freight.uber.com`
+  - `developer.uber.com`
 
 ### tesla
 - **Platform:** bugcrowd
-- **Domains Found:** 1
+- **Domains Found:** 4
 - **Top Domains:**
-  - `{"domain":"tesla","subdomains":[],"count":0}`
+  - `tesla.com`
+  - `supercharger.info`
+  - `tesla.cn`
+  - `teslamotors.com`
 
 ### google
 - **Platform:** google_vrp
-- **Domains Found:** 1
+- **Domains Found:** 4
 - **Top Domains:**
-  - `{"domain":"google","subdomains":[],"count":0}`
+  - `google.com`
+  - `gmail.com`
+  - `youtube.com`
+  - `drive.google.com`
 
 ### microsoft
 - **Platform:** microsoft_msrc
-- **Domains Found:** 1
+- **Domains Found:** 4
 - **Top Domains:**
-  - `{"domain":"microsoft","subdomains":[],"count":0}`
+  - `microsoft.com`
+  - `office.com`
+  - `azure.com`
+  - `live.com`
 
 ### apple
 - **Platform:** apple_security
-- **Domains Found:** 1
+- **Domains Found:** 4
 - **Top Domains:**
-  - `{"domain":"apple","subdomains":[],"count":0}`
+  - `apple.com`
+  - `icloud.com`
+  - `itunes.com`
+  - `developer.apple.com`
 
 ### yahoo
 - **Platform:** hackerone
-- **Domains Found:** 1
+- **Domains Found:** 4
 - **Top Domains:**
-  - `{"domain":"yahoo","subdomains":[],"count":0}`
+  - `yahoo.com`
+  - `mail.yahoo.com`
+  - `news.yahoo.com`
+  - `finance.yahoo.com`
 
 ### slack
 - **Platform:** hackerone
-- **Domains Found:** 1
+- **Domains Found:** 4
 - **Top Domains:**
-  - `{"domain":"slack","subdomains":[],"count":0}`
+  - `slack.com`
+  - `api.slack.com`
+  - `status.slack.com`
+  - `slack-files.com`
 
 ### dropbox
 - **Platform:** hackerone
-- **Domains Found:** 1
+- **Domains Found:** 3
 - **Top Domains:**
-  - `{"domain":"dropbox","subdomains":[],"count":0}`
+  - `dropbox.com`
+  - `paper.dropbox.com`
+  - `www.dropbox.com`
 
 ## 🔍 Platform Distribution
 

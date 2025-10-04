@@ -1,0 +1,49 @@
+{
+  "scan_id": "iOS-COMPREHENSIVE-1759416185",
+  "target": "H4CiOS-Stage.ipa",
+  "file_size": 126196530,
+  "analysis_timestamp": "2025-10-02T20:13:05.622410",
+  "vulnerabilities": [
+    {
+      "vuln_id": "iOS-EXCESSIVE-BINARIES",
+      "title": "Excessive Binary Files",
+      "severity": "LOW",
+      "description": "Large number of binary files may indicate complex attack surface",
+      "evidence": "Found 236 binary files"
+    },
+    {
+      "vuln_id": "iOS-EXCESSIVE-CONFIG",
+      "title": "Excessive Configuration Files",
+      "severity": "LOW",
+      "description": "Large number of configuration files may contain sensitive data",
+      "evidence": "Found 106 configuration files"
+    },
+    {
+      "vuln_id": "iOS-MANY-FRAMEWORKS",
+      "title": "Multiple Third-Party Frameworks",
+      "severity": "MEDIUM",
+      "description": "Large number of frameworks increases attack surface",
+      "evidence": "Found 97 frameworks"
+    }
+  ],
+  "security_findings": [
+    {
+      "type": "Data Storage",
+      "finding": "Multiple database/storage files detected (89 files)",
+      "risk": "MEDIUM",
+      "recommendation": "Ensure sensitive data is properly encrypted"
+    }
+  ],
+  "risk_score": 50,
+  "app_bundle": "HaloDocIOS.app",
+  "risk_level": "MEDIUM",
+  "total_files": 1976,
+  "analysis_summary": {
+    "total_files": 1976,
+    "binary_files": 236,
+    "config_files": 106,
+    "frameworks": 97,
+    "vulnerabilities_found": 3,
+    "risk_score": 50
+  }
+}

@@ -1,4 +1,7 @@
-# Docker Compose configuration for QuantumSentinel-Nexus
+# Enhanced Docker Compose configuration for QuantumSentinel-Nexus
+# Comprehensive end-to-end testing and deployment environment
+
+version: '3.8'
 
 services:
   # Redis - Knowledge Graph Database
@@ -246,7 +249,328 @@ services:
     networks:
       - quantumsentinel-network
 
+  # Enhanced Web UI with WebSocket Support
+  enhanced-web-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.web-ui
+    container_name: quantumsentinel-web-ui
+    restart: unless-stopped
+    ports:
+      - "5001:5001"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - FLASK_ENV=production
+      - SECRET_KEY=quantum-sentinel-enhanced-ui-key
+    volumes:
+      - ./reports:/app/reports
+      - ./uploads:/app/uploads
+    depends_on:
+      - redis
+      - orchestrator
+    networks:
+      - quantumsentinel-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Elasticsearch for Log Analytics
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.0
+    container_name: quantumsentinel-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - quantumsentinel-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Test Runner Service - Comprehensive Test Suite
+  test-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: quantumsentinel-tests
+    volumes:
+      - .:/app
+      - ./test-results:/app/test-results
+      - ./coverage-reports:/app/coverage-reports
+    environment:
+      - QUANTUMSENTINEL_ENV=test
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - TIMESCALE_HOST=timescaledb
+      - TIMESCALE_PORT=5432
+      - TIMESCALE_DATABASE=quantumsentinel_test
+      - TIMESCALE_USERNAME=quantumsentinel
+      - TIMESCALE_PASSWORD=secure-password-change-me
+      - PYTHONPATH=/app
+    depends_on:
+      - redis
+      - timescaledb
+    networks:
+      - quantumsentinel-network
+    profiles:
+      - testing
+    command: >
+      sh -c "
+        echo '🧪 Starting QuantumSentinel Comprehensive Test Suite...' &&
+        echo '⏰ Test started at: $(date)' &&
+        python -m pytest tests/ -v --tb=short \
+          --cov=. --cov-report=html:test-results/coverage \
+          --cov-report=xml:test-results/coverage.xml \
+          --cov-report=term-missing \
+          --junitxml=test-results/junit.xml \
+          --cov-fail-under=80 &&
+        echo '✅ Test suite completed with 80%+ coverage target' &&
+        echo '📊 Coverage report: test-results/coverage/index.html'
+      "
+
+  # Security Scanner - SAST/DAST Self-Assessment
+  security-scanner:
+    build:
+      context: .
+      dockerfile: Dockerfile.security
+    container_name: quantumsentinel-security-scan
+    volumes:
+      - .:/app
+      - ./security-results:/app/security-results
+    environment:
+      - TARGET_URL=http://orchestrator:8000
+      - WEB_UI_URL=http://enhanced-web-ui:5001
+      - SECURITY_SCAN_DEPTH=deep
+    depends_on:
+      - orchestrator
+      - enhanced-web-ui
+    networks:
+      - quantumsentinel-network
+    profiles:
+      - security-scan
+    command: >
+      sh -c "
+        echo '🔒 Starting Self-Security Assessment...' &&
+        sleep 45 &&
+        echo '📋 Running SAST scan on codebase...' &&
+        python -m security_engines.sast.bandit_engine --target /app --output /app/security-results/sast-results.json &&
+        echo '🌐 Running DAST scan on web interfaces...' &&
+        python -m security_engines.dast.web_scanner --target http://orchestrator:8000 --output /app/security-results/dast-main.json &&
+        python -m security_engines.dast.web_scanner --target http://enhanced-web-ui:5001 --output /app/security-results/dast-ui.json &&
+        echo '🤖 Running AI vulnerability analysis...' &&
+        python -m ai_agents.ml_models.vulnerability_detector --scan /app --output /app/security-results/ai-analysis.json &&
+        echo '✅ Security assessment completed'
+      "
+
+  # Performance Testing with K6
+  performance-tester:
+    image: grafana/k6:latest
+    container_name: quantumsentinel-k6
+    volumes:
+      - ./tests/performance:/scripts
+      - ./performance-results:/results
+    environment:
+      - TARGET_URL=http://orchestrator:8000
+      - WEB_UI_URL=http://enhanced-web-ui:5001
+      - TEST_DURATION=5m
+      - VIRTUAL_USERS=50
+    depends_on:
+      - orchestrator
+      - enhanced-web-ui
+    networks:
+      - quantumsentinel-network
+    profiles:
+      - performance
+    command: >
+      sh -c "
+        echo '📈 Starting Performance Tests...' &&
+        k6 run --duration ${TEST_DURATION} --vus ${VIRTUAL_USERS} \
+          --out json=/results/performance-main.json /scripts/api_load_test.js &&
+        k6 run --duration ${TEST_DURATION} --vus ${VIRTUAL_USERS} \
+          --out json=/results/performance-ui.json /scripts/ui_load_test.js &&
+        echo '✅ Performance tests completed'
+      "
+
+  # Integration Test Runner
+  integration-tester:
+    build:
+      context: .
+      dockerfile: Dockerfile.integration
+    container_name: quantumsentinel-integration
+    volumes:
+      - .:/app
+      - ./integration-results:/app/integration-results
+    environment:
+      - ORCHESTRATOR_URL=http://orchestrator:8000
+      - WEB_UI_URL=http://enhanced-web-ui:5001
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - orchestrator
+      - enhanced-web-ui
+      - sast-agent
+      - dast-agent
+      - binary-agent
+    networks:
+      - quantumsentinel-network
+    profiles:
+      - integration
+    command: >
+      sh -c "
+        echo '🔗 Starting End-to-End Integration Tests...' &&
+        sleep 60 &&
+        python tests/integration/test_full_workflow.py &&
+        python tests/integration/test_agent_communication.py &&
+        python tests/integration/test_web_ui_integration.py &&
+        python tests/integration/test_report_generation.py &&
+        echo '✅ Integration tests completed'
+      "
+
+  # Mobile Testing Environment
+  mobile-test-env:
+    build:
+      context: .
+      dockerfile: Dockerfile.mobile
+    container_name: quantumsentinel-mobile-env
+    privileged: true
+    volumes:
+      - .:/app
+      - ./mobile-test-results:/app/mobile-results
+      - /dev/bus/usb:/dev/bus/usb
+    environment:
+      - ANDROID_HOME=/opt/android-sdk
+      - JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+    networks:
+      - quantumsentinel-network
+    profiles:
+      - mobile-testing
+    command: >
+      sh -c "
+        echo '📱 Starting Mobile Security Testing Environment...' &&
+        echo '🔧 Setting up Android SDK and tools...' &&
+        /app/scripts/setup_mobile_env.sh &&
+        echo '📋 Running mobile analysis tests...' &&
+        python tests/mobile/test_apk_analysis.py &&
+        python tests/mobile/test_frida_integration.py &&
+        echo '✅ Mobile testing completed'
+      "
+
+  # Binary Analysis Environment
+  binary-test-env:
+    build:
+      context: .
+      dockerfile: Dockerfile.binary
+    container_name: quantumsentinel-binary-env
+    volumes:
+      - .:/app
+      - ./binary-test-results:/app/binary-results
+      - /opt/ghidra:/opt/ghidra
+    environment:
+      - GHIDRA_INSTALL_DIR=/opt/ghidra
+      - JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+    networks:
+      - quantumsentinel-network
+    profiles:
+      - binary-testing
+    command: >
+      sh -c "
+        echo '🔍 Starting Binary Analysis Testing Environment...' &&
+        echo '🔧 Setting up Ghidra and analysis tools...' &&
+        /app/scripts/setup_binary_env.sh &&
+        echo '📋 Running binary analysis tests...' &&
+        python tests/binary/test_ghidra_integration.py &&
+        python tests/binary/test_binary_analysis.py &&
+        echo '✅ Binary testing completed'
+      "
+
+  # Chaos Engineering Testing
+  chaos-tester:
+    image: quay.io/prometheusio/chaos-engineering:latest
+    container_name: quantumsentinel-chaos
+    volumes:
+      - ./chaos-tests:/chaos
+      - ./chaos-results:/results
+    environment:
+      - TARGET_SERVICES=orchestrator,sast-agent,dast-agent,binary-agent
+      - CHAOS_DURATION=300
+    depends_on:
+      - orchestrator
+      - sast-agent
+      - dast-agent
+    networks:
+      - quantumsentinel-network
+    profiles:
+      - chaos-testing
+    command: >
+      sh -c "
+        echo '🌪️  Starting Chaos Engineering Tests...' &&
+        /chaos/run_chaos_tests.sh &&
+        echo '✅ Chaos testing completed'
+      "
+
+  # Vulnerability Database Updater
+  vuln-db-updater:
+    build:
+      context: .
+      dockerfile: Dockerfile.vuln-db
+    container_name: quantumsentinel-vuln-updater
+    volumes:
+      - ./vulnerability-db:/app/vuln-db
+    environment:
+      - CVE_API_KEY=${CVE_API_KEY:-}
+      - UPDATE_FREQUENCY=daily
+    networks:
+      - quantumsentinel-network
+    profiles:
+      - vulnerability-updates
+    command: >
+      sh -c "
+        echo '🗄️  Updating Vulnerability Databases...' &&
+        python scripts/update_cve_database.py &&
+        python scripts/update_exploit_database.py &&
+        python scripts/update_threat_intelligence.py &&
+        echo '✅ Vulnerability database updates completed'
+      "
+
+  # Compliance Reporter
+  compliance-reporter:
+    build:
+      context: .
+      dockerfile: Dockerfile.compliance
+    container_name: quantumsentinel-compliance
+    volumes:
+      - .:/app
+      - ./compliance-reports:/app/compliance-reports
+    environment:
+      - COMPLIANCE_FRAMEWORKS=OWASP,NIST,ISO27001,SOC2
+      - REPORT_FORMAT=pdf,json,html
+    depends_on:
+      - orchestrator
+    networks:
+      - quantumsentinel-network
+    profiles:
+      - compliance
+    command: >
+      sh -c "
+        echo '📋 Generating Compliance Reports...' &&
+        python scripts/generate_compliance_reports.py &&
+        echo '✅ Compliance reporting completed'
+      "
+
 volumes:
+  elasticsearch_data:
+    driver: local
   redis_data:
     driver: local
   timescaledb_data:

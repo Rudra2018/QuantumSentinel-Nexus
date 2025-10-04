@@ -88,6 +88,93 @@ modules:
       extensions: ["php", "asp", "aspx", "jsp", "html", "js", "txt", "pdf"]
       threads: 30
 
+  binary_analysis:
+    enabled: true
+    description: "Comprehensive binary security analysis with multi-format support"
+    tools:
+      static_analysis:
+        - "ghidra"
+        - "radare2"
+        - "lief"
+        - "capstone"
+        - "pefile"
+        - "pyelftools"
+        - "macholib"
+        - "objdump"
+        - "readelf"
+        - "strings"
+        - "checksec"
+      dynamic_analysis:
+        - "qemu"
+        - "frida"
+        - "unicorn"
+        - "strace"
+        - "ltrace"
+      vulnerability_scanning:
+        - "pwntools"
+        - "ropper"
+        - "yara"
+        - "ssdeep"
+        - "entropy"
+    supported_formats:
+      - "pe"           # Windows executables
+      - "elf"          # Linux executables
+      - "macho"        # macOS executables
+      - "ipa"          # iOS applications
+      - "apk"          # Android applications
+      - "deb"          # Debian packages
+      - "dll"          # Windows libraries
+      - "so"           # Linux shared objects
+      - "dylib"        # macOS dynamic libraries
+      - "framework"    # iOS/macOS frameworks
+      - "ko"           # Linux kernel modules
+      - "kext"         # macOS kernel extensions
+    settings:
+      enable_dynamic_analysis: false  # Default disabled for safety
+      enable_emulation: false        # Default disabled for safety
+      ghidra_path: "/opt/ghidra"
+      max_analysis_time_minutes: 30
+      sandbox_analysis: true
+      create_backups: true
+      parallel_analysis: false       # Process binaries sequentially
+    static_analysis:
+      extract_strings: true
+      min_string_length: 6
+      detect_packing: true
+      analyze_imports: true
+      analyze_exports: true
+      check_security_features: true
+      entropy_threshold: 7.5
+      disassembly_depth: "moderate"
+    dynamic_analysis:
+      qemu_timeout_seconds: 30
+      frida_timeout_seconds: 20
+      trace_system_calls: true
+      monitor_memory: true
+      monitor_network: true
+      monitor_file_access: true
+      crash_detection: true
+    vulnerability_detection:
+      dangerous_functions: true
+      buffer_overflow_patterns: true
+      format_string_bugs: true
+      integer_overflow: true
+      use_after_free: true
+      hardcoded_credentials: true
+      weak_crypto: true
+      memory_leaks: true
+    security_features:
+      check_pie: true
+      check_canary: true
+      check_nx: true
+      check_relro: true
+      check_fortify: true
+      check_aslr: true
+    owasp_cwe_mapping:
+      enabled: true
+      include_references: true
+      severity_mapping: "cvss"
+
 # Output Configuration
 output:
   base_dir: "assessments"

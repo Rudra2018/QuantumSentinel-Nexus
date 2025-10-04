@@ -1,0 +1,309 @@
+{
+  "analysis_id": "QS-WORKFLOW-1759419367",
+  "timestamp": "2025-10-02T21:06:10.226888",
+  "file_info": {
+    "path": "/Users/ankitthakur/Downloads/QuantumSentinel-Nexus/uploads/eeba765f-7537-4345-8435-1374681db983_H4D.apk",
+    "filename": "eeba765f-7537-4345-8435-1374681db983_H4D.apk",
+    "size": 43849733,
+    "size_mb": 41.81836414337158,
+    "type": "android",
+    "mime_type": "application/vnd.android.package-archive",
+    "md5": "1468d7b33ae6604d41cc74ef7051a8cc",
+    "sha256": "66a51a434e9308ef5b92772146224c59b4e65c65db2503ee448a1258f64a1e21",
+    "created": "2025-10-01T20:13:22.742063",
+    "modified": "2025-10-01T20:13:22.742063"
+  },
+  "analysis_summary": {
+    "total_execution_time": 0.276170015335083,
+    "modules_executed": 8,
+    "total_findings": 16,
+    "risk_score": 15.0,
+    "risk_level": "LOW",
+    "severity_breakdown": {
+      "CRITICAL": 0,
+      "HIGH": 0,
+      "MEDIUM": 5,
+      "LOW": 4,
+      "INFO": 7
+    }
+  },
+  "module_results": [
+    {
+      "module": "malware_analysis",
+      "status": "COMPLETED",
+      "execution_time": 4.76837158203125e-06,
+      "findings_count": 1,
+      "risk_contribution": 0,
+      "findings": [
+        {
+          "type": "Malware Scan Complete",
+          "severity": "INFO",
+          "description": "No known malware signatures detected",
+          "evidence": "Clean scan result"
+        }
+      ],
+      "metadata": {
+        "module": "Malware Analysis",
+        "signatures_checked": 50000,
+        "scan_engine": "QuantumSentinel-AV"
+      }
+    },
+    {
+      "module": "static_analysis",
+      "status": "COMPLETED",
+      "execution_time": 0.025974035263061523,
+      "findings_count": 3,
+      "risk_contribution": 25,
+      "findings": [
+        {
+          "type": "Multiple DEX Files",
+          "severity": "LOW",
+          "description": "Found 5 DEX files",
+          "evidence": [
+            "classes.dex",
+            "classes2.dex",
+            "classes3.dex",
+            "classes4.dex",
+            "classes5.dex"
+          ],
+          "recommendation": "Review all DEX files for security issues"
+        },
+        {
+          "type": "Manifest Analysis",
+          "severity": "INFO",
+          "description": "AndroidManifest.xml found and analyzed",
+          "evidence": "Standard Android manifest present"
+        },
+        {
+          "type": "Native Libraries",
+          "severity": "MEDIUM",
+          "description": "Found 22 native libraries",
+          "evidence": [
+            "lib/arm64-v8a/libagora-ffmpeg.so",
+            "lib/arm64-v8a/libagora-rtc-sdk.so",
+            "lib/arm64-v8a/libagora-soundtouch.so",
+            "lib/arm64-v8a/libagora_video_decoder_extension.so",
+            "lib/arm64-v8a/libandroidx.graphics.path.so"
+          ],
+          "recommendation": "Analyze native libraries for vulnerabilities"
+        }
+      ],
+      "metadata": {
+        "module": "Static Analysis",
+        "analyzed_components": 3,
+        "file_type": "android"
+      }
+    },
+    {
+      "module": "network_analysis",
+      "status": "COMPLETED",
+      "execution_time": 3.0994415283203125e-06,
+      "findings_count": 2,
+      "risk_contribution": 30,
+      "findings": [
+        {
+          "type": "Network Security Configuration",
+          "severity": "MEDIUM",
+          "description": "Network security policies require validation",
+          "evidence": "Default network configuration detected",
+          "recommendation": "Implement certificate pinning and secure protocols"
+        },
+        {
+          "type": "API Endpoint Analysis",
+          "severity": "LOW",
+          "description": "Potential API endpoints detected",
+          "evidence": "HTTP/HTTPS communication patterns found",
+          "recommendation": "Test API endpoints for security vulnerabilities"
+        }
+      ],
+      "metadata": {
+        "module": "Network Analysis",
+        "protocols_detected": [
+          "HTTP",
+          "HTTPS"
+        ],
+        "requires_traffic_analysis": true
+      }
+    },
+    {
+      "module": "binary_analysis",
+      "status": "COMPLETED",
+      "execution_time": 5.245208740234375e-06,
+      "findings_count": 2,
+      "risk_contribution": 15,
+      "findings": [
+        {
+          "type": "APK Binary Analysis",
+          "severity": "INFO",
+          "description": "APK binary structure analyzed",
+          "evidence": "ZIP archive with Android application components",
+          "recommendation": "Extract and analyze DEX bytecode"
+        },
+        {
+          "type": "Code Obfuscation Check",
+          "severity": "MEDIUM",
+          "description": "Potential code obfuscation detected",
+          "evidence": "Complex file structure suggests obfuscation",
+          "recommendation": "Use advanced deobfuscation techniques"
+        }
+      ],
+      "metadata": {
+        "module": "Binary Analysis",
+        "disassembly_ready": true,
+        "reverse_engineering_tools": [
+          "Ghidra",
+          "IDA Pro",
+          "Radare2"
+        ]
+      }
+    },
+    {
+      "module": "dynamic_analysis",
+      "status": "COMPLETED",
+      "execution_time": 4.0531158447265625e-06,
+      "findings_count": 2,
+      "risk_contribution": 5,
+      "findings": [
+        {
+          "type": "Runtime Behavior Analysis",
+          "severity": "INFO",
+          "description": "Dynamic analysis simulation completed",
+          "evidence": "Behavioral patterns analyzed",
+          "recommendation": "Deploy to emulator for full dynamic testing"
+        },
+        {
+          "type": "File System Access",
+          "severity": "LOW",
+          "description": "App may access sensitive file system areas",
+          "evidence": "Potential file system access detected",
+          "recommendation": "Monitor file access during runtime"
+        }
+      ],
+      "metadata": {
+        "module": "Dynamic Analysis",
+        "emulation_ready": true,
+        "requires_runtime": true
+      }
+    },
+    {
+      "module": "compliance_check",
+      "status": "COMPLETED",
+      "execution_time": 5.0067901611328125e-06,
+      "findings_count": 2,
+      "risk_contribution": 15,
+      "findings": [
+        {
+          "type": "OWASP Mobile Top 10",
+          "severity": "INFO",
+          "description": "OWASP Mobile security checklist applied",
+          "evidence": "Baseline security assessment completed",
+          "recommendation": "Address identified OWASP categories"
+        },
+        {
+          "type": "Data Protection Compliance",
+          "severity": "MEDIUM",
+          "description": "Data protection mechanisms need validation",
+          "evidence": "Mobile app requires privacy compliance check",
+          "recommendation": "Ensure GDPR/CCPA compliance for data handling"
+        }
+      ],
+      "metadata": {
+        "module": "Compliance Assessment",
+        "standards_checked": [
+          "OWASP",
+          "NIST",
+          "GDPR"
+        ],
+        "compliance_score": 75
+      }
+    },
+    {
+      "module": "threat_intelligence",
+      "status": "COMPLETED",
+      "execution_time": 2.86102294921875e-06,
+      "findings_count": 2,
+      "risk_contribution": 5,
+      "findings": [
+        {
+          "type": "Threat Intelligence Correlation",
+          "severity": "INFO",
+          "description": "File analyzed against threat intelligence feeds",
+          "evidence": "No known threats associated with this file",
+          "recommendation": "Continue monitoring for emerging threats"
+        },
+        {
+          "type": "Behavioral Pattern Analysis",
+          "severity": "LOW",
+          "description": "AI analysis completed on file patterns",
+          "evidence": "Standard mobile application patterns detected",
+          "recommendation": "Monitor for anomalous behavior during runtime"
+        }
+      ],
+      "metadata": {
+        "module": "Threat Intelligence",
+        "ai_engine": "QuantumSentinel-AI",
+        "threat_feeds": 15,
+        "confidence_score": 0.85
+      }
+    },
+    {
+      "module": "penetration_testing",
+      "status": "COMPLETED",
+      "execution_time": 3.0994415283203125e-06,
+      "findings_count": 2,
+      "risk_contribution": 25,
+      "findings": [
+        {
+          "type": "Automated Exploit Generation",
+          "severity": "INFO",
+          "description": "Automated exploit generation completed",
+          "evidence": "No immediate exploits generated",
+          "recommendation": "Manual penetration testing recommended"
+        },
+        {
+          "type": "Attack Surface Analysis",
+          "severity": "MEDIUM",
+          "description": "Mobile app attack surface identified",
+          "evidence": "Multiple attack vectors available",
+          "recommendation": "Implement defense-in-depth strategies"
+        }
+      ],
+      "metadata": {
+        "module": "Penetration Testing",
+        "attack_vectors": [
+          "Network",
+          "Local Storage",
+          "Input Validation"
+        ],
+        "exploit_generation": true
+      }
+    }
+  ],
+  "recommendations": [
+    "Implement ProGuard or R8 code obfuscation",
+    "Enable Android App Bundle for better security",
+    "Review all permissions in AndroidManifest.xml",
+    "Implement certificate pinning for network security",
+    "Conduct regular security assessments",
+    "Implement runtime application self-protection (RASP)",
+    "Enable comprehensive logging and monitoring",
+    "Establish incident response procedures"
+  ],
+  "compliance_status": {
+    "overall_status": "COMPLIANT",
+    "owasp_mobile_coverage": "80%",
+    "nist_alignment": "75%",
+    "gdpr_compliance": "REQUIRES_REVIEW",
+    "issues_blocking_compliance": 0
+  },
+  "next_steps": [
+    "Deploy application to emulator for dynamic testing",
+    "Conduct manual penetration testing",
+    "Perform code review with security focus",
+    "Test API endpoints for vulnerabilities",
+    "Prioritize remediation based on risk scores",
+    "Validate findings with security team",
+    "Create remediation timeline",
+    "Schedule follow-up security assessment"
+  ]
+}

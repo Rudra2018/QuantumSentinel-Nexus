@@ -2,6 +2,7 @@
 """
 PDF Report Generator for Security Analysis
 Creates professional security assessment reports in PDF format
+Enhanced with comprehensive binary analysis capabilities
 """
 
 from reportlab.lib import colors
@@ -15,6 +16,7 @@ import io
 from datetime import datetime
 import os
 from typing import Dict, Any, List
+import json
 
 class SecurityReportGenerator:
     def __init__(self):
@@ -126,6 +128,11 @@ class SecurityReportGenerator:
         # Remediation Plan
         story.extend(self._create_remediation_plan(report_data))
         story.append(PageBreak())
+
+        # Binary Analysis Section (if applicable)
+        if 'binary_analysis' in report_data:
+            story.extend(self._create_binary_analysis_section(report_data['binary_analysis']))
+            story.append(PageBreak())
 
         # Technical Appendix
         story.extend(self._create_technical_appendix(report_data))
@@ -543,6 +550,212 @@ class SecurityReportGenerator:
                 """
                 story.append(Paragraph(action_text, self.styles['Normal']))
                 story.append(Spacer(1, 8))
+
+        return story
+
+    def _create_binary_analysis_section(self, binary_data: Dict[str, Any]) -> List:
+        """Create comprehensive binary analysis section"""
+        story = []
+
+        story.append(Paragraph("Binary Analysis Results", self.styles['SectionHeader']))
+        story.append(Spacer(1, 12))
+
+        # Binary Overview
+        story.append(Paragraph("Binary Overview", self.styles['Heading3']))
+
+        binary_metadata = binary_data.get('metadata', {})
+        overview_data = [
+            ['Property', 'Value', 'Security Assessment'],
+            ['File Format', binary_data.get('file_format', 'Unknown'), 'Platform-specific vulnerabilities'],
+            ['Architecture', binary_data.get('architecture', 'Unknown'), 'Exploit target architecture'],
+            ['File Size', f"{binary_data.get('file_size', 0):,} bytes", 'Resource footprint'],
+            ['Entropy', f"{binary_data.get('entropy', 0.0):.3f}", 'Packing/Obfuscation indicator'],
+            ['Packed', 'Yes' if binary_data.get('packed', False) else 'No', 'Anti-analysis technique'],
+            ['Digitally Signed', 'Yes' if binary_data.get('signed', False) else 'No', 'Code integrity verification'],
+            ['Debug Information', 'Present' if binary_metadata.get('debug_info', False) else 'Stripped', 'Information disclosure risk']
+        ]
+
+        overview_table = Table(overview_data, colWidths=[1.8*inch, 2*inch, 2.2*inch])
+        overview_table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.darkblue),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, 0), 11),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+            ('BACKGROUND', (0, 1), (-1, -1), colors.Color(0.95, 0.95, 1.0)),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black),
+            ('VALIGN', (0, 0), (-1, -1), 'TOP')
+        ]))
+
+        story.append(overview_table)
+        story.append(Spacer(1, 20))
+
+        # Vulnerability Assessment
+        vuln_assessment = binary_data.get('vulnerability_assessment', {})
+        if vuln_assessment:
+            story.append(Paragraph("Binary Vulnerability Assessment", self.styles['Heading3']))
+
+            risk_level = vuln_assessment.get('risk_level', 'UNKNOWN')
+            risk_score = vuln_assessment.get('overall_risk_score', 0.0)
+            critical_findings = vuln_assessment.get('critical_findings', [])
+
+            risk_text = f"""
+            <b>Overall Risk Level:</b> {risk_level}<br/>
+            <b>Risk Score:</b> {risk_score:.2f}/1.0<br/>
+            <b>Critical Vulnerabilities:</b> {len([f for f in critical_findings if f.get('severity') == 'CRITICAL'])}<br/>
+            <b>High Severity Issues:</b> {len([f for f in critical_findings if f.get('severity') == 'HIGH'])}<br/>
+            <b>Medium Severity Issues:</b> {len([f for f in critical_findings if f.get('severity') == 'MEDIUM'])}
+            """
+
+            # Apply appropriate style based on risk level
+            risk_style = 'Critical' if risk_level in ['CRITICAL', 'HIGH'] else 'Normal'
+            story.append(Paragraph(risk_text, self.styles[risk_style]))
+            story.append(Spacer(1, 15))
+
+            # Critical findings details
+            if critical_findings:
+                story.append(Paragraph("Critical Binary Security Issues", self.styles['VulnTitle']))
+
+                for i, finding in enumerate(critical_findings[:5], 1):  # Show first 5
+                    severity = finding.get('severity', 'MEDIUM')
+                    title = finding.get('title', 'Unknown Issue')
+                    description = finding.get('description', 'No description available')
+                    recommendation = finding.get('recommendation', 'No recommendation provided')
+
+                    finding_text = f"""
+                    <b>{i}. {title} [{severity}]</b><br/>
+                    <b>Description:</b> {description}<br/>
+                    <b>Recommendation:</b> {recommendation}
+                    """
+
+                    finding_style = 'Critical' if severity in ['CRITICAL', 'HIGH'] else 'Normal'
+                    story.append(Paragraph(finding_text, self.styles[finding_style]))
+                    story.append(Spacer(1, 10))
+
+        # Security Features Analysis
+        security_features = vuln_assessment.get('security_features', {})
+        if security_features:
+            story.append(Paragraph("Security Features Analysis", self.styles['Heading3']))
+
+            security_data = [
+                ['Security Feature', 'Status', 'Security Impact'],
+                ['PIE (Position Independent Executable)',
+                 'Enabled' if security_features.get('pie_enabled') else 'Disabled',
+                 'ASLR effectiveness / Memory layout randomization'],
+                ['NX Bit (Data Execution Prevention)',
+                 'Enabled' if security_features.get('nx_enabled') else 'Disabled',
+                 'Code injection prevention'],
+                ['Stack Canary Protection',
+                 'Present' if security_features.get('stack_canary') else 'Missing',
+                 'Buffer overflow detection'],
+                ['RELRO (Relocation Read-Only)',
+                 'Enabled' if security_features.get('relro_enabled') else 'Disabled',
+                 'GOT overwrite protection'],
+                ['FORTIFY_SOURCE',
+                 'Enabled' if security_features.get('fortify_source') else 'Disabled',
+                 'Enhanced bounds checking']
+            ]
+
+            security_table = Table(security_data, colWidths=[2.2*inch, 1.5*inch, 2.3*inch])
+            security_table.setStyle(TableStyle([
+                ('BACKGROUND', (0, 0), (-1, 0), colors.darkgreen),
+                ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+                ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                ('FONTSIZE', (0, 0), (-1, 0), 10),
+                ('BOTTOMPADDING', (0, 0), (-1, 0), 10),
+                ('BACKGROUND', (0, 1), (-1, -1), colors.Color(0.95, 1.0, 0.95)),
+                ('GRID', (0, 0), (-1, -1), 1, colors.black),
+                ('VALIGN', (0, 0), (-1, -1), 'TOP')
+            ]))
+
+            story.append(security_table)
+            story.append(Spacer(1, 20))
+
+        # Machine Learning Analysis
+        ml_analysis = binary_data.get('ml_analysis', {})
+        if ml_analysis:
+            story.append(Paragraph("Machine Learning Analysis", self.styles['Heading3']))
+
+            ml_score = ml_analysis.get('vulnerability_score', 0.0)
+            ml_findings = ml_analysis.get('findings', [])
+
+            ml_text = f"""
+            <b>ML Vulnerability Score:</b> {ml_score:.3f}<br/>
+            <b>Total ML Findings:</b> {len(ml_findings)}<br/>
+            <b>High Confidence Findings:</b> {ml_analysis.get('ml_analysis', {}).get('high_confidence_findings', 0)}<br/>
+            <b>Models Used:</b> {', '.join(ml_analysis.get('ml_analysis', {}).get('models_used', []))}
+            """
+
+            story.append(Paragraph(ml_text, self.styles['Normal']))
+            story.append(Spacer(1, 10))
+
+            # ML findings summary
+            if ml_findings:
+                story.append(Paragraph("Key ML-Detected Issues:", self.styles['VulnTitle']))
+
+                for i, finding in enumerate(ml_findings[:3], 1):  # Show first 3
+                    ml_finding_text = f"""
+                    {i}. <b>{finding.get('title', 'Unknown Issue')}</b><br/>
+                    Confidence: {finding.get('confidence_score', 0.0):.2f} |
+                    Model: {finding.get('model_used', 'Unknown')}<br/>
+                    {finding.get('description', 'No description')}
+                    """
+                    story.append(Paragraph(ml_finding_text, self.styles['Normal']))
+                    story.append(Spacer(1, 8))
+
+        # Static Analysis Summary
+        static_analysis = binary_data.get('static_analysis', {})
+        if static_analysis:
+            story.append(Paragraph("Static Analysis Summary", self.styles['Heading3']))
+
+            # Dangerous functions
+            dangerous_functions = static_analysis.get('dangerous_functions', [])
+            if dangerous_functions:
+                functions_text = f"<b>Dangerous Functions Detected:</b> {len(dangerous_functions)}<br/>"
+                functions_text += "Key functions: " + ", ".join(dangerous_functions[:8])  # First 8
+                story.append(Paragraph(functions_text, self.styles['Normal']))
+                story.append(Spacer(1, 8))
+
+            # Notable strings
+            strings = binary_metadata.get('strings', [])[:10]  # First 10 strings
+            if strings:
+                strings_text = "<b>Notable Extracted Strings:</b><br/>"
+                for string in strings:
+                    if len(string) > 60:
+                        string = string[:60] + "..."
+                    strings_text += f"• {string}<br/>"
+                story.append(Paragraph(strings_text, self.styles['Code']))
+
+        # Analysis Timeline
+        timeline = binary_data.get('timeline', [])
+        if timeline:
+            story.append(Spacer(1, 20))
+            story.append(Paragraph("Analysis Performance Timeline", self.styles['Heading3']))
+
+            timeline_data = [['Analysis Phase', 'Duration (seconds)', 'Status']]
+
+            for phase in timeline:
+                timeline_data.append([
+                    phase.get('phase', 'Unknown').replace('_', ' ').title(),
+                    f"{phase.get('duration_seconds', 0):.2f}",
+                    phase.get('status', 'Unknown').title()
+                ])
+
+            timeline_table = Table(timeline_data, colWidths=[3*inch, 1.5*inch, 1.5*inch])
+            timeline_table.setStyle(TableStyle([
+                ('BACKGROUND', (0, 0), (-1, 0), colors.Color(0.2, 0.2, 0.6)),
+                ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+                ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                ('FONTSIZE', (0, 0), (-1, 0), 10),
+                ('BOTTOMPADDING', (0, 0), (-1, 0), 10),
+                ('BACKGROUND', (0, 1), (-1, -1), colors.Color(0.98, 0.98, 1.0)),
+                ('GRID', (0, 0), (-1, -1), 1, colors.black)
+            ]))
+
+            story.append(timeline_table)
 
         return story
 

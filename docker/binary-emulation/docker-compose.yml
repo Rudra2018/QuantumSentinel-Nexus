@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # Full-featured Ubuntu x64 environment for comprehensive analysis
+  quantum-binary-analysis:
+    build:
+      context: .
+      dockerfile: Dockerfile.ubuntu-x64
+    container_name: quantum-binary-analysis
+    volumes:
+      - ./binaries:/analysis/binaries:ro
+      - ./results:/analysis/results
+      - ./configs:/analysis/configs:ro
+    networks:
+      - quantum-network
+    cap_add:
+      - SYS_PTRACE
+      - NET_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - ANALYSIS_MODE=full
+      - TIMEOUT=600
+    command: /bin/bash
+
+  # Lightweight Alpine environment for quick analysis
+  quantum-binary-minimal:
+    build:
+      context: .
+      dockerfile: Dockerfile.alpine-minimal
+    container_name: quantum-binary-minimal
+    volumes:
+      - ./binaries:/analysis/binaries:ro
+      - ./results:/analysis/results
+    networks:
+      - quantum-network
+    environment:
+      - ANALYSIS_MODE=static
+      - TIMEOUT=300
+    command: /bin/bash
+
+  # Windows binary analysis with WINE
+  quantum-binary-windows:
+    build:
+      context: .
+      dockerfile: Dockerfile.windows-wine
+    container_name: quantum-binary-windows
+    volumes:
+      - ./binaries:/analysis/binaries:ro
+      - ./results:/analysis/results
+      - ./wine-data:/analysis/wine-prefix
+    networks:
+      - quantum-network
+    environment:
+      - DISPLAY=:99
+      - WINEARCH=win64
+      - WINEPREFIX=/analysis/wine-prefix
+    command: bash -c "Xvfb :99 -screen 0 1024x768x16 & exec /bin/bash"
+
+  # Network monitoring service for dynamic analysis
+  quantum-network-monitor:
+    image: nicolaka/netshoot
+    container_name: quantum-network-monitor
+    volumes:
+      - ./results:/analysis/results
+    networks:
+      - quantum-network
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    command: tcpdump -i any -w /analysis/results/network_capture.pcap
+
+networks:
+  quantum-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  wine-data:
+    driver: local

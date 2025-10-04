@@ -1,0 +1,80 @@
+# QuantumSentinel Binary Emulation - Alpine Minimal Environment
+# Lightweight container for basic binary analysis
+
+FROM alpine:3.18
+
+LABEL maintainer="QuantumSentinel-Nexus"
+LABEL description="Alpine minimal binary analysis environment"
+LABEL version="1.0"
+
+# Install system packages
+RUN apk add --no-cache \
+    # Core tools
+    bash \
+    curl \
+    wget \
+    git \
+    vim \
+    tmux \
+    htop \
+    unzip \
+    # Build tools
+    build-base \
+    cmake \
+    autoconf \
+    automake \
+    libtool \
+    pkgconfig \
+    # Python
+    python3 \
+    python3-dev \
+    py3-pip \
+    # Binary analysis tools
+    binutils \
+    gdb \
+    file \
+    hexdump \
+    strace \
+    # QEMU (limited)
+    qemu-system-x86_64 \
+    qemu-user \
+    # Network tools
+    netcat-openbsd \
+    nmap \
+    # Additional tools
+    patchelf \
+    # Libraries
+    musl-dev \
+    linux-headers
+
+# Install Python packages (minimal set)
+RUN pip3 install --no-cache-dir \
+    capstone \
+    pefile \
+    pyelftools \
+    lief \
+    requests \
+    click
+
+# Create analysis directories
+RUN mkdir -p /analysis/{binaries,results,scripts,logs}
+
+# Create analyst user
+RUN adduser -D -s /bin/bash analyst && \
+    addgroup analyst wheel && \
+    echo '%wheel ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+# Copy minimal analysis scripts
+COPY scripts/analyze-minimal.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/*.sh && \
+    chown -R analyst:analyst /analysis
+
+# Switch to analyst user
+USER analyst
+WORKDIR /analysis
+
+# Environment variables
+ENV PYTHONPATH="/analysis:$PYTHONPATH"
+
+# Default command
+CMD ["/bin/bash"]

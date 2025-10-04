@@ -1,0 +1,356 @@
+version: '3.8'
+
+# QuantumSentinel-Nexus Bug Bounty Security Scanning Environment
+# Comprehensive bug bounty automation with ZAP proxy integration
+
+services:
+  # =============================================================================
+  # BUG BOUNTY SCANNING SERVICES
+  # =============================================================================
+
+  # Main bug bounty scanning service with full reconnaissance
+  quantum-bounty-scanner:
+    build:
+      context: .
+      dockerfile: Dockerfile.bounty-scanner
+    container_name: quantum-bounty-scanner
+    hostname: bounty-scanner
+    volumes:
+      - ./configs:/bounty/configs:ro
+      - ./scripts:/bounty/scripts:ro
+      - ./results:/bounty/results
+      - ./wordlists:/bounty/wordlists:ro
+    networks:
+      - bounty-network
+    environment:
+      - SCAN_MODE=comprehensive
+      - CHAOS_API_KEY=${CHAOS_API_KEY:-1545c524-7e20-4b62-aa4a-8235255cff96}
+      - ZAP_MEMORY=2g
+      - SUBDOMAIN_DISCOVERY=enabled
+      - CONTEXT_TESTING=enabled
+    restart: unless-stopped
+    depends_on:
+      - quantum-zap-proxy
+      - quantum-db
+
+  # OWASP ZAP Proxy for DAST scanning
+  quantum-zap-proxy:
+    image: owasp/zap2docker-stable:latest
+    container_name: quantum-zap-proxy
+    hostname: zap-proxy
+    ports:
+      - "8080:8080"
+      - "8090:8090"
+    volumes:
+      - ./zap-configs:/zap/wrk/configs:ro
+      - ./zap-results:/zap/wrk/output
+      - ./zap-scripts:/zap/wrk/scripts:ro
+    networks:
+      - bounty-network
+    environment:
+      - ZAP_PORT=8080
+      - ZAP_PROXY_PORT=8090
+    command: >
+      sh -c "
+        zap.sh -daemon -host 0.0.0.0 -port 8080 -config api.key=quantum-zap-api-key &&
+        tail -f /dev/null
+      "
+    restart: unless-stopped
+
+  # Browser automation service for context-aware testing
+  quantum-browser-automation:
+    build:
+      context: .
+      dockerfile: Dockerfile.browser-automation
+    container_name: quantum-browser-automation
+    hostname: browser-automation
+    volumes:
+      - ./browser-configs:/automation/configs:ro
+      - ./browser-results:/automation/results
+      - ./browser-scripts:/automation/scripts:ro
+    networks:
+      - bounty-network
+    environment:
+      - SELENIUM_GRID_URL=http://selenium-hub:4444/wd/hub
+      - ZAP_PROXY_URL=http://quantum-zap-proxy:8090
+      - BROWSER_TIMEOUT=300
+    restart: unless-stopped
+    depends_on:
+      - selenium-hub
+      - quantum-zap-proxy
+
+  # Selenium Grid Hub for browser automation
+  selenium-hub:
+    image: selenium/hub:4.15.0
+    container_name: selenium-hub
+    hostname: selenium-hub
+    ports:
+      - "4444:4444"
+    networks:
+      - bounty-network
+    environment:
+      - GRID_MAX_SESSION=16
+      - GRID_BROWSER_TIMEOUT=300
+      - GRID_TIMEOUT=300
+    restart: unless-stopped
+
+  # Chrome browser nodes
+  selenium-chrome:
+    image: selenium/node-chrome:4.15.0
+    container_name: selenium-chrome
+    hostname: selenium-chrome
+    volumes:
+      - /dev/shm:/dev/shm
+    networks:
+      - bounty-network
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - NODE_MAX_INSTANCES=4
+      - NODE_MAX_SESSION=4
+    depends_on:
+      - selenium-hub
+    restart: unless-stopped
+
+  # Firefox browser nodes
+  selenium-firefox:
+    image: selenium/node-firefox:4.15.0
+    container_name: selenium-firefox
+    hostname: selenium-firefox
+    volumes:
+      - /dev/shm:/dev/shm
+    networks:
+      - bounty-network
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - NODE_MAX_INSTANCES=2
+      - NODE_MAX_SESSION=2
+    depends_on:
+      - selenium-hub
+    restart: unless-stopped
+
+  # Reconnaissance service for asset discovery
+  quantum-recon:
+    build:
+      context: .
+      dockerfile: Dockerfile.recon
+    container_name: quantum-recon
+    hostname: recon-service
+    volumes:
+      - ./recon-configs:/recon/configs:ro
+      - ./recon-results:/recon/results
+      - ./wordlists:/recon/wordlists:ro
+    networks:
+      - bounty-network
+    environment:
+      - CHAOS_API_KEY=${CHAOS_API_KEY:-1545c524-7e20-4b62-aa4a-8235255cff96}
+      - SUBDOMAIN_THREADS=50
+      - DNS_RESOLVERS=/recon/configs/resolvers.txt
+      - AMASS_CONFIG=/recon/configs/amass-config.yaml
+    restart: unless-stopped
+
+  # Database for storing scan results and program data
+  quantum-db:
+    image: postgres:15-alpine
+    container_name: quantum-db
+    hostname: quantum-db
+    volumes:
+      - quantum-db-data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - bounty-network
+    environment:
+      - POSTGRES_DB=quantum_bounty
+      - POSTGRES_USER=quantum_user
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-quantum_secure_password_2024}
+    restart: unless-stopped
+
+  # Redis for caching and job queuing
+  quantum-redis:
+    image: redis:7-alpine
+    container_name: quantum-redis
+    hostname: quantum-redis
+    volumes:
+      - quantum-redis-data:/data
+    networks:
+      - bounty-network
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-quantum_redis_password}
+    restart: unless-stopped
+
+  # Report generation service
+  quantum-reports:
+    build:
+      context: .
+      dockerfile: Dockerfile.reports
+    container_name: quantum-reports
+    hostname: reports-service
+    volumes:
+      - ./report-templates:/reports/templates:ro
+      - ./report-results:/reports/output
+      - ./report-configs:/reports/configs:ro
+    networks:
+      - bounty-network
+    environment:
+      - REPORT_FORMATS=json,html,pdf
+      - TEMPLATE_DIR=/reports/templates
+      - OUTPUT_DIR=/reports/output
+    restart: unless-stopped
+    depends_on:
+      - quantum-db
+
+  # Web dashboard for monitoring and control
+  quantum-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: quantum-dashboard
+    hostname: dashboard
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./dashboard-configs:/dashboard/configs:ro
+    networks:
+      - bounty-network
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=quantum-db
+      - DB_PORT=5432
+      - DB_NAME=quantum_bounty
+      - DB_USER=quantum_user
+      - DB_PASSWORD=${DB_PASSWORD:-quantum_secure_password_2024}
+      - REDIS_HOST=quantum-redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-quantum_redis_password}
+    restart: unless-stopped
+    depends_on:
+      - quantum-db
+      - quantum-redis
+
+  # =============================================================================
+  # SPECIALIZED SCANNING PROFILES
+  # =============================================================================
+
+  # Quick scan profile for rapid assessment
+  quantum-bounty-quick:
+    build:
+      context: .
+      dockerfile: Dockerfile.bounty-scanner
+    container_name: quantum-bounty-quick
+    hostname: bounty-quick
+    volumes:
+      - ./configs:/bounty/configs:ro
+      - ./scripts:/bounty/scripts:ro
+      - ./results:/bounty/results
+    networks:
+      - bounty-network
+    environment:
+      - SCAN_MODE=quick
+      - ZAP_PROFILE=quick
+      - SPIDER_DEPTH=2
+      - ACTIVE_SCAN=disabled
+      - AJAX_SPIDER=disabled
+    profiles:
+      - quick
+    restart: "no"
+
+  # Passive scan profile for stealth assessment
+  quantum-bounty-passive:
+    build:
+      context: .
+      dockerfile: Dockerfile.bounty-scanner
+    container_name: quantum-bounty-passive
+    hostname: bounty-passive
+    volumes:
+      - ./configs:/bounty/configs:ro
+      - ./scripts:/bounty/scripts:ro
+      - ./results:/bounty/results
+    networks:
+      - bounty-network
+    environment:
+      - SCAN_MODE=passive
+      - ZAP_PROFILE=passive
+      - ACTIVE_SCAN=disabled
+      - SPIDER_ONLY=enabled
+    profiles:
+      - passive
+    restart: "no"
+
+  # Platform-specific scanning services
+  quantum-hackerone:
+    extends:
+      service: quantum-bounty-scanner
+    container_name: quantum-hackerone
+    environment:
+      - PLATFORM=hackerone
+      - PLATFORM_CONFIG=/bounty/configs/hackerone.yaml
+    profiles:
+      - hackerone
+    restart: "no"
+
+  quantum-bugcrowd:
+    extends:
+      service: quantum-bounty-scanner
+    container_name: quantum-bugcrowd
+    environment:
+      - PLATFORM=bugcrowd
+      - PLATFORM_CONFIG=/bounty/configs/bugcrowd.yaml
+    profiles:
+      - bugcrowd
+    restart: "no"
+
+  quantum-huntr:
+    extends:
+      service: quantum-bounty-scanner
+    container_name: quantum-huntr
+    environment:
+      - PLATFORM=huntr
+      - PLATFORM_CONFIG=/bounty/configs/huntr.yaml
+    profiles:
+      - huntr
+    restart: "no"
+
+# =============================================================================
+# NETWORKS AND VOLUMES
+# =============================================================================
+
+networks:
+  bounty-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  quantum-db-data:
+    driver: local
+  quantum-redis-data:
+    driver: local
+
+# =============================================================================
+# USAGE EXAMPLES
+# =============================================================================
+
+# Start full bug bounty scanning environment:
+# docker-compose -f docker-compose-bounty.yml up -d
+
+# Start quick scan profile:
+# docker-compose -f docker-compose-bounty.yml --profile quick up quantum-bounty-quick
+
+# Start passive scan profile:
+# docker-compose -f docker-compose-bounty.yml --profile passive up quantum-bounty-passive
+
+# Start HackerOne specific scanning:
+# docker-compose -f docker-compose-bounty.yml --profile hackerone up quantum-hackerone
+
+# Start only ZAP proxy for manual testing:
+# docker-compose -f docker-compose-bounty.yml up quantum-zap-proxy selenium-hub selenium-chrome
+
+# Monitor logs:
+# docker-compose -f docker-compose-bounty.yml logs -f quantum-bounty-scanner
+
+# Scale browser nodes:
+# docker-compose -f docker-compose-bounty.yml up --scale selenium-chrome=4 --scale selenium-firefox=2
+
+# Cleanup:
+# docker-compose -f docker-compose-bounty.yml down -v

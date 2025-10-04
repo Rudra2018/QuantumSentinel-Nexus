@@ -1,0 +1,106 @@
+# QuantumSentinel-Nexus Reconnaissance Service
+# Specialized container for comprehensive asset discovery and subdomain enumeration
+
+FROM golang:1.21-alpine AS builder
+
+# Install build dependencies
+RUN apk add --no-cache git make gcc musl-dev
+
+# Build Go-based recon tools
+RUN go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest && \
+    go install github.com/projectdiscovery/httpx/cmd/httpx@latest && \
+    go install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest && \
+    go install github.com/projectdiscovery/chaos-client/cmd/chaos@latest && \
+    go install github.com/projectdiscovery/dnsx/cmd/dnsx@latest && \
+    go install github.com/tomnomnom/waybackurls@latest && \
+    go install github.com/tomnomnom/assetfinder@latest && \
+    go install github.com/tomnomnom/httprobe@latest && \
+    go install github.com/tomnomnom/anew@latest && \
+    go install github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
+
+# Production stage
+FROM python:3.11-alpine
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV CHAOS_API_KEY=""
+ENV SUBDOMAIN_THREADS=50
+
+# Install system dependencies
+RUN apk add --no-cache \
+    git \
+    curl \
+    wget \
+    bind-tools \
+    whois \
+    nmap \
+    masscan \
+    ca-certificates \
+    bash \
+    jq \
+    findutils \
+    grep \
+    sed \
+    awk \
+    && rm -rf /var/cache/apk/*
+
+# Install Python packages
+RUN pip install --no-cache-dir \
+    requests \
+    aiohttp \
+    dnspython \
+    python-whois \
+    asyncio-throttle \
+    python-dotenv \
+    beautifulsoup4 \
+    shodan \
+    censys
+
+# Copy Go binaries from builder
+COPY --from=builder /go/bin/* /usr/local/bin/
+
+# Install Amass
+RUN wget https://github.com/OWASP/Amass/releases/download/v4.2.0/amass_Linux_amd64.zip && \
+    unzip amass_Linux_amd64.zip && \
+    mv amass_Linux_amd64/amass /usr/local/bin/ && \
+    rm -rf amass_Linux_amd64*
+
+# Create working directories
+RUN mkdir -p /recon/{configs,results,wordlists,tools}
+
+# Set working directory
+WORKDIR /recon
+
+# Copy QuantumSentinel source code
+COPY ../../ /opt/quantumsentinel/
+
+# Copy recon configurations
+COPY configs/recon/ /recon/configs/
+COPY scripts/recon/ /recon/scripts/
+
+# Download wordlists
+RUN mkdir -p /recon/wordlists && \
+    wget -O /recon/wordlists/subdomains.txt https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/DNS/subdomains-top1million-110000.txt && \
+    wget -O /recon/wordlists/resolvers.txt https://raw.githubusercontent.com/blechschmidt/massdns/master/lists/resolvers.txt && \
+    wget -O /recon/wordlists/all.txt https://raw.githubusercontent.com/six2dez/OneListForAll/main/onelistforallmicro.txt
+
+# Make scripts executable
+RUN chmod +x /recon/scripts/*.sh
+
+# Create user for running recon
+RUN adduser -D -s /bin/bash recon && \
+    chown -R recon:recon /recon
+
+# Set up environment
+ENV PYTHONPATH="/opt/quantumsentinel:$PYTHONPATH"
+ENV PATH="/usr/local/bin:$PATH"
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD subfinder -version || exit 1
+
+# Switch to recon user
+USER recon
+
+# Default command
+CMD ["/recon/scripts/start-recon-service.sh"]

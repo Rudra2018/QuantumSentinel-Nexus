@@ -1,0 +1,402 @@
+version: '3.8'
+
+# QuantumSentinel-Nexus Comprehensive Binary Analysis Environment
+# Multi-format binary analysis with specialized containers for each format type
+
+services:
+  # =============================================================================
+  # GENERAL PURPOSE ANALYSIS CONTAINERS
+  # =============================================================================
+
+  # Full-featured Ubuntu x64 environment for comprehensive analysis
+  quantum-binary-analysis:
+    build:
+      context: .
+      dockerfile: Dockerfile.ubuntu-x64
+    container_name: quantum-binary-analysis
+    hostname: quantum-analysis
+    volumes:
+      - ./binaries:/analysis/binaries:ro
+      - ./results:/analysis/results
+      - ./configs:/analysis/configs:ro
+      - ./scripts:/analysis/scripts:ro
+    networks:
+      - quantum-network
+    cap_add:
+      - SYS_PTRACE
+      - NET_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - ANALYSIS_MODE=full
+      - TIMEOUT=600
+      - SUPPORTED_FORMATS=elf,pe,general
+    restart: unless-stopped
+
+  # Lightweight Alpine environment for quick analysis
+  quantum-binary-minimal:
+    build:
+      context: .
+      dockerfile: Dockerfile.alpine-minimal
+    container_name: quantum-binary-minimal
+    hostname: quantum-minimal
+    volumes:
+      - ./binaries:/analysis/binaries:ro
+      - ./results:/analysis/results
+    networks:
+      - quantum-network
+    environment:
+      - ANALYSIS_MODE=static
+      - TIMEOUT=300
+      - SUPPORTED_FORMATS=elf,basic
+    restart: unless-stopped
+
+  # =============================================================================
+  # PLATFORM-SPECIFIC ANALYSIS CONTAINERS
+  # =============================================================================
+
+  # macOS Binary Analysis (Mach-O, .app, KEXT, dylib, framework)
+  quantum-macos-analysis:
+    build:
+      context: .
+      dockerfile: Dockerfile.macos-analysis
+    container_name: quantum-macos-analysis
+    hostname: quantum-macos
+    volumes:
+      - ./binaries:/analysis/binaries:ro
+      - ./results:/analysis/results
+      - ./configs:/analysis/configs:ro
+      - ./scripts:/analysis/scripts:ro
+      - macos-workspace:/analysis/macos-specific
+    networks:
+      - quantum-network
+    environment:
+      - ANALYSIS_MODE=macos
+      - TIMEOUT=900
+      - SUPPORTED_FORMATS=mach-o,app,kext,dylib,framework
+      - MACOS_ANALYSIS=true
+    restart: unless-stopped
+
+  # Windows Binary Analysis (PE, EXE, DLL, MSI, SYS)
+  quantum-windows-analysis:
+    build:
+      context: .
+      dockerfile: Dockerfile.windows-enhanced
+    container_name: quantum-windows-analysis
+    hostname: quantum-windows
+    volumes:
+      - ./binaries:/analysis/binaries:ro
+      - ./results:/analysis/results
+      - ./configs:/analysis/configs:ro
+      - ./scripts:/analysis/scripts:ro
+      - wine-data:/analysis/wine-prefix
+      - windows-workspace:/analysis/windows-specific
+    networks:
+      - quantum-network
+    environment:
+      - DISPLAY=:99
+      - WINEARCH=win64
+      - WINEPREFIX=/analysis/wine-prefix
+      - ANALYSIS_MODE=windows
+      - TIMEOUT=1200
+      - SUPPORTED_FORMATS=pe,exe,dll,msi,sys,scr,com
+      - WINDOWS_ANALYSIS=true
+    ports:
+      - "5900:5900"  # VNC for GUI analysis
+    restart: unless-stopped
+
+  # Mobile Binary Analysis (APK, IPA, AAB)
+  quantum-mobile-analysis:
+    build:
+      context: .
+      dockerfile: Dockerfile.mobile-analysis
+    container_name: quantum-mobile-analysis
+    hostname: quantum-mobile
+    volumes:
+      - ./binaries:/analysis/binaries:ro
+      - ./results:/analysis/results
+      - ./configs:/analysis/configs:ro
+      - ./scripts:/analysis/scripts:ro
+      - mobile-workspace:/analysis/mobile-specific
+      - android-sdk:/opt/android-sdk
+    networks:
+      - quantum-network
+    environment:
+      - ANALYSIS_MODE=mobile
+      - TIMEOUT=1800
+      - SUPPORTED_FORMATS=apk,ipa,aab,dex,elf-android
+      - ANDROID_SDK_ROOT=/opt/android-sdk
+      - MOBILE_ANALYSIS=true
+    ports:
+      - "5555:5555"  # ADB debugging
+    restart: unless-stopped
+
+  # Linux Package Analysis (DEB, RPM, kernel modules)
+  quantum-linux-packages:
+    build:
+      context: .
+      dockerfile: Dockerfile.linux-packages
+    container_name: quantum-linux-packages
+    hostname: quantum-packages
+    volumes:
+      - ./binaries:/analysis/binaries:ro
+      - ./results:/analysis/results
+      - ./configs:/analysis/configs:ro
+      - ./scripts:/analysis/scripts:ro
+      - packages-workspace:/analysis/packages
+      - kernel-workspace:/analysis/kernel-modules
+    networks:
+      - quantum-network
+    privileged: true  # Required for kernel module analysis
+    environment:
+      - ANALYSIS_MODE=linux-packages
+      - TIMEOUT=1200
+      - SUPPORTED_FORMATS=deb,rpm,ko,kernel-module,snap,appimage
+      - PACKAGE_ANALYSIS=true
+    restart: unless-stopped
+
+  # =============================================================================
+  # SPECIALIZED ANALYSIS SERVICES
+  # =============================================================================
+
+  # Machine Learning Analysis Service
+  quantum-ml-analysis:
+    build:
+      context: ../..
+      dockerfile: docker/Dockerfile.enhanced
+    container_name: quantum-ml-analysis
+    hostname: quantum-ml
+    volumes:
+      - ./binaries:/analysis/binaries:ro
+      - ./results:/analysis/results
+      - ./configs:/analysis/configs:ro
+      - ml-models:/analysis/ml-models
+    networks:
+      - quantum-network
+    environment:
+      - ANALYSIS_MODE=ml
+      - TIMEOUT=600
+      - ML_ANALYSIS=true
+      - PYTHONPATH=/app:/analysis
+    command: >
+      bash -c "
+      cd /analysis &&
+      python3 -m ai_agents.ml_models.vulnerability_detector --mode=service
+      "
+    restart: unless-stopped
+
+  # Network Monitoring Service for Dynamic Analysis
+  quantum-network-monitor:
+    image: nicolaka/netshoot
+    container_name: quantum-network-monitor
+    hostname: quantum-netmon
+    volumes:
+      - ./results:/analysis/results
+    networks:
+      - quantum-network
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    environment:
+      - CAPTURE_MODE=all
+      - OUTPUT_PATH=/analysis/results
+    command: >
+      bash -c "
+      echo 'Starting network monitoring for binary analysis...' &&
+      tcpdump -i any -w /analysis/results/network_capture_$(date +%s).pcap &
+      sleep infinity
+      "
+    restart: unless-stopped
+
+  # Distributed Analysis Coordinator
+  quantum-analysis-coordinator:
+    build:
+      context: ../..
+      dockerfile: docker/Dockerfile.enhanced
+    container_name: quantum-analysis-coordinator
+    hostname: quantum-coordinator
+    volumes:
+      - ./binaries:/analysis/binaries:ro
+      - ./results:/analysis/results
+      - ./configs:/analysis/configs:ro
+    networks:
+      - quantum-network
+    environment:
+      - COORDINATOR_MODE=true
+      - ANALYSIS_QUEUE=redis://quantum-redis:6379
+    ports:
+      - "8888:8888"  # Analysis API
+    command: >
+      bash -c "
+      cd /analysis &&
+      python3 -m workflows.binary-analysis-comprehensive --mode=coordinator
+      "
+    depends_on:
+      - quantum-redis
+    restart: unless-stopped
+
+  # Redis for analysis job queue
+  quantum-redis:
+    image: redis:7-alpine
+    container_name: quantum-redis
+    hostname: quantum-redis
+    volumes:
+      - redis-data:/data
+    networks:
+      - quantum-network
+    environment:
+      - REDIS_PASSWORD=quantum-analysis-2024
+    command: redis-server --requirepass quantum-analysis-2024
+    restart: unless-stopped
+
+  # =============================================================================
+  # REPORTING AND VISUALIZATION SERVICES
+  # =============================================================================
+
+  # Report Generation Service
+  quantum-report-generator:
+    build:
+      context: ../..
+      dockerfile: docker/Dockerfile.enhanced
+    container_name: quantum-report-generator
+    hostname: quantum-reports
+    volumes:
+      - ./results:/analysis/results
+      - ./reports:/analysis/reports
+      - ./configs:/analysis/configs:ro
+    networks:
+      - quantum-network
+    environment:
+      - REPORT_MODE=true
+      - OUTPUT_FORMATS=pdf,html,json
+    ports:
+      - "8080:8080"  # Report API
+    command: >
+      bash -c "
+      cd /analysis &&
+      python3 -m reporting.binary_report_generator --mode=service
+      "
+    restart: unless-stopped
+
+  # Analysis Dashboard
+  quantum-dashboard:
+    build:
+      context: ../..
+      dockerfile: docker/Dockerfile.enhanced
+    container_name: quantum-dashboard
+    hostname: quantum-dashboard
+    volumes:
+      - ./results:/analysis/results:ro
+      - ./configs:/analysis/configs:ro
+    networks:
+      - quantum-network
+    environment:
+      - DASHBOARD_MODE=true
+      - REDIS_URL=redis://quantum-redis:6379
+    ports:
+      - "3000:3000"  # Dashboard UI
+    command: >
+      bash -c "
+      cd /analysis &&
+      python3 -m dashboards.enhanced_working_dashboard --host=0.0.0.0 --port=3000
+      "
+    depends_on:
+      - quantum-redis
+    restart: unless-stopped
+
+# =============================================================================
+# NETWORKS AND VOLUMES
+# =============================================================================
+
+networks:
+  quantum-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+    driver_opts:
+      com.docker.network.bridge.name: quantum-bridge
+
+volumes:
+  # Persistent storage for analysis workspaces
+  wine-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./volumes/wine-data
+
+  macos-workspace:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./volumes/macos-workspace
+
+  mobile-workspace:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./volumes/mobile-workspace
+
+  packages-workspace:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./volumes/packages-workspace
+
+  kernel-workspace:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./volumes/kernel-workspace
+
+  windows-workspace:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./volumes/windows-workspace
+
+  # Shared data volumes
+  android-sdk:
+    driver: local
+
+  ml-models:
+    driver: local
+
+  redis-data:
+    driver: local
+
+# =============================================================================
+# DOCKER COMPOSE PROFILES FOR SELECTIVE DEPLOYMENT
+# =============================================================================
+
+# Usage examples:
+# docker-compose --profile analysis up        # Start analysis containers only
+# docker-compose --profile mobile up          # Start mobile analysis only
+# docker-compose --profile windows up         # Start Windows analysis only
+# docker-compose --profile full up            # Start everything
+# docker-compose up quantum-macos-analysis    # Start specific container
+
+x-profiles:
+  analysis: &analysis-profile
+    profiles: ["analysis", "full"]
+
+  mobile: &mobile-profile
+    profiles: ["mobile", "analysis", "full"]
+
+  windows: &windows-profile
+    profiles: ["windows", "analysis", "full"]
+
+  macos: &macos-profile
+    profiles: ["macos", "analysis", "full"]
+
+  packages: &packages-profile
+    profiles: ["packages", "analysis", "full"]
+
+  services: &services-profile
+    profiles: ["services", "full"]
