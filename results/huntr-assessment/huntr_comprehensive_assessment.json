@@ -1,10 +1,10 @@
 {
   "assessment_metadata": {
-    "start_time": "2025-10-03T11:05:58.644470",
+    "start_time": "2025-10-05T13:26:01.751030",
     "total_targets": 10,
     "assessment_type": "huntr_comprehensive",
     "platform": "huntr.com",
-    "end_time": "2025-10-03T11:05:58.644863"
+    "end_time": "2025-10-05T13:26:01.751475"
   },
   "target_analysis": {
     "PyTorch": {
@@ -58,7 +58,7 @@
           "accessibility": "accessible"
         }
       },
-      "analysis_timestamp": "2025-10-03T11:05:58.644549"
+      "analysis_timestamp": "2025-10-05T13:26:01.751120"
     },
     "TensorFlow": {
       "target_info": {
@@ -111,7 +111,7 @@
           "accessibility": "accessible"
         }
       },
-      "analysis_timestamp": "2025-10-03T11:05:58.644585"
+      "analysis_timestamp": "2025-10-05T13:26:01.751160"
     },
     "Apache Spark": {
       "target_info": {
@@ -156,7 +156,7 @@
           "accessibility": "accessible"
         }
       },
-      "analysis_timestamp": "2025-10-03T11:05:58.644619"
+      "analysis_timestamp": "2025-10-05T13:26:01.751199"
     },
     "Hugging Face Transformers": {
       "target_info": {
@@ -202,7 +202,7 @@
           "accessibility": "accessible"
         }
       },
-      "analysis_timestamp": "2025-10-03T11:05:58.644653"
+      "analysis_timestamp": "2025-10-05T13:26:01.751237"
     },
     "MLflow": {
       "target_info": {
@@ -247,7 +247,7 @@
           "accessibility": "accessible"
         }
       },
-      "analysis_timestamp": "2025-10-03T11:05:58.644686"
+      "analysis_timestamp": "2025-10-05T13:26:01.751275"
     },
     "Apache Airflow": {
       "target_info": {
@@ -290,7 +290,7 @@
           "accessibility": "accessible"
         }
       },
-      "analysis_timestamp": "2025-10-03T11:05:58.644719"
+      "analysis_timestamp": "2025-10-05T13:26:01.751311"
     },
     "Jupyter": {
       "target_info": {
@@ -334,7 +334,7 @@
           "accessibility": "accessible"
         }
       },
-      "analysis_timestamp": "2025-10-03T11:05:58.644752"
+      "analysis_timestamp": "2025-10-05T13:26:01.751348"
     },
     "FastAPI": {
       "target_info": {
@@ -376,7 +376,7 @@
           "accessibility": "accessible"
         }
       },
-      "analysis_timestamp": "2025-10-03T11:05:58.644785"
+      "analysis_timestamp": "2025-10-05T13:26:01.751385"
     },
     "ONNX": {
       "target_info": {
@@ -424,7 +424,7 @@
           "accessibility": "accessible"
         }
       },
-      "analysis_timestamp": "2025-10-03T11:05:58.644817"
+      "analysis_timestamp": "2025-10-05T13:26:01.751423"
     },
     "NumPy": {
       "target_info": {
@@ -467,7 +467,7 @@
           "accessibility": "accessible"
         }
       },
-      "analysis_timestamp": "2025-10-03T11:05:58.644850"
+      "analysis_timestamp": "2025-10-05T13:26:01.751460"
     }
   },
   "summary_statistics": {

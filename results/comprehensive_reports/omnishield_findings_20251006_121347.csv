@@ -1,0 +1,20 @@
+Vulnerability ID,Severity,Confidence,Title,Description,Affected Component,CVE ID,CVSS Score,Exploit Vector,Remediation,Timestamp
+QS-MOBILE_SECURITY-0000,Medium,0.7,APK Analysis Required: b4583a15-063f-41b3-9507-d12cb27ae203_H4D.apk,Android APK file detected requiring security analysis,mobile_security,,,,,2025-10-06T12:13:47.608075
+QS-MOBILE_SECURITY-0001,Medium,0.7,APK Analysis Required: f46b9e0e-46ef-4ee3-bd01-582ee9acf4c7_H4D.apk,Android APK file detected requiring security analysis,mobile_security,,,,,2025-10-06T12:13:47.608085
+QS-MOBILE_SECURITY-0002,Medium,0.7,APK Analysis Required: b966da7c-79bb-49d3-91bf-e51c0a2e8100_H4C.apk,Android APK file detected requiring security analysis,mobile_security,,,,,2025-10-06T12:13:47.608089
+QS-MOBILE_SECURITY-0003,Medium,0.7,APK Analysis Required: 96ed20ca-dc19-4280-8a0f-89e06246f885_H4C.apk,Android APK file detected requiring security analysis,mobile_security,,,,,2025-10-06T12:13:47.608093
+QS-MOBILE_SECURITY-0004,Medium,0.7,APK Analysis Required: 40bbe685-5086-4df5-bd9d-7698009dfa9e_H4C.apk,Android APK file detected requiring security analysis,mobile_security,,,,,2025-10-06T12:13:47.608096
+QS-MOBILE_SECURITY-0005,Medium,0.7,APK Analysis Required: 94261026-8418-44e0-8775-34f8d1d5020b_H4D.apk,Android APK file detected requiring security analysis,mobile_security,,,,,2025-10-06T12:13:47.608099
+QS-MOBILE_SECURITY-0006,Medium,0.7,APK Analysis Required: 0f3d8734-5f16-49d1-a5fe-30d430aaa849_H4C.apk,Android APK file detected requiring security analysis,mobile_security,,,,,2025-10-06T12:13:47.608102
+QS-MOBILE_SECURITY-0007,Medium,0.7,APK Analysis Required: eeba765f-7537-4345-8435-1374681db983_H4D.apk,Android APK file detected requiring security analysis,mobile_security,,,,,2025-10-06T12:13:47.608105
+QS-MOBILE_SECURITY-0008,Medium,0.7,APK Analysis Required: c11162c8-b376-4dd3-a3ba-be13869115b6_H4D.apk,Android APK file detected requiring security analysis,mobile_security,,,,,2025-10-06T12:13:47.608108
+QS-ZERO_DAY_RESEARCH-0009,Critical,0.7,Zero-Day: Go Compiler Backend,Remote Code Execution (RCE),zero_day_research,,,,,2025-10-06T12:13:47.608112
+QS-ZERO_DAY_RESEARCH-0010,High,0.7,Zero-Day: Bazel Build System,BUILD File Execution,zero_day_research,,,,,2025-10-06T12:13:47.608115
+QS-ZERO_DAY_RESEARCH-0011,High,0.7,Zero-Day: Angular Sanitizer,XSS Bypass,zero_day_research,,,,,2025-10-06T12:13:47.608133
+QS-ZERO_DAY_RESEARCH-0012,Critical,0.7,Zero-Day: PyTorch Model Deserialization,Remote Code Execution via Pickle,zero_day_research,,,,,2025-10-06T12:13:47.608136
+QS-ZERO_DAY_RESEARCH-0013,Medium,0.7,Zero-Day: TensorFlow Runtime,Model Tampering & Buffer Overflow,zero_day_research,,,,,2025-10-06T12:13:47.608138
+QS-ZERO_DAY_RESEARCH-0014,Critical,0.7,Zero-Day: Go Compiler Backend,Remote Code Execution (RCE),zero_day_research,,,,,2025-10-06T12:13:47.608141
+QS-ZERO_DAY_RESEARCH-0015,High,0.7,Zero-Day: Bazel Build System,BUILD File Execution,zero_day_research,,,,,2025-10-06T12:13:47.608145
+QS-ZERO_DAY_RESEARCH-0016,High,0.7,Zero-Day: Angular Sanitizer,XSS Bypass,zero_day_research,,,,,2025-10-06T12:13:47.608148
+QS-ZERO_DAY_RESEARCH-0017,Critical,0.7,Zero-Day: PyTorch Model Deserialization,Remote Code Execution via Pickle,zero_day_research,,,,,2025-10-06T12:13:47.608151
+QS-ZERO_DAY_RESEARCH-0018,Medium,0.7,Zero-Day: TensorFlow Runtime,Model Tampering & Buffer Overflow,zero_day_research,,,,,2025-10-06T12:13:47.608154

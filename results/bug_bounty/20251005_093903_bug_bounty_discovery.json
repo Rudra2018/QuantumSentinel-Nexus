@@ -1,0 +1,119 @@
+{
+  "program": {
+    "platform": "intigriti",
+    "program_id": "9ab98619",
+    "name": "LiferayDXP",
+    "slug": "liferaydxp",
+    "url": "https://app.intigriti.com/programs/liferay/liferaydxp",
+    "description": "Liferay Digital Experience Platform security testing",
+    "status": "active",
+    "rewards_range": {
+      "min": 50,
+      "max": 10000
+    },
+    "scope": [
+      {
+        "type": "web",
+        "target": "liferay.com"
+      },
+      {
+        "type": "web",
+        "target": "*.liferay.com"
+      },
+      {
+        "type": "api",
+        "target": "api.liferay.com"
+      }
+    ],
+    "out_of_scope": [],
+    "last_updated": "2025-10-05 09:38:11.241168",
+    "metadata": {}
+  },
+  "assets": [
+    {
+      "asset_id": "7af5c07b9069",
+      "program_id": "9ab98619",
+      "asset_type": "web",
+      "url": "https://liferay.com",
+      "description": "Web asset: liferay.com",
+      "priority": "medium",
+      "technology_stack": [
+        "react"
+      ],
+      "subdomains": [
+        "test.liferay.com",
+        "api.liferay.com",
+        "login.liferay.com",
+        "dev.liferay.com",
+        "www.liferay.com"
+      ],
+      "metadata": {
+        "type": "web",
+        "target": "liferay.com"
+      },
+      "discovered_at": "2025-10-05 09:38:11.241457"
+    },
+    {
+      "asset_id": "0a51d9e62326",
+      "program_id": "9ab98619",
+      "asset_type": "web",
+      "url": "https://*.liferay.com",
+      "description": "Web asset: *.liferay.com",
+      "priority": "medium",
+      "technology_stack": [],
+      "subdomains": [],
+      "metadata": {
+        "type": "web",
+        "target": "*.liferay.com"
+      },
+      "discovered_at": "2025-10-05 09:38:11.241496"
+    },
+    {
+      "asset_id": "601f3c6c0f87",
+      "program_id": "9ab98619",
+      "asset_type": "api",
+      "url": "https://api.liferay.com",
+      "description": "Api asset: api.liferay.com",
+      "priority": "medium",
+      "technology_stack": [],
+      "subdomains": [],
+      "metadata": {
+        "type": "api",
+        "target": "api.liferay.com"
+      },
+      "discovered_at": "2025-10-05 09:38:11.241526"
+    }
+  ],
+  "reconnaissance": {
+    "subdomains": [
+      "test.liferay.com",
+      "api.liferay.com",
+      "login.liferay.com",
+      "dev.liferay.com",
+      "www.liferay.com"
+    ],
+    "technology_stack": [
+      "react"
+    ]
+  },
+  "context": {
+    "login_forms": [],
+    "interactive_features": [
+      "submit",
+      "button",
+      "button",
+      "submit",
+      "submit",
+      "submit",
+      "submit",
+      "submit",
+      "submit",
+      "button"
+    ],
+    "javascript_heavy": true,
+    "authentication_required": false,
+    "technologies": [
+      "react"
+    ]
+  }
+}

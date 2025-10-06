@@ -1,0 +1,618 @@
+{
+  "report_metadata": {
+    "framework": "VALIDATE-OMNISHIELD",
+    "version": "1.0.0",
+    "generated_at": "2025-10-06T12:13:47.608572",
+    "scan_id": "QS-OMNISHIELD-20251006_121322",
+    "report_format": "JSON"
+  },
+  "scan_results": {
+    "scan_id": "QS-OMNISHIELD-20251006_121322",
+    "timestamp": "2025-10-06T12:13:47.608314",
+    "system_info": {
+      "platform": "Unknown",
+      "release": "Unknown",
+      "machine": "Unknown",
+      "python_version": "Unknown",
+      "timestamp": "2025-10-06T12:13:47.608281"
+    },
+    "technologies": [],
+    "findings": [
+      {
+        "vulnerability_id": "QS-MOBILE_SECURITY-0000",
+        "severity": "Medium",
+        "confidence": 0.7,
+        "title": "APK Analysis Required: b4583a15-063f-41b3-9507-d12cb27ae203_H4D.apk",
+        "description": "Android APK file detected requiring security analysis",
+        "affected_component": "mobile_security",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608075",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "mobile_security",
+          "original_data": {
+            "type": "mobile_app",
+            "severity": "Medium",
+            "title": "APK Analysis Required: b4583a15-063f-41b3-9507-d12cb27ae203_H4D.apk",
+            "description": "Android APK file detected requiring security analysis",
+            "file_path": "uploads/b4583a15-063f-41b3-9507-d12cb27ae203_H4D.apk",
+            "size": 43849733
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-MOBILE_SECURITY-0001",
+        "severity": "Medium",
+        "confidence": 0.7,
+        "title": "APK Analysis Required: f46b9e0e-46ef-4ee3-bd01-582ee9acf4c7_H4D.apk",
+        "description": "Android APK file detected requiring security analysis",
+        "affected_component": "mobile_security",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608085",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "mobile_security",
+          "original_data": {
+            "type": "mobile_app",
+            "severity": "Medium",
+            "title": "APK Analysis Required: f46b9e0e-46ef-4ee3-bd01-582ee9acf4c7_H4D.apk",
+            "description": "Android APK file detected requiring security analysis",
+            "file_path": "uploads/f46b9e0e-46ef-4ee3-bd01-582ee9acf4c7_H4D.apk",
+            "size": 43849733
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-MOBILE_SECURITY-0002",
+        "severity": "Medium",
+        "confidence": 0.7,
+        "title": "APK Analysis Required: b966da7c-79bb-49d3-91bf-e51c0a2e8100_H4C.apk",
+        "description": "Android APK file detected requiring security analysis",
+        "affected_component": "mobile_security",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608089",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "mobile_security",
+          "original_data": {
+            "type": "mobile_app",
+            "severity": "Medium",
+            "title": "APK Analysis Required: b966da7c-79bb-49d3-91bf-e51c0a2e8100_H4C.apk",
+            "description": "Android APK file detected requiring security analysis",
+            "file_path": "uploads/b966da7c-79bb-49d3-91bf-e51c0a2e8100_H4C.apk",
+            "size": 45178431
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-MOBILE_SECURITY-0003",
+        "severity": "Medium",
+        "confidence": 0.7,
+        "title": "APK Analysis Required: 96ed20ca-dc19-4280-8a0f-89e06246f885_H4C.apk",
+        "description": "Android APK file detected requiring security analysis",
+        "affected_component": "mobile_security",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608093",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "mobile_security",
+          "original_data": {
+            "type": "mobile_app",
+            "severity": "Medium",
+            "title": "APK Analysis Required: 96ed20ca-dc19-4280-8a0f-89e06246f885_H4C.apk",
+            "description": "Android APK file detected requiring security analysis",
+            "file_path": "uploads/96ed20ca-dc19-4280-8a0f-89e06246f885_H4C.apk",
+            "size": 45178431
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-MOBILE_SECURITY-0004",
+        "severity": "Medium",
+        "confidence": 0.7,
+        "title": "APK Analysis Required: 40bbe685-5086-4df5-bd9d-7698009dfa9e_H4C.apk",
+        "description": "Android APK file detected requiring security analysis",
+        "affected_component": "mobile_security",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608096",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "mobile_security",
+          "original_data": {
+            "type": "mobile_app",
+            "severity": "Medium",
+            "title": "APK Analysis Required: 40bbe685-5086-4df5-bd9d-7698009dfa9e_H4C.apk",
+            "description": "Android APK file detected requiring security analysis",
+            "file_path": "uploads/40bbe685-5086-4df5-bd9d-7698009dfa9e_H4C.apk",
+            "size": 45178431
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-MOBILE_SECURITY-0005",
+        "severity": "Medium",
+        "confidence": 0.7,
+        "title": "APK Analysis Required: 94261026-8418-44e0-8775-34f8d1d5020b_H4D.apk",
+        "description": "Android APK file detected requiring security analysis",
+        "affected_component": "mobile_security",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608099",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "mobile_security",
+          "original_data": {
+            "type": "mobile_app",
+            "severity": "Medium",
+            "title": "APK Analysis Required: 94261026-8418-44e0-8775-34f8d1d5020b_H4D.apk",
+            "description": "Android APK file detected requiring security analysis",
+            "file_path": "uploads/94261026-8418-44e0-8775-34f8d1d5020b_H4D.apk",
+            "size": 43849733
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-MOBILE_SECURITY-0006",
+        "severity": "Medium",
+        "confidence": 0.7,
+        "title": "APK Analysis Required: 0f3d8734-5f16-49d1-a5fe-30d430aaa849_H4C.apk",
+        "description": "Android APK file detected requiring security analysis",
+        "affected_component": "mobile_security",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608102",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "mobile_security",
+          "original_data": {
+            "type": "mobile_app",
+            "severity": "Medium",
+            "title": "APK Analysis Required: 0f3d8734-5f16-49d1-a5fe-30d430aaa849_H4C.apk",
+            "description": "Android APK file detected requiring security analysis",
+            "file_path": "uploads/0f3d8734-5f16-49d1-a5fe-30d430aaa849_H4C.apk",
+            "size": 45178431
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-MOBILE_SECURITY-0007",
+        "severity": "Medium",
+        "confidence": 0.7,
+        "title": "APK Analysis Required: eeba765f-7537-4345-8435-1374681db983_H4D.apk",
+        "description": "Android APK file detected requiring security analysis",
+        "affected_component": "mobile_security",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608105",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "mobile_security",
+          "original_data": {
+            "type": "mobile_app",
+            "severity": "Medium",
+            "title": "APK Analysis Required: eeba765f-7537-4345-8435-1374681db983_H4D.apk",
+            "description": "Android APK file detected requiring security analysis",
+            "file_path": "uploads/eeba765f-7537-4345-8435-1374681db983_H4D.apk",
+            "size": 43849733
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-MOBILE_SECURITY-0008",
+        "severity": "Medium",
+        "confidence": 0.7,
+        "title": "APK Analysis Required: c11162c8-b376-4dd3-a3ba-be13869115b6_H4D.apk",
+        "description": "Android APK file detected requiring security analysis",
+        "affected_component": "mobile_security",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608108",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "mobile_security",
+          "original_data": {
+            "type": "mobile_app",
+            "severity": "Medium",
+            "title": "APK Analysis Required: c11162c8-b376-4dd3-a3ba-be13869115b6_H4D.apk",
+            "description": "Android APK file detected requiring security analysis",
+            "file_path": "uploads/c11162c8-b376-4dd3-a3ba-be13869115b6_H4D.apk",
+            "size": 43849733
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-ZERO_DAY_RESEARCH-0009",
+        "severity": "Critical",
+        "confidence": 0.7,
+        "title": "Zero-Day: Go Compiler Backend",
+        "description": "Remote Code Execution (RCE)",
+        "affected_component": "zero_day_research",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608112",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "zero_day_research",
+          "original_data": {
+            "type": "zero_day",
+            "severity": "Critical",
+            "title": "Zero-Day: Go Compiler Backend",
+            "description": "Remote Code Execution (RCE)",
+            "cve_potential": "High",
+            "validation_status": "Confirmed"
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-ZERO_DAY_RESEARCH-0010",
+        "severity": "High",
+        "confidence": 0.7,
+        "title": "Zero-Day: Bazel Build System",
+        "description": "BUILD File Execution",
+        "affected_component": "zero_day_research",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608115",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "zero_day_research",
+          "original_data": {
+            "type": "zero_day",
+            "severity": "High",
+            "title": "Zero-Day: Bazel Build System",
+            "description": "BUILD File Execution",
+            "cve_potential": "Medium",
+            "validation_status": "Partially validated"
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-ZERO_DAY_RESEARCH-0011",
+        "severity": "High",
+        "confidence": 0.7,
+        "title": "Zero-Day: Angular Sanitizer",
+        "description": "XSS Bypass",
+        "affected_component": "zero_day_research",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608133",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "zero_day_research",
+          "original_data": {
+            "type": "zero_day",
+            "severity": "High",
+            "title": "Zero-Day: Angular Sanitizer",
+            "description": "XSS Bypass",
+            "cve_potential": "High",
+            "validation_status": "Environment ready"
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-ZERO_DAY_RESEARCH-0012",
+        "severity": "Critical",
+        "confidence": 0.7,
+        "title": "Zero-Day: PyTorch Model Deserialization",
+        "description": "Remote Code Execution via Pickle",
+        "affected_component": "zero_day_research",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608136",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "zero_day_research",
+          "original_data": {
+            "type": "zero_day",
+            "severity": "Critical",
+            "title": "Zero-Day: PyTorch Model Deserialization",
+            "description": "Remote Code Execution via Pickle",
+            "cve_potential": "Critical",
+            "validation_status": "PyTorch not installed"
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-ZERO_DAY_RESEARCH-0013",
+        "severity": "Medium",
+        "confidence": 0.7,
+        "title": "Zero-Day: TensorFlow Runtime",
+        "description": "Model Tampering & Buffer Overflow",
+        "affected_component": "zero_day_research",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608138",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "zero_day_research",
+          "original_data": {
+            "type": "zero_day",
+            "severity": "Medium",
+            "title": "Zero-Day: TensorFlow Runtime",
+            "description": "Model Tampering & Buffer Overflow",
+            "cve_potential": "Medium",
+            "validation_status": "TensorFlow not installed"
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-ZERO_DAY_RESEARCH-0014",
+        "severity": "Critical",
+        "confidence": 0.7,
+        "title": "Zero-Day: Go Compiler Backend",
+        "description": "Remote Code Execution (RCE)",
+        "affected_component": "zero_day_research",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608141",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "zero_day_research",
+          "original_data": {
+            "type": "zero_day",
+            "severity": "Critical",
+            "title": "Zero-Day: Go Compiler Backend",
+            "description": "Remote Code Execution (RCE)",
+            "cve_potential": "High",
+            "validation_status": "Confirmed"
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-ZERO_DAY_RESEARCH-0015",
+        "severity": "High",
+        "confidence": 0.7,
+        "title": "Zero-Day: Bazel Build System",
+        "description": "BUILD File Execution",
+        "affected_component": "zero_day_research",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608145",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "zero_day_research",
+          "original_data": {
+            "type": "zero_day",
+            "severity": "High",
+            "title": "Zero-Day: Bazel Build System",
+            "description": "BUILD File Execution",
+            "cve_potential": "Medium",
+            "validation_status": "Partially validated"
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-ZERO_DAY_RESEARCH-0016",
+        "severity": "High",
+        "confidence": 0.7,
+        "title": "Zero-Day: Angular Sanitizer",
+        "description": "XSS Bypass",
+        "affected_component": "zero_day_research",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608148",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "zero_day_research",
+          "original_data": {
+            "type": "zero_day",
+            "severity": "High",
+            "title": "Zero-Day: Angular Sanitizer",
+            "description": "XSS Bypass",
+            "cve_potential": "High",
+            "validation_status": "Environment ready"
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-ZERO_DAY_RESEARCH-0017",
+        "severity": "Critical",
+        "confidence": 0.7,
+        "title": "Zero-Day: PyTorch Model Deserialization",
+        "description": "Remote Code Execution via Pickle",
+        "affected_component": "zero_day_research",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608151",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "zero_day_research",
+          "original_data": {
+            "type": "zero_day",
+            "severity": "Critical",
+            "title": "Zero-Day: PyTorch Model Deserialization",
+            "description": "Remote Code Execution via Pickle",
+            "cve_potential": "Critical",
+            "validation_status": "PyTorch not installed"
+          }
+        }
+      },
+      {
+        "vulnerability_id": "QS-ZERO_DAY_RESEARCH-0018",
+        "severity": "Medium",
+        "confidence": 0.7,
+        "title": "Zero-Day: TensorFlow Runtime",
+        "description": "Model Tampering & Buffer Overflow",
+        "affected_component": "zero_day_research",
+        "cve_id": null,
+        "cvss_score": null,
+        "exploit_vector": null,
+        "remediation": null,
+        "timestamp": "2025-10-06T12:13:47.608154",
+        "evidence": {
+          "source_framework": "QuantumSentinel-Nexus",
+          "source_module": "zero_day_research",
+          "original_data": {
+            "type": "zero_day",
+            "severity": "Medium",
+            "title": "Zero-Day: TensorFlow Runtime",
+            "description": "Model Tampering & Buffer Overflow",
+            "cve_potential": "Medium",
+            "validation_status": "TensorFlow not installed"
+          }
+        }
+      }
+    ],
+    "summary": {
+      "total_technologies": 0,
+      "total_findings": 19,
+      "severity_breakdown": {
+        "Critical": 4,
+        "High": 4,
+        "Medium": 11,
+        "Low": 0
+      },
+      "risk_score": 5.9,
+      "cve_mappings": 0,
+      "recommendations": [
+        "Address 4 Critical Security Issues Immediately",
+        "QuantumSentinel-Nexus Security Improvements",
+        "Establish Continuous Security Monitoring",
+        "Strengthen Security Governance"
+      ]
+    }
+  },
+  "executive_summary": {
+    "scan_overview": {
+      "total_technologies": 0,
+      "technologies_with_vulnerabilities": 2,
+      "total_vulnerabilities": 19,
+      "average_confidence": 0.7
+    },
+    "risk_assessment": {
+      "overall_risk_score": 5.9,
+      "risk_level": "Medium",
+      "priority_actions_required": true
+    },
+    "compliance_impact": {
+      "potential_cve_exposure": 0,
+      "remediation_priority": "immediate"
+    }
+  },
+  "technical_details": {
+    "scan_configuration": {
+      "framework_version": "1.0.0",
+      "plugins_used": [
+        "golang_security_plugin",
+        "ml_security_plugin",
+        "web_security_plugin"
+      ],
+      "scan_depth": "comprehensive",
+      "safe_mode": true
+    },
+    "discovery_statistics": {
+      "command_executions": "multiple",
+      "file_system_scans": "recursive",
+      "network_tests": "local_only"
+    },
+    "validation_methods": {
+      "static_analysis": true,
+      "dynamic_testing": true,
+      "configuration_review": true,
+      "dependency_scanning": true
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "urgent",
+      "category": "vulnerability_management",
+      "title": "Address Critical Vulnerabilities Immediately",
+      "description": "Found 4 critical vulnerabilities requiring immediate attention",
+      "actions": [
+        "Patch affected systems immediately",
+        "Implement temporary mitigations",
+        "Monitor for exploitation attempts",
+        "Update incident response procedures"
+      ]
+    },
+    {
+      "priority": "medium",
+      "category": "technology_security",
+      "title": "Secure mobile_security Implementation",
+      "description": "Found 9 security issues in mobile_security",
+      "actions": [
+        "Update mobile_security to latest secure version",
+        "Review mobile_security security configuration",
+        "Implement mobile_security-specific security controls",
+        "Monitor mobile_security security advisories"
+      ]
+    },
+    {
+      "priority": "high",
+      "category": "technology_security",
+      "title": "Secure zero_day_research Implementation",
+      "description": "Found 10 security issues in zero_day_research",
+      "actions": [
+        "Update zero_day_research to latest secure version",
+        "Review zero_day_research security configuration",
+        "Implement zero_day_research-specific security controls",
+        "Monitor zero_day_research security advisories"
+      ]
+    },
+    {
+      "priority": "high",
+      "category": "security_operations",
+      "title": "Implement Continuous Security Monitoring",
+      "description": "Establish ongoing security validation processes",
+      "actions": [
+        "Schedule regular VALIDATE-OMNISHIELD scans",
+        "Integrate with CI/CD pipelines",
+        "Set up vulnerability alerting",
+        "Establish remediation SLAs"
+      ]
+    },
+    {
+      "priority": "medium",
+      "category": "training",
+      "title": "Security Training and Awareness",
+      "description": "Improve security knowledge across development teams",
+      "actions": [
+        "Conduct secure coding training",
+        "Implement security code reviews",
+        "Establish security champions program",
+        "Regular security awareness sessions"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "scan_metadata": {
+    "scan_id": "web_recon_1759650915",
+    "target_domain": "example.com",
+    "start_time": "2025-10-05T13:25:15.334456",
+    "tools_used": [],
+    "end_time": "2025-10-05T13:25:16.731619",
+    "total_subdomains": 0,
+    "total_vulnerabilities": 0
+  },
+  "subdomains": [],
+  "ports": {},
+  "technologies": {},
+  "vulnerabilities": [],
+  "endpoints": [],
+  "certificates": {}
+}
